@@ -6,6 +6,8 @@ logging:
 server:
   port: 8083
 springdoc:
+  swagger-ui:
+    path: /v3/api-docs
   api-docs:
     version: openapi_3_1
     enabled: true
@@ -17,9 +19,9 @@ spring:
     database: mysql
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://host.docker.internal:3306/adore
-    username: root
-    password: root
+    url: jdbc:mariadb://${MYSQL_HOST}:3306/adore
+    username: ${MYSQL_USER}
+    password: ${MYSQL_PASSWORD}
   application:
     name: admin-service
   config:
