@@ -43,6 +43,7 @@ docker push dyw1014/adore-be-community-service
 docker push dyw1014/adore-be-user-service
 docker push dyw1014/adore-be-gateway-service
 docker push dyw1014/adore-be-admin-service
+ls -a
 docker push dyw1014/adore-be-discovery-service
 docker push
 
