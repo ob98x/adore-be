@@ -30,14 +30,14 @@ spring:
       host: host.docker.internal
       port: 6379
   r2dbc:
-    url: r2dbc:mariadb://host.docker.internal:3306/adore
-    username: root
-    password: root
+    url: r2dbc:mariadb://${MY_SQL_HOST}:3306/adore
+    username: ${MY_SQL_USER}
+    password: ${MY_SQL_PASSWORD}
   mail:
     host: smtp.gmail.com
     port: 587
     username: dyw1014@gachon.ac.kr
-    password: wdfx vuvg bfwz vruy
+    password: ${MAIL_PASSWORD}
     properties:
       mail.smtp.auth: true
       mail.smtp.starttls.enable: true

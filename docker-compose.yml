@@ -39,6 +39,10 @@ services:
       - ./logs:/logs
     environment:
       - TZ=Asia/Seoul
+      - MY_SQL_HOST=${MY_SQL_HOST}
+      - MY_SQL_USER=${MY_SQL_USER}
+      - MY_SQL_PASSWORD=${MY_SQL_PASSWORD}
+      - MAIL_PASSWORD=${MAIL_PASSWORD}
     image: dyw1014/adore-be-gateway-service:latest
     ports:
       - "8111:8111"
@@ -136,6 +140,9 @@ services:
     environment:
       - DISCOVERY_SERVICE=http://discovery-service:8761/eureka
       - SPRING_CLOUD_CONFIG_URI=http://config-service:8888
+      - MY_SQL_HOST=${MY_SQL_HOST}
+      - MY_SQL_USER=${MY_SQL_USER}
+      - MY_SQL_PASSWORD=${MY_SQL_PASSWORD}
     depends_on:
       - discovery-service
     networks:
