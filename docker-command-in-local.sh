@@ -15,15 +15,17 @@ cd ./gateway-service
 docker build --no-cache -t dyw1014/adore-be-gateway-service:latest .
 cd ..
 
+cd ./admin-service
+./gradlew clean build
+docker build --no-cache -t dyw1014/adore-be-admin-service:latest .
+cd ..
+
 cd ./discovery-service
 ./gradlew clean build
 docker build --no-cache -t dyw1014/adore-be-discovery-service:latest .
 cd ..
 
-cd ./admin-service
-./gradlew clean build
-docker build --no-cache -t dyw1014/adore-be-admin-service:latest .
-cd ..
+
 
 cd ./config-service
 ./gradlew clean build
@@ -40,8 +42,8 @@ docker build --no-cache -t dyw1014/adore-be-vault-service:latest .
 docker push dyw1014/adore-be-community-service
 docker push dyw1014/adore-be-user-service
 docker push dyw1014/adore-be-gateway-service
-docker push dyw1014/adore-be-discovery-service
 docker push dyw1014/adore-be-admin-service
+docker push dyw1014/adore-be-discovery-service
 docker push
 
 # Pull docker-compose image
