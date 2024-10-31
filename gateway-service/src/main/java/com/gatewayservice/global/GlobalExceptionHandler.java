@@ -4,8 +4,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
-import org.springframework.web.HttpMediaTypeNotSupportedException;
-import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -24,15 +22,6 @@ public class GlobalExceptionHandler {
         final ErrorResponse errorResponse = ErrorResponse.of(e.getResponseCode());
         return ResponseEntity
                 .status(e.getResponseCode().getStatus())
-                .body(errorResponse);
-    }
-
-    // 지원하지 않는 HttpRequestMethod
-    @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
-    protected ResponseEntity<ErrorResponse> handleHttpRequestMethodNotSupportedException() {
-        final ErrorResponse errorResponse = ErrorResponse.of(ResponseCode.METHOD_NOT_ALLOWED);
-        return ResponseEntity
-                .status(ResponseCode.METHOD_NOT_ALLOWED.getStatus())
                 .body(errorResponse);
     }
 
@@ -75,15 +64,6 @@ public class GlobalExceptionHandler {
 
     }
 
-    //지원하지 않는 media type 에러
-    @ExceptionHandler(HttpMediaTypeNotSupportedException.class)
-    public ResponseEntity<ErrorResponse> httpMediaTypeNotSupportedExceptionError(
-            HttpMediaTypeNotSupportedException e) {
-        final ErrorResponse errorResponse = ErrorResponse.of(ResponseCode.BAD_REQUEST, e);
-        return ResponseEntity
-                .status(e.getStatusCode())
-                .body(errorResponse);
-    }
 
     //외부 api client 에러
     @ExceptionHandler(HttpClientErrorException.class)

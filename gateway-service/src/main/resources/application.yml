@@ -1,3 +1,8 @@
+logging:
+  level:
+    root: INFO
+  file:
+    path: ./logs/gateway-service.log
 jwt:
   secret: "sceretsecretsecretsecretsecretsecretsecretsecretsecretsecret"
   access_exp: 259200
@@ -52,3 +57,7 @@ spring:
           uri : lb://community-service
           predicates:
             - Path=/community/**
+        - id: admin-service
+          uri: lb://admin-service
+          predicates:
+            - Path=/admin/**

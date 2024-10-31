@@ -7,6 +7,8 @@ services:
       dockerfile: Dockerfile
     container_name: discovery-service
     image: dyw1014/adore-be-discovery-service:latest
+    volumes:
+      - ./logs:/logs
     environment:
       - TZ=Asia/Seoul
     ports:
@@ -14,18 +16,18 @@ services:
     networks:
       - msa-network
 
-  config-service:
-    build:
-      context: ./config-service
-      dockerfile: Dockerfile
-    container_name: config-service
-    image: dyw1014/adore-be-config-service:latest
-    environment:
-      - GIT_PW=${GIT_PW}
-    ports:
-      - "8888:8888"
-    networks:
-      - msa-network
+#  config-service:
+#    build:
+#      context: ./config-service
+#      dockerfile: Dockerfile
+#    container_name: config-service
+#    image: dyw1014/adore-be-config-service:latest
+#    environment:
+#      - GIT_PW=${GIT_PW}
+#    ports:
+#      - "8888:8888"
+#    networks:
+#      - msa-network
 
   # Gateway
   gateway-service:
@@ -33,6 +35,8 @@ services:
       context: ./gateway-service
       dockerfile: Dockerfile
     container_name: gateway-service
+    volumes:
+      - ./logs:/logs
     environment:
       - TZ=Asia/Seoul
     image: dyw1014/adore-be-gateway-service:latest
@@ -41,32 +45,31 @@ services:
     networks:
       - msa-network
 
-  user-service:
-    build:
-      context: ./user-service
-      dockerfile: Dockerfile
-    container_name: user-service
-    image: dyw1014/adore-be-user-service:latest
-    environment:
-      - DISCOVERY_SERVICE=http://discovery-service:8761/eureka
-      - SPRING_CLOUD_CONFIG_URI=http://config-service:8888
-    depends_on:
-      - discovery-service
-    networks:
-      - msa-network
-    ports:
-      - "8081:8081"
+#  user-service:
+#    build:
+#      context: ./user-service
+#      dockerfile: Dockerfile
+#    container_name: user-service
+#    image: dyw1014/adore-be-user-service:latest
+#    environment:
+#      - DISCOVERY_SERVICE=http://discovery-service:8761/eureka
+#      - SPRING_CLOUD_CONFIG_URI=http://config-service:8888
+#    depends_on:
+#      - discovery-service
+#    networks:
+#      - msa-network
+#    ports:
+#      - "8081:8081"
 
   es-service:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.10.2
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.15.3
     container_name: es-service
     environment:
-      - ES_JAVA_OPTS=-Xmx512m -Xms512m
       - ELASTIC_PASSWORD=root
     volumes:
-      - ../elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
-      - ../elasticsearch/data:/usr/share/elasticsearch/data
-      - ../elasticsearch/backup:/usr/share/elasticsearch/backup
+      - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+      - ./elasticsearch/data:/usr/share/elasticsearch/data
+      - ./elasticsearch/backup:/usr/share/elasticsearch/backup
     ports:
       - "9200:9200"
       - "9300:9300"
@@ -77,13 +80,10 @@ services:
     build:
       context: ./kibana
       dockerfile: Dockerfile
-    image: docker.elastic.co/kibana/kibana:7.10.2
+    image: docker.elastic.co/kibana/kibana:8.15.3
     container_name: kibana
     volumes:
-      - .kibana/config/kibana.yml:/usr/share/kibana/config/kibana.yml
-    environment:
-      - ELASTICSEARCH_USERNAME=elastic
-      - ELASTICSEARCH_PASSWORD=root
+      - ./kibana/config/kibana.yml:/usr/share/kibana/config/kibana.yml
     ports:
       - 5601:5601
     networks:
@@ -96,9 +96,11 @@ services:
     container_name: fluentd-service
     volumes:
       - ./fluentd/pos:/var/pos
-      - ./logs/log:/var/log
+      - ./logs:/var/log
+      - ./fluentd/buffer:/var/buffer
     image: dyw1014/adore-be-fluentd-service:latest
     environment:
+      - FLUENTD_CONF=fluentd.conf
       - TZ=Asia/Seoul
     networks:
       - msa-network
@@ -107,21 +109,21 @@ services:
       - "8999:8999/udp"
 
 
-  community-service:
-    build:
-      context: ./community-service
-      dockerfile: Dockerfile
-    container_name: community-service
-    image: dyw1014/adore-be-community-service:latest
-    environment:
-      - DISCOVERY_SERVICE=http://discovery-service:8761/eureka
-      - SPRING_CLOUD_CONFIG_URI=http://config-service:8888
-    depends_on:
-      - discovery-service
-    networks:
-      - msa-network
-    ports:
-      - "8082:8082"
+#  community-service:
+#    build:
+#      context: ./community-service
+#      dockerfile: Dockerfile
+#    container_name: community-service
+#    image: dyw1014/adore-be-community-service:latest
+#    environment:
+#      - DISCOVERY_SERVICE=http://discovery-service:8761/eureka
+#      - SPRING_CLOUD_CONFIG_URI=http://config-service:8888
+#    depends_on:
+#      - discovery-service
+#    networks:
+#      - msa-network
+#    ports:
+#      - "8082:8082"
 
   admin-service:
     build:
@@ -129,6 +131,8 @@ services:
       dockerfile: Dockerfile
     container_name: admin-service
     image: dyw1014/adore-be-admin-service:latest
+    volumes:
+      - ./logs:/logs
     environment:
       - DISCOVERY_SERVICE=http://discovery-service:8761/eureka
       - SPRING_CLOUD_CONFIG_URI=http://config-service:8888

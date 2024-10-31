@@ -36,3 +36,11 @@ out/
 
 ### VS Code ###
 .vscode/
+/elasticsearch/data/_state/
+/elasticsearch/data/indices/
+/elasticsearch/data/snapshot_cache/
+/elasticsearch/data/node.lock
+/elasticsearch/data/nodes
+/elasticsearch/data/
+/logs/
+/fluentd/buffer/

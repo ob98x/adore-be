@@ -20,10 +20,17 @@ cd ./discovery-service
 docker build --no-cache -t dyw1014/adore-be-discovery-service:latest .
 cd ..
 
+cd ./admin-service
+./gradlew clean build
+docker build --no-cache -t dyw1014/adore-be-admin-service:latest .
+cd ..
+
 cd ./config-service
 ./gradlew clean build
 docker build --no-cache -t dyw1014/adore-be-config-service:latest .
 cd ..
+
+
 
 cd ./vault
 docker build --no-cache -t dyw1014/adore-be-vault-service:latest .
@@ -34,6 +41,8 @@ docker push dyw1014/adore-be-community-service
 docker push dyw1014/adore-be-user-service
 docker push dyw1014/adore-be-gateway-service
 docker push dyw1014/adore-be-discovery-service
+docker push dyw1014/adore-be-admin-service
+docker push
 
 # Pull docker-compose image
 docker-compose -f .\docker-compose.yml pull
@@ -43,6 +52,10 @@ docker-compose -f .\docker-compose.yml up -d
 
 # Stop docker-compose
 docker-compose -f .\docker-compose.yml stop
+
+# test
+docker compose up -d gateway-service admin-service
+
 
 # build and run docker image
 docker-compose up --build -d
