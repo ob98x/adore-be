@@ -43,6 +43,7 @@ services:
       - MY_SQL_USER=${MY_SQL_USER}
       - MY_SQL_PASSWORD=${MY_SQL_PASSWORD}
       - MAIL_PASSWORD=${MAIL_PASSWORD}
+      - REDIS_HOST=${REDIS_HOST}
     image: dyw1014/adore-be-gateway-service:latest
     ports:
       - "8111:8111"
