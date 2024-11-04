@@ -1,6 +1,6 @@
 logging:
   level:
-    root: INFO
+    root: DEBUG
   file:
     path: ./logs/gateway-service.log
 jwt:
@@ -20,8 +20,25 @@ eureka:
     service-url:
       defaultZone: http://discovery-service:8761/eureka/
 springdoc:
+  api-docs:
+    version: openapi_3_1
+    enabled: true
   swagger-ui:
-    path: /swagger-ui
+    urls[0]:
+      name: Auth Service
+      url: http://localhost:8111/auth/swagger-ui
+    urls[1]:
+      name: Admin Service
+      url: http://localhost:8111/admin/swagger-ui
+    path: /auth/swagger-ui
+management:
+  endpoints:
+    web:
+      exposure:
+        include: gateway
+  endpoint:
+    gateway:
+      enabled: true # default: true
 spring:
   data:
     redis:
@@ -48,23 +65,20 @@ spring:
     import: optional:configserver:http://config-service:8888
   cloud:
     gateway:
+      discovery:
+        locator:
+          enabled: true
       globalcors:
         corsConfigurations:
           '[/**]':
             allowedOrigins: "*"
             allowedMethods: "*"
             allowedHeaders: "*"
-            allowCredentials: true
+            allowCredentials: false
       routes:
-        - id : user-service
-          uri : lb://user-service
-          predicates:
-            - Path=/user/**
-        - id: community-service
-          uri : lb://community-service
-          predicates:
-            - Path=/community/**
         - id: admin-service
           uri: lb://admin-service
           predicates:
             - Path=/admin/**
+          filters:
+            - RewritePath=/admin/(?<segment>.*), /admin/${segment}
