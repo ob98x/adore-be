@@ -1,124 +1,1324 @@
-{"@timestamp":"2024-10-30T00:07:17.028+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"com.gatewayservice.GatewayServiceApplication", "message":"Starting GatewayServiceApplication using Java 17 with PID 28756 (C:\Users\김용우\IdeaProjects\adore-be\gateway-service\build\classes\java\main started by Kimyoungwoo in C:\Users\김용우\IdeaProjects\adore-be\gateway-service)"}
-{"@timestamp":"2024-10-30T00:07:17.030+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"com.gatewayservice.GatewayServiceApplication", "message":"The following 1 profile is active: "local""}
-{"@timestamp":"2024-10-30T00:07:17.056+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"org.springframework.cloud.config.client.ConfigServerConfigDataLoader", "message":"Fetching config from server at : http://config-service:8888"}
-{"@timestamp":"2024-10-30T00:07:17.057+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"org.springframework.cloud.config.client.ConfigServerConfigDataLoader", "message":"Exception on Url - http://config-service:8888:org.springframework.web.client.ResourceAccessException: I/O error on GET request for "http://config-service:8888/gateway-service/default": config-service. Will be trying the next url if available"}
-{"@timestamp":"2024-10-30T00:07:17.057+0900", "level":"WARN", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"org.springframework.cloud.config.client.ConfigServerConfigDataLoader", "message":"Could not locate PropertySource ([ConfigServerConfigDataResource@7e31ce0f uris = array<String>['http://config-service:8888'], optional = true, profiles = 'default']): I/O error on GET request for "http://config-service:8888/gateway-service/default": config-service"}
-{"@timestamp":"2024-10-30T00:07:17.057+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"org.springframework.cloud.config.client.ConfigServerConfigDataLoader", "message":"Fetching config from server at : http://config-service:8888"}
-{"@timestamp":"2024-10-30T00:07:17.057+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"org.springframework.cloud.config.client.ConfigServerConfigDataLoader", "message":"Exception on Url - http://config-service:8888:org.springframework.web.client.ResourceAccessException: I/O error on GET request for "http://config-service:8888/gateway-service/local": config-service. Will be trying the next url if available"}
-{"@timestamp":"2024-10-30T00:07:17.057+0900", "level":"WARN", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"org.springframework.cloud.config.client.ConfigServerConfigDataLoader", "message":"Could not locate PropertySource ([ConfigServerConfigDataResource@794b435f uris = array<String>['http://config-service:8888'], optional = true, profiles = 'local']): I/O error on GET request for "http://config-service:8888/gateway-service/local": config-service"}
-{"@timestamp":"2024-10-30T00:07:17.057+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"org.springframework.cloud.config.client.ConfigServerConfigDataLoader", "message":"Fetching config from server at : http://config-service:8888"}
-{"@timestamp":"2024-10-30T00:07:17.057+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"org.springframework.cloud.config.client.ConfigServerConfigDataLoader", "message":"Exception on Url - http://config-service:8888:org.springframework.web.client.ResourceAccessException: I/O error on GET request for "http://config-service:8888/gateway-service/default": config-service. Will be trying the next url if available"}
-{"@timestamp":"2024-10-30T00:07:17.057+0900", "level":"WARN", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"org.springframework.cloud.config.client.ConfigServerConfigDataLoader", "message":"Could not locate PropertySource ([ConfigServerConfigDataResource@38f2e97e uris = array<String>['http://config-service:8888'], optional = true, profiles = 'default']): I/O error on GET request for "http://config-service:8888/gateway-service/default": config-service"}
-{"@timestamp":"2024-10-30T00:07:18.095+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"org.springframework.data.repository.config.RepositoryConfigurationDelegate", "message":"Multiple Spring Data modules found, entering strict repository configuration mode"}
-{"@timestamp":"2024-10-30T00:07:18.096+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"org.springframework.data.repository.config.RepositoryConfigurationDelegate", "message":"Bootstrapping Spring Data R2DBC repositories in DEFAULT mode."}
-{"@timestamp":"2024-10-30T00:07:18.208+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"org.springframework.data.repository.config.RepositoryConfigurationDelegate", "message":"Finished Spring Data repository scanning in 108 ms. Found 1 R2DBC repository interface."}
-{"@timestamp":"2024-10-30T00:07:18.217+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"org.springframework.data.repository.config.RepositoryConfigurationDelegate", "message":"Multiple Spring Data modules found, entering strict repository configuration mode"}
-{"@timestamp":"2024-10-30T00:07:18.217+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"org.springframework.data.repository.config.RepositoryConfigurationDelegate", "message":"Bootstrapping Spring Data Redis repositories in DEFAULT mode."}
-{"@timestamp":"2024-10-30T00:07:18.228+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"org.springframework.data.repository.config.RepositoryConfigurationExtensionSupport", "message":"Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.gatewayservice.auth.repository.MemberRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository"}
-{"@timestamp":"2024-10-30T00:07:18.228+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"org.springframework.data.repository.config.RepositoryConfigurationDelegate", "message":"Finished Spring Data repository scanning in 5 ms. Found 0 Redis repository interfaces."}
-{"@timestamp":"2024-10-30T00:07:18.413+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"org.springframework.cloud.context.scope.GenericScope", "message":"BeanFactory id=159cfa71-63ce-3af2-9507-3ddc1cbee267"}
-{"@timestamp":"2024-10-30T00:07:18.508+0900", "level":"WARN", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker", "message":"Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [lbRestClientPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead."}
-{"@timestamp":"2024-10-30T00:07:18.509+0900", "level":"WARN", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker", "message":"Bean 'deferringLoadBalancerInterceptor' of type [org.springframework.cloud.client.loadbalancer.DeferringLoadBalancerInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies."}
-{"@timestamp":"2024-10-30T00:07:18.510+0900", "level":"WARN", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker", "message":"Bean 'org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration' of type [org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [loadBalancerWebClientBuilderBeanPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead."}
-{"@timestamp":"2024-10-30T00:07:18.510+0900", "level":"WARN", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker", "message":"Bean 'org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration$ReactorDeferringLoadBalancerFilterConfig' of type [org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration$ReactorDeferringLoadBalancerFilterConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [loadBalancerWebClientBuilderBeanPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies."}
-{"@timestamp":"2024-10-30T00:07:18.511+0900", "level":"WARN", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker", "message":"Bean 'reactorDeferringLoadBalancerExchangeFilterFunction' of type [org.springframework.cloud.client.loadbalancer.reactive.DeferringLoadBalancerExchangeFilterFunction] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [loadBalancerWebClientBuilderBeanPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies."}
-{"@timestamp":"2024-10-30T00:07:19.817+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"org.springframework.boot.autoconfigure.security.reactive.ReactiveUserDetailsServiceAutoConfiguration", "message":"
+{"@timestamp":"2024-11-04T22:35:04.871+0900", "level":"DEBUG", "service":"gateway-service", "trace": "", "span": "", "thread":"background-preinit", "logger":"org.jboss.logging", "message":"Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property"}
+{"@timestamp":"2024-11-04T22:35:04.882+0900", "level":"DEBUG", "service":"gateway-service", "trace": "", "span": "", "thread":"background-preinit", "logger":"org.hibernate.validator.internal.xml.config.ValidationXmlParser", "message":"Trying to load META-INF/validation.xml for XML based Validator configuration."}
+{"@timestamp":"2024-11-04T22:35:04.883+0900", "level":"DEBUG", "service":"gateway-service", "trace": "", "span": "", "thread":"background-preinit", "logger":"org.hibernate.validator.internal.xml.config.ResourceLoaderHelper", "message":"Trying to load META-INF/validation.xml via TCCL"}
+{"@timestamp":"2024-11-04T22:35:04.884+0900", "level":"DEBUG", "service":"gateway-service", "trace": "", "span": "", "thread":"background-preinit", "logger":"org.hibernate.validator.internal.xml.config.ResourceLoaderHelper", "message":"Trying to load META-INF/validation.xml via Hibernate Validator's class loader"}
+{"@timestamp":"2024-11-04T22:35:04.884+0900", "level":"DEBUG", "service":"gateway-service", "trace": "", "span": "", "thread":"background-preinit", "logger":"org.hibernate.validator.internal.xml.config.ValidationXmlParser", "message":"No META-INF/validation.xml found. Using annotation based configuration only."}
+{"@timestamp":"2024-11-04T22:35:04.889+0900", "level":"DEBUG", "service":"gateway-service", "trace": "", "span": "", "thread":"background-preinit", "logger":"org.hibernate.validator.internal.engine.resolver.TraversableResolvers", "message":"Cannot find jakarta.persistence.Persistence on classpath. Assuming non JPA 2 environment. All properties will per default be traversable."}
+{"@timestamp":"2024-11-04T22:35:04.916+0900", "level":"DEBUG", "service":"gateway-service", "trace": "", "span": "", "thread":"background-preinit", "logger":"org.hibernate.validator.messageinterpolation.ResourceBundleMessageInterpolator", "message":"Loaded expression factory via original TCCL"}
+{"@timestamp":"2024-11-04T22:35:04.917+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"com.gatewayservice.GatewayServiceApplication", "message":"Starting GatewayServiceApplication using Java 17 with PID 34692 (C:\Users\김용우\IdeaProjects\adore-be\gateway-service\build\classes\java\main started by Kimyoungwoo in C:\Users\김용우\IdeaProjects\adore-be\gateway-service)"}
+{"@timestamp":"2024-11-04T22:35:04.918+0900", "level":"DEBUG", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"com.gatewayservice.GatewayServiceApplication", "message":"Running with Spring Boot v3.3.4, Spring v6.1.13"}
+{"@timestamp":"2024-11-04T22:35:04.919+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"com.gatewayservice.GatewayServiceApplication", "message":"The following 1 profile is active: "local""}
+{"@timestamp":"2024-11-04T22:35:04.919+0900", "level":"DEBUG", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"org.springframework.boot.SpringApplication", "message":"Loading source class com.gatewayservice.GatewayServiceApplication"}
+{"@timestamp":"2024-11-04T22:35:04.949+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"org.springframework.cloud.config.client.ConfigServerConfigDataLoader", "message":"Fetching config from server at : http://config-service:8888"}
+{"@timestamp":"2024-11-04T22:35:04.949+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"org.springframework.cloud.config.client.ConfigServerConfigDataLoader", "message":"Exception on Url - http://config-service:8888:org.springframework.web.client.ResourceAccessException: I/O error on GET request for "http://config-service:8888/gateway-service/default": config-service. Will be trying the next url if available"}
+{"@timestamp":"2024-11-04T22:35:04.949+0900", "level":"WARN", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"org.springframework.cloud.config.client.ConfigServerConfigDataLoader", "message":"Could not locate PropertySource ([ConfigServerConfigDataResource@3cc20577 uris = array<String>['http://config-service:8888'], optional = true, profiles = 'default']): I/O error on GET request for "http://config-service:8888/gateway-service/default": config-service"}
+{"@timestamp":"2024-11-04T22:35:04.949+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"org.springframework.cloud.config.client.ConfigServerConfigDataLoader", "message":"Fetching config from server at : http://config-service:8888"}
+{"@timestamp":"2024-11-04T22:35:04.949+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"org.springframework.cloud.config.client.ConfigServerConfigDataLoader", "message":"Exception on Url - http://config-service:8888:org.springframework.web.client.ResourceAccessException: I/O error on GET request for "http://config-service:8888/gateway-service/local": config-service. Will be trying the next url if available"}
+{"@timestamp":"2024-11-04T22:35:04.949+0900", "level":"WARN", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"org.springframework.cloud.config.client.ConfigServerConfigDataLoader", "message":"Could not locate PropertySource ([ConfigServerConfigDataResource@61942c1 uris = array<String>['http://config-service:8888'], optional = true, profiles = 'local']): I/O error on GET request for "http://config-service:8888/gateway-service/local": config-service"}
+{"@timestamp":"2024-11-04T22:35:04.949+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"org.springframework.cloud.config.client.ConfigServerConfigDataLoader", "message":"Fetching config from server at : http://config-service:8888"}
+{"@timestamp":"2024-11-04T22:35:04.950+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"org.springframework.cloud.config.client.ConfigServerConfigDataLoader", "message":"Exception on Url - http://config-service:8888:org.springframework.web.client.ResourceAccessException: I/O error on GET request for "http://config-service:8888/gateway-service/default": config-service. Will be trying the next url if available"}
+{"@timestamp":"2024-11-04T22:35:04.950+0900", "level":"WARN", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"org.springframework.cloud.config.client.ConfigServerConfigDataLoader", "message":"Could not locate PropertySource ([ConfigServerConfigDataResource@6f63c44f uris = array<String>['http://config-service:8888'], optional = true, profiles = 'default']): I/O error on GET request for "http://config-service:8888/gateway-service/default": config-service"}
+{"@timestamp":"2024-11-04T22:35:04.951+0900", "level":"DEBUG", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"org.springframework.boot.web.reactive.context.AnnotationConfigReactiveWebServerApplicationContext", "message":"Refreshing org.springframework.boot.web.reactive.context.AnnotationConfigReactiveWebServerApplicationContext@24361cfc"}
+{"@timestamp":"2024-11-04T22:35:04.965+0900", "level":"DEBUG", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"org.springframework.beans.factory.support.DefaultListableBeanFactory", "message":"Creating shared instance of singleton bean 'org.springframework.context.annotation.internalConfigurationAnnotationProcessor'"}
+{"@timestamp":"2024-11-04T22:35:04.977+0900", "level":"DEBUG", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"org.springframework.beans.factory.support.DefaultListableBeanFactory", "message":"Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.internalCachingMetadataReaderFactory'"}
+{"@timestamp":"2024-11-04T22:35:05.012+0900", "level":"DEBUG", "service":"gateway-service", "trace": "", "span": "", "thread":"background-preinit", "logger":"org.hibernate.validator.internal.engine.ValidatorFactoryConfigurationHelper", "message":"HV000252: Using org.hibernate.validator.internal.engine.DefaultPropertyNodeNameProvider as property node name provider."}
+{"@timestamp":"2024-11-04T22:35:05.023+0900", "level":"DEBUG", "service":"gateway-service", "trace": "", "span": "", "thread":"background-preinit", "logger":"org.hibernate.validator.internal.engine.ValidatorFactoryConfigurationHelper", "message":"HV000234: Using org.hibernate.validator.messageinterpolation.ResourceBundleMessageInterpolator as ValidatorFactory-scoped message interpolator."}
+{"@timestamp":"2024-11-04T22:35:05.023+0900", "level":"DEBUG", "service":"gateway-service", "trace": "", "span": "", "thread":"background-preinit", "logger":"org.hibernate.validator.internal.engine.ValidatorFactoryConfigurationHelper", "message":"HV000234: Using org.hibernate.validator.internal.engine.resolver.TraverseAllTraversableResolver as ValidatorFactory-scoped traversable resolver."}
+{"@timestamp":"2024-11-04T22:35:05.023+0900", "level":"DEBUG", "service":"gateway-service", "trace": "", "span": "", "thread":"background-preinit", "logger":"org.hibernate.validator.internal.engine.ValidatorFactoryConfigurationHelper", "message":"HV000234: Using org.hibernate.validator.internal.util.ExecutableParameterNameProvider as ValidatorFactory-scoped parameter name provider."}
+{"@timestamp":"2024-11-04T22:35:05.023+0900", "level":"DEBUG", "service":"gateway-service", "trace": "", "span": "", "thread":"background-preinit", "logger":"org.hibernate.validator.internal.engine.ValidatorFactoryConfigurationHelper", "message":"HV000234: Using org.hibernate.validator.internal.engine.DefaultClockProvider as ValidatorFactory-scoped clock provider."}
+{"@timestamp":"2024-11-04T22:35:05.023+0900", "level":"DEBUG", "service":"gateway-service", "trace": "", "span": "", "thread":"background-preinit", "logger":"org.hibernate.validator.internal.engine.ValidatorFactoryConfigurationHelper", "message":"HV000234: Using org.hibernate.validator.internal.engine.scripting.DefaultScriptEvaluatorFactory as ValidatorFactory-scoped script evaluator factory."}
+{"@timestamp":"2024-11-04T22:35:05.051+0900", "level":"DEBUG", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"org.springframework.context.annotation.ClassPathBeanDefinitionScanner", "message":"Identified candidate component class: file [C:\Users\김용우\IdeaProjects\adore-be\gateway-service\build\classes\java\main\com\gatewayservice\auth\controller\AuthController.class]"}
+{"@timestamp":"2024-11-04T22:35:05.154+0900", "level":"DEBUG", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"org.springframework.context.annotation.ClassPathBeanDefinitionScanner", "message":"Ignored because not a concrete top-level class: file [C:\Users\김용우\IdeaProjects\adore-be\gateway-service\build\classes\java\main\com\gatewayservice\auth\repository\MemberRepository.class]"}
+{"@timestamp":"2024-11-04T22:35:05.167+0900", "level":"DEBUG", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"org.springframework.context.annotation.ClassPathBeanDefinitionScanner", "message":"Identified candidate component class: file [C:\Users\김용우\IdeaProjects\adore-be\gateway-service\build\classes\java\main\com\gatewayservice\auth\service\AuthServiceImpl.class]"}
+{"@timestamp":"2024-11-04T22:35:05.174+0900", "level":"DEBUG", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"org.springframework.context.annotation.ClassPathBeanDefinitionScanner", "message":"Identified candidate component class: file [C:\Users\김용우\IdeaProjects\adore-be\gateway-service\build\classes\java\main\com\gatewayservice\config\JwtUtil.class]"}
+{"@timestamp":"2024-11-04T22:35:05.182+0900", "level":"DEBUG", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"org.springframework.context.annotation.ClassPathBeanDefinitionScanner", "message":"Identified candidate component class: file [C:\Users\김용우\IdeaProjects\adore-be\gateway-service\build\classes\java\main\com\gatewayservice\config\MailConfig.class]"}
+{"@timestamp":"2024-11-04T22:35:05.187+0900", "level":"DEBUG", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"org.springframework.context.annotation.ClassPathBeanDefinitionScanner", "message":"Identified candidate component class: file [C:\Users\김용우\IdeaProjects\adore-be\gateway-service\build\classes\java\main\com\gatewayservice\config\RedisConfig.class]"}
+{"@timestamp":"2024-11-04T22:35:05.196+0900", "level":"DEBUG", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"org.springframework.context.annotation.ClassPathBeanDefinitionScanner", "message":"Identified candidate component class: file [C:\Users\김용우\IdeaProjects\adore-be\gateway-service\build\classes\java\main\com\gatewayservice\config\SecurityConfig.class]"}
+{"@timestamp":"2024-11-04T22:35:05.204+0900", "level":"DEBUG", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"org.springframework.context.annotation.ClassPathBeanDefinitionScanner", "message":"Identified candidate component class: file [C:\Users\김용우\IdeaProjects\adore-be\gateway-service\build\classes\java\main\com\gatewayservice\config\SwaggerConfig.class]"}
+{"@timestamp":"2024-11-04T22:35:05.227+0900", "level":"DEBUG", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"org.springframework.context.annotation.ClassPathBeanDefinitionScanner", "message":"Identified candidate component class: file [C:\Users\김용우\IdeaProjects\adore-be\gateway-service\build\classes\java\main\com\gatewayservice\global\GlobalExceptionHandler.class]"}
+{"@timestamp":"2024-11-04T22:35:05.231+0900", "level":"DEBUG", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"org.springframework.context.annotation.ClassPathBeanDefinitionScanner", "message":"Identified candidate component class: file [C:\Users\김용우\IdeaProjects\adore-be\gateway-service\build\classes\java\main\com\gatewayservice\global\RedisUtil.class]"}
+{"@timestamp":"2024-11-04T22:35:05.505+0900", "level":"WARN", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"org.springframework.boot.web.reactive.context.AnnotationConfigReactiveWebServerApplicationContext", "message":"Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanDefinitionStoreException: Failed to process import candidates for configuration class [org.springframework.boot.autoconfigure.r2dbc.R2dbcAutoConfiguration]: Error processing condition on org.springframework.boot.autoconfigure.r2dbc.ConnectionFactoryConfigurations$PoolConfiguration"}
+{"@timestamp":"2024-11-04T22:35:05.514+0900", "level":"DEBUG", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"org.springframework.boot.autoconfigure.logging.ConditionEvaluationReportLogger", "message":"
 
-Using generated security password: 9d15e520-7e03-4731-9570-f9ce6ab71082
+
+============================
+CONDITIONS EVALUATION REPORT
+============================
+
+
+Positive matches:
+-----------------
+
+   AuditAutoConfiguration matched:
+      - @ConditionalOnProperty (management.auditevents.enabled) matched (OnPropertyCondition)
+
+   AuditEventsEndpointAutoConfiguration matched:
+      - @ConditionalOnAvailableEndpoint marked as exposed by a 'management.endpoints.web.exposure' property (OnAvailableEndpointCondition)
+
+   BeansEndpointAutoConfiguration matched:
+      - @ConditionalOnAvailableEndpoint marked as exposed by a 'management.endpoints.web.exposure' property (OnAvailableEndpointCondition)
+
+   CodecsAutoConfiguration matched:
+      - @ConditionalOnClass found required classes 'org.springframework.http.codec.CodecConfigurer', 'org.springframework.web.reactive.function.client.WebClient' (OnClassCondition)
+
+   CodecsAutoConfiguration.JacksonCodecConfiguration matched:
+      - @ConditionalOnClass found required class 'com.fasterxml.jackson.databind.ObjectMapper' (OnClassCondition)
+
+   CompositeMeterRegistryAutoConfiguration matched:
+      - @ConditionalOnClass found required class 'io.micrometer.core.instrument.composite.CompositeMeterRegistry' (OnClassCondition)
+
+   ErrorWebFluxAutoConfiguration matched:
+      - @ConditionalOnClass found required class 'org.springframework.web.reactive.config.WebFluxConfigurer' (OnClassCondition)
+      - found ConfigurableReactiveWebEnvironment (OnWebApplicationCondition)
+
+   GatewayAutoConfiguration matched:
+      - @ConditionalOnClass found required class 'org.springframework.web.reactive.DispatcherHandler' (OnClassCondition)
+      - @ConditionalOnProperty (spring.cloud.gateway.enabled) matched (OnPropertyCondition)
+
+   GatewayAutoConfiguration.GatewayActuatorConfiguration matched:
+      - @ConditionalOnClass found required class 'org.springframework.boot.actuate.health.Health' (OnClassCondition)
+
+   GatewayAutoConfiguration.NettyConfiguration matched:
+      - @ConditionalOnClass found required class 'reactor.netty.http.client.HttpClient' (OnClassCondition)
+
+   GatewayClassPathWarningAutoConfiguration matched:
+      - @ConditionalOnProperty (spring.cloud.gateway.enabled) matched (OnPropertyCondition)
+
+   GatewayDiscoveryClientAutoConfiguration matched:
+      - @ConditionalOnClass found required classes 'org.springframework.web.reactive.DispatcherHandler', 'org.springframework.cloud.client.discovery.composite.CompositeDiscoveryClientAutoConfiguration' (OnClassCondition)
+      - @ConditionalOnProperty (spring.cloud.gateway.enabled) matched (OnPropertyCondition)
+
+   GatewayDiscoveryClientAutoConfiguration.ReactiveDiscoveryClientRouteDefinitionLocatorConfiguration matched:
+      - @ConditionalOnProperty (spring.cloud.discovery.reactive.enabled) matched (OnPropertyCondition)
+
+   GatewayMetricsAutoConfiguration matched:
+      - @ConditionalOnClass found required classes 'org.springframework.web.reactive.DispatcherHandler', 'io.micrometer.core.instrument.MeterRegistry', 'org.springframework.boot.actuate.autoconfigure.metrics.MetricsAutoConfiguration' (OnClassCondition)
+      - @ConditionalOnProperty (spring.cloud.gateway.enabled) matched (OnPropertyCondition)
+
+   GatewayMetricsAutoConfiguration.ObservabilityConfiguration matched:
+      - @ConditionalOnProperty (spring.cloud.gateway.observability.enabled) matched (OnPropertyCondition)
+
+   GatewayReactiveLoadBalancerClientAutoConfiguration matched:
+      - @ConditionalOnClass found required classes 'org.springframework.cloud.client.loadbalancer.reactive.ReactiveLoadBalancer', 'org.springframework.cloud.loadbalancer.config.LoadBalancerAutoConfiguration', 'org.springframework.web.reactive.DispatcherHandler' (OnClassCondition)
+
+   GatewayRedisAutoConfiguration matched:
+      - @ConditionalOnClass found required classes 'org.springframework.data.redis.core.RedisTemplate', 'org.springframework.web.reactive.DispatcherHandler' (OnClassCondition)
+      - @ConditionalOnProperty (spring.cloud.gateway.redis.enabled) matched (OnPropertyCondition)
+
+   HttpHandlerAutoConfiguration matched:
+      - @ConditionalOnClass found required classes 'org.springframework.web.reactive.DispatcherHandler', 'org.springframework.http.server.reactive.HttpHandler' (OnClassCondition)
+      - found ConfigurableReactiveWebEnvironment (OnWebApplicationCondition)
+
+   JacksonAutoConfiguration matched:
+      - @ConditionalOnClass found required class 'com.fasterxml.jackson.databind.ObjectMapper' (OnClassCondition)
+
+   JacksonAutoConfiguration.Jackson2ObjectMapperBuilderCustomizerConfiguration matched:
+      - @ConditionalOnClass found required class 'org.springframework.http.converter.json.Jackson2ObjectMapperBuilder' (OnClassCondition)
+
+   JacksonAutoConfiguration.JacksonObjectMapperBuilderConfiguration matched:
+      - @ConditionalOnClass found required class 'org.springframework.http.converter.json.Jackson2ObjectMapperBuilder' (OnClassCondition)
+
+   JacksonAutoConfiguration.JacksonObjectMapperConfiguration matched:
+      - @ConditionalOnClass found required class 'org.springframework.http.converter.json.Jackson2ObjectMapperBuilder' (OnClassCondition)
+
+   JacksonAutoConfiguration.ParameterNamesModuleConfiguration matched:
+      - @ConditionalOnClass found required class 'com.fasterxml.jackson.module.paramnames.ParameterNamesModule' (OnClassCondition)
+
+   LettuceConnectionConfiguration matched:
+      - @ConditionalOnClass found required class 'io.lettuce.core.RedisClient' (OnClassCondition)
+      - @ConditionalOnProperty (spring.data.redis.client-type=lettuce) matched (OnPropertyCondition)
+
+   LettuceMetricsAutoConfiguration matched:
+      - @ConditionalOnClass found required classes 'io.lettuce.core.RedisClient', 'io.lettuce.core.metrics.MicrometerCommandLatencyRecorder' (OnClassCondition)
+
+   LoadBalancerAutoConfiguration matched:
+      - @ConditionalOnProperty (spring.cloud.loadbalancer.enabled=true) matched (OnPropertyCondition)
+
+   MetricsAutoConfiguration matched:
+      - @ConditionalOnClass found required class 'io.micrometer.core.annotation.Timed' (OnClassCondition)
+
+   MultipleOpenApiSupportConfiguration matched:
+      - found ConfigurableReactiveWebEnvironment (OnWebApplicationCondition)
+      - @ConditionalOnProperty (springdoc.api-docs.enabled) matched (OnPropertyCondition)
+
+   ObservationAutoConfiguration matched:
+      - @ConditionalOnClass found required class 'io.micrometer.observation.ObservationRegistry' (OnClassCondition)
+
+   ObservationAutoConfiguration.OnlyMetricsConfiguration matched:
+      - @ConditionalOnClass found required class 'io.micrometer.core.instrument.MeterRegistry'; @ConditionalOnMissingClass did not find unwanted class 'io.micrometer.tracing.Tracer' (OnClassCondition)
+
+   R2dbcAutoConfiguration matched:
+      - @ConditionalOnClass found required class 'io.r2dbc.spi.ConnectionFactory' (OnClassCondition)
+      - @ConditionalOnResource found location classpath:META-INF/services/io.r2dbc.spi.ConnectionFactoryProvider (OnResourceCondition)
+
+   ReactiveMultipartAutoConfiguration matched:
+      - @ConditionalOnClass found required classes 'org.springframework.http.codec.multipart.DefaultPartHttpMessageReader', 'org.springframework.web.reactive.config.WebFluxConfigurer' (OnClassCondition)
+      - found ConfigurableReactiveWebEnvironment (OnWebApplicationCondition)
+
+   ReactiveWebServerFactoryAutoConfiguration matched:
+      - @ConditionalOnClass found required class 'org.springframework.http.ReactiveHttpInputMessage' (OnClassCondition)
+      - found ConfigurableReactiveWebEnvironment (OnWebApplicationCondition)
+
+   ReactiveWebServerFactoryConfiguration.EmbeddedNetty matched:
+      - @ConditionalOnClass found required class 'reactor.netty.http.server.HttpServer' (OnClassCondition)
+
+   RedisAutoConfiguration matched:
+      - @ConditionalOnClass found required class 'org.springframework.data.redis.core.RedisOperations' (OnClassCondition)
+
+   RedisReactiveAutoConfiguration matched:
+      - @ConditionalOnClass found required classes 'org.springframework.data.redis.connection.ReactiveRedisConnectionFactory', 'org.springframework.data.redis.core.ReactiveRedisTemplate', 'reactor.core.publisher.Flux' (OnClassCondition)
+
+   SimpleMetricsExportAutoConfiguration matched:
+      - @ConditionalOnEnabledMetricsExport management.defaults.metrics.export.enabled is considered true (OnMetricsExportEnabledCondition)
+
+   SpringDocConfigProperties matched:
+      - @ConditionalOnProperty (springdoc.api-docs.enabled) matched (OnPropertyCondition)
+
+   SpringDocConfiguration matched:
+      - @ConditionalOnWebApplication (required) found ConfigurableReactiveWebEnvironment (OnWebApplicationCondition)
+      - @ConditionalOnProperty (springdoc.api-docs.enabled) matched (OnPropertyCondition)
+
+   SpringDocConfiguration.QuerydslProvider matched:
+      - @ConditionalOnClass found required class 'org.springframework.data.querydsl.binding.QuerydslBindingsFactory' (OnClassCondition)
+
+   SpringDocConfiguration.SpringDocSpringDataWebPropertiesProvider matched:
+      - @ConditionalOnClass found required class 'org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties' (OnClassCondition)
+
+   SpringDocConfiguration.SpringDocWebFluxSupportConfiguration matched:
+      - @ConditionalOnClass found required class 'reactor.core.publisher.Flux' (OnClassCondition)
+
+   SpringDocConfiguration.WebConversionServiceConfiguration matched:
+      - @ConditionalOnClass found required class 'org.springframework.boot.autoconfigure.web.format.WebConversionService' (OnClassCondition)
+
+   SpringDocPageableConfiguration matched:
+      - @ConditionalOnClass found required class 'org.springframework.data.domain.Pageable' (OnClassCondition)
+      - @ConditionalOnWebApplication (required) found ConfigurableReactiveWebEnvironment (OnWebApplicationCondition)
+      - @ConditionalOnProperty (springdoc.api-docs.enabled) matched (OnPropertyCondition)
+
+   SpringDocSecurityConfiguration matched:
+      - @ConditionalOnClass found required class 'org.springframework.security.web.SecurityFilterChain' (OnClassCondition)
+      - @ConditionalOnWebApplication (required) found ConfigurableReactiveWebEnvironment (OnWebApplicationCondition)
+      - @ConditionalOnExpression (#{${springdoc.api-docs.enabled:true} and ${springdoc.enable-spring-security:true}}) resulted in true (OnExpressionCondition)
+
+   SpringDocSortConfiguration matched:
+      - @ConditionalOnClass found required class 'org.springframework.data.domain.Sort' (OnClassCondition)
+      - @ConditionalOnWebApplication (required) found ConfigurableReactiveWebEnvironment (OnWebApplicationCondition)
+      - @ConditionalOnProperty (springdoc.api-docs.enabled) matched (OnPropertyCondition)
+
+   SpringDocUIConfiguration matched:
+      - @ConditionalOnWebApplication (required) found ConfigurableReactiveWebEnvironment (OnWebApplicationCondition)
+
+   SpringDocWebFluxConfiguration matched:
+      - found ConfigurableReactiveWebEnvironment (OnWebApplicationCondition)
+      - @ConditionalOnProperty (springdoc.api-docs.enabled) matched (OnPropertyCondition)
+
+   SpringDocWebFluxConfiguration.SpringDocWebFluxActuatorConfiguration matched:
+      - @ConditionalOnClass found required class 'org.springframework.boot.actuate.endpoint.web.reactive.WebFluxEndpointHandlerMapping' (OnClassCondition)
+
+   SwaggerConfig matched:
+      - found ConfigurableReactiveWebEnvironment (OnWebApplicationCondition)
+      - @ConditionalOnProperty (springdoc.swagger-ui.enabled) matched (OnPropertyCondition)
+
+   SwaggerUiConfigParameters matched:
+      - @ConditionalOnProperty (springdoc.swagger-ui.enabled) matched (OnPropertyCondition)
+
+   SwaggerUiConfigProperties matched:
+      - @ConditionalOnProperty (springdoc.swagger-ui.enabled) matched (OnPropertyCondition)
+
+   SwaggerUiOAuthProperties matched:
+      - @ConditionalOnProperty (springdoc.swagger-ui.enabled) matched (OnPropertyCondition)
+
+   ValidationAutoConfiguration matched:
+      - @ConditionalOnClass found required class 'jakarta.validation.executable.ExecutableValidator' (OnClassCondition)
+      - @ConditionalOnResource found location classpath:META-INF/services/jakarta.validation.spi.ValidationProvider (OnResourceCondition)
+
+   WebFluxAutoConfiguration matched:
+      - @ConditionalOnClass found required class 'org.springframework.web.reactive.config.WebFluxConfigurer' (OnClassCondition)
+      - found ConfigurableReactiveWebEnvironment (OnWebApplicationCondition)
+
+   WebSessionIdResolverAutoConfiguration matched:
+      - @ConditionalOnClass found required classes 'org.springframework.web.server.session.WebSessionManager', 'reactor.core.publisher.Mono' (OnClassCondition)
+      - found ConfigurableReactiveWebEnvironment (OnWebApplicationCondition)
+
+
+Negative matches:
+-----------------
+
+   ActiveMQAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'jakarta.jms.ConnectionFactory' (OnClassCondition)
+
+   AppOpticsMetricsExportAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'io.micrometer.appoptics.AppOpticsMeterRegistry' (OnClassCondition)
+
+   ArtemisAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'jakarta.jms.ConnectionFactory' (OnClassCondition)
+
+   AtlasMetricsExportAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'io.micrometer.atlas.AtlasMeterRegistry' (OnClassCondition)
+
+   AvailabilityProbesAutoConfiguration:
+      Did not match:
+         - Probes availability not running on a supported cloud platform (AvailabilityProbesAutoConfiguration.ProbesCondition)
+
+   BatchAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.springframework.batch.core.launch.JobLauncher' (OnClassCondition)
+
+   BatchObservationAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.springframework.batch.core.configuration.annotation.BatchObservabilityBeanPostProcessor' (OnClassCondition)
+
+   BraveAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'brave.Tracer' (OnClassCondition)
+
+   CassandraAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'com.datastax.oss.driver.api.core.CqlSession' (OnClassCondition)
+
+   CassandraDataAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'com.datastax.oss.driver.api.core.CqlSession' (OnClassCondition)
+
+   CassandraHealthContributorAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'com.datastax.oss.driver.api.core.CqlSession' (OnClassCondition)
+
+   CassandraReactiveDataAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'com.datastax.oss.driver.api.core.CqlSession' (OnClassCondition)
+
+   CassandraReactiveHealthContributorAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'com.datastax.oss.driver.api.core.CqlSession' (OnClassCondition)
+
+   CassandraReactiveRepositoriesAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.springframework.data.cassandra.ReactiveSession' (OnClassCondition)
+
+   CassandraRepositoriesAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'com.datastax.oss.driver.api.core.CqlSession' (OnClassCondition)
+
+   CloudFoundryActuatorAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.springframework.web.servlet.DispatcherServlet' (OnClassCondition)
+
+   CouchbaseAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'com.couchbase.client.java.Cluster' (OnClassCondition)
+
+   CouchbaseDataAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'com.couchbase.client.java.Bucket' (OnClassCondition)
+
+   CouchbaseHealthContributorAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'com.couchbase.client.java.Cluster' (OnClassCondition)
+
+   CouchbaseReactiveDataAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'com.couchbase.client.java.Cluster' (OnClassCondition)
+
+   CouchbaseReactiveHealthContributorAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'com.couchbase.client.java.Cluster' (OnClassCondition)
+
+   CouchbaseReactiveRepositoriesAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'com.couchbase.client.java.Cluster' (OnClassCondition)
+
+   CouchbaseRepositoriesAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'com.couchbase.client.java.Bucket' (OnClassCondition)
+
+   DatadogMetricsExportAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'io.micrometer.datadog.DatadogMeterRegistry' (OnClassCondition)
+
+   DispatcherServletAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.springframework.web.servlet.DispatcherServlet' (OnClassCondition)
+
+   DynatraceMetricsExportAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'io.micrometer.dynatrace.DynatraceMeterRegistry' (OnClassCondition)
+
+   ElasticMetricsExportAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'io.micrometer.elastic.ElasticMeterRegistry' (OnClassCondition)
+
+   ElasticsearchClientAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'co.elastic.clients.elasticsearch.ElasticsearchClient' (OnClassCondition)
+
+   ElasticsearchDataAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.springframework.data.elasticsearch.client.elc.ElasticsearchTemplate' (OnClassCondition)
+
+   ElasticsearchReactiveHealthContributorAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.springframework.data.elasticsearch.client.elc.ReactiveElasticsearchClient' (OnClassCondition)
+
+   ElasticsearchRepositoriesAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.springframework.data.elasticsearch.repository.ElasticsearchRepository' (OnClassCondition)
+
+   ElasticsearchRestClientAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.elasticsearch.client.RestClientBuilder' (OnClassCondition)
+
+   ElasticsearchRestHealthContributorAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.elasticsearch.client.RestClient' (OnClassCondition)
+
+   EmbeddedLdapAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'com.unboundid.ldap.listener.InMemoryDirectoryServer' (OnClassCondition)
+
+   ErrorMvcAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'jakarta.servlet.Servlet' (OnClassCondition)
+
+   EurekaClientConfigServerAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.springframework.cloud.config.server.config.ConfigServerProperties' (OnClassCondition)
+
+   FlywayAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.flywaydb.core.Flyway' (OnClassCondition)
+
+   FlywayEndpointAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.flywaydb.core.Flyway' (OnClassCondition)
+
+   FreeMarkerAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'freemarker.template.Configuration' (OnClassCondition)
+
+   GangliaMetricsExportAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'io.micrometer.ganglia.GangliaMeterRegistry' (OnClassCondition)
+
+   GatewayAutoConfiguration.TokenRelayConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.springframework.security.oauth2.client.OAuth2AuthorizedClient' (OnClassCondition)
+
+   GatewayClassPathWarningAutoConfiguration.SpringMvcFoundOnClasspathConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.springframework.web.servlet.DispatcherServlet' (OnClassCondition)
+
+   GatewayClassPathWarningAutoConfiguration.WebfluxMissingFromClasspathConfiguration:
+      Did not match:
+         - @ConditionalOnMissingClass found unwanted class 'org.springframework.web.reactive.DispatcherHandler' (OnClassCondition)
+
+   GatewayMetricsAutoConfiguration.ObservabilityConfiguration.GatewayTracingConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'io.micrometer.tracing.Tracer' (OnClassCondition)
+
+   GatewayReactiveOAuth2AutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.springframework.security.oauth2.client.OAuth2AuthorizedClient' (OnClassCondition)
+
+   GatewayResilience4JCircuitBreakerAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.springframework.cloud.circuitbreaker.resilience4j.ReactiveResilience4JAutoConfiguration' (OnClassCondition)
+
+   GraphQlAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'graphql.GraphQL' (OnClassCondition)
+
+   GraphQlObservationAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'graphql.GraphQL' (OnClassCondition)
+
+   GraphQlQueryByExampleAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'graphql.GraphQL' (OnClassCondition)
+
+   GraphQlQuerydslAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'com.querydsl.core.Query' (OnClassCondition)
+
+   GraphQlRSocketAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'graphql.GraphQL' (OnClassCondition)
+
+   GraphQlReactiveQueryByExampleAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'graphql.GraphQL' (OnClassCondition)
+
+   GraphQlReactiveQuerydslAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'com.querydsl.core.Query' (OnClassCondition)
+
+   GraphQlWebFluxAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'graphql.GraphQL' (OnClassCondition)
+
+   GraphQlWebFluxSecurityAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'graphql.GraphQL' (OnClassCondition)
+
+   GraphQlWebMvcAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'graphql.GraphQL' (OnClassCondition)
+
+   GraphQlWebMvcSecurityAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'graphql.GraphQL' (OnClassCondition)
+
+   GraphiteMetricsExportAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'io.micrometer.graphite.GraphiteMeterRegistry' (OnClassCondition)
+
+   GroovyTemplateAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'groovy.text.markup.MarkupTemplateEngine' (OnClassCondition)
+
+   H2ConsoleAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.h2.server.web.JakartaWebServlet' (OnClassCondition)
+
+   HazelcastAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'com.hazelcast.core.HazelcastInstance' (OnClassCondition)
+
+   HazelcastHealthContributorAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'com.hazelcast.core.HazelcastInstance' (OnClassCondition)
+
+   HazelcastJpaDependencyAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'com.hazelcast.core.HazelcastInstance' (OnClassCondition)
+
+   HibernateJpaAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'jakarta.persistence.EntityManager' (OnClassCondition)
+
+   HibernateMetricsAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'jakarta.persistence.EntityManagerFactory' (OnClassCondition)
+
+   HttpEncodingAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.springframework.web.filter.CharacterEncodingFilter' (OnClassCondition)
+
+   HumioMetricsExportAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'io.micrometer.humio.HumioMeterRegistry' (OnClassCondition)
+
+   HypermediaAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.springframework.hateoas.EntityModel' (OnClassCondition)
+
+   InfluxDbAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.influxdb.InfluxDB' (OnClassCondition)
+
+   InfluxDbHealthContributorAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.influxdb.InfluxDB' (OnClassCondition)
+
+   InfluxMetricsExportAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'io.micrometer.influx.InfluxMeterRegistry' (OnClassCondition)
+
+   IntegrationAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.springframework.integration.config.EnableIntegration' (OnClassCondition)
+
+   IntegrationGraphEndpointAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.springframework.integration.graph.IntegrationGraphServer' (OnClassCondition)
+
+   JdbcRepositoriesAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.springframework.data.jdbc.repository.config.AbstractJdbcConfiguration' (OnClassCondition)
+
+   JedisConnectionConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required classes 'org.apache.commons.pool2.impl.GenericObjectPool', 'redis.clients.jedis.Jedis' (OnClassCondition)
+
+   JerseyAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'jakarta.servlet.ServletRegistration' (OnClassCondition)
+
+   JerseyServerMetricsAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.glassfish.jersey.micrometer.server.ObservationApplicationEventListener' (OnClassCondition)
+
+   JettyMetricsAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.eclipse.jetty.server.Server' (OnClassCondition)
+
+   JmsAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'jakarta.jms.Message' (OnClassCondition)
+
+   JmsHealthContributorAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'jakarta.jms.ConnectionFactory' (OnClassCondition)
+
+   JmxMetricsExportAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'io.micrometer.jmx.JmxMeterRegistry' (OnClassCondition)
+
+   JndiConnectionFactoryAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.springframework.jms.core.JmsTemplate' (OnClassCondition)
+
+   JndiDataSourceAutoConfiguration:
+      Did not match:
+         - @ConditionalOnProperty (spring.datasource.jndi-name) did not find property 'jndi-name' (OnPropertyCondition)
+      Matched:
+         - @ConditionalOnClass found required classes 'javax.sql.DataSource', 'org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType' (OnClassCondition)
+
+   JooqAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.jooq.DSLContext' (OnClassCondition)
+
+   JpaRepositoriesAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.springframework.data.jpa.repository.JpaRepository' (OnClassCondition)
+
+   JsonbAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'jakarta.json.bind.Jsonb' (OnClassCondition)
+
+   JtaAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'jakarta.transaction.Transaction' (OnClassCondition)
+
+   KafkaAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.springframework.kafka.core.KafkaTemplate' (OnClassCondition)
+
+   KafkaMetricsAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.springframework.kafka.core.ProducerFactory' (OnClassCondition)
+
+   KairosMetricsExportAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'io.micrometer.kairos.KairosMeterRegistry' (OnClassCondition)
+
+   LdapAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.springframework.ldap.core.ContextSource' (OnClassCondition)
+
+   LdapHealthContributorAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.springframework.ldap.core.LdapOperations' (OnClassCondition)
+
+   LdapRepositoriesAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.springframework.data.ldap.repository.LdapRepository' (OnClassCondition)
+
+   LiquibaseAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'liquibase.change.DatabaseChange' (OnClassCondition)
+
+   LiquibaseEndpointAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'liquibase.integration.spring.SpringLiquibase' (OnClassCondition)
+
+   LocalResponseCacheAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'com.github.benmanes.caffeine.cache.Caffeine' (OnClassCondition)
+
+   Log4J2MetricsAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.apache.logging.log4j.core.LoggerContext' (OnClassCondition)
+
+   MessageSourceAutoConfiguration:
+      Did not match:
+         - ResourceBundle did not find bundle with basename messages (MessageSourceAutoConfiguration.ResourceBundleCondition)
+
+   MetricsAspectsAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.aspectj.weaver.Advice' (OnClassCondition)
+
+   MicrometerTracingAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'io.micrometer.tracing.Tracer' (OnClassCondition)
+
+   MongoAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'com.mongodb.client.MongoClient' (OnClassCondition)
+
+   MongoDataAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'com.mongodb.client.MongoClient' (OnClassCondition)
+
+   MongoHealthContributorAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.springframework.data.mongodb.core.MongoTemplate' (OnClassCondition)
+
+   MongoMetricsAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'com.mongodb.MongoClientSettings' (OnClassCondition)
+
+   MongoReactiveAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'com.mongodb.reactivestreams.client.MongoClient' (OnClassCondition)
+
+   MongoReactiveDataAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'com.mongodb.reactivestreams.client.MongoClient' (OnClassCondition)
+
+   MongoReactiveHealthContributorAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.springframework.data.mongodb.core.ReactiveMongoTemplate' (OnClassCondition)
+
+   MongoReactiveRepositoriesAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'com.mongodb.reactivestreams.client.MongoClient' (OnClassCondition)
+
+   MongoRepositoriesAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'com.mongodb.client.MongoClient' (OnClassCondition)
+
+   MultipartAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'jakarta.servlet.MultipartConfigElement' (OnClassCondition)
+
+   MultipleOpenApiSupportConfiguration.SpringDocWebMvcActuatorDifferentConfiguration:
+      Did not match:
+         - Management Port actual port type (SAME) did not match required type (DIFFERENT) (OnManagementPortCondition)
+      Matched:
+         - @ConditionalOnClass found required class 'org.springframework.boot.actuate.endpoint.web.reactive.WebFluxEndpointHandlerMapping' (OnClassCondition)
+
+   MustacheAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'com.samskivert.mustache.Mustache' (OnClassCondition)
+
+   Neo4jAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.neo4j.driver.Driver' (OnClassCondition)
+
+   Neo4jDataAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.neo4j.driver.Driver' (OnClassCondition)
+
+   Neo4jHealthContributorAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.neo4j.driver.Driver' (OnClassCondition)
+
+   Neo4jReactiveDataAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.neo4j.driver.Driver' (OnClassCondition)
+
+   Neo4jReactiveRepositoriesAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.neo4j.driver.Driver' (OnClassCondition)
+
+   Neo4jRepositoriesAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.neo4j.driver.Driver' (OnClassCondition)
+
+   NewRelicMetricsExportAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'io.micrometer.newrelic.NewRelicMeterRegistry' (OnClassCondition)
+
+   NoopTracerAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'io.micrometer.tracing.Tracer' (OnClassCondition)
+
+   OAuth2AuthorizationServerAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.springframework.security.oauth2.server.authorization.OAuth2Authorization' (OnClassCondition)
+
+   OAuth2AuthorizationServerJwtAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.springframework.security.oauth2.server.authorization.OAuth2Authorization' (OnClassCondition)
+
+   OAuth2ClientAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.springframework.security.oauth2.client.registration.ClientRegistration' (OnClassCondition)
+
+   OAuth2ResourceServerAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.springframework.security.oauth2.server.resource.authentication.BearerTokenAuthenticationToken' (OnClassCondition)
+
+   ObservationAutoConfiguration.MeterObservationHandlerConfiguration.TracingAndMetricsObservationHandlerConfiguration:
+      Did not match:
+         - @ConditionalOnBean did not find required type 'io.micrometer.tracing.Tracer' (OnBeanCondition)
+
+   ObservationAutoConfiguration.MetricsWithTracingConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'io.micrometer.tracing.Tracer' (OnClassCondition)
+
+   ObservationAutoConfiguration.ObservedAspectConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.aspectj.weaver.Advice' (OnClassCondition)
+
+   ObservationAutoConfiguration.OnlyTracingConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'io.micrometer.tracing.Tracer' (OnClassCondition)
+
+   org.springframework.boot.actuate.autoconfigure.opentelemetry.OpenTelemetryAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'io.opentelemetry.sdk.OpenTelemetrySdk' (OnClassCondition)
+
+   org.springframework.boot.actuate.autoconfigure.tracing.OpenTelemetryAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'io.micrometer.tracing.otel.bridge.OtelTracer' (OnClassCondition)
+
+   OtlpAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'io.micrometer.tracing.otel.bridge.OtelTracer' (OnClassCondition)
+
+   OtlpMetricsExportAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'io.micrometer.registry.otlp.OtlpMeterRegistry' (OnClassCondition)
+
+   PrometheusExemplarsAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'io.micrometer.tracing.Tracer' (OnClassCondition)
+
+   PrometheusMetricsExportAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'io.micrometer.prometheusmetrics.PrometheusMeterRegistry' (OnClassCondition)
+
+   PrometheusSimpleclientExemplarsAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'io.micrometer.tracing.Tracer' (OnClassCondition)
+
+   PrometheusSimpleclientMetricsExportAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'io.micrometer.prometheus.PrometheusMeterRegistry' (OnClassCondition)
+
+   PulsarAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.apache.pulsar.client.api.PulsarClient' (OnClassCondition)
+
+   PulsarReactiveAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.apache.pulsar.client.api.PulsarClient' (OnClassCondition)
+
+   QuartzAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.quartz.Scheduler' (OnClassCondition)
+
+   QuartzEndpointAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.quartz.Scheduler' (OnClassCondition)
+
+   R2dbcObservationAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'io.r2dbc.proxy.ProxyConnectionFactory' (OnClassCondition)
+
+   RSocketGraphQlClientAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'graphql.GraphQL' (OnClassCondition)
+
+   RSocketMessagingAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'io.rsocket.RSocket' (OnClassCondition)
+
+   RSocketRequesterAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'io.rsocket.RSocket' (OnClassCondition)
+
+   RSocketSecurityAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.springframework.security.rsocket.core.SecuritySocketAcceptorInterceptor' (OnClassCondition)
+
+   RSocketServerAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'io.rsocket.core.RSocketServer' (OnClassCondition)
+
+   RSocketStrategiesAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'io.rsocket.RSocket' (OnClassCondition)
+
+   RabbitAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'com.rabbitmq.client.Channel' (OnClassCondition)
+
+   RabbitHealthContributorAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.springframework.amqp.rabbit.core.RabbitTemplate' (OnClassCondition)
+
+   RabbitMetricsAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'com.rabbitmq.client.ConnectionFactory' (OnClassCondition)
+
+   ReactiveElasticsearchClientAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'co.elastic.clients.transport.ElasticsearchTransport' (OnClassCondition)
+
+   ReactiveElasticsearchRepositoriesAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.springframework.data.elasticsearch.client.elc.ReactiveElasticsearchClient' (OnClassCondition)
+
+   ReactiveOAuth2ClientAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.springframework.security.oauth2.client.registration.ClientRegistration' (OnClassCondition)
+
+   ReactiveWebServerFactoryConfiguration.EmbeddedJetty:
+      Did not match:
+         - @ConditionalOnClass did not find required classes 'org.eclipse.jetty.server.Server', 'org.eclipse.jetty.ee10.servlet.ServletHolder' (OnClassCondition)
+
+   ReactiveWebServerFactoryConfiguration.EmbeddedTomcat:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.apache.catalina.startup.Tomcat' (OnClassCondition)
+
+   ReactiveWebServerFactoryConfiguration.EmbeddedUndertow:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'io.undertow.Undertow' (OnClassCondition)
+
+   RepositoryRestMvcAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.springframework.data.rest.webmvc.config.RepositoryRestMvcConfiguration' (OnClassCondition)
+
+   Saml2RelyingPartyAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.springframework.security.saml2.provider.service.registration.RelyingPartyRegistrationRepository' (OnClassCondition)
+
+   SendGridAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'com.sendgrid.SendGrid' (OnClassCondition)
+
+   ServletManagementContextAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'jakarta.servlet.Servlet' (OnClassCondition)
+
+   ServletWebServerFactoryAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'jakarta.servlet.ServletRequest' (OnClassCondition)
+
+   SessionAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.springframework.session.Session' (OnClassCondition)
+
+   SessionsEndpointAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.springframework.session.Session' (OnClassCondition)
+
+   SignalFxMetricsExportAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'io.micrometer.signalfx.SignalFxMeterRegistry' (OnClassCondition)
+
+   SpringDataWebAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.springframework.web.servlet.config.annotation.WebMvcConfigurer' (OnClassCondition)
+
+   SpringDocConfiguration.SpringDocActuatorConfiguration:
+      Did not match:
+         - @ConditionalOnProperty (springdoc.show-actuator) did not find property 'springdoc.show-actuator' (OnPropertyCondition)
+      Matched:
+         - @ConditionalOnClass found required class 'org.springframework.boot.actuate.autoconfigure.endpoint.web.WebEndpointProperties' (OnClassCondition)
+
+   SpringDocConfiguration.SpringDocRepositoryRestConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.springframework.data.rest.core.config.RepositoryRestConfiguration' (OnClassCondition)
+
+   SpringDocDataRestConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.springframework.data.rest.core.config.RepositoryRestConfiguration' (OnClassCondition)
+
+   SpringDocFunctionCatalogConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.springframework.cloud.function.web.function.FunctionEndpointInitializer' (OnClassCondition)
+
+   SpringDocGroovyConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'groovy.lang.MetaClass' (OnClassCondition)
+
+   SpringDocHateoasConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.springframework.hateoas.server.LinkRelationProvider' (OnClassCondition)
+
+   SpringDocJacksonKotlinModuleConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'com.fasterxml.jackson.module.kotlin.KotlinModule' (OnClassCondition)
+
+   SpringDocJavadocConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'com.github.therapi.runtimejavadoc.CommentFormatter' (OnClassCondition)
+
+   SpringDocKotlinConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'kotlin.coroutines.Continuation' (OnClassCondition)
+
+   SpringDocKotlinxConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'kotlinx.coroutines.flow.Flow' (OnClassCondition)
+
+   SpringDocSecurityConfiguration.SpringDocSecurityOAuth2ClientConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.springframework.security.oauth2.client.annotation.RegisteredOAuth2AuthorizedClient' (OnClassCondition)
+
+   SpringDocSecurityConfiguration.SpringDocSecurityOAuth2Configuration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationService' (OnClassCondition)
+
+   SpringDocSecurityConfiguration.SpringSecurityLoginEndpointConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'jakarta.servlet.Filter' (OnClassCondition)
+
+   StackdriverMetricsExportAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'io.micrometer.stackdriver.StackdriverMeterRegistry' (OnClassCondition)
+
+   StatsdMetricsExportAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'io.micrometer.statsd.StatsdMeterRegistry' (OnClassCondition)
+
+   SwaggerConfig.SwaggerActuatorWelcomeConfiguration:
+      Did not match:
+         - @ConditionalOnProperty (springdoc.use-management-port) did not find property 'springdoc.use-management-port' (OnPropertyCondition)
+      Matched:
+         - @ConditionalOnClass found required class 'org.springframework.boot.actuate.endpoint.web.reactive.WebFluxEndpointHandlerMapping' (OnClassCondition)
+
+   ThymeleafAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.thymeleaf.spring6.SpringTemplateEngine' (OnClassCondition)
+
+   TomcatMetricsAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.apache.catalina.Manager' (OnClassCondition)
+
+   WavefrontAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'com.wavefront.sdk.common.application.ApplicationTags' (OnClassCondition)
+
+   WavefrontMetricsExportAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'com.wavefront.sdk.common.WavefrontSender' (OnClassCondition)
+
+   WavefrontTracingAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'com.wavefront.sdk.common.WavefrontSender' (OnClassCondition)
+
+   WebFluxAutoConfiguration.ProblemDetailsErrorHandlingConfiguration:
+      Did not match:
+         - @ConditionalOnProperty (spring.webflux.problemdetails.enabled=true) did not find property 'enabled' (OnPropertyCondition)
+
+   WebFluxAutoConfiguration.ResourceChainCustomizerConfiguration:
+      Did not match:
+         - @ConditionalOnEnabledResourceChain did not find class org.webjars.WebJarAssetLocator (OnEnabledResourceChainCondition)
+
+   WebMvcAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'jakarta.servlet.Servlet' (OnClassCondition)
+
+   WebMvcObservationAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.springframework.web.servlet.DispatcherServlet' (OnClassCondition)
+
+   WebServiceTemplateAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.springframework.ws.client.core.WebServiceTemplate' (OnClassCondition)
+
+   WebServicesAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.springframework.ws.transport.http.MessageDispatcherServlet' (OnClassCondition)
+
+   WebSocketMessagingAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer' (OnClassCondition)
+
+   WebSocketReactiveAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'jakarta.servlet.Servlet' (OnClassCondition)
+
+   WebSocketServletAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'jakarta.servlet.Servlet' (OnClassCondition)
+
+   XADataSourceAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'jakarta.transaction.TransactionManager' (OnClassCondition)
+
+   ZipkinAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'zipkin2.reporter.Encoding' (OnClassCondition)
+
+
+Exclusions:
+-----------
+
+    None
+
+
+Unconditional classes:
+----------------------
+
+    org.springframework.boot.actuate.autoconfigure.management.HeapDumpWebEndpointAutoConfiguration
+
+    org.springframework.cloud.client.loadbalancer.reactive.ReactorLoadBalancerClientAutoConfiguration
+
+    org.springframework.boot.actuate.autoconfigure.web.reactive.ReactiveManagementContextAutoConfiguration
+
+    org.springframework.cloud.client.discovery.simple.SimpleDiscoveryClientAutoConfiguration
+
+    org.springframework.boot.actuate.autoconfigure.startup.StartupEndpointAutoConfiguration
+
+    org.springframework.boot.actuate.autoconfigure.mail.MailHealthContributorAutoConfiguration
+
+    org.springframework.boot.actuate.autoconfigure.context.properties.ConfigurationPropertiesReportEndpointAutoConfiguration
+
+    org.springframework.boot.actuate.autoconfigure.metrics.cache.CacheMetricsAutoConfiguration
+
+    org.springframework.cloud.client.serviceregistry.ServiceRegistryAutoConfiguration
+
+    org.springframework.boot.actuate.autoconfigure.endpoint.web.WebEndpointAutoConfiguration
+
+    org.springframework.boot.actuate.autoconfigure.r2dbc.ConnectionFactoryHealthContributorAutoConfiguration
+
+    org.springframework.cloud.autoconfigure.LifecycleMvcEndpointAutoConfiguration
+
+    org.springframework.boot.autoconfigure.mail.MailSenderValidatorAutoConfiguration
+
+    org.springframework.boot.actuate.autoconfigure.cache.CachesEndpointAutoConfiguration
+
+    org.springframework.boot.actuate.autoconfigure.metrics.data.RepositoryMetricsAutoConfiguration
+
+    org.springframework.boot.autoconfigure.transaction.TransactionAutoConfiguration
+
+    org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration
+
+    org.springframework.boot.autoconfigure.web.reactive.function.client.ClientHttpConnectorAutoConfiguration
+
+    org.springframework.boot.actuate.autoconfigure.endpoint.jmx.JmxEndpointAutoConfiguration
+
+    org.springframework.boot.autoconfigure.transaction.TransactionManagerCustomizationAutoConfiguration
+
+    org.springframework.boot.autoconfigure.mail.MailSenderAutoConfiguration
+
+    org.springframework.cloud.netflix.eureka.loadbalancer.LoadBalancerEurekaAutoConfiguration
+
+    org.springframework.boot.autoconfigure.netty.NettyAutoConfiguration
+
+    org.springframework.cloud.client.loadbalancer.LoadBalancerDefaultMappingsProviderAutoConfiguration
+
+    org.springframework.boot.autoconfigure.data.redis.RedisRepositoriesAutoConfiguration
+
+    org.springframework.boot.actuate.autoconfigure.metrics.jdbc.DataSourcePoolMetricsAutoConfiguration
+
+    org.springframework.boot.autoconfigure.admin.SpringApplicationAdminJmxAutoConfiguration
+
+    org.springframework.boot.autoconfigure.web.client.RestTemplateAutoConfiguration
+
+    org.springframework.cloud.client.ReactiveCommonsClientAutoConfiguration
+
+    org.springframework.boot.autoconfigure.sql.init.SqlInitializationAutoConfiguration
+
+    org.springframework.boot.autoconfigure.web.embedded.EmbeddedWebServerFactoryCustomizerAutoConfiguration
+
+    org.springframework.boot.actuate.autoconfigure.env.EnvironmentEndpointAutoConfiguration
+
+    org.springframework.boot.actuate.autoconfigure.data.redis.RedisReactiveHealthContributorAutoConfiguration
+
+    org.springframework.boot.actuate.autoconfigure.context.ShutdownEndpointAutoConfiguration
+
+    org.springframework.boot.autoconfigure.jdbc.JdbcClientAutoConfiguration
+
+    org.springframework.cloud.autoconfigure.RefreshAutoConfiguration
+
+    org.springframework.boot.autoconfigure.security.servlet.SecurityFilterAutoConfiguration
+
+    org.springframework.boot.autoconfigure.http.HttpMessageConvertersAutoConfiguration
+
+    org.springframework.boot.autoconfigure.web.reactive.function.client.WebClientAutoConfiguration
+
+    org.springframework.cloud.commons.util.UtilAutoConfiguration
+
+    org.springframework.boot.actuate.autoconfigure.metrics.SystemMetricsAutoConfiguration
+
+    org.springframework.cloud.autoconfigure.WritableEnvironmentEndpointAutoConfiguration
+
+    org.springframework.boot.autoconfigure.security.reactive.ReactiveSecurityAutoConfiguration
+
+    org.springframework.cloud.netflix.eureka.EurekaClientAutoConfiguration
+
+    org.springframework.boot.actuate.autoconfigure.availability.AvailabilityHealthContributorAutoConfiguration
+
+    org.springframework.boot.autoconfigure.data.r2dbc.R2dbcRepositoriesAutoConfiguration
+
+    org.springframework.cloud.gateway.config.GatewayNoLoadBalancerClientAutoConfiguration
+
+    org.springframework.cloud.loadbalancer.security.OAuth2LoadBalancerClientAutoConfiguration
+
+    org.springframework.boot.actuate.autoconfigure.metrics.task.TaskExecutorMetricsAutoConfiguration
+
+    org.springframework.boot.actuate.autoconfigure.metrics.startup.StartupTimeMetricsListenerAutoConfiguration
+
+    org.springframework.cloud.commons.config.CommonsConfigAutoConfiguration
+
+    org.springframework.boot.actuate.autoconfigure.scheduling.ScheduledTasksObservabilityAutoConfiguration
+
+    org.springframework.boot.autoconfigure.gson.GsonAutoConfiguration
+
+    org.springframework.boot.actuate.autoconfigure.cloudfoundry.reactive.ReactiveCloudFoundryActuatorAutoConfiguration
+
+    org.springframework.cloud.configuration.CompatibilityVerifierAutoConfiguration
+
+    org.springframework.boot.actuate.autoconfigure.jdbc.DataSourceHealthContributorAutoConfiguration
+
+    org.springframework.boot.actuate.autoconfigure.metrics.JvmMetricsAutoConfiguration
+
+    org.springframework.boot.autoconfigure.jdbc.JdbcTemplateAutoConfiguration
+
+    org.springframework.boot.autoconfigure.reactor.ReactorAutoConfiguration
+
+    org.springframework.boot.actuate.autoconfigure.management.ThreadDumpEndpointAutoConfiguration
+
+    org.springdoc.core.configuration.SpringDocSpecPropertiesConfiguration
+
+    org.springframework.boot.autoconfigure.availability.ApplicationAvailabilityAutoConfiguration
+
+    org.springframework.boot.actuate.autoconfigure.security.servlet.ManagementWebSecurityAutoConfiguration
+
+    org.springframework.boot.autoconfigure.security.reactive.ReactiveUserDetailsServiceAutoConfiguration
+
+    org.springframework.boot.actuate.autoconfigure.scheduling.ScheduledTasksEndpointAutoConfiguration
+
+    org.springframework.boot.autoconfigure.aop.AopAutoConfiguration
+
+    org.springframework.boot.autoconfigure.task.TaskExecutionAutoConfiguration
+
+    org.springframework.boot.actuate.autoconfigure.info.InfoContributorAutoConfiguration
+
+    org.springframework.boot.autoconfigure.context.PropertyPlaceholderAutoConfiguration
+
+    org.springframework.cloud.client.discovery.simple.reactive.SimpleReactiveDiscoveryClientAutoConfiguration
+
+    org.springframework.boot.actuate.autoconfigure.metrics.integration.IntegrationMetricsAutoConfiguration
+
+    org.springframework.cloud.loadbalancer.config.LoadBalancerStatsAutoConfiguration
+
+    org.springframework.boot.actuate.autoconfigure.security.reactive.ReactiveManagementWebSecurityAutoConfiguration
+
+    org.springframework.boot.autoconfigure.security.oauth2.resource.reactive.ReactiveOAuth2ResourceServerAutoConfiguration
+
+    org.springframework.boot.actuate.autoconfigure.metrics.LogbackMetricsAutoConfiguration
+
+    org.springframework.boot.actuate.autoconfigure.logging.LoggersEndpointAutoConfiguration
+
+    org.springframework.cloud.commons.security.ResourceServerTokenRelayAutoConfiguration
+
+    org.springframework.cloud.netflix.eureka.EurekaDiscoveryClientConfiguration
+
+    org.springframework.cloud.autoconfigure.RefreshEndpointAutoConfiguration
+
+    org.springframework.boot.autoconfigure.dao.PersistenceExceptionTranslationAutoConfiguration
+
+    org.springframework.boot.actuate.autoconfigure.endpoint.EndpointAutoConfiguration
+
+    org.springframework.boot.actuate.autoconfigure.condition.ConditionsReportEndpointAutoConfiguration
+
+    org.springframework.boot.actuate.autoconfigure.data.redis.RedisHealthContributorAutoConfiguration
+
+    org.springframework.cloud.netflix.eureka.config.DiscoveryClientOptionalArgsConfiguration
+
+    org.springframework.boot.autoconfigure.r2dbc.R2dbcTransactionManagerAutoConfiguration
+
+    org.springframework.cloud.client.hypermedia.CloudHypermediaAutoConfiguration
+
+    org.springframework.cloud.loadbalancer.config.LoadBalancerCacheAutoConfiguration
+
+    org.springframework.cloud.config.client.ConfigClientAutoConfiguration
+
+    org.springframework.boot.actuate.autoconfigure.system.DiskSpaceHealthContributorAutoConfiguration
+
+    org.springframework.cloud.client.discovery.composite.CompositeDiscoveryClientAutoConfiguration
+
+    org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration
+
+    org.springframework.cloud.gateway.config.SimpleUrlHandlerMappingGlobalCorsAutoConfiguration
+
+    org.springframework.cloud.netflix.eureka.reactive.EurekaReactiveDiscoveryClientConfiguration
+
+    org.springframework.boot.autoconfigure.cache.CacheAutoConfiguration
+
+    org.springframework.boot.autoconfigure.data.r2dbc.R2dbcDataAutoConfiguration
+
+    org.springframework.boot.autoconfigure.context.LifecycleAutoConfiguration
+
+    org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration
+
+    org.springframework.boot.actuate.autoconfigure.logging.LogFileWebEndpointAutoConfiguration
+
+    org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration
+
+    org.springframework.boot.actuate.autoconfigure.metrics.MetricsEndpointAutoConfiguration
+
+    org.springframework.boot.actuate.autoconfigure.observation.web.client.HttpClientObservationsAutoConfiguration
+
+    org.springframework.cloud.client.serviceregistry.AutoServiceRegistrationAutoConfiguration
+
+    org.springframework.cloud.loadbalancer.config.BlockingLoadBalancerClientAutoConfiguration
+
+    org.springframework.boot.actuate.autoconfigure.health.HealthEndpointAutoConfiguration
+
+    org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+
+    org.springframework.boot.autoconfigure.jmx.JmxAutoConfiguration
+
+    org.springframework.boot.actuate.autoconfigure.health.HealthContributorAutoConfiguration
+
+    org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
+
+    org.springframework.boot.autoconfigure.web.client.RestClientAutoConfiguration
+
+    org.springframework.boot.actuate.autoconfigure.observation.web.reactive.WebFluxObservationAutoConfiguration
+
+    org.springframework.boot.actuate.autoconfigure.info.InfoEndpointAutoConfiguration
+
+    org.springframework.boot.autoconfigure.context.ConfigurationPropertiesAutoConfiguration
+
+    org.springframework.boot.actuate.autoconfigure.sbom.SbomEndpointAutoConfiguration
+
+    org.springframework.boot.autoconfigure.ssl.SslAutoConfiguration
+
+    org.springframework.boot.actuate.autoconfigure.metrics.r2dbc.ConnectionPoolMetricsAutoConfiguration
+
+    org.springframework.boot.actuate.autoconfigure.web.exchanges.HttpExchangesAutoConfiguration
+
+    org.springframework.cloud.client.CommonsClientAutoConfiguration
+
+    org.springframework.boot.actuate.autoconfigure.web.server.ManagementContextAutoConfiguration
+
+    org.springframework.boot.actuate.autoconfigure.web.exchanges.HttpExchangesEndpointAutoConfiguration
+
+    org.springframework.boot.autoconfigure.task.TaskSchedulingAutoConfiguration
+
+    org.springframework.cloud.client.discovery.composite.reactive.ReactiveCompositeDiscoveryClientAutoConfiguration
+
+    org.springframework.boot.actuate.autoconfigure.web.mappings.MappingsEndpointAutoConfiguration
+
+    org.springframework.boot.actuate.autoconfigure.endpoint.jackson.JacksonEndpointAutoConfiguration
+
+    org.springframework.boot.autoconfigure.info.ProjectInfoAutoConfiguration
+
+    org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration
+
+
 "}
-{"@timestamp":"2024-10-30T00:07:19.875+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"com.gatewayservice.config.SecurityConfig", "message":"JwtFilter is called"}
-{"@timestamp":"2024-10-30T00:07:19.876+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"com.gatewayservice.config.SecurityConfig", "message":"JwtFilter is called"}
-{"@timestamp":"2024-10-30T00:07:19.877+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"com.gatewayservice.config.SecurityConfig", "message":"org.springframework.security.web.server.authentication.AuthenticationWebFilter@84e43fb"}
-{"@timestamp":"2024-10-30T00:07:20.204+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"org.springframework.cloud.gateway.route.RouteDefinitionRouteLocator", "message":"Loaded RoutePredicateFactory [After]"}
-{"@timestamp":"2024-10-30T00:07:20.204+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"org.springframework.cloud.gateway.route.RouteDefinitionRouteLocator", "message":"Loaded RoutePredicateFactory [Before]"}
-{"@timestamp":"2024-10-30T00:07:20.204+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"org.springframework.cloud.gateway.route.RouteDefinitionRouteLocator", "message":"Loaded RoutePredicateFactory [Between]"}
-{"@timestamp":"2024-10-30T00:07:20.204+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"org.springframework.cloud.gateway.route.RouteDefinitionRouteLocator", "message":"Loaded RoutePredicateFactory [Cookie]"}
-{"@timestamp":"2024-10-30T00:07:20.204+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"org.springframework.cloud.gateway.route.RouteDefinitionRouteLocator", "message":"Loaded RoutePredicateFactory [Header]"}
-{"@timestamp":"2024-10-30T00:07:20.204+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"org.springframework.cloud.gateway.route.RouteDefinitionRouteLocator", "message":"Loaded RoutePredicateFactory [Host]"}
-{"@timestamp":"2024-10-30T00:07:20.204+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"org.springframework.cloud.gateway.route.RouteDefinitionRouteLocator", "message":"Loaded RoutePredicateFactory [Method]"}
-{"@timestamp":"2024-10-30T00:07:20.205+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"org.springframework.cloud.gateway.route.RouteDefinitionRouteLocator", "message":"Loaded RoutePredicateFactory [Path]"}
-{"@timestamp":"2024-10-30T00:07:20.205+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"org.springframework.cloud.gateway.route.RouteDefinitionRouteLocator", "message":"Loaded RoutePredicateFactory [Query]"}
-{"@timestamp":"2024-10-30T00:07:20.205+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"org.springframework.cloud.gateway.route.RouteDefinitionRouteLocator", "message":"Loaded RoutePredicateFactory [ReadBody]"}
-{"@timestamp":"2024-10-30T00:07:20.205+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"org.springframework.cloud.gateway.route.RouteDefinitionRouteLocator", "message":"Loaded RoutePredicateFactory [RemoteAddr]"}
-{"@timestamp":"2024-10-30T00:07:20.205+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"org.springframework.cloud.gateway.route.RouteDefinitionRouteLocator", "message":"Loaded RoutePredicateFactory [XForwardedRemoteAddr]"}
-{"@timestamp":"2024-10-30T00:07:20.205+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"org.springframework.cloud.gateway.route.RouteDefinitionRouteLocator", "message":"Loaded RoutePredicateFactory [Weight]"}
-{"@timestamp":"2024-10-30T00:07:20.205+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"org.springframework.cloud.gateway.route.RouteDefinitionRouteLocator", "message":"Loaded RoutePredicateFactory [CloudFoundryRouteService]"}
-{"@timestamp":"2024-10-30T00:07:20.800+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"org.springframework.boot.actuate.endpoint.web.EndpointLinksResolver", "message":"Exposing 1 endpoint beneath base path '/actuator'"}
-{"@timestamp":"2024-10-30T00:07:21.561+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"org.springframework.cloud.netflix.eureka.config.DiscoveryClientOptionalArgsConfiguration", "message":"Eureka HTTP Client uses RestTemplate."}
-{"@timestamp":"2024-10-30T00:07:21.578+0900", "level":"WARN", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"org.springframework.cloud.loadbalancer.config.LoadBalancerCacheAutoConfiguration$LoadBalancerCaffeineWarnLogger", "message":"Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath."}
-{"@timestamp":"2024-10-30T00:07:21.624+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"org.springframework.cloud.netflix.eureka.InstanceInfoFactory", "message":"Setting initial instance status as: STARTING"}
-{"@timestamp":"2024-10-30T00:07:21.642+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"com.netflix.discovery.DiscoveryClient", "message":"Initializing Eureka in region us-east-1"}
-{"@timestamp":"2024-10-30T00:07:21.646+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"com.netflix.discovery.shared.resolver.aws.ConfigClusterResolver", "message":"Resolving eureka endpoints via configuration"}
-{"@timestamp":"2024-10-30T00:07:21.654+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"com.netflix.discovery.DiscoveryClient", "message":"Disable delta property : false"}
-{"@timestamp":"2024-10-30T00:07:21.654+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"com.netflix.discovery.DiscoveryClient", "message":"Single vip registry refresh property : null"}
-{"@timestamp":"2024-10-30T00:07:21.654+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"com.netflix.discovery.DiscoveryClient", "message":"Force full registry fetch : false"}
-{"@timestamp":"2024-10-30T00:07:21.654+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"com.netflix.discovery.DiscoveryClient", "message":"Application is null : false"}
-{"@timestamp":"2024-10-30T00:07:21.654+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"com.netflix.discovery.DiscoveryClient", "message":"Registered Applications size is zero : true"}
-{"@timestamp":"2024-10-30T00:07:21.655+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"com.netflix.discovery.DiscoveryClient", "message":"Application version is -1: true"}
-{"@timestamp":"2024-10-30T00:07:21.655+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"com.netflix.discovery.DiscoveryClient", "message":"Getting all instance registry info from the eureka server"}
-{"@timestamp":"2024-10-30T00:07:22.864+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient", "message":"Request execution error. endpoint=DefaultEndpoint{ serviceUrl='http://discovery-service:8761/eureka/}, exception=I/O error on GET request for "http://discovery-service:8761/eureka/apps/": 알려진 호스트가 없습니다 (discovery-service) stacktrace=org.springframework.web.client.ResourceAccessException: I/O error on GET request for "http://discovery-service:8761/eureka/apps/": 알려진 호스트가 없습니다 (discovery-service)
-	at org.springframework.web.client.RestTemplate.createResourceAccessException(RestTemplate.java:915)
-	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:895)
-	at org.springframework.web.client.RestTemplate.execute(RestTemplate.java:790)
-	at org.springframework.web.client.RestTemplate.exchange(RestTemplate.java:672)
-	at org.springframework.cloud.netflix.eureka.http.RestTemplateEurekaHttpClient.getApplicationsInternal(RestTemplateEurekaHttpClient.java:145)
-	at org.springframework.cloud.netflix.eureka.http.RestTemplateEurekaHttpClient.getApplications(RestTemplateEurekaHttpClient.java:135)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$6.execute(EurekaHttpClientDecorator.java:137)
-	at com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient.executeOnNewServer(RedirectingEurekaHttpClient.java:121)
-	at com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient.execute(RedirectingEurekaHttpClient.java:80)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.getApplications(EurekaHttpClientDecorator.java:134)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$6.execute(EurekaHttpClientDecorator.java:137)
-	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:120)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.getApplications(EurekaHttpClientDecorator.java:134)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$6.execute(EurekaHttpClientDecorator.java:137)
-	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:76)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.getApplications(EurekaHttpClientDecorator.java:134)
-	at com.netflix.discovery.DiscoveryClient.getAndStoreFullRegistry(DiscoveryClient.java:1046)
-	at com.netflix.discovery.DiscoveryClient.fetchRegistry(DiscoveryClient.java:961)
-	at com.netflix.discovery.DiscoveryClient.<init>(DiscoveryClient.java:410)
-	at com.netflix.discovery.DiscoveryClient.<init>(DiscoveryClient.java:245)
-	at com.netflix.discovery.DiscoveryClient.<init>(DiscoveryClient.java:240)
-	at org.springframework.cloud.netflix.eureka.CloudEurekaClient.<init>(CloudEurekaClient.java:68)
-	at org.springframework.cloud.netflix.eureka.EurekaClientAutoConfiguration$RefreshableEurekaClientConfiguration.eurekaClient(EurekaClientAutoConfiguration.java:321)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:146)
-	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:644)
-	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:636)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1355)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1185)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:562)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$1(AbstractBeanFactory.java:376)
-	at org.springframework.cloud.context.scope.GenericScope$BeanLifecycleWrapper.getBean(GenericScope.java:375)
-	at org.springframework.cloud.context.scope.GenericScope.get(GenericScope.java:179)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:373)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
-	at org.springframework.aop.target.SimpleBeanTargetSource.getTarget(SimpleBeanTargetSource.java:35)
-	at org.springframework.cloud.netflix.eureka.serviceregistry.EurekaRegistration.getTargetObject(EurekaRegistration.java:128)
-	at org.springframework.cloud.netflix.eureka.serviceregistry.EurekaRegistration.getEurekaClient(EurekaRegistration.java:116)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-	at org.springframework.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:281)
-	at org.springframework.cloud.context.scope.GenericScope$LockedScopedProxyFactoryBean.invoke(GenericScope.java:482)
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
-	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:768)
-	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:720)
-	at org.springframework.cloud.netflix.eureka.serviceregistry.EurekaRegistration$$SpringCGLIB$$0.getEurekaClient(<generated>)
-	at org.springframework.cloud.netflix.eureka.serviceregistry.EurekaServiceRegistry.maybeInitializeClient(EurekaServiceRegistry.java:83)
-	at org.springframework.cloud.netflix.eureka.serviceregistry.EurekaServiceRegistry.register(EurekaServiceRegistry.java:66)
-	at org.springframework.cloud.netflix.eureka.serviceregistry.EurekaAutoServiceRegistration.start(EurekaAutoServiceRegistration.java:89)
-	at org.springframework.context.support.DefaultLifecycleProcessor.doStart(DefaultLifecycleProcessor.java:285)
-	at org.springframework.context.support.DefaultLifecycleProcessor$LifecycleGroup.start(DefaultLifecycleProcessor.java:472)
+{"@timestamp":"2024-11-04T22:35:05.536+0900", "level":"ERROR", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"org.springframework.boot.SpringApplication", "message":"Application run failed"}
+org.springframework.beans.factory.BeanDefinitionStoreException: Failed to process import candidates for configuration class [org.springframework.boot.autoconfigure.r2dbc.R2dbcAutoConfiguration]: Error processing condition on org.springframework.boot.autoconfigure.r2dbc.ConnectionFactoryConfigurations$PoolConfiguration
+	at org.springframework.context.annotation.ConfigurationClassParser.processImports(ConfigurationClassParser.java:544)
+	at org.springframework.context.annotation.ConfigurationClassParser.doProcessConfigurationClass(ConfigurationClassParser.java:321)
+	at org.springframework.context.annotation.ConfigurationClassParser.processConfigurationClass(ConfigurationClassParser.java:246)
+	at org.springframework.context.annotation.ConfigurationClassParser.processImports(ConfigurationClassParser.java:534)
+	at org.springframework.context.annotation.ConfigurationClassParser$DeferredImportSelectorGroupingHandler.lambda$processGroupImports$1(ConfigurationClassParser.java:746)
 	at java.base/java.lang.Iterable.forEach(Iterable.java:75)
-	at org.springframework.context.support.DefaultLifecycleProcessor.startBeans(DefaultLifecycleProcessor.java:257)
-	at org.springframework.context.support.DefaultLifecycleProcessor.onRefresh(DefaultLifecycleProcessor.java:202)
-	at org.springframework.context.support.AbstractApplicationContext.finishRefresh(AbstractApplicationContext.java:990)
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:628)
+	at org.springframework.context.annotation.ConfigurationClassParser$DeferredImportSelectorGroupingHandler.processGroupImports(ConfigurationClassParser.java:743)
+	at org.springframework.context.annotation.ConfigurationClassParser$DeferredImportSelectorHandler.process(ConfigurationClassParser.java:714)
+	at org.springframework.context.annotation.ConfigurationClassParser.parse(ConfigurationClassParser.java:183)
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.processConfigBeanDefinitions(ConfigurationClassPostProcessor.java:417)
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.postProcessBeanDefinitionRegistry(ConfigurationClassPostProcessor.java:290)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanDefinitionRegistryPostProcessors(PostProcessorRegistrationDelegate.java:349)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:118)
+	at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:789)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:607)
 	at org.springframework.boot.web.reactive.context.ReactiveWebServerApplicationContext.refresh(ReactiveWebServerApplicationContext.java:66)
 	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
 	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:456)
@@ -126,574 +1326,22 @@ Using generated security password: 9d15e520-7e03-4731-9570-f9ce6ab71082
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1363)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1352)
 	at com.gatewayservice.GatewayServiceApplication.main(GatewayServiceApplication.java:12)
-Caused by: java.net.UnknownHostException: 알려진 호스트가 없습니다 (discovery-service)
-	at java.base/java.net.Inet6AddressImpl.lookupAllHostAddr(Native Method)
-	at java.base/java.net.InetAddress$PlatformNameService.lookupAllHostAddr(InetAddress.java:933)
-	at java.base/java.net.InetAddress.getAddressesFromNameService(InetAddress.java:1519)
-	at java.base/java.net.InetAddress$NameServiceAddresses.get(InetAddress.java:852)
-	at java.base/java.net.InetAddress.getAllByName0(InetAddress.java:1509)
-	at java.base/java.net.InetAddress.getAllByName(InetAddress.java:1367)
-	at java.base/java.net.InetAddress.getAllByName(InetAddress.java:1301)
-	at org.apache.hc.client5.http.SystemDefaultDnsResolver.resolve(SystemDefaultDnsResolver.java:45)
-	at org.apache.hc.client5.http.impl.io.DefaultHttpClientConnectionOperator.connect(DefaultHttpClientConnectionOperator.java:144)
-	at org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:450)
-	at org.apache.hc.client5.http.impl.classic.InternalExecRuntime.connectEndpoint(InternalExecRuntime.java:162)
-	at org.apache.hc.client5.http.impl.classic.InternalExecRuntime.connectEndpoint(InternalExecRuntime.java:172)
-	at org.apache.hc.client5.http.impl.classic.ConnectExec.execute(ConnectExec.java:142)
-	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
-	at org.apache.hc.client5.http.impl.classic.ProtocolExec.execute(ProtocolExec.java:192)
-	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
-	at org.apache.hc.client5.http.impl.classic.HttpRequestRetryExec.execute(HttpRequestRetryExec.java:113)
-	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
-	at org.apache.hc.client5.http.impl.classic.ContentCompressionExec.execute(ContentCompressionExec.java:152)
-	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
-	at org.apache.hc.client5.http.impl.classic.RedirectExec.execute(RedirectExec.java:116)
-	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
-	at org.apache.hc.client5.http.impl.classic.InternalHttpClient.doExecute(InternalHttpClient.java:170)
-	at org.apache.hc.client5.http.impl.classic.CloseableHttpClient.execute(CloseableHttpClient.java:87)
-	at org.apache.hc.client5.http.impl.classic.CloseableHttpClient.execute(CloseableHttpClient.java:55)
-	at org.apache.hc.client5.http.classic.HttpClient.executeOpen(HttpClient.java:183)
-	at org.springframework.http.client.HttpComponentsClientHttpRequest.executeInternal(HttpComponentsClientHttpRequest.java:99)
-	at org.springframework.http.client.AbstractStreamingClientHttpRequest.executeInternal(AbstractStreamingClientHttpRequest.java:70)
-	at org.springframework.http.client.AbstractClientHttpRequest.execute(AbstractClientHttpRequest.java:66)
-	at org.springframework.http.client.InterceptingClientHttpRequest$InterceptingRequestExecution.execute(InterceptingClientHttpRequest.java:112)
-	at org.springframework.cloud.netflix.eureka.http.RestTemplateTransportClientFactory.lambda$restTemplate$3(RestTemplateTransportClientFactory.java:170)
-	at org.springframework.http.client.InterceptingClientHttpRequest$InterceptingRequestExecution.execute(InterceptingClientHttpRequest.java:88)
-	at org.springframework.http.client.InterceptingClientHttpRequest.executeInternal(InterceptingClientHttpRequest.java:72)
-	at org.springframework.http.client.AbstractBufferingClientHttpRequest.executeInternal(AbstractBufferingClientHttpRequest.java:48)
-	at org.springframework.http.client.AbstractClientHttpRequest.execute(AbstractClientHttpRequest.java:66)
-	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:889)
-	... 67 more
-"}
-{"@timestamp":"2024-10-30T00:07:22.865+0900", "level":"WARN", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient", "message":"Request execution failed with message: I/O error on GET request for "http://discovery-service:8761/eureka/apps/": 알려진 호스트가 없습니다 (discovery-service)"}
-{"@timestamp":"2024-10-30T00:07:22.865+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"com.netflix.discovery.DiscoveryClient", "message":"DiscoveryClient_GATEWAY-SERVICE/host.docker.internal:gateway-service:8111 - was unable to refresh its cache! This periodic background refresh will be retried in 30 seconds. status = Cannot execute request on any known server stacktrace = com.netflix.discovery.shared.transport.TransportException: Cannot execute request on any known server
-	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:112)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.getApplications(EurekaHttpClientDecorator.java:134)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$6.execute(EurekaHttpClientDecorator.java:137)
-	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:76)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.getApplications(EurekaHttpClientDecorator.java:134)
-	at com.netflix.discovery.DiscoveryClient.getAndStoreFullRegistry(DiscoveryClient.java:1046)
-	at com.netflix.discovery.DiscoveryClient.fetchRegistry(DiscoveryClient.java:961)
-	at com.netflix.discovery.DiscoveryClient.<init>(DiscoveryClient.java:410)
-	at com.netflix.discovery.DiscoveryClient.<init>(DiscoveryClient.java:245)
-	at com.netflix.discovery.DiscoveryClient.<init>(DiscoveryClient.java:240)
-	at org.springframework.cloud.netflix.eureka.CloudEurekaClient.<init>(CloudEurekaClient.java:68)
-	at org.springframework.cloud.netflix.eureka.EurekaClientAutoConfiguration$RefreshableEurekaClientConfiguration.eurekaClient(EurekaClientAutoConfiguration.java:321)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:146)
-	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:644)
-	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:636)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1355)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1185)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:562)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$1(AbstractBeanFactory.java:376)
-	at org.springframework.cloud.context.scope.GenericScope$BeanLifecycleWrapper.getBean(GenericScope.java:375)
-	at org.springframework.cloud.context.scope.GenericScope.get(GenericScope.java:179)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:373)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
-	at org.springframework.aop.target.SimpleBeanTargetSource.getTarget(SimpleBeanTargetSource.java:35)
-	at org.springframework.cloud.netflix.eureka.serviceregistry.EurekaRegistration.getTargetObject(EurekaRegistration.java:128)
-	at org.springframework.cloud.netflix.eureka.serviceregistry.EurekaRegistration.getEurekaClient(EurekaRegistration.java:116)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-	at org.springframework.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:281)
-	at org.springframework.cloud.context.scope.GenericScope$LockedScopedProxyFactoryBean.invoke(GenericScope.java:482)
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
-	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:768)
-	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:720)
-	at org.springframework.cloud.netflix.eureka.serviceregistry.EurekaRegistration$$SpringCGLIB$$0.getEurekaClient(<generated>)
-	at org.springframework.cloud.netflix.eureka.serviceregistry.EurekaServiceRegistry.maybeInitializeClient(EurekaServiceRegistry.java:83)
-	at org.springframework.cloud.netflix.eureka.serviceregistry.EurekaServiceRegistry.register(EurekaServiceRegistry.java:66)
-	at org.springframework.cloud.netflix.eureka.serviceregistry.EurekaAutoServiceRegistration.start(EurekaAutoServiceRegistration.java:89)
-	at org.springframework.context.support.DefaultLifecycleProcessor.doStart(DefaultLifecycleProcessor.java:285)
-	at org.springframework.context.support.DefaultLifecycleProcessor$LifecycleGroup.start(DefaultLifecycleProcessor.java:472)
-	at java.base/java.lang.Iterable.forEach(Iterable.java:75)
-	at org.springframework.context.support.DefaultLifecycleProcessor.startBeans(DefaultLifecycleProcessor.java:257)
-	at org.springframework.context.support.DefaultLifecycleProcessor.onRefresh(DefaultLifecycleProcessor.java:202)
-	at org.springframework.context.support.AbstractApplicationContext.finishRefresh(AbstractApplicationContext.java:990)
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:628)
-	at org.springframework.boot.web.reactive.context.ReactiveWebServerApplicationContext.refresh(ReactiveWebServerApplicationContext.java:66)
-	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
-	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:456)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:335)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1363)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1352)
-	at com.gatewayservice.GatewayServiceApplication.main(GatewayServiceApplication.java:12)
-"}
-{"@timestamp":"2024-10-30T00:07:22.865+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"com.netflix.discovery.DiscoveryClient", "message":"Initial registry fetch from primary servers failed"}
-{"@timestamp":"2024-10-30T00:07:22.866+0900", "level":"WARN", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"com.netflix.discovery.DiscoveryClient", "message":"Using default backup registry implementation which does not do anything."}
-{"@timestamp":"2024-10-30T00:07:22.866+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"com.netflix.discovery.DiscoveryClient", "message":"Initial registry fetch from backup servers failed"}
-{"@timestamp":"2024-10-30T00:07:22.866+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"com.netflix.discovery.DiscoveryClient", "message":"Starting heartbeat executor: renew interval is: 5"}
-{"@timestamp":"2024-10-30T00:07:22.868+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"com.netflix.discovery.InstanceInfoReplicator", "message":"InstanceInfoReplicator onDemand update allowed rate per min is 4"}
-{"@timestamp":"2024-10-30T00:07:22.869+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"com.netflix.discovery.DiscoveryClient", "message":"Discovery Client initialized at timestamp 1730214442869 with initial instances count: 0"}
-{"@timestamp":"2024-10-30T00:07:22.871+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"org.springframework.cloud.netflix.eureka.serviceregistry.EurekaServiceRegistry", "message":"Registering application GATEWAY-SERVICE with eureka with status UP"}
-{"@timestamp":"2024-10-30T00:07:22.872+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"com.netflix.discovery.DiscoveryClient", "message":"Saw local status change event StatusChangeEvent [timestamp=1730214442872, current=UP, previous=STARTING]"}
-{"@timestamp":"2024-10-30T00:07:22.873+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"DiscoveryClient-InstanceInfoReplicator-%d", "logger":"com.netflix.discovery.DiscoveryClient", "message":"DiscoveryClient_GATEWAY-SERVICE/host.docker.internal:gateway-service:8111: registering service..."}
-{"@timestamp":"2024-10-30T00:07:22.904+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"DiscoveryClient-InstanceInfoReplicator-%d", "logger":"com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient", "message":"Request execution error. endpoint=DefaultEndpoint{ serviceUrl='http://discovery-service:8761/eureka/}, exception=I/O error on POST request for "http://discovery-service:8761/eureka/apps/GATEWAY-SERVICE": discovery-service stacktrace=org.springframework.web.client.ResourceAccessException: I/O error on POST request for "http://discovery-service:8761/eureka/apps/GATEWAY-SERVICE": discovery-service
-	at org.springframework.web.client.RestTemplate.createResourceAccessException(RestTemplate.java:915)
-	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:895)
-	at org.springframework.web.client.RestTemplate.execute(RestTemplate.java:790)
-	at org.springframework.web.client.RestTemplate.exchange(RestTemplate.java:672)
-	at org.springframework.cloud.netflix.eureka.http.RestTemplateEurekaHttpClient.register(RestTemplateEurekaHttpClient.java:77)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$1.execute(EurekaHttpClientDecorator.java:59)
-	at com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient.executeOnNewServer(RedirectingEurekaHttpClient.java:121)
-	at com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient.execute(RedirectingEurekaHttpClient.java:80)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$1.execute(EurekaHttpClientDecorator.java:59)
-	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:120)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$1.execute(EurekaHttpClientDecorator.java:59)
-	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:76)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56)
-	at com.netflix.discovery.DiscoveryClient.register(DiscoveryClient.java:828)
-	at com.netflix.discovery.InstanceInfoReplicator.run(InstanceInfoReplicator.java:125)
-	at com.netflix.discovery.InstanceInfoReplicator$2.run(InstanceInfoReplicator.java:105)
-	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:539)
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:304)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
-	at java.base/java.lang.Thread.run(Thread.java:833)
-Caused by: java.net.UnknownHostException: discovery-service
-	at java.base/java.net.InetAddress$CachedAddresses.get(InetAddress.java:801)
-	at java.base/java.net.InetAddress.getAllByName0(InetAddress.java:1509)
-	at java.base/java.net.InetAddress.getAllByName(InetAddress.java:1367)
-	at java.base/java.net.InetAddress.getAllByName(InetAddress.java:1301)
-	at org.apache.hc.client5.http.SystemDefaultDnsResolver.resolve(SystemDefaultDnsResolver.java:45)
-	at org.apache.hc.client5.http.impl.io.DefaultHttpClientConnectionOperator.connect(DefaultHttpClientConnectionOperator.java:144)
-	at org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:450)
-	at org.apache.hc.client5.http.impl.classic.InternalExecRuntime.connectEndpoint(InternalExecRuntime.java:162)
-	at org.apache.hc.client5.http.impl.classic.InternalExecRuntime.connectEndpoint(InternalExecRuntime.java:172)
-	at org.apache.hc.client5.http.impl.classic.ConnectExec.execute(ConnectExec.java:142)
-	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
-	at org.apache.hc.client5.http.impl.classic.ProtocolExec.execute(ProtocolExec.java:192)
-	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
-	at org.apache.hc.client5.http.impl.classic.HttpRequestRetryExec.execute(HttpRequestRetryExec.java:113)
-	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
-	at org.apache.hc.client5.http.impl.classic.ContentCompressionExec.execute(ContentCompressionExec.java:152)
-	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
-	at org.apache.hc.client5.http.impl.classic.RedirectExec.execute(RedirectExec.java:116)
-	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
-	at org.apache.hc.client5.http.impl.classic.InternalHttpClient.doExecute(InternalHttpClient.java:170)
-	at org.apache.hc.client5.http.impl.classic.CloseableHttpClient.execute(CloseableHttpClient.java:87)
-	at org.apache.hc.client5.http.impl.classic.CloseableHttpClient.execute(CloseableHttpClient.java:55)
-	at org.apache.hc.client5.http.classic.HttpClient.executeOpen(HttpClient.java:183)
-	at org.springframework.http.client.HttpComponentsClientHttpRequest.executeInternal(HttpComponentsClientHttpRequest.java:99)
-	at org.springframework.http.client.AbstractStreamingClientHttpRequest.executeInternal(AbstractStreamingClientHttpRequest.java:70)
-	at org.springframework.http.client.AbstractClientHttpRequest.execute(AbstractClientHttpRequest.java:66)
-	at org.springframework.http.client.InterceptingClientHttpRequest$InterceptingRequestExecution.execute(InterceptingClientHttpRequest.java:112)
-	at org.springframework.cloud.netflix.eureka.http.RestTemplateTransportClientFactory.lambda$restTemplate$3(RestTemplateTransportClientFactory.java:170)
-	at org.springframework.http.client.InterceptingClientHttpRequest$InterceptingRequestExecution.execute(InterceptingClientHttpRequest.java:88)
-	at org.springframework.http.client.InterceptingClientHttpRequest.executeInternal(InterceptingClientHttpRequest.java:72)
-	at org.springframework.http.client.AbstractBufferingClientHttpRequest.executeInternal(AbstractBufferingClientHttpRequest.java:48)
-	at org.springframework.http.client.AbstractClientHttpRequest.execute(AbstractClientHttpRequest.java:66)
-	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:889)
-	... 22 more
-"}
-{"@timestamp":"2024-10-30T00:07:22.905+0900", "level":"WARN", "service":"gateway-service", "trace": "", "span": "", "thread":"DiscoveryClient-InstanceInfoReplicator-%d", "logger":"com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient", "message":"Request execution failed with message: I/O error on POST request for "http://discovery-service:8761/eureka/apps/GATEWAY-SERVICE": discovery-service"}
-{"@timestamp":"2024-10-30T00:07:22.905+0900", "level":"WARN", "service":"gateway-service", "trace": "", "span": "", "thread":"DiscoveryClient-InstanceInfoReplicator-%d", "logger":"com.netflix.discovery.DiscoveryClient", "message":"DiscoveryClient_GATEWAY-SERVICE/host.docker.internal:gateway-service:8111 - registration failed Cannot execute request on any known server"}
-com.netflix.discovery.shared.transport.TransportException: Cannot execute request on any known server
-	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:112)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$1.execute(EurekaHttpClientDecorator.java:59)
-	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:76)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56)
-	at com.netflix.discovery.DiscoveryClient.register(DiscoveryClient.java:828)
-	at com.netflix.discovery.InstanceInfoReplicator.run(InstanceInfoReplicator.java:125)
-	at com.netflix.discovery.InstanceInfoReplicator$2.run(InstanceInfoReplicator.java:105)
-	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:539)
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:304)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
-	at java.base/java.lang.Thread.run(Thread.java:833)
-{"@timestamp":"2024-10-30T00:07:22.906+0900", "level":"WARN", "service":"gateway-service", "trace": "", "span": "", "thread":"DiscoveryClient-InstanceInfoReplicator-%d", "logger":"com.netflix.discovery.InstanceInfoReplicator", "message":"There was a problem with the instance info replicator"}
-com.netflix.discovery.shared.transport.TransportException: Cannot execute request on any known server
-	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:112)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$1.execute(EurekaHttpClientDecorator.java:59)
-	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:76)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56)
-	at com.netflix.discovery.DiscoveryClient.register(DiscoveryClient.java:828)
-	at com.netflix.discovery.InstanceInfoReplicator.run(InstanceInfoReplicator.java:125)
-	at com.netflix.discovery.InstanceInfoReplicator$2.run(InstanceInfoReplicator.java:105)
-	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:539)
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:304)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
-	at java.base/java.lang.Thread.run(Thread.java:833)
-{"@timestamp":"2024-10-30T00:07:23.050+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"org.springframework.boot.web.embedded.netty.NettyWebServer", "message":"Netty started on port 8111 (http)"}
-{"@timestamp":"2024-10-30T00:07:23.050+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"org.springframework.cloud.netflix.eureka.serviceregistry.EurekaAutoServiceRegistration", "message":"Updating port to 8111"}
-{"@timestamp":"2024-10-30T00:07:24.045+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"main", "logger":"com.gatewayservice.GatewayServiceApplication", "message":"Started GatewayServiceApplication in 10.505 seconds (process running for 13.152)"}
-{"@timestamp":"2024-10-30T00:07:27.885+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"DiscoveryClient-HeartbeatExecutor-%d", "logger":"com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient", "message":"Request execution error. endpoint=DefaultEndpoint{ serviceUrl='http://discovery-service:8761/eureka/}, exception=I/O error on PUT request for "http://discovery-service:8761/eureka/apps/GATEWAY-SERVICE/host.docker.internal:gateway-service:8111": discovery-service stacktrace=org.springframework.web.client.ResourceAccessException: I/O error on PUT request for "http://discovery-service:8761/eureka/apps/GATEWAY-SERVICE/host.docker.internal:gateway-service:8111": discovery-service
-	at org.springframework.web.client.RestTemplate.createResourceAccessException(RestTemplate.java:915)
-	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:895)
-	at org.springframework.web.client.RestTemplate.execute(RestTemplate.java:790)
-	at org.springframework.web.client.RestTemplate.exchange(RestTemplate.java:672)
-	at org.springframework.cloud.netflix.eureka.http.RestTemplateEurekaHttpClient.sendHeartBeat(RestTemplateEurekaHttpClient.java:99)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$3.execute(EurekaHttpClientDecorator.java:92)
-	at com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient.executeOnNewServer(RedirectingEurekaHttpClient.java:121)
-	at com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient.execute(RedirectingEurekaHttpClient.java:80)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.sendHeartBeat(EurekaHttpClientDecorator.java:89)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$3.execute(EurekaHttpClientDecorator.java:92)
-	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:120)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.sendHeartBeat(EurekaHttpClientDecorator.java:89)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$3.execute(EurekaHttpClientDecorator.java:92)
-	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:76)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.sendHeartBeat(EurekaHttpClientDecorator.java:89)
-	at com.netflix.discovery.DiscoveryClient.renew(DiscoveryClient.java:845)
-	at com.netflix.discovery.DiscoveryClient$HeartbeatThread.run(DiscoveryClient.java:1402)
-	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:539)
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
-	at java.base/java.lang.Thread.run(Thread.java:833)
-Caused by: java.net.UnknownHostException: discovery-service
-	at java.base/java.net.InetAddress$CachedAddresses.get(InetAddress.java:801)
-	at java.base/java.net.InetAddress.getAllByName0(InetAddress.java:1509)
-	at java.base/java.net.InetAddress.getAllByName(InetAddress.java:1367)
-	at java.base/java.net.InetAddress.getAllByName(InetAddress.java:1301)
-	at org.apache.hc.client5.http.SystemDefaultDnsResolver.resolve(SystemDefaultDnsResolver.java:45)
-	at org.apache.hc.client5.http.impl.io.DefaultHttpClientConnectionOperator.connect(DefaultHttpClientConnectionOperator.java:144)
-	at org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:450)
-	at org.apache.hc.client5.http.impl.classic.InternalExecRuntime.connectEndpoint(InternalExecRuntime.java:162)
-	at org.apache.hc.client5.http.impl.classic.InternalExecRuntime.connectEndpoint(InternalExecRuntime.java:172)
-	at org.apache.hc.client5.http.impl.classic.ConnectExec.execute(ConnectExec.java:142)
-	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
-	at org.apache.hc.client5.http.impl.classic.ProtocolExec.execute(ProtocolExec.java:192)
-	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
-	at org.apache.hc.client5.http.impl.classic.HttpRequestRetryExec.execute(HttpRequestRetryExec.java:113)
-	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
-	at org.apache.hc.client5.http.impl.classic.ContentCompressionExec.execute(ContentCompressionExec.java:152)
-	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
-	at org.apache.hc.client5.http.impl.classic.RedirectExec.execute(RedirectExec.java:116)
-	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
-	at org.apache.hc.client5.http.impl.classic.InternalHttpClient.doExecute(InternalHttpClient.java:170)
-	at org.apache.hc.client5.http.impl.classic.CloseableHttpClient.execute(CloseableHttpClient.java:87)
-	at org.apache.hc.client5.http.impl.classic.CloseableHttpClient.execute(CloseableHttpClient.java:55)
-	at org.apache.hc.client5.http.classic.HttpClient.executeOpen(HttpClient.java:183)
-	at org.springframework.http.client.HttpComponentsClientHttpRequest.executeInternal(HttpComponentsClientHttpRequest.java:99)
-	at org.springframework.http.client.AbstractStreamingClientHttpRequest.executeInternal(AbstractStreamingClientHttpRequest.java:70)
-	at org.springframework.http.client.AbstractClientHttpRequest.execute(AbstractClientHttpRequest.java:66)
-	at org.springframework.http.client.InterceptingClientHttpRequest$InterceptingRequestExecution.execute(InterceptingClientHttpRequest.java:112)
-	at org.springframework.cloud.netflix.eureka.http.RestTemplateTransportClientFactory.lambda$restTemplate$3(RestTemplateTransportClientFactory.java:170)
-	at org.springframework.http.client.InterceptingClientHttpRequest$InterceptingRequestExecution.execute(InterceptingClientHttpRequest.java:88)
-	at org.springframework.http.client.InterceptingClientHttpRequest.executeInternal(InterceptingClientHttpRequest.java:72)
-	at org.springframework.http.client.AbstractBufferingClientHttpRequest.executeInternal(AbstractBufferingClientHttpRequest.java:48)
-	at org.springframework.http.client.AbstractClientHttpRequest.execute(AbstractClientHttpRequest.java:66)
-	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:889)
-	... 20 more
-"}
-{"@timestamp":"2024-10-30T00:07:27.885+0900", "level":"WARN", "service":"gateway-service", "trace": "", "span": "", "thread":"DiscoveryClient-HeartbeatExecutor-%d", "logger":"com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient", "message":"Request execution failed with message: I/O error on PUT request for "http://discovery-service:8761/eureka/apps/GATEWAY-SERVICE/host.docker.internal:gateway-service:8111": discovery-service"}
-{"@timestamp":"2024-10-30T00:07:27.886+0900", "level":"ERROR", "service":"gateway-service", "trace": "", "span": "", "thread":"DiscoveryClient-HeartbeatExecutor-%d", "logger":"com.netflix.discovery.DiscoveryClient", "message":"DiscoveryClient_GATEWAY-SERVICE/host.docker.internal:gateway-service:8111 - was unable to send heartbeat!"}
-com.netflix.discovery.shared.transport.TransportException: Cannot execute request on any known server
-	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:112)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.sendHeartBeat(EurekaHttpClientDecorator.java:89)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$3.execute(EurekaHttpClientDecorator.java:92)
-	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:76)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.sendHeartBeat(EurekaHttpClientDecorator.java:89)
-	at com.netflix.discovery.DiscoveryClient.renew(DiscoveryClient.java:845)
-	at com.netflix.discovery.DiscoveryClient$HeartbeatThread.run(DiscoveryClient.java:1402)
-	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:539)
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
-	at java.base/java.lang.Thread.run(Thread.java:833)
-{"@timestamp":"2024-10-30T00:07:30.380+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"SpringApplicationShutdownHook", "logger":"org.springframework.cloud.netflix.eureka.serviceregistry.EurekaServiceRegistry", "message":"Unregistering application GATEWAY-SERVICE with eureka with status DOWN"}
-{"@timestamp":"2024-10-30T00:07:30.380+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"SpringApplicationShutdownHook", "logger":"com.netflix.discovery.DiscoveryClient", "message":"Saw local status change event StatusChangeEvent [timestamp=1730214450380, current=DOWN, previous=UP]"}
-{"@timestamp":"2024-10-30T00:07:30.380+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"DiscoveryClient-InstanceInfoReplicator-%d", "logger":"com.netflix.discovery.DiscoveryClient", "message":"DiscoveryClient_GATEWAY-SERVICE/host.docker.internal:gateway-service:8111: registering service..."}
-{"@timestamp":"2024-10-30T00:07:30.386+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"DiscoveryClient-InstanceInfoReplicator-%d", "logger":"com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient", "message":"Request execution error. endpoint=DefaultEndpoint{ serviceUrl='http://discovery-service:8761/eureka/}, exception=I/O error on POST request for "http://discovery-service:8761/eureka/apps/GATEWAY-SERVICE": discovery-service stacktrace=org.springframework.web.client.ResourceAccessException: I/O error on POST request for "http://discovery-service:8761/eureka/apps/GATEWAY-SERVICE": discovery-service
-	at org.springframework.web.client.RestTemplate.createResourceAccessException(RestTemplate.java:915)
-	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:895)
-	at org.springframework.web.client.RestTemplate.execute(RestTemplate.java:790)
-	at org.springframework.web.client.RestTemplate.exchange(RestTemplate.java:672)
-	at org.springframework.cloud.netflix.eureka.http.RestTemplateEurekaHttpClient.register(RestTemplateEurekaHttpClient.java:77)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$1.execute(EurekaHttpClientDecorator.java:59)
-	at com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient.executeOnNewServer(RedirectingEurekaHttpClient.java:121)
-	at com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient.execute(RedirectingEurekaHttpClient.java:80)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$1.execute(EurekaHttpClientDecorator.java:59)
-	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:120)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$1.execute(EurekaHttpClientDecorator.java:59)
-	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:76)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56)
-	at com.netflix.discovery.DiscoveryClient.register(DiscoveryClient.java:828)
-	at com.netflix.discovery.InstanceInfoReplicator.run(InstanceInfoReplicator.java:125)
-	at com.netflix.discovery.InstanceInfoReplicator$2.run(InstanceInfoReplicator.java:105)
-	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:539)
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:304)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
-	at java.base/java.lang.Thread.run(Thread.java:833)
-Caused by: java.net.UnknownHostException: discovery-service
-	at java.base/java.net.InetAddress$CachedAddresses.get(InetAddress.java:801)
-	at java.base/java.net.InetAddress.getAllByName0(InetAddress.java:1509)
-	at java.base/java.net.InetAddress.getAllByName(InetAddress.java:1367)
-	at java.base/java.net.InetAddress.getAllByName(InetAddress.java:1301)
-	at org.apache.hc.client5.http.SystemDefaultDnsResolver.resolve(SystemDefaultDnsResolver.java:45)
-	at org.apache.hc.client5.http.impl.io.DefaultHttpClientConnectionOperator.connect(DefaultHttpClientConnectionOperator.java:144)
-	at org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:450)
-	at org.apache.hc.client5.http.impl.classic.InternalExecRuntime.connectEndpoint(InternalExecRuntime.java:162)
-	at org.apache.hc.client5.http.impl.classic.InternalExecRuntime.connectEndpoint(InternalExecRuntime.java:172)
-	at org.apache.hc.client5.http.impl.classic.ConnectExec.execute(ConnectExec.java:142)
-	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
-	at org.apache.hc.client5.http.impl.classic.ProtocolExec.execute(ProtocolExec.java:192)
-	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
-	at org.apache.hc.client5.http.impl.classic.HttpRequestRetryExec.execute(HttpRequestRetryExec.java:113)
-	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
-	at org.apache.hc.client5.http.impl.classic.ContentCompressionExec.execute(ContentCompressionExec.java:152)
-	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
-	at org.apache.hc.client5.http.impl.classic.RedirectExec.execute(RedirectExec.java:116)
-	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
-	at org.apache.hc.client5.http.impl.classic.InternalHttpClient.doExecute(InternalHttpClient.java:170)
-	at org.apache.hc.client5.http.impl.classic.CloseableHttpClient.execute(CloseableHttpClient.java:87)
-	at org.apache.hc.client5.http.impl.classic.CloseableHttpClient.execute(CloseableHttpClient.java:55)
-	at org.apache.hc.client5.http.classic.HttpClient.executeOpen(HttpClient.java:183)
-	at org.springframework.http.client.HttpComponentsClientHttpRequest.executeInternal(HttpComponentsClientHttpRequest.java:99)
-	at org.springframework.http.client.AbstractStreamingClientHttpRequest.executeInternal(AbstractStreamingClientHttpRequest.java:70)
-	at org.springframework.http.client.AbstractClientHttpRequest.execute(AbstractClientHttpRequest.java:66)
-	at org.springframework.http.client.InterceptingClientHttpRequest$InterceptingRequestExecution.execute(InterceptingClientHttpRequest.java:112)
-	at org.springframework.cloud.netflix.eureka.http.RestTemplateTransportClientFactory.lambda$restTemplate$3(RestTemplateTransportClientFactory.java:170)
-	at org.springframework.http.client.InterceptingClientHttpRequest$InterceptingRequestExecution.execute(InterceptingClientHttpRequest.java:88)
-	at org.springframework.http.client.InterceptingClientHttpRequest.executeInternal(InterceptingClientHttpRequest.java:72)
-	at org.springframework.http.client.AbstractBufferingClientHttpRequest.executeInternal(AbstractBufferingClientHttpRequest.java:48)
-	at org.springframework.http.client.AbstractClientHttpRequest.execute(AbstractClientHttpRequest.java:66)
-	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:889)
-	... 22 more
-"}
-{"@timestamp":"2024-10-30T00:07:30.386+0900", "level":"WARN", "service":"gateway-service", "trace": "", "span": "", "thread":"DiscoveryClient-InstanceInfoReplicator-%d", "logger":"com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient", "message":"Request execution failed with message: I/O error on POST request for "http://discovery-service:8761/eureka/apps/GATEWAY-SERVICE": discovery-service"}
-{"@timestamp":"2024-10-30T00:07:30.386+0900", "level":"WARN", "service":"gateway-service", "trace": "", "span": "", "thread":"DiscoveryClient-InstanceInfoReplicator-%d", "logger":"com.netflix.discovery.DiscoveryClient", "message":"DiscoveryClient_GATEWAY-SERVICE/host.docker.internal:gateway-service:8111 - registration failed Cannot execute request on any known server"}
-com.netflix.discovery.shared.transport.TransportException: Cannot execute request on any known server
-	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:112)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$1.execute(EurekaHttpClientDecorator.java:59)
-	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:76)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56)
-	at com.netflix.discovery.DiscoveryClient.register(DiscoveryClient.java:828)
-	at com.netflix.discovery.InstanceInfoReplicator.run(InstanceInfoReplicator.java:125)
-	at com.netflix.discovery.InstanceInfoReplicator$2.run(InstanceInfoReplicator.java:105)
-	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:539)
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:304)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
-	at java.base/java.lang.Thread.run(Thread.java:833)
-{"@timestamp":"2024-10-30T00:07:30.386+0900", "level":"WARN", "service":"gateway-service", "trace": "", "span": "", "thread":"DiscoveryClient-InstanceInfoReplicator-%d", "logger":"com.netflix.discovery.InstanceInfoReplicator", "message":"There was a problem with the instance info replicator"}
-com.netflix.discovery.shared.transport.TransportException: Cannot execute request on any known server
-	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:112)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$1.execute(EurekaHttpClientDecorator.java:59)
-	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:76)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56)
-	at com.netflix.discovery.DiscoveryClient.register(DiscoveryClient.java:828)
-	at com.netflix.discovery.InstanceInfoReplicator.run(InstanceInfoReplicator.java:125)
-	at com.netflix.discovery.InstanceInfoReplicator$2.run(InstanceInfoReplicator.java:105)
-	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:539)
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:304)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
-	at java.base/java.lang.Thread.run(Thread.java:833)
-{"@timestamp":"2024-10-30T00:07:32.579+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"SpringApplicationShutdownHook", "logger":"com.netflix.discovery.DiscoveryClient", "message":"Shutting down DiscoveryClient ..."}
-{"@timestamp":"2024-10-30T00:07:33.924+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"DiscoveryClient-HeartbeatExecutor-%d", "logger":"com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient", "message":"Request execution error. endpoint=DefaultEndpoint{ serviceUrl='http://discovery-service:8761/eureka/}, exception=I/O error on PUT request for "http://discovery-service:8761/eureka/apps/GATEWAY-SERVICE/host.docker.internal:gateway-service:8111": 알려진 호스트가 없습니다 (discovery-service) stacktrace=org.springframework.web.client.ResourceAccessException: I/O error on PUT request for "http://discovery-service:8761/eureka/apps/GATEWAY-SERVICE/host.docker.internal:gateway-service:8111": 알려진 호스트가 없습니다 (discovery-service)
-	at org.springframework.web.client.RestTemplate.createResourceAccessException(RestTemplate.java:915)
-	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:895)
-	at org.springframework.web.client.RestTemplate.execute(RestTemplate.java:790)
-	at org.springframework.web.client.RestTemplate.exchange(RestTemplate.java:672)
-	at org.springframework.cloud.netflix.eureka.http.RestTemplateEurekaHttpClient.sendHeartBeat(RestTemplateEurekaHttpClient.java:99)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$3.execute(EurekaHttpClientDecorator.java:92)
-	at com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient.executeOnNewServer(RedirectingEurekaHttpClient.java:121)
-	at com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient.execute(RedirectingEurekaHttpClient.java:80)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.sendHeartBeat(EurekaHttpClientDecorator.java:89)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$3.execute(EurekaHttpClientDecorator.java:92)
-	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:120)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.sendHeartBeat(EurekaHttpClientDecorator.java:89)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$3.execute(EurekaHttpClientDecorator.java:92)
-	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:76)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.sendHeartBeat(EurekaHttpClientDecorator.java:89)
-	at com.netflix.discovery.DiscoveryClient.renew(DiscoveryClient.java:845)
-	at com.netflix.discovery.DiscoveryClient$HeartbeatThread.run(DiscoveryClient.java:1402)
-	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:539)
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
-	at java.base/java.lang.Thread.run(Thread.java:833)
-Caused by: java.net.UnknownHostException: 알려진 호스트가 없습니다 (discovery-service)
-	at java.base/java.net.Inet6AddressImpl.lookupAllHostAddr(Native Method)
-	at java.base/java.net.InetAddress$PlatformNameService.lookupAllHostAddr(InetAddress.java:933)
-	at java.base/java.net.InetAddress.getAddressesFromNameService(InetAddress.java:1519)
-	at java.base/java.net.InetAddress$NameServiceAddresses.get(InetAddress.java:852)
-	at java.base/java.net.InetAddress.getAllByName0(InetAddress.java:1509)
-	at java.base/java.net.InetAddress.getAllByName(InetAddress.java:1367)
-	at java.base/java.net.InetAddress.getAllByName(InetAddress.java:1301)
-	at org.apache.hc.client5.http.SystemDefaultDnsResolver.resolve(SystemDefaultDnsResolver.java:45)
-	at org.apache.hc.client5.http.impl.io.DefaultHttpClientConnectionOperator.connect(DefaultHttpClientConnectionOperator.java:144)
-	at org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:450)
-	at org.apache.hc.client5.http.impl.classic.InternalExecRuntime.connectEndpoint(InternalExecRuntime.java:162)
-	at org.apache.hc.client5.http.impl.classic.InternalExecRuntime.connectEndpoint(InternalExecRuntime.java:172)
-	at org.apache.hc.client5.http.impl.classic.ConnectExec.execute(ConnectExec.java:142)
-	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
-	at org.apache.hc.client5.http.impl.classic.ProtocolExec.execute(ProtocolExec.java:192)
-	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
-	at org.apache.hc.client5.http.impl.classic.HttpRequestRetryExec.execute(HttpRequestRetryExec.java:113)
-	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
-	at org.apache.hc.client5.http.impl.classic.ContentCompressionExec.execute(ContentCompressionExec.java:152)
-	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
-	at org.apache.hc.client5.http.impl.classic.RedirectExec.execute(RedirectExec.java:116)
-	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
-	at org.apache.hc.client5.http.impl.classic.InternalHttpClient.doExecute(InternalHttpClient.java:170)
-	at org.apache.hc.client5.http.impl.classic.CloseableHttpClient.execute(CloseableHttpClient.java:87)
-	at org.apache.hc.client5.http.impl.classic.CloseableHttpClient.execute(CloseableHttpClient.java:55)
-	at org.apache.hc.client5.http.classic.HttpClient.executeOpen(HttpClient.java:183)
-	at org.springframework.http.client.HttpComponentsClientHttpRequest.executeInternal(HttpComponentsClientHttpRequest.java:99)
-	at org.springframework.http.client.AbstractStreamingClientHttpRequest.executeInternal(AbstractStreamingClientHttpRequest.java:70)
-	at org.springframework.http.client.AbstractClientHttpRequest.execute(AbstractClientHttpRequest.java:66)
-	at org.springframework.http.client.InterceptingClientHttpRequest$InterceptingRequestExecution.execute(InterceptingClientHttpRequest.java:112)
-	at org.springframework.cloud.netflix.eureka.http.RestTemplateTransportClientFactory.lambda$restTemplate$3(RestTemplateTransportClientFactory.java:170)
-	at org.springframework.http.client.InterceptingClientHttpRequest$InterceptingRequestExecution.execute(InterceptingClientHttpRequest.java:88)
-	at org.springframework.http.client.InterceptingClientHttpRequest.executeInternal(InterceptingClientHttpRequest.java:72)
-	at org.springframework.http.client.AbstractBufferingClientHttpRequest.executeInternal(AbstractBufferingClientHttpRequest.java:48)
-	at org.springframework.http.client.AbstractClientHttpRequest.execute(AbstractClientHttpRequest.java:66)
-	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:889)
-	... 20 more
-"}
-{"@timestamp":"2024-10-30T00:07:33.924+0900", "level":"WARN", "service":"gateway-service", "trace": "", "span": "", "thread":"DiscoveryClient-HeartbeatExecutor-%d", "logger":"com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient", "message":"Request execution failed with message: I/O error on PUT request for "http://discovery-service:8761/eureka/apps/GATEWAY-SERVICE/host.docker.internal:gateway-service:8111": 알려진 호스트가 없습니다 (discovery-service)"}
-{"@timestamp":"2024-10-30T00:07:33.924+0900", "level":"ERROR", "service":"gateway-service", "trace": "", "span": "", "thread":"DiscoveryClient-HeartbeatExecutor-%d", "logger":"com.netflix.discovery.DiscoveryClient", "message":"DiscoveryClient_GATEWAY-SERVICE/host.docker.internal:gateway-service:8111 - was unable to send heartbeat!"}
-com.netflix.discovery.shared.transport.TransportException: Cannot execute request on any known server
-	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:112)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.sendHeartBeat(EurekaHttpClientDecorator.java:89)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$3.execute(EurekaHttpClientDecorator.java:92)
-	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:76)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.sendHeartBeat(EurekaHttpClientDecorator.java:89)
-	at com.netflix.discovery.DiscoveryClient.renew(DiscoveryClient.java:845)
-	at com.netflix.discovery.DiscoveryClient$HeartbeatThread.run(DiscoveryClient.java:1402)
-	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:539)
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
-	at java.base/java.lang.Thread.run(Thread.java:833)
-{"@timestamp":"2024-10-30T00:07:35.585+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"SpringApplicationShutdownHook", "logger":"com.netflix.discovery.DiscoveryClient", "message":"Unregistering ..."}
-{"@timestamp":"2024-10-30T00:07:35.589+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"SpringApplicationShutdownHook", "logger":"com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient", "message":"Request execution error. endpoint=DefaultEndpoint{ serviceUrl='http://discovery-service:8761/eureka/}, exception=I/O error on DELETE request for "http://discovery-service:8761/eureka/apps/GATEWAY-SERVICE/host.docker.internal:gateway-service:8111": discovery-service stacktrace=org.springframework.web.client.ResourceAccessException: I/O error on DELETE request for "http://discovery-service:8761/eureka/apps/GATEWAY-SERVICE/host.docker.internal:gateway-service:8111": discovery-service
-	at org.springframework.web.client.RestTemplate.createResourceAccessException(RestTemplate.java:915)
-	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:895)
-	at org.springframework.web.client.RestTemplate.execute(RestTemplate.java:790)
-	at org.springframework.web.client.RestTemplate.exchange(RestTemplate.java:672)
-	at org.springframework.cloud.netflix.eureka.http.RestTemplateEurekaHttpClient.cancel(RestTemplateEurekaHttpClient.java:87)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$2.execute(EurekaHttpClientDecorator.java:74)
-	at com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient.executeOnNewServer(RedirectingEurekaHttpClient.java:121)
-	at com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient.execute(RedirectingEurekaHttpClient.java:80)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.cancel(EurekaHttpClientDecorator.java:71)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$2.execute(EurekaHttpClientDecorator.java:74)
-	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:120)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.cancel(EurekaHttpClientDecorator.java:71)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$2.execute(EurekaHttpClientDecorator.java:74)
-	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:76)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.cancel(EurekaHttpClientDecorator.java:71)
-	at com.netflix.discovery.DiscoveryClient.unregister(DiscoveryClient.java:919)
-	at com.netflix.discovery.DiscoveryClient.shutdown(DiscoveryClient.java:900)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleMethod.invoke(InitDestroyAnnotationBeanPostProcessor.java:457)
-	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleMetadata.invokeDestroyMethods(InitDestroyAnnotationBeanPostProcessor.java:415)
-	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor.postProcessBeforeDestruction(InitDestroyAnnotationBeanPostProcessor.java:239)
-	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:202)
-	at org.springframework.beans.factory.support.DisposableBeanAdapter.run(DisposableBeanAdapter.java:195)
-	at org.springframework.cloud.context.scope.GenericScope$BeanLifecycleWrapper.destroy(GenericScope.java:389)
-	at org.springframework.cloud.context.scope.GenericScope.destroy(GenericScope.java:136)
-	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:211)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroyBean(DefaultSingletonBeanRegistry.java:587)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingleton(DefaultSingletonBeanRegistry.java:559)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingleton(DefaultListableBeanFactory.java:1202)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingletons(DefaultSingletonBeanRegistry.java:520)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingletons(DefaultListableBeanFactory.java:1195)
-	at org.springframework.context.support.AbstractApplicationContext.destroyBeans(AbstractApplicationContext.java:1195)
-	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:1156)
-	at org.springframework.boot.web.reactive.context.ReactiveWebServerApplicationContext.doClose(ReactiveWebServerApplicationContext.java:149)
-	at org.springframework.context.support.AbstractApplicationContext.close(AbstractApplicationContext.java:1102)
-	at org.springframework.boot.SpringApplicationShutdownHook.closeAndWait(SpringApplicationShutdownHook.java:145)
-	at java.base/java.lang.Iterable.forEach(Iterable.java:75)
-	at org.springframework.boot.SpringApplicationShutdownHook.run(SpringApplicationShutdownHook.java:114)
-	at java.base/java.lang.Thread.run(Thread.java:833)
-Caused by: java.net.UnknownHostException: discovery-service
-	at java.base/java.net.InetAddress$CachedAddresses.get(InetAddress.java:801)
-	at java.base/java.net.InetAddress.getAllByName0(InetAddress.java:1509)
-	at java.base/java.net.InetAddress.getAllByName(InetAddress.java:1367)
-	at java.base/java.net.InetAddress.getAllByName(InetAddress.java:1301)
-	at org.apache.hc.client5.http.SystemDefaultDnsResolver.resolve(SystemDefaultDnsResolver.java:45)
-	at org.apache.hc.client5.http.impl.io.DefaultHttpClientConnectionOperator.connect(DefaultHttpClientConnectionOperator.java:144)
-	at org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:450)
-	at org.apache.hc.client5.http.impl.classic.InternalExecRuntime.connectEndpoint(InternalExecRuntime.java:162)
-	at org.apache.hc.client5.http.impl.classic.InternalExecRuntime.connectEndpoint(InternalExecRuntime.java:172)
-	at org.apache.hc.client5.http.impl.classic.ConnectExec.execute(ConnectExec.java:142)
-	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
-	at org.apache.hc.client5.http.impl.classic.ProtocolExec.execute(ProtocolExec.java:192)
-	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
-	at org.apache.hc.client5.http.impl.classic.HttpRequestRetryExec.execute(HttpRequestRetryExec.java:113)
-	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
-	at org.apache.hc.client5.http.impl.classic.ContentCompressionExec.execute(ContentCompressionExec.java:152)
-	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
-	at org.apache.hc.client5.http.impl.classic.RedirectExec.execute(RedirectExec.java:116)
-	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
-	at org.apache.hc.client5.http.impl.classic.InternalHttpClient.doExecute(InternalHttpClient.java:170)
-	at org.apache.hc.client5.http.impl.classic.CloseableHttpClient.execute(CloseableHttpClient.java:87)
-	at org.apache.hc.client5.http.impl.classic.CloseableHttpClient.execute(CloseableHttpClient.java:55)
-	at org.apache.hc.client5.http.classic.HttpClient.executeOpen(HttpClient.java:183)
-	at org.springframework.http.client.HttpComponentsClientHttpRequest.executeInternal(HttpComponentsClientHttpRequest.java:99)
-	at org.springframework.http.client.AbstractStreamingClientHttpRequest.executeInternal(AbstractStreamingClientHttpRequest.java:70)
-	at org.springframework.http.client.AbstractClientHttpRequest.execute(AbstractClientHttpRequest.java:66)
-	at org.springframework.http.client.InterceptingClientHttpRequest$InterceptingRequestExecution.execute(InterceptingClientHttpRequest.java:112)
-	at org.springframework.cloud.netflix.eureka.http.RestTemplateTransportClientFactory.lambda$restTemplate$3(RestTemplateTransportClientFactory.java:170)
-	at org.springframework.http.client.InterceptingClientHttpRequest$InterceptingRequestExecution.execute(InterceptingClientHttpRequest.java:88)
-	at org.springframework.http.client.InterceptingClientHttpRequest.executeInternal(InterceptingClientHttpRequest.java:72)
-	at org.springframework.http.client.AbstractBufferingClientHttpRequest.executeInternal(AbstractBufferingClientHttpRequest.java:48)
-	at org.springframework.http.client.AbstractClientHttpRequest.execute(AbstractClientHttpRequest.java:66)
-	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:889)
-	... 40 more
-"}
-{"@timestamp":"2024-10-30T00:07:35.589+0900", "level":"WARN", "service":"gateway-service", "trace": "", "span": "", "thread":"SpringApplicationShutdownHook", "logger":"com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient", "message":"Request execution failed with message: I/O error on DELETE request for "http://discovery-service:8761/eureka/apps/GATEWAY-SERVICE/host.docker.internal:gateway-service:8111": discovery-service"}
-{"@timestamp":"2024-10-30T00:07:35.590+0900", "level":"ERROR", "service":"gateway-service", "trace": "", "span": "", "thread":"SpringApplicationShutdownHook", "logger":"com.netflix.discovery.DiscoveryClient", "message":"DiscoveryClient_GATEWAY-SERVICE/host.docker.internal:gateway-service:8111 - de-registration failedCannot execute request on any known server"}
-com.netflix.discovery.shared.transport.TransportException: Cannot execute request on any known server
-	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:112)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.cancel(EurekaHttpClientDecorator.java:71)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$2.execute(EurekaHttpClientDecorator.java:74)
-	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:76)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.cancel(EurekaHttpClientDecorator.java:71)
-	at com.netflix.discovery.DiscoveryClient.unregister(DiscoveryClient.java:919)
-	at com.netflix.discovery.DiscoveryClient.shutdown(DiscoveryClient.java:900)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleMethod.invoke(InitDestroyAnnotationBeanPostProcessor.java:457)
-	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleMetadata.invokeDestroyMethods(InitDestroyAnnotationBeanPostProcessor.java:415)
-	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor.postProcessBeforeDestruction(InitDestroyAnnotationBeanPostProcessor.java:239)
-	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:202)
-	at org.springframework.beans.factory.support.DisposableBeanAdapter.run(DisposableBeanAdapter.java:195)
-	at org.springframework.cloud.context.scope.GenericScope$BeanLifecycleWrapper.destroy(GenericScope.java:389)
-	at org.springframework.cloud.context.scope.GenericScope.destroy(GenericScope.java:136)
-	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:211)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroyBean(DefaultSingletonBeanRegistry.java:587)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingleton(DefaultSingletonBeanRegistry.java:559)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingleton(DefaultListableBeanFactory.java:1202)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingletons(DefaultSingletonBeanRegistry.java:520)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingletons(DefaultListableBeanFactory.java:1195)
-	at org.springframework.context.support.AbstractApplicationContext.destroyBeans(AbstractApplicationContext.java:1195)
-	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:1156)
-	at org.springframework.boot.web.reactive.context.ReactiveWebServerApplicationContext.doClose(ReactiveWebServerApplicationContext.java:149)
-	at org.springframework.context.support.AbstractApplicationContext.close(AbstractApplicationContext.java:1102)
-	at org.springframework.boot.SpringApplicationShutdownHook.closeAndWait(SpringApplicationShutdownHook.java:145)
-	at java.base/java.lang.Iterable.forEach(Iterable.java:75)
-	at org.springframework.boot.SpringApplicationShutdownHook.run(SpringApplicationShutdownHook.java:114)
-	at java.base/java.lang.Thread.run(Thread.java:833)
-{"@timestamp":"2024-10-30T00:07:35.590+0900", "level":"INFO", "service":"gateway-service", "trace": "", "span": "", "thread":"SpringApplicationShutdownHook", "logger":"com.netflix.discovery.DiscoveryClient", "message":"Completed shut down of DiscoveryClient"}
+Caused by: java.lang.IllegalStateException: Error processing condition on org.springframework.boot.autoconfigure.r2dbc.ConnectionFactoryConfigurations$PoolConfiguration
+	at org.springframework.boot.autoconfigure.condition.SpringBootCondition.matches(SpringBootCondition.java:60)
+	at org.springframework.context.annotation.ConditionEvaluator.shouldSkip(ConditionEvaluator.java:108)
+	at org.springframework.context.annotation.ConfigurationClassParser.processConfigurationClass(ConfigurationClassParser.java:220)
+	at org.springframework.context.annotation.ConfigurationClassParser.processImports(ConfigurationClassParser.java:534)
+	... 21 common frames omitted
+Caused by: java.lang.IllegalArgumentException: Could not resolve placeholder 'MY_SQL_HOST' in value "r2dbc:mariadb://${MY_SQL_HOST}:3306/adore"
+	at org.springframework.util.PropertyPlaceholderHelper.parseStringValue(PropertyPlaceholderHelper.java:180)
+	at org.springframework.util.PropertyPlaceholderHelper.replacePlaceholders(PropertyPlaceholderHelper.java:126)
+	at org.springframework.core.env.AbstractPropertyResolver.doResolvePlaceholders(AbstractPropertyResolver.java:239)
+	at org.springframework.core.env.AbstractPropertyResolver.resolveRequiredPlaceholders(AbstractPropertyResolver.java:210)
+	at org.springframework.core.env.AbstractPropertyResolver.resolveNestedPlaceholders(AbstractPropertyResolver.java:230)
+	at org.springframework.boot.context.properties.source.ConfigurationPropertySourcesPropertyResolver.getProperty(ConfigurationPropertySourcesPropertyResolver.java:80)
+	at org.springframework.boot.context.properties.source.ConfigurationPropertySourcesPropertyResolver.getProperty(ConfigurationPropertySourcesPropertyResolver.java:61)
+	at org.springframework.core.env.AbstractEnvironment.getProperty(AbstractEnvironment.java:552)
+	at org.springframework.boot.autoconfigure.r2dbc.ConnectionFactoryConfigurations$PooledConnectionFactoryCondition.hasPoolUrl(ConnectionFactoryConfigurations.java:172)
+	at org.springframework.boot.autoconfigure.r2dbc.ConnectionFactoryConfigurations$PooledConnectionFactoryCondition.getMatchOutcome(ConnectionFactoryConfigurations.java:156)
+	at org.springframework.boot.autoconfigure.condition.SpringBootCondition.matches(SpringBootCondition.java:47)
+	... 24 common frames omitted

@@ -71,8 +71,6 @@ public class SecurityConfig {
                 .authorizeExchange(exchanges -> exchanges
                         .anyExchange().permitAll()
                 )
-                .formLogin(withDefaults())
-                .httpBasic(withDefaults())
                 .addFilterBefore(JwtFilter(), SecurityWebFiltersOrder.AUTHENTICATION)
         ;
         return http.build();

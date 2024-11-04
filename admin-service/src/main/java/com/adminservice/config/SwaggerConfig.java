@@ -13,24 +13,28 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.Collections;
 
+@OpenAPIDefinition(
+        info = @Info(title = "API 명세서",
+                description = "CAPI 명세서",
+                version = "v1"))
 @RequiredArgsConstructor
 @Configuration
-@OpenAPIDefinition(
-        info = @Info(title = "API Document", description = "관리자 서비스 명세서", version = "v3")
-)
 public class SwaggerConfig {
 
     @Bean
-    public OpenAPI openAPI() {
-        SecurityScheme securityScheme = new SecurityScheme()
-                .type(SecurityScheme.Type.HTTP).scheme("bearer").bearerFormat("JWT")
-                .in(SecurityScheme.In.HEADER).name("Authorization");
-        SecurityRequirement securityRequirement = new SecurityRequirement().addList("bearerAuth");
+    public OpenAPI api() {
+        SecurityScheme apiKey = new SecurityScheme()
+                .type(SecurityScheme.Type.APIKEY)
+                .in(SecurityScheme.In.HEADER)
+                .name("Authorization");
+
+        SecurityRequirement securityRequirement = new SecurityRequirement()
+                .addList("Bearer Token");
 
         return new OpenAPI()
-                .components(new Components().addSecuritySchemes("bearerAuth", securityScheme))
-                .security(Collections.singletonList(securityRequirement))
-                .addServersItem(new Server().url("/"));
+                .addServersItem(new Server().url("/"))
+                .components(new Components().addSecuritySchemes("Bearer Token", apiKey))
+                .addSecurityItem(securityRequirement);
     }
 
 }
