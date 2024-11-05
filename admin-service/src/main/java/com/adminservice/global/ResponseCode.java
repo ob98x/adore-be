@@ -54,7 +54,14 @@ public enum ResponseCode {
     FAILED_MAIL_SEND("MAIL-ERR-003", HttpStatus.INTERNAL_SERVER_ERROR, "메일 전송에 실패했습니다."),
 
     FILE_NOT_FOUND("HOL-ERR-002", HttpStatus.BAD_REQUEST, "파일이 없습니다."),
-    NOT_IMAGE_FILE("GLB-ERR-004", HttpStatus.BAD_REQUEST, "이미지 파일이 아닙니다.");
+    NOT_IMAGE_FILE("GLB-ERR-004", HttpStatus.BAD_REQUEST, "이미지 파일이 아닙니다."),
+    QUESTION_NOT_FOUND("QST-ERR-001", HttpStatus.NOT_FOUND, "문의사항을 찾을 수 없습니다."),
+    QUESTION_DELETED("QST-ERR-002", HttpStatus.BAD_REQUEST, "삭제된 문의사항입니다."),
+    REPORT_NOT_FOUND("RPT-ERR-001", HttpStatus.NOT_FOUND, "신고사항을 찾을 수 없습니다."),
+    REPORT_DELETED("RPT-ERR-002", HttpStatus.BAD_REQUEST, "삭제된 신고사항입니다."),
+    NOTIFICATION_NOT_FOUND("NOT-ERR-001", HttpStatus.BAD_REQUEST, "공지사항을 찾을 수 없습니다."),
+    NOTIFICATION_DELETED("NOT-ERR-002", HttpStatus.BAD_REQUEST, "삭제된 공지사항입니다."),
+    MEMBER_DELETED("MEM-ERR-02", HttpStatus.BAD_REQUEST, "삭제된 회원입니다.");
     private final String code;
     private final HttpStatus status;
     private final String message;

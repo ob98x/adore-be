@@ -5,13 +5,13 @@ import com.adminservice.user.entity.MemberState;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 import java.util.Optional;
 
-public interface MemberRepository extends JpaRepository<Member, Long> {
-    Page<Member> findByNicknameContainingAndState(String nickname, MemberState state, Pageable pageable);
-    Page<Member> findByEmailContainingAndState (String email, MemberState state, Pageable pageable);
+public interface MemberRepository extends JpaRepository<Member, Long>, JpaSpecificationExecutor<Member> {
     Optional<Member> findByIdAndState(Long id, MemberState state);
+    Optional<Member> findById(Long id);
     boolean existsMemberByEmail(String email);
     boolean existsMemberByNickname(String nickname);
 }

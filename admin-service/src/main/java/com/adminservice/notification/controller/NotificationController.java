@@ -1,0 +1,52 @@
+package com.adminservice.notification.controller;
+
+import com.adminservice.global.CustomResponseCode;
+import com.adminservice.global.SearchType;
+import com.adminservice.notification.dto.GetNotificationListResponseDto;
+import com.adminservice.notification.dto.GetNotificationResponseDto;
+import com.adminservice.notification.dto.NotificationCreateRequestDto;
+import com.adminservice.notification.service.NotificationService;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+
+@RestController
+@RequiredArgsConstructor
+@RequestMapping("/admin/user")
+public class NotificationController {
+
+    private final NotificationService notificationService;
+
+    @PostMapping("/create")
+    public ResponseEntity<CustomResponseCode> createNotification(
+            @Valid @RequestBody NotificationCreateRequestDto notificationCreateRequestDto) {
+        return notificationService.createNotification(notificationCreateRequestDto);
+    }
+
+    @PatchMapping("/update")
+    public ResponseEntity<CustomResponseCode> updateNotification(
+            @Valid @RequestBody NotificationCreateRequestDto notificationCreateRequestDto, @RequestParam Long id) {
+        return notificationService.updateNotification(id, notificationCreateRequestDto);
+    }
+
+    @GetMapping("/")
+    public ResponseEntity<GetNotificationResponseDto> viewMemberInfo(@RequestParam Long id) {
+        return notificationService.getNotification(id);
+    }
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<CustomResponseCode> deleteMember(@RequestParam Long id) {
+        return notificationService.deleteNotification(id);
+    }
+
+    @GetMapping("/lists/{page}")
+    public ResponseEntity<GetNotificationListResponseDto> getNotificationLists(
+            @PathVariable("page") int page,
+            @RequestParam("searchType") SearchType searchType,
+            @RequestParam("keyword") String keyword) {
+        GetNotificationListResponseDto response = notificationService.getNotificationLists(searchType, keyword, page-1);
+        return ResponseEntity.ok(response);
+    }
+}

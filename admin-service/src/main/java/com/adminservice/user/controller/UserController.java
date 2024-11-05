@@ -1,10 +1,10 @@
 package com.adminservice.user.controller;
 
 import com.adminservice.global.CustomResponseCode;
+import com.adminservice.global.SearchType;
 import com.adminservice.user.dto.GetMemberListResponseDto;
 import com.adminservice.user.dto.GetMemberResponseDto;
 import com.adminservice.user.dto.MemberCreateRequestDto;
-import com.adminservice.user.entity.SearchType;
 import com.adminservice.user.service.MemberSearchService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

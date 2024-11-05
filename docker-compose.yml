@@ -39,11 +39,7 @@ services:
       - ./logs:/logs
     environment:
       - TZ=Asia/Seoul
-      - MY_SQL_HOST=${MY_SQL_HOST}
-      - MY_SQL_USER=${MY_SQL_USER}
-      - MY_SQL_PASSWORD=${MY_SQL_PASSWORD}
-      - MAIL_PASSWORD=${MAIL_PASSWORD}
-      - REDIS_HOST=${REDIS_HOST}
+      - JWT_SECRET=${JWT_SECRET}
     image: dyw1014/adore-be-gateway-service:latest
     ports:
       - "8111:8111"
@@ -129,6 +125,29 @@ services:
 #      - msa-network
 #    ports:
 #      - "8082:8082"
+  auth-service:
+    build:
+      context: ./auth-service
+      dockerfile: Dockerfile
+    container_name: auth-service
+    image: dyw1014/adore-be-auth-service:latest
+    volumes:
+      - ./logs:/logs
+    environment:
+      - DISCOVERY_SERVICE=http://discovery-service:8761/eureka
+      - SPRING_CLOUD_CONFIG_URI=http://config-service:8888
+      - MY_SQL_HOST=${MY_SQL_HOST}
+      - MY_SQL_USER=${MY_SQL_USER}
+      - MY_SQL_PASSWORD=${MY_SQL_PASSWORD}
+      - MAIL_PASSWORD=${MAIL_PASSWORD}
+      - REDIS_HOST=${REDIS_HOST}
+      - JWT_SECRET=${JWT_SECRET}
+    depends_on:
+      - discovery-service
+    networks:
+      - msa-network
+    ports:
+      - "8084:8084"
 
   admin-service:
     build:

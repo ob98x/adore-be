@@ -15,8 +15,6 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class MemberCreateRequestDto {
 
-
-
     private String name;
     private String email;
     private String password;

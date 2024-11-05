@@ -44,4 +44,4 @@ out/
 /elasticsearch/data/
 /logs/
 /fluentd/buffer/
-/gateway-service/logs/gateway.2024-10-30.log.gz
+/gateway-service/logs/**
