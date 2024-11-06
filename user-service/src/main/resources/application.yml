@@ -1,6 +1,26 @@
+logging:
+  level:
+    root: INFO
+  file:
+    path: ./logs/user-service.log
 server:
   port: 8081
+springdoc:
+  api-docs:
+    enabled: true
+    path: /admin/swagger-ui
+    version: openapi_3_1
+  enable-spring-security: true
+  default-consumes-media-type: application/json
+  default-produces-media-type: application/json
 spring:
+  jpa:
+    database: mysql
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://${MY_SQL_HOST}:3306/adore
+    username: ${MY_SQL_USER}
+    password: ${MY_SQL_PASSWORD}
   application:
     name: user-service
   config:
