@@ -99,7 +99,7 @@ services:
       - ./fluentd/pos:/var/pos
       - ./logs:/var/log
       - ./fluentd/buffer:/var/buffer
-    image: dyw1014/adore-be-fluentd-service:latest
+    image: dyw1014/adore-be-fluentd:latest
     environment:
       - FLUENTD_CONF=fluentd.conf
       - TZ=Asia/Seoul
