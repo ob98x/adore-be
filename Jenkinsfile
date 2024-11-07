@@ -32,7 +32,7 @@ pipeline {
                 script {
                     try {
                         // 각각의 서비스 디렉토리에서 빌드
-                        def services = ['discovery-service', 'gateway-service', 'user-service', 'community-service', 'config-service', 'admin-service', 'auth-service','fluentd']
+                        def services = ['discovery-service', 'gateway-service', 'user-service', 'community-service', 'config-service', 'admin-service', 'auth-service']
                         services.each { service ->
                             dir(service) {
                                 sh 'chmod +x gradlew'
