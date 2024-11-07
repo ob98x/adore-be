@@ -5,7 +5,7 @@ import com.adminservice.global.SearchType;
 import com.adminservice.user.dto.GetMemberListResponseDto;
 import com.adminservice.user.dto.GetMemberResponseDto;
 import com.adminservice.user.dto.MemberCreateRequestDto;
-import com.adminservice.user.service.MemberSearchService;
+import com.adminservice.user.service.MemberService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/admin/user")
 public class UserController {
 
-    private final MemberSearchService memberSearchService;
+    private final MemberService memberService;
 
 
     @GetMapping("/lists/{page}")
@@ -25,29 +25,29 @@ public class UserController {
             @PathVariable("page") int page,
             @RequestParam("type") SearchType searchType,
             @RequestParam("keyword") String keyword) {
-        GetMemberListResponseDto response = memberSearchService.searchUsers(searchType, keyword, page-1);
+        GetMemberListResponseDto response = memberService.searchUsers(searchType, keyword, page-1);
         return ResponseEntity.ok(response);
     }
 
     @PostMapping("/create")
     public ResponseEntity<CustomResponseCode> createMember(
             @Valid @RequestBody MemberCreateRequestDto memberCreateRequestDto) {
-        return memberSearchService.createMember(memberCreateRequestDto);
+        return memberService.createMember(memberCreateRequestDto);
     }
 
     @PatchMapping("/update")
     public ResponseEntity<CustomResponseCode> updateMember(
             @Valid @RequestBody MemberCreateRequestDto memberCreateRequestDto, @RequestParam Long id) {
-        return memberSearchService.updateMember(id, memberCreateRequestDto);
+        return memberService.updateMember(id, memberCreateRequestDto);
     }
 
     @GetMapping("/")
     public ResponseEntity<GetMemberResponseDto> viewMemberInfo(@RequestParam Long id) {
-        return memberSearchService.getMember(id);
+        return ResponseEntity.ok(memberService.getMember(id));
     }
 
     @DeleteMapping("/delete")
     public ResponseEntity<CustomResponseCode> deleteMember(@RequestParam Long id) {
-        return memberSearchService.deleteMember(id);
+        return memberService.deleteMember(id);
     }
 }

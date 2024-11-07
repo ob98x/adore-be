@@ -16,6 +16,16 @@ public enum CustomResponseCode {
     NOTIFICATION_CREATE_SUCCESS("공지 사항 작성에 성공하였습니다."),
     NOTIFICATION_UPDATE_SUCCESS("공지 사항 수정에 성공하였습니다."),
     NOTIFICATION_DELETE_SUCCESS("공지사항 삭제에 성공하였습니다."),
-    MY_PAGE_UPDATE_SUCCESS("마이페이지 수정에 성공하였습니다.");
+    PERFUME_DELETE_SUCCESS("향수 삭제에 성공하였습니다."),
+    PERFUME_CREATE_SUCCESS("향수 등록에 성공하였습니다."),
+    PERFUME_UPDATE_SUCCESS("향수 수정에 성공하였습니다."),
+    PERFUME_LIKE_SUCCESS("향수 좋아요에 성공하였습니다."),
+    PERFUME_LIKE_CANCEL_SUCCESS("향수 좋아요 취소에 성공하였습니다."),
+    PERFUME_LIKE_DUPLICATE("이미 좋아요를 누르셨습니다."),
+    PERFUME_LIKE_NOT_FOUND("좋아요를 누르지 않으셨습니다."),
+    PERFUME_LIKE_NOT_FOUND_PERFUME("해당 향수를 찾을 수 없습니다."),
+    PERFUME_LIKE_NOT_FOUND_MEMBER("해당 회원을 찾을 수 없습니다."),
+    PERFUME_LIKE_NOT_FOUND_LIKE("좋아요를 찾을 수 없습니다."),
+    PERFUME_LIKE_NOT_FOUND_UNLIKE("좋아요 취소를 찾을 수 없습니다.");
     private final String message;
 }

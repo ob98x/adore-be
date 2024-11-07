@@ -1,0 +1,67 @@
+package com.userservice.review.entity;
+
+import com.userservice.global.BaseEntity;
+import com.userservice.perfume.entity.Perfume;
+import com.userservice.user.entity.Member;
+import jakarta.persistence.*;
+import lombok.*;
+
+@Getter
+@Setter
+@Entity
+@Table(name = "review")
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class Review extends BaseEntity {
+
+    @OneToOne
+    @JoinColumn(name = "perfume_id")
+    private Perfume perfume;
+
+    @OneToOne
+    @JoinColumn(name = "member_id")
+    private Member member;
+
+    @Column(name = "photo")
+    private String photo;
+
+    @Column(name = "content")
+    private String content;
+
+    @Column(name = "title")
+    private String title;
+
+    @Column(name = "like_cnt")
+    private int likeCnt;
+
+    @Column(name = "rate")
+    private int rate;
+
+    @Column(name = "views")
+    private int views;
+
+    @Builder
+    public Review(Perfume perfume, Member member, String photo, String content, String title, int likeCnt, int rate, int views) {
+        this.perfume = perfume;
+        this.member = member;
+        this.photo = photo;
+        this.content = content;
+        this.title = title;
+        this.likeCnt = likeCnt;
+        this.rate = rate;
+        this.views = views;
+    }
+
+    public static Review of(Perfume perfume, Member member, String photo, String content, String title, int likeCnt, int rate, int views) {
+        return Review.builder()
+                .perfume(perfume)
+                .member(member)
+                .photo(photo)
+                .content(content)
+                .title(title)
+                .likeCnt(likeCnt)
+                .rate(rate)
+                .views(views)
+                .build();
+    }
+
+}

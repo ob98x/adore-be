@@ -17,14 +17,12 @@ spring:
   jpa:
     database: mysql
   datasource:
-    driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://${MY_SQL_HOST}:3306/adore
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://${MY_SQL_HOST}:3306/adore
     username: ${MY_SQL_USER}
     password: ${MY_SQL_PASSWORD}
   application:
     name: admin-service
-  config:
-    import: optional:configserver:http://config-service:8888
 eureka:
   client:
     fetch-registry: true

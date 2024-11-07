@@ -25,7 +25,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class MemberSearchServiceImpl implements MemberSearchService {
+public class MemberServiceImpl implements MemberService {
 
     private final PasswordEncoder passwordEncoder;
     private final MemberRepository memberRepository;
@@ -59,10 +59,9 @@ public class MemberSearchServiceImpl implements MemberSearchService {
 
     @Override
     @Transactional(readOnly = true)
-    public ResponseEntity<GetMemberResponseDto> getMember(Long id) {
+    public GetMemberResponseDto getMember(Long id) {
         Member member = memberRepository.findByIdAndState(id, MemberState.ACTIVE).orElseThrow(() -> new CustomException(ResponseCode.MEMBER_NOT_FOUND));
-        GetMemberResponseDto response = GetMemberResponseDto.getMemberInfo(member);
-        return ResponseEntity.ok(response);
+        return GetMemberResponseDto.getMemberInfo(member);
     }
 
     // 전체 리스트

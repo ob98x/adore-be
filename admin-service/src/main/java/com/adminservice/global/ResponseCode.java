@@ -61,7 +61,9 @@ public enum ResponseCode {
     REPORT_DELETED("RPT-ERR-002", HttpStatus.BAD_REQUEST, "삭제된 신고사항입니다."),
     NOTIFICATION_NOT_FOUND("NOT-ERR-001", HttpStatus.BAD_REQUEST, "공지사항을 찾을 수 없습니다."),
     NOTIFICATION_DELETED("NOT-ERR-002", HttpStatus.BAD_REQUEST, "삭제된 공지사항입니다."),
-    MEMBER_DELETED("MEM-ERR-02", HttpStatus.BAD_REQUEST, "삭제된 회원입니다.");
+    MEMBER_DELETED("MEM-ERR-02", HttpStatus.BAD_REQUEST, "삭제된 회원입니다."),
+    PERFUME_DELETED("PER-ERR-002", HttpStatus.BAD_REQUEST, "삭제된 향수입니다."),
+    PERFUME_NOT_FOUND("PER-ERR-001", HttpStatus.NOT_FOUND, "향수를 찾을 수 없습니다."),;
     private final String code;
     private final HttpStatus status;
     private final String message;
