@@ -5,7 +5,6 @@ import com.adminservice.global.SearchType;
 import com.adminservice.perfume.dto.GetPerfumeListResponseDto;
 import com.adminservice.perfume.dto.GetPerfumeResponseDto;
 import com.adminservice.perfume.dto.PerfumeCreateRequestDto;
-
 import org.springframework.http.ResponseEntity;
 
 public interface PerfumeService {

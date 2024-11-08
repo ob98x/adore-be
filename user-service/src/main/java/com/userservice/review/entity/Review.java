@@ -33,25 +33,25 @@ public class Review extends BaseEntity {
     @Column(name = "like_cnt")
     private int likeCnt;
 
-    @Column(name = "rate")
-    private int rate;
-
     @Column(name = "views")
     private int views;
 
+    @Column(name = "state")
+    private ReviewState state;
+
     @Builder
-    public Review(Perfume perfume, Member member, String photo, String content, String title, int likeCnt, int rate, int views) {
+    public Review(Perfume perfume, Member member, String photo, String content, String title, int likeCnt, int views, ReviewState state) {
         this.perfume = perfume;
         this.member = member;
         this.photo = photo;
         this.content = content;
         this.title = title;
         this.likeCnt = likeCnt;
-        this.rate = rate;
         this.views = views;
+        this.state = state;
     }
 
-    public static Review of(Perfume perfume, Member member, String photo, String content, String title, int likeCnt, int rate, int views) {
+    public static Review of(Perfume perfume, Member member, String photo, String content, String title, int likeCnt, int views, ReviewState state) {
         return Review.builder()
                 .perfume(perfume)
                 .member(member)
@@ -59,8 +59,8 @@ public class Review extends BaseEntity {
                 .content(content)
                 .title(title)
                 .likeCnt(likeCnt)
-                .rate(rate)
                 .views(views)
+                .state(state)
                 .build();
     }
 

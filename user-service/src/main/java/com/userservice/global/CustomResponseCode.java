@@ -26,6 +26,10 @@ public enum CustomResponseCode {
     PERFUME_LIKE_NOT_FOUND_PERFUME("해당 향수를 찾을 수 없습니다."),
     PERFUME_LIKE_NOT_FOUND_MEMBER("해당 회원을 찾을 수 없습니다."),
     PERFUME_LIKE_NOT_FOUND_LIKE("좋아요를 찾을 수 없습니다."),
-    PERFUME_LIKE_NOT_FOUND_UNLIKE("좋아요 취소를 찾을 수 없습니다.");
+    PERFUME_LIKE_NOT_FOUND_UNLIKE("좋아요 취소를 찾을 수 없습니다."),
+    REVIEW_DELETE_SUCCESS("리뷰 삭제에 성공하였습니다."),
+    MY_PAGE_UPDATE_SUCCESS("마이페이지 수정에 성공하였습니다."),
+    REVIEW_CREATE_SUCCESS("리뷰 작성에 성공하였습니다."),
+    REVIEW_UPDATE_SUCCESS("리뷰 수정에 성공하였습니다.");
     private final String message;
 }

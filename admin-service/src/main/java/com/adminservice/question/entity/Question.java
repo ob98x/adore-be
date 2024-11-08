@@ -3,7 +3,10 @@ package com.adminservice.question.entity;
 import com.adminservice.global.BaseEntity;
 import com.adminservice.user.entity.Member;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Getter

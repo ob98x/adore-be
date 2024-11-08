@@ -2,12 +2,10 @@ package com.adminservice.question.dto;
 
 import com.adminservice.question.entity.Question;
 import com.adminservice.question.entity.QuestionState;
-import com.adminservice.user.dto.GetMemberResponseDto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter

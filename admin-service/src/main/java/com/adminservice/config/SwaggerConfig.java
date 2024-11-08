@@ -11,8 +11,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.Collections;
-
 @OpenAPIDefinition(
         info = @Info(title = "API 명세서",
                 description = "CAPI 명세서",

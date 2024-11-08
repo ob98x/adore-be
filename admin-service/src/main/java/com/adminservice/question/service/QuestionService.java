@@ -1,10 +1,10 @@
 package com.adminservice.question.service;
 
 import com.adminservice.global.CustomResponseCode;
+import com.adminservice.global.FilterType;
 import com.adminservice.global.SearchType;
 import com.adminservice.question.dto.GetQuestionListResponseDto;
 import com.adminservice.question.dto.GetQuestionResponseDto;
-import com.adminservice.global.FilterType;
 import com.adminservice.question.entity.QuestionCategory;
 import org.springframework.http.ResponseEntity;
 

@@ -1,20 +1,22 @@
 package com.userservice.perfume.service;
 
 import com.userservice.global.CustomException;
-import com.userservice.global.CustomResponseCode;
 import com.userservice.global.ResponseCode;
 import com.userservice.global.SearchType;
+import com.userservice.perfume.dto.GetNoteListResponseDto;
+import com.userservice.perfume.dto.GetNoteResponseDto;
 import com.userservice.perfume.dto.GetPerfumeListResponseDto;
 import com.userservice.perfume.dto.GetPerfumeResponseDto;
+import com.userservice.perfume.entity.Note;
 import com.userservice.perfume.entity.Perfume;
 import com.userservice.perfume.entity.PerfumeState;
+import com.userservice.perfume.repository.NoteRepository;
 import com.userservice.perfume.repository.PerfumeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,7 +27,13 @@ import java.util.List;
 public class PerfumeServiceImpl implements PerfumeService {
 
     private final PerfumeRepository perfumeRepository;
+    private final NoteRepository noteRepository;
 
+    @Override
+    @Transactional(readOnly = true)
+    public GetNoteResponseDto getNote(Long id) {
+        return GetNoteResponseDto.getNote(checkConflictNote(id));
+    }
 
     @Override
     @Transactional(readOnly = true)
@@ -34,6 +42,28 @@ public class PerfumeServiceImpl implements PerfumeService {
     }
 
     // 전체 리스트
+    @Override
+    @Transactional(readOnly = true)
+    public GetNoteListResponseDto searchNotes(SearchType searchType, String keyword, int page) {
+        Pageable pageable = PageRequest.of(page, 10);  // 한 페이지당 10개의 항목을 가져옵니다.
+
+        Specification<Note> spec = Specification.where(null);
+
+        if (searchType == SearchType.NAME) {
+            spec = spec.and((root, query, cb) ->
+                    cb.like(root.get("note_nm"), "%" + keyword + "%"));
+        }
+
+        Page<Note> resultPage = noteRepository.findAll(spec, pageable);
+        List<GetNoteListResponseDto.NoteListInfo> noteList = resultPage.getContent().stream()
+                .map(GetNoteListResponseDto.NoteListInfo::fromNote)
+                .toList();
+
+        return GetNoteListResponseDto.createResponse(noteList, resultPage.getTotalPages(), resultPage.hasNext());
+    }
+
+    @Override
+    @Transactional(readOnly = true)
     public GetPerfumeListResponseDto searchPerfumes(SearchType searchType, String keyword, int page) {
         Pageable pageable = PageRequest.of(page, 10);  // 한 페이지당 10개의 항목을 가져옵니다.
 
@@ -68,5 +98,13 @@ public class PerfumeServiceImpl implements PerfumeService {
             throw new CustomException(ResponseCode.PERFUME_DELETED);
         }
         return perfumeRepository.findByIdAndState(id, PerfumeState.ACTIVE).get();
+    }
+
+    public Note checkConflictNote(Long id) {
+        if (noteRepository.findNoteById(id).isEmpty()) {
+            throw new CustomException(ResponseCode.NOTE_NOT_FOUND);
+        } else {
+            return noteRepository.findNoteById(id).get();
+        }
     }
 }

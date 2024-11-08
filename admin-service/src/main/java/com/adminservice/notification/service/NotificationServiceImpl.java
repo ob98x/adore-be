@@ -1,6 +1,9 @@
 package com.adminservice.notification.service;
 
-import com.adminservice.global.*;
+import com.adminservice.global.CustomException;
+import com.adminservice.global.CustomResponseCode;
+import com.adminservice.global.ResponseCode;
+import com.adminservice.global.SearchType;
 import com.adminservice.notification.dto.GetNotificationListResponseDto;
 import com.adminservice.notification.dto.GetNotificationResponseDto;
 import com.adminservice.notification.dto.NotificationCreateRequestDto;

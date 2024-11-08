@@ -1,7 +1,5 @@
 package com.adminservice.report.dto;
 
-import com.adminservice.question.entity.Question;
-import com.adminservice.question.entity.QuestionState;
 import com.adminservice.report.entity.Report;
 import com.adminservice.report.entity.ReportCategory;
 import com.adminservice.report.entity.ReportState;

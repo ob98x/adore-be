@@ -1,5 +1,6 @@
 package com.userservice.user.service;
 
+
 import com.userservice.global.CustomException;
 import com.userservice.global.CustomResponseCode;
 import com.userservice.global.ResponseCode;
@@ -15,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-public class MemberSearchServiceImpl implements MemberSearchService {
+public class MemberServiceImpl implements MemberService {
 
     private final MemberRepository memberRepository;
 

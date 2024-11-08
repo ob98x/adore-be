@@ -1,10 +1,8 @@
 package com.adminservice.user.entity;
 
 import com.adminservice.global.BaseEntity;
-import com.adminservice.user.dto.MemberCreateRequestDto;
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDate;
 

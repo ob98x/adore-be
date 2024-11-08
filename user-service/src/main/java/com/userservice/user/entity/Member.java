@@ -1,5 +1,6 @@
 package com.userservice.user.entity;
 
+
 import com.userservice.global.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
