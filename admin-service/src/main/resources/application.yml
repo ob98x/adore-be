@@ -7,14 +7,11 @@ server:
   port: 8083
 springdoc:
   api-docs:
-    enabled: true
     path: /swagger-ui
-    version: openapi_3_1
-  enable-spring-security: true
-  default-consumes-media-type: application/json
-  default-produces-media-type: application/json
 spring:
   jpa:
+    hibernate:
+      ddl-auto: update
     database: mysql
   datasource:
     driver-class-name: com.mysql.jdbc.Driver

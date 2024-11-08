@@ -46,68 +46,71 @@ services:
     networks:
       - msa-network
 
-#  user-service:
-#    build:
-#      context: ./user-service
-#      dockerfile: Dockerfile
-#    container_name: user-service
-#    image: dyw1014/adore-be-user-service:latest
+  user-service:
+    build:
+      context: ./user-service
+      dockerfile: Dockerfile
+    container_name: user-service
+    image: dyw1014/adore-be-user-service:latest
+    environment:
+      - DISCOVERY_SERVICE=http://discovery-service:8761/eureka
+      - SPRING_CLOUD_CONFIG_URI=http://config-service:8888
+      - MY_SQL_HOST=${MY_SQL_HOST}
+      - MY_SQL_USER=${MY_SQL_USER}
+      - MY_SQL_PASSWORD=${MY_SQL_PASSWORD}
+    depends_on:
+      - discovery-service
+    networks:
+      - msa-network
+    ports:
+      - "8081:8081"
+#
+#  es-service:
+#    image: docker.elastic.co/elasticsearch/elasticsearch:8.15.3
+#    container_name: es-service
 #    environment:
-#      - DISCOVERY_SERVICE=http://discovery-service:8761/eureka
-#      - SPRING_CLOUD_CONFIG_URI=http://config-service:8888
-#    depends_on:
-#      - discovery-service
+#      - ELASTIC_PASSWORD=root
+#    volumes:
+#      - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+#      - ./elasticsearch/data:/usr/share/elasticsearch/data
+#      - ./elasticsearch/backup:/usr/share/elasticsearch/backup
+#    ports:
+#      - "9200:9200"
+#      - "9300:9300"
+#    networks:
+#      - msa-network
+#
+#  kibana-service:
+#    build:
+#      context: ./kibana
+#      dockerfile: Dockerfile
+#    image: docker.elastic.co/kibana/kibana:8.15.3
+#    container_name: kibana
+#    volumes:
+#      - ./kibana/config/kibana.yml:/usr/share/kibana/config/kibana.yml
+#    ports:
+#      - 5601:5601
+#    networks:
+#      - msa-network
+#
+#  fluentd-service:
+#    build:
+#      context: ./fluentd
+#      dockerfile: Dockerfile
+#    container_name: fluentd-service
+#    volumes:
+#      - ./fluentd/pos:/var/pos
+#      - ./logs:/var/log
+#      - ./fluentd/buffer:/var/buffer
+#    image: dyw1014/adore-be-fluentd:latest
+#    environment:
+#      - FLUENTD_CONF=fluentd.conf
+#      - TZ=Asia/Seoul
 #    networks:
 #      - msa-network
 #    ports:
-#      - "8081:8081"
-
-  es-service:
-    image: docker.elastic.co/elasticsearch/elasticsearch:8.15.3
-    container_name: es-service
-    environment:
-      - ELASTIC_PASSWORD=root
-    volumes:
-      - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
-      - ./elasticsearch/data:/usr/share/elasticsearch/data
-      - ./elasticsearch/backup:/usr/share/elasticsearch/backup
-    ports:
-      - "9200:9200"
-      - "9300:9300"
-    networks:
-      - msa-network
-
-  kibana-service:
-    build:
-      context: ./kibana
-      dockerfile: Dockerfile
-    image: docker.elastic.co/kibana/kibana:8.15.3
-    container_name: kibana
-    volumes:
-      - ./kibana/config/kibana.yml:/usr/share/kibana/config/kibana.yml
-    ports:
-      - 5601:5601
-    networks:
-      - msa-network
-
-  fluentd-service:
-    build:
-      context: ./fluentd
-      dockerfile: Dockerfile
-    container_name: fluentd-service
-    volumes:
-      - ./fluentd/pos:/var/pos
-      - ./logs:/var/log
-      - ./fluentd/buffer:/var/buffer
-    image: dyw1014/adore-be-fluentd:latest
-    environment:
-      - FLUENTD_CONF=fluentd.conf
-      - TZ=Asia/Seoul
-    networks:
-      - msa-network
-    ports:
-      - "8999:8999"
-      - "8999:8999/udp"
+#      - "8999:8999"
+#      - "8999:8999/udp"
 
 
 #  community-service:
