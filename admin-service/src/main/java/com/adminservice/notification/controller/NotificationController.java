@@ -6,19 +6,26 @@ import com.adminservice.notification.dto.GetNotificationListResponseDto;
 import com.adminservice.notification.dto.GetNotificationResponseDto;
 import com.adminservice.notification.dto.NotificationCreateRequestDto;
 import com.adminservice.notification.service.NotificationService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-
+@Tag(name = "[관리자] 공지 관련 API", description = "Notification API")
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/admin/user")
+@RequestMapping("/admin/notification")
 public class NotificationController {
 
     private final NotificationService notificationService;
 
+    @Operation(summary = "공지 사항 생성 API", description = "공지 사항을 생성합니다.")
     @PostMapping("/create")
     public ResponseEntity<CustomResponseCode> createNotification(
             @Valid @RequestBody NotificationCreateRequestDto notificationCreateRequestDto) {

@@ -10,14 +10,19 @@ cd ./user-service
 docker build --no-cache -t dyw1014/adore-be-user-service:latest .
 cd ..
 
-cd ./gateway-service
-./gradlew clean build
-docker build --no-cache -t dyw1014/adore-be-gateway-service:latest .
-cd ..
-
 cd ./admin-service
 ./gradlew clean build
 docker build --no-cache -t dyw1014/adore-be-admin-service:latest .
+cd ..
+
+cd ./auth-service
+./gradlew clean build
+docker build --no-cache -t dyw1014/adore-be-auth-service:latest .
+cd ..
+
+cd ./gateway-service
+./gradlew clean build
+docker build --no-cache -t dyw1014/adore-be-gateway-service:latest .
 cd ..
 
 cd ./discovery-service

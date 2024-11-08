@@ -16,16 +16,23 @@ public class PerfumeCreateRequestDto {
     private String perfumePhoto;
     private String gender;
     private String season;
+    private String top;
+    private String middle;
+    private String base;
+    private String country;
     private int price;
 
     public static Perfume createPerfume(PerfumeCreateRequestDto perfumeCreateRequestDto) {
         return Perfume.builder()
                 .name(perfumeCreateRequestDto.getName())
                 .brand(perfumeCreateRequestDto.getBrand())
-                .description(perfumeCreateRequestDto.getDescription())
-                .perfumePhoto(perfumeCreateRequestDto.getPerfumePhoto())
+                .perfumeDesc(perfumeCreateRequestDto.getDescription())
+                .perfumeImg(perfumeCreateRequestDto.getPerfumePhoto())
                 .gender(perfumeCreateRequestDto.getGender())
-                .season(perfumeCreateRequestDto.getSeason())
+                .top(perfumeCreateRequestDto.getTop())
+                .middle(perfumeCreateRequestDto.getMiddle())
+                .base(perfumeCreateRequestDto.getBase())
+                .country(perfumeCreateRequestDto.getCountry())
                 .price(perfumeCreateRequestDto.getPrice())
                 .build();
     }
