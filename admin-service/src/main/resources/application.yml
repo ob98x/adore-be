@@ -12,8 +12,6 @@ springdoc:
     path: /v3/api-docs
 spring:
   jpa:
-    hibernate:
-      ddl-auto: update
     database: mysql
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
