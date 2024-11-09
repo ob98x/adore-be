@@ -13,8 +13,10 @@ management:
 server:
   port: 8084
 springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
   api-docs:
-    path: /swagger-ui
+    path: /v3/api-docs
 
 
 spring:

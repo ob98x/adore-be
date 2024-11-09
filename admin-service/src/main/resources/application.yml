@@ -6,8 +6,10 @@ logging:
 server:
   port: 8083
 springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
   api-docs:
-    path: /swagger-ui
+    path: /v3/api-docs
 spring:
   jpa:
     hibernate:
