@@ -30,6 +30,14 @@ public class QuestionServiceImpl implements QuestionService {
 
 
     @Override
+    public List<GetQuestionListResponseDto.QuestionListInfo> allQuestions() {
+        List<Question> questionList = questionRepository.findAll();
+        return questionList.stream()
+                .map(GetQuestionListResponseDto.QuestionListInfo::fromQuestion)
+                .toList();
+    }
+
+    @Override
     public GetQuestionListResponseDto getQuestionList(SearchType searchType, FilterType filterType, QuestionCategory category, String searchKeyword, int page) {
         Pageable pageable = PageRequest.of(page, 10);  // 한 페이지당 10개의 항목을 가져옵니다.
 

@@ -46,6 +46,14 @@ public class NotificationServiceImpl implements NotificationService {
     }
 
     @Override
+    public List<GetNotificationListResponseDto.NotificationListInfo> allNotifications() {
+        List<Notification> notificationList = notificationRepository.findAll();
+        return notificationList.stream()
+                .map(GetNotificationListResponseDto.NotificationListInfo::fromNotification)
+                .toList();
+    }
+
+    @Override
     public GetNotificationListResponseDto getNotificationLists(SearchType searchType, String keyword, int page) {
         Pageable pageable = PageRequest.of(page, 10);
 

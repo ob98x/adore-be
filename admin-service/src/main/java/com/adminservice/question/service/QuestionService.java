@@ -8,9 +8,11 @@ import com.adminservice.question.dto.GetQuestionResponseDto;
 import com.adminservice.question.entity.QuestionCategory;
 import org.springframework.http.ResponseEntity;
 
+import java.util.List;
+
 public interface QuestionService {
     ResponseEntity<GetQuestionResponseDto> getQuestions(Long id);
     ResponseEntity<CustomResponseCode> processQuestions(Long id, String answerContent);
     GetQuestionListResponseDto getQuestionList(SearchType searchType, FilterType filterType, QuestionCategory category, String searchKeyword, int page);
-
+    List<GetQuestionListResponseDto.QuestionListInfo> allQuestions();
 }

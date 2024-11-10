@@ -7,10 +7,13 @@ import com.adminservice.user.dto.GetMemberResponseDto;
 import com.adminservice.user.dto.MemberCreateRequestDto;
 import org.springframework.http.ResponseEntity;
 
+import java.util.List;
+
 public interface MemberService {
     ResponseEntity<CustomResponseCode> createMember(MemberCreateRequestDto memberCreateRequestDto);
     ResponseEntity<CustomResponseCode> updateMember(Long id, MemberCreateRequestDto memberCreateRequestDto);
     GetMemberResponseDto getMember(Long id);
     ResponseEntity<CustomResponseCode> deleteMember(Long id);
     GetMemberListResponseDto searchUsers(SearchType searchType, String keyword, int page);
+    List<GetMemberListResponseDto.MemberListInfo> allMembers();
 }

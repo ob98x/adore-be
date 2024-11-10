@@ -39,6 +39,15 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
+    @Transactional(readOnly = true)
+    public List<GetMemberListResponseDto.MemberListInfo> allMembers() {
+        List<Member> memberList = memberRepository.findAll();
+        return memberList.stream()
+                .map(GetMemberListResponseDto.MemberListInfo::fromMember)
+                .toList();
+    }
+
+    @Override
     @Transactional
     public ResponseEntity<CustomResponseCode> createMember(MemberCreateRequestDto memberCreateRequestDto) {
         checkDuplicateMembers(memberCreateRequestDto.getNickname(), memberCreateRequestDto.getEmail());

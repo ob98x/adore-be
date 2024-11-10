@@ -49,6 +49,14 @@ public class ReportServiceImpl implements ReportService {
     }
 
     @Override
+    public List<GetReportListResponseDto.ReportListInfo> allReports() {
+        List<Report> reportList = reportRepository.findAll();
+        return reportList.stream()
+                .map(GetReportListResponseDto.ReportListInfo::fromReport)
+                .toList();
+    }
+
+    @Override
     public GetReportListResponseDto getReportLists(FilterType filterType, int page) {
         Pageable pageable = PageRequest.of(page, 10);  // 한 페이지당 10개의 항목을 가져옵니다.=
 

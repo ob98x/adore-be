@@ -57,6 +57,15 @@ public class PerfumeServiceImpl implements PerfumeService {
         return GetPerfumeResponseDto.getPerfume(checkConflictPerfume(id));
     }
 
+    @Override
+    public List<GetPerfumeListResponseDto.PerfumeListInfo> allPerfumes() {
+        List<Perfume> perfumes = perfumeRepository.findAll();
+        return perfumes.stream()
+                .map(GetPerfumeListResponseDto.PerfumeListInfo::fromPerfume)
+                .toList();
+
+    }
+
     // 전체 리스트
     public GetPerfumeListResponseDto searchPerfumes(SearchType searchType, String keyword, int page) {
         Pageable pageable = PageRequest.of(page, 10);  // 한 페이지당 10개의 항목을 가져옵니다.

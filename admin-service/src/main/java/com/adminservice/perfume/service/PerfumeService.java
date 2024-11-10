@@ -7,10 +7,13 @@ import com.adminservice.perfume.dto.GetPerfumeResponseDto;
 import com.adminservice.perfume.dto.PerfumeCreateRequestDto;
 import org.springframework.http.ResponseEntity;
 
+import java.util.List;
+
 public interface PerfumeService {
     ResponseEntity<CustomResponseCode> createPerfume(PerfumeCreateRequestDto perfumeCreateRequestDto);
     ResponseEntity<CustomResponseCode> updatePerfume(Long id, PerfumeCreateRequestDto perfumeCreateRequestDto);
     GetPerfumeResponseDto getPerfume(Long id);
+    List<GetPerfumeListResponseDto.PerfumeListInfo> allPerfumes();
     ResponseEntity<CustomResponseCode> deletePerfume(Long id);
     GetPerfumeListResponseDto searchPerfumes(SearchType searchType, String keyword, int page);
 }
