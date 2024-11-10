@@ -93,6 +93,9 @@ public class AuthServiceImpl implements AuthService {
         jwtUtil.validateToken(accessToken);
 
         log.info("logout end, redis token delete: {}", jwtUtil.getMemberId(accessToken));
+        if (redisUtil.getValue(jwtUtil.getMemberId(accessToken).toString()) != null) {
+            throw new CustomException(ResponseCode.ALREADY_LOGOUT);
+        }
         redisUtil.deleteValue(jwtUtil.getMemberId(accessToken).toString());
 
         return ResponseEntity.ok(CustomResponseCode.LOGOUT_SUCCESS);
@@ -149,7 +152,9 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public ResponseEntity<CustomResponseCode> send(String email, String subject, String text, int code) {
         // 이메일 요청 횟수 확인
+        log.info("send email, email: {}", email);
         long count = getEmailRequestCount(email);
+        log.info("send email, email request count: {}", count);
         if (count >= 5) {
             throw new CustomException(ResponseCode.EMAIL_COUNT_EXCEED);
         }
@@ -170,6 +175,7 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public ResponseEntity<CustomResponseCode> verificationEmail(String code, String savedCode) {
+        log.info("verification email, code: {}, savedCode: {}", code, savedCode);
         // 입력된 코드와 저장된 코드 비교
         if (!code.equals(savedCode)) {
             throw new CustomException(ResponseCode.EMAIL_AUTHORIZATION_FAIL);
@@ -178,14 +184,17 @@ public class AuthServiceImpl implements AuthService {
     }
 
     public String getVerificationCode(String email) {
+        log.info("get verification code, email: {}", email);
         return redisTemplate.opsForValue().get(email);
     }
 
     public void saveVerificationCode(String email, String code) {
+        log.info("save verification code, email: {}, code: {}", email, code);
         redisTemplate.opsForValue().set(email, code, 1, TimeUnit.MINUTES); // 1분 타임아웃
     }
 
     public void increaseEmailRequestCount(String email) {
+        log.info("increase email request count, email: {}", email);
         String key = "email_request_count:" + email;
 
         Long count = redisTemplate.opsForValue().increment(key);
