@@ -33,6 +33,16 @@ public class ReviewServiceImpl implements ReviewService {
     private final PerfumeService perfumeService;
     private final MemberService memberService;
 
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<GetReviewListResponseDto.ReviewListInfo> allReviews() {
+        List<Review> reviewList = reviewRepository.findAllByState(ReviewState.ACTIVE);
+        return reviewList.stream()
+                .map(GetReviewListResponseDto.ReviewListInfo::fromReview)
+                .toList();
+    }
+
     @Override
     @Transactional
     public ResponseEntity<CustomResponseCode> deleteReview(Long id) {

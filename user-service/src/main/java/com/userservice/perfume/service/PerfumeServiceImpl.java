@@ -41,6 +41,24 @@ public class PerfumeServiceImpl implements PerfumeService {
         return GetPerfumeResponseDto.getPerfume(checkConflictPerfume(id));
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public List<GetNoteListResponseDto.NoteListInfo> allNotes() {
+        List<Note> noteList = noteRepository.findAll();
+        return noteList.stream()
+                .map(GetNoteListResponseDto.NoteListInfo::fromNote)
+                .toList();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<GetPerfumeListResponseDto.PerfumeListInfo> allPerfumes() {
+        List<Perfume> perfumeList = perfumeRepository.findAllByState(PerfumeState.ACTIVE);
+        return perfumeList.stream()
+                .map(GetPerfumeListResponseDto.PerfumeListInfo::fromPerfume)
+                .toList();
+    }
+
     // 전체 리스트
     @Override
     @Transactional(readOnly = true)
