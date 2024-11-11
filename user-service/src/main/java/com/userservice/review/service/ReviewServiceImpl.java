@@ -10,9 +10,14 @@ import com.userservice.perfume.service.PerfumeService;
 import com.userservice.review.dto.GetReviewListResponseDto;
 import com.userservice.review.dto.GetReviewResponseDto;
 import com.userservice.review.dto.ReviewCreateRequestDto;
+import com.userservice.review.entity.Comment;
+import com.userservice.review.entity.CommentState;
 import com.userservice.review.entity.Review;
 import com.userservice.review.entity.ReviewState;
+import com.userservice.review.repository.CommentRepository;
 import com.userservice.review.repository.ReviewRepository;
+import com.userservice.user.entity.Member;
+import com.userservice.user.repository.MemberRepository;
 import com.userservice.user.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -29,10 +34,45 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ReviewServiceImpl implements ReviewService {
 
+    private final MemberRepository memberRepository;
+    private final CommentRepository commentRepository;
     private final ReviewRepository reviewRepository;
     private final PerfumeService perfumeService;
     private final MemberService memberService;
 
+
+    @Override
+    @Transactional
+    public ResponseEntity<CustomResponseCode> createComment(Long reviewId, Long memberId, String content) {
+        Member member = memberService.checkConflictMember(memberId);
+        Review review = checkConflictReview(reviewId);
+        Comment comment = Comment.builder()
+                .content(content)
+                .review(review)
+                .state(CommentState.ACTIVE)
+                .writer(member)
+                .build();
+        commentRepository.save(comment);
+        return ResponseEntity.ok(CustomResponseCode.COMMENT_CREATE_SUCCESS);
+    }
+
+    @Override
+    @Transactional
+    public ResponseEntity<CustomResponseCode> deleteComment(Long commentId) {
+        Comment comment = checkConflictComment(commentId);
+        comment.setState(CommentState.INACTIVE);
+        commentRepository.save(comment);
+        return ResponseEntity.ok(CustomResponseCode.COMMENT_DELETE_SUCCESS);
+    }
+
+    @Override
+    @Transactional
+    public ResponseEntity<CustomResponseCode> updateComment(Long commendId, String content) {
+        Comment comment = checkConflictComment(commendId);
+        comment.setContent(content);
+        commentRepository.save(comment);
+        return ResponseEntity.ok(CustomResponseCode.COMMENT_UPDATE_SUCCESS);
+    }
 
     @Override
     @Transactional(readOnly = true)
@@ -108,5 +148,11 @@ public class ReviewServiceImpl implements ReviewService {
         if (reviewRepository.findByIdAndState(id, ReviewState.ACTIVE).isEmpty()) {
             throw new CustomException(ResponseCode.REVIEW_NOT_FOUND);
         } else  return reviewRepository.findByIdAndState(id, ReviewState.ACTIVE).get();
+    }
+
+    public Comment checkConflictComment(Long id) {
+        if (commentRepository.findByIdAndState(id, CommentState.ACTIVE).isEmpty()) {
+            throw new CustomException(ResponseCode.COMMENT_NOT_FOUND);
+        } else  return commentRepository.findByIdAndState(id, CommentState.ACTIVE).get();
     }
 }

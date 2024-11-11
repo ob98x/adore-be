@@ -28,6 +28,7 @@ public class GetReviewListResponseDto {
         private String title;
         private String name;
         private int likeCnt;
+        private String email;
         private LocalDateTime createdAt;
 
 
@@ -39,6 +40,7 @@ public class GetReviewListResponseDto {
             info.setName(review.getMember().getName());
             info.setCreatedAt(review.getCreatedAt());
             info.setLikeCnt(review.getLikeCnt());
+            info.setEmail(review.getMember().getEmail());
             return info;
         }
     }

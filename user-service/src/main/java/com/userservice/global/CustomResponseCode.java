@@ -30,6 +30,9 @@ public enum CustomResponseCode {
     REVIEW_DELETE_SUCCESS("리뷰 삭제에 성공하였습니다."),
     MY_PAGE_UPDATE_SUCCESS("마이페이지 수정에 성공하였습니다."),
     REVIEW_CREATE_SUCCESS("리뷰 작성에 성공하였습니다."),
-    REVIEW_UPDATE_SUCCESS("리뷰 수정에 성공하였습니다.");
+    REVIEW_UPDATE_SUCCESS("리뷰 수정에 성공하였습니다."),
+    COMMENT_CREATE_SUCCESS("댓글 작성에 성공하였습니다."),
+    COMMENT_DELETE_SUCCESS("댓글 삭제에 성공하였습니다."),
+    COMMENT_UPDATE_SUCCESS("댓글 수정에 성공하였습니다."),;
     private final String message;
 }

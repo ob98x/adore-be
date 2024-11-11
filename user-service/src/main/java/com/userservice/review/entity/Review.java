@@ -6,6 +6,8 @@ import com.userservice.user.entity.Member;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Getter
 @Setter
 @Entity
@@ -20,6 +22,9 @@ public class Review extends BaseEntity {
     @OneToOne
     @JoinColumn(name = "member_id")
     private Member member;
+
+    @OneToMany( mappedBy = "review")
+    private List<Comment> commentList;
 
     @Column(name = "photo")
     private String photo;

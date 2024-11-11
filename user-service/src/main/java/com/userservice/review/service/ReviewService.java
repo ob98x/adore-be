@@ -17,4 +17,7 @@ public interface ReviewService {
     ResponseEntity<CustomResponseCode> deleteReview(Long id);
     ResponseEntity<CustomResponseCode> createReview(ReviewCreateRequestDto reviewCreateRequestDto);
     ResponseEntity<CustomResponseCode> updateReview(Long id, ReviewCreateRequestDto reviewCreateRequestDto);
+    ResponseEntity<CustomResponseCode> createComment(Long reviewId, Long memberId, String content);
+    ResponseEntity<CustomResponseCode> deleteComment(Long commentId);
+    ResponseEntity<CustomResponseCode> updateComment(Long commentId, String content);
 }

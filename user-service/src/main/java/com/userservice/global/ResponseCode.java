@@ -66,7 +66,8 @@ public enum ResponseCode {
     PERFUME_NOT_FOUND("PER-ERR-001", HttpStatus.NOT_FOUND, "향수를 찾을 수 없습니다."),
     NOTE_NOT_FOUND("NOT-ERR-001", HttpStatus.NOT_FOUND, "노트를 찾을 수 없습니다."),
     REVIEW_NOT_FOUND("REV-ERR-001", HttpStatus.NOT_FOUND, "리뷰를 찾을 수 없습니다."),
-    REVIEW_DELETED("REV-ERR-002", HttpStatus.BAD_REQUEST, "삭제된 리뷰입니다.");
+    REVIEW_DELETED("REV-ERR-002", HttpStatus.BAD_REQUEST, "삭제된 리뷰입니다."),
+    COMMENT_NOT_FOUND("COM-ERR-001", HttpStatus.NOT_FOUND, "댓글을 찾을 수 없습니다."),;
     private final String code;
     private final HttpStatus status;
     private final String message;

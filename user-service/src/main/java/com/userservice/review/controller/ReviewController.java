@@ -66,4 +66,29 @@ public class ReviewController {
     public ResponseEntity<CustomResponseCode> deleteReview(@Parameter(description = "삭제할 리뷰 id") @RequestParam Long id) {
         return reviewService.deleteReview(id);
     }
+
+    @Operation(summary = "댓글 작성 API", description = "리뷰에 댓글을 작성합니다.")
+    @PostMapping("/comment/create")
+    public ResponseEntity<CustomResponseCode> createComment(
+            @Parameter(description = "댓글을 작성할 리뷰 id") @RequestParam Long reviewId,
+            @Parameter(description = "댓글을 작성할 사용자 id") @RequestParam Long memberId,
+            @RequestBody String content) {
+        return reviewService.createComment(reviewId, memberId, content);
+    }
+
+    @Operation(summary = "댓글 삭제 API", description = "리뷰의 댓글을 삭제합니다.")
+    @DeleteMapping("/comment/delete")
+    public ResponseEntity<CustomResponseCode> deleteComment(@Parameter(description = "삭제할 댓글 id") @RequestParam Long commentId) {
+        return reviewService.deleteComment(commentId);
+    }
+
+    @Operation(summary = "댓글 수정 API", description = "리뷰의 댓글을 수정합니다.")
+    @PatchMapping("/comment/update")
+    public ResponseEntity<CustomResponseCode> updateComment(
+            @Parameter(description = "수정할 댓글 id") @RequestParam Long commentId,
+            @RequestBody String content) {
+        return reviewService.updateComment(commentId, content);
+    }
+
+
 }
