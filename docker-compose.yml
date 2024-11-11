@@ -1,4 +1,65 @@
 services:
+
+  influxdb:
+    image: bitnami/influxdb:1.8.5
+    container_name: influxdb
+    ports:
+      - "8086:8086"
+      - "8085:8088"
+    environment:
+      - INFLUXDB_ADMIN_USER_PASSWORD=${INFLUXDB_ADMIN_USER_PASSWORD}
+      - INFLUXDB_ADMIN_USER_TOKEN=${INFLUXDB_ADMIN_USER_TOKEN}
+      - INFLUXDB_HTTP_AUTH_ENABLED=false
+      - INFLUXDB_DB=adore
+    networks:
+      - msa-network
+  k6:
+    image: grafana/k6
+    container_name: k6
+    volumes:
+      - ./k6:/scripts
+    environment:
+      - K6_PROMETHEUS_RW_SERVER_URL=http://prometheus:9090/api/v1/write
+      - K6_PROMETHEUS_RW_TREND_AS_NATIVE_HISTOGRAM=true
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    depends_on:
+      - prometheus
+    networks:
+      - msa-network
+
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    depends_on:
+      - prometheus
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./grafana/data:/var/lib/grafana
+    environment:
+      - GF_SERVER_ROOT_URL=${GF_SERVER_ROOT_URL}
+      - ./grafana/provisioning:/etc/grafana/provisioning
+      - ./grafana/dashboard:/dashboard
+    restart: always
+    networks:
+      - msa-network
+
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    volumes:
+      - ./prometheus/config/:/etc/prometheus/
+      - ./prometheus/data:/prometheus
+    ports:
+      - '9090:9090'
+    command:
+      - --web.enable-remote-write-receiver
+      - --enable-feature=native-histograms
+      - --config.file=/etc/prometheus/prometheus.yml
+    restart: always
+    networks:
+      - msa-network
   # Eureka
   discovery-service:
     build:

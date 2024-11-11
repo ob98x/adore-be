@@ -8,7 +8,10 @@ management:
   endpoints:
     web:
       exposure:
-        include: "*"
+        include: 'prometheus'
+  metrics:
+    tags:
+      application: ${spring.application.name}
 
 server:
   port: 8084
@@ -17,7 +20,6 @@ springdoc:
     path: /swagger-ui.html
   api-docs:
     path: /v3/api-docs
-
 
 spring:
   mail:
