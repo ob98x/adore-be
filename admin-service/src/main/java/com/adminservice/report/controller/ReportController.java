@@ -31,7 +31,7 @@ public class ReportController {
     }
 
     @Operation(summary = "신고 사항 리스트 조회 API", description = "신고 사항 리스트를 조회합니다.")
-    @GetMapping("/list")
+    @GetMapping("/list/")
     public ResponseEntity<List<GetReportListResponseDto.ReportListInfo>> getReportLists() {
         List<GetReportListResponseDto.ReportListInfo> response = reportService.allReports();
         return ResponseEntity.ok(response);

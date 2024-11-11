@@ -1,64 +1,50 @@
 global:
   scrape_interval: 15s
   scrape_timeout: 15s
-
   external_labels:
     monitor: 'adore-monitor'
-  query_log_file: saved.log
 
 scrape_configs:
+  - job_name: 'node'
+    static_configs:
+      - targets: [ 'node-exporter:9100' ]
+
   - job_name: 'gateway-service'
-    scrape_interval: 15s
-    scrape_timeout: 10s
     metrics_path: '/actuator/prometheus'
-    honor_labels: false
-    honor_timestamps: false
     scheme: 'http'
     static_configs:
       - targets: [ 'gateway-service:8111' ]
         labels:
-          service: 'monitor-1'
+          service: 'gateway-service'  # 고유한 서비스 라벨 사용
+
   - job_name: 'auth-service'
-    scrape_interval: 15s
-    scrape_timeout: 10s
     metrics_path: '/actuator/prometheus'
-    honor_labels: false
-    honor_timestamps: false
     scheme: 'http'
     static_configs:
       - targets: ['auth-service:8084']
         labels:
-          service : 'monitor-1'
+          service: 'auth-service'  # 고유한 서비스 라벨 사용
+
   - job_name: 'discovery-service'
-    scrape_interval: 15s
-    scrape_timeout: 10s
     metrics_path: '/actuator/prometheus'
-    honor_labels: false
-    honor_timestamps: false
     scheme: 'http'
     static_configs:
       - targets: [ 'discovery-service:8761' ]
         labels:
-          service: 'monitor-1'
+          service: 'discovery-service'  # 고유한 서비스 라벨 사용
+
   - job_name: 'user-service'
-    scrape_interval: 15s
-    scrape_timeout: 10s
     metrics_path: '/actuator/prometheus'
-    honor_labels: false
-    honor_timestamps: false
     scheme: 'http'
     static_configs:
       - targets: [ 'user-service:8081' ]
         labels:
-          service: 'monitor-1'
+          service: 'user-service'  # 고유한 서비스 라벨 사용
+
   - job_name: 'admin-service'
-    scrape_interval: 15s
-    scrape_timeout: 10s
     metrics_path: '/actuator/prometheus'
-    honor_labels: false
-    honor_timestamps: false
     scheme: 'http'
     static_configs:
       - targets: [ 'admin-service:8083' ]
         labels:
-          service: 'monitor-1'
+          service: 'admin-service'  # 고유한 서비스 라벨 사용

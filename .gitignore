@@ -45,5 +45,6 @@ out/
 /logs/
 /fluentd/buffer/
 /gateway-service/logs/**
-/grafana/data/
+/grafana/data/**
+/prometheus/data/**
 /prometheus/data/

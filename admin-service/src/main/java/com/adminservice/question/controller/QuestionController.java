@@ -39,7 +39,7 @@ public class QuestionController {
 
 
     @Operation(summary = "문의 사항 리스트 조회 API", description = "문의 사항 리스트를 조회합니다.")
-    @GetMapping("/list")
+    @GetMapping("/list/")
     public ResponseEntity<List<GetQuestionListResponseDto.QuestionListInfo>> searchQuestions() {
         List<GetQuestionListResponseDto.QuestionListInfo> response = questionService.allQuestions();
         return ResponseEntity.ok(response);

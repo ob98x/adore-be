@@ -37,7 +37,7 @@ public class UserController {
     }
 
     @Operation
-    @GetMapping("/list")
+    @GetMapping("/list/")
     public ResponseEntity<List<GetMemberListResponseDto.MemberListInfo>> allMembers() {
         List<GetMemberListResponseDto.MemberListInfo> response = memberService.allMembers();
         return ResponseEntity.ok(response);
