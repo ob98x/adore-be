@@ -37,7 +37,7 @@ public class PerfumeController {
     }
 
     @Operation(summary = "향수 리스트 조회 API", description = "향수 리스트를 조회합니다.")
-    @GetMapping("/list/}")
+    @GetMapping("/list/")
     public ResponseEntity<List<GetPerfumeListResponseDto.PerfumeListInfo>> searchPerfume() {
         List<GetPerfumeListResponseDto.PerfumeListInfo> response = perfumeService.allPerfumes();
         return ResponseEntity.ok(response);

@@ -49,3 +49,4 @@ out/
 /prometheus/data/**
 /prometheus/data/
 /auth-service/logs/auth-service.log
+/prometheus/data/data/
