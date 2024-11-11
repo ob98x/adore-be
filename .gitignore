@@ -48,3 +48,4 @@ out/
 /grafana/data/**
 /prometheus/data/**
 /prometheus/data/
+/auth-service/logs/auth-service.log
