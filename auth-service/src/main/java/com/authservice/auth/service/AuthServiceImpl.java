@@ -21,6 +21,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Duration;
+import java.time.LocalDate;
 import java.util.concurrent.TimeUnit;
 
 @Service
@@ -58,6 +59,9 @@ public class AuthServiceImpl implements AuthService {
 
         redisUtil.setValues(memberInfo.getId().toString(), refreshToken, expireTime);
         log.info("login end, set redis key: {}", accessToken);
+
+        member.setLastLoginAt(LocalDate.now());
+        memberRepository.save(member);
 
         return LoginResponseDto.of(accessToken, refreshToken, member.getName(), member.getRole());
     }
@@ -141,7 +145,8 @@ public class AuthServiceImpl implements AuthService {
                 signUpRequestDto.getGender(),
                 signUpRequestDto.getNickname(),
                 MemberRole.USER,
-                MemberState.ACTIVE
+                MemberState.ACTIVE,
+                LocalDate.now()
         );
 
         memberRepository.save(member);

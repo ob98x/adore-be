@@ -43,11 +43,14 @@ public class Member extends BaseEntity {
     @Column(name = "state", nullable = false)
     private MemberState state;
 
+    @Column(name = "last_login_at")
+    private LocalDate lastLoginAt;
+
     @Builder
     public Member(
             String name, String email, String password, LocalDate birthDate,
             String inflow, String gender, String nickname, MemberRole role,
-            MemberState state
+            MemberState state, LocalDate lastLoginAt
     ) {
         this.name = name;
         this.email = email;
@@ -58,12 +61,13 @@ public class Member extends BaseEntity {
         this.nickname = nickname;
         this.role = role;
         this.state = state;
+        this.lastLoginAt = lastLoginAt;
     }
 
     public static Member of(
             String name, String email, String password, LocalDate birthDate,
             String inflow, String gender, String nickname, MemberRole role,
-            MemberState state
+            MemberState state, LocalDate lastLoginAt
     ) {
         return Member.builder()
                 .name(name)
@@ -75,6 +79,7 @@ public class Member extends BaseEntity {
                 .nickname(nickname)
                 .role(role)
                 .state(state)
+                .lastLoginAt(lastLoginAt)
                 .build();
     }
 
