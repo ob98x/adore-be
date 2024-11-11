@@ -122,8 +122,7 @@ pipeline {
                                 sshTransfer(
                                     execCommand: '''
                                         # 프로젝트 디렉토리로 이동
-                                        mkdir test
-                                        cd /root/adore/adore-be
+                                        cd adore/adore-be
 
                                         # Git 저장소에서 최신 코드 가져오기
                                         git pull origin main
