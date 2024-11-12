@@ -1,9 +1,7 @@
 package com.userservice.perfume.entity;
 
 import com.userservice.global.BaseEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Getter
