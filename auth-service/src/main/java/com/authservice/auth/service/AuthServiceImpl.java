@@ -109,16 +109,14 @@ public class AuthServiceImpl implements AuthService {
     public String checkEmailDuplicate(String email) {
         if (memberRepository.findMemberByEmailAndState(email, MemberState.ACTIVE).isPresent()) {
             throw new CustomException(ResponseCode.EMAIL_DUPLICATE);
-        }
-        return email;
+        } else return email;
     }
 
     @Override
     public String checkNicknameDuplicate(String nickname) {
         if (memberRepository.findMemberByNicknameAndState(nickname, MemberState.ACTIVE).isPresent()) {
             throw new CustomException(ResponseCode.NICKNAME_DUPLICATE);
-        }
-        return nickname;
+        } else return nickname;
     }
 
     @Override

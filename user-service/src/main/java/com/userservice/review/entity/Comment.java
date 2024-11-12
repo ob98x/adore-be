@@ -15,6 +15,7 @@ public class Comment extends BaseEntity {
     private String content;
 
     @Column(name = "state")
+    @Enumerated(EnumType.STRING)
     private CommentState state;
 
     @ManyToOne

@@ -53,6 +53,7 @@ public class Perfume extends BaseEntity {
     private String base;
 
     @Column(name="state")
+    @Enumerated(EnumType.STRING)
     private PerfumeState state;
 
     @Builder

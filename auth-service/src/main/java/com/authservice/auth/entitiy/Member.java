@@ -1,8 +1,6 @@
 package com.authservice.auth.entitiy;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.*;
 
@@ -38,9 +36,11 @@ public class Member extends BaseEntity {
     private String nickname;
 
     @Column(name = "role")
+    @Enumerated(EnumType.STRING)
     private MemberRole role;
 
     @Column(name = "state")
+    @Enumerated(EnumType.STRING)
     private MemberState state;
 
     @Column(name = "last_login_at")

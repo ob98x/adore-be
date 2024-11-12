@@ -42,6 +42,7 @@ public class Review extends BaseEntity {
     private int views;
 
     @Column(name = "state")
+    @Enumerated(EnumType.STRING)
     private ReviewState state;
 
     @Builder

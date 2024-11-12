@@ -14,10 +14,10 @@ public class ErrorResponse {
     }
 
     public static ErrorResponse of(ResponseCode code, Exception e) {
-        return new ErrorResponse(code.getCode(), code.getMessage(e));
+        return new ErrorResponse(code.getCode(), code.getFormattedMessage(e));
     }
 
     public static ErrorResponse of(ResponseCode code, String message) {
-        return new ErrorResponse(code.getCode(), code.getMessage(message));
+        return new ErrorResponse(code.getCode(), code.getFormattedMessage(message));
     }
 }

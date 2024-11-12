@@ -62,13 +62,13 @@ public enum ResponseCode {
     private final String message;
 
 
-    public String getMessage(Throwable e) {
-        return this.getMessage(this.getMessage() + " - " + e.getMessage());
+    public String getFormattedMessage(Throwable e) {
+        return this.message + " - " + e.getMessage();
     }
 
-    public String getMessage(String message) {
+    public String getFormattedMessage(String message) {
         return Optional.ofNullable(message)
                 .filter(Predicate.not(String::isBlank))
-                .orElse(this.getMessage());
+                .orElse(this.message);
     }
 }
