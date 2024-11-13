@@ -86,11 +86,18 @@ pipeline {
             }
         }
 
+        stage('Login') {
+            steps {
+                sh 'echo $DOCKER_USER | docker login -u $DOCKER_PASSWORD --password-stdin' // docker hub 로그인
+            }
+        }
+
         stage('Push Docker Images') {
             steps {
                 script {
                     try {
                         // Docker 이미지 푸시
+                        sh "docker login -u dyw1014 -p $DOCKER_PASSWORD"
                         def services = ['discovery-service', 'gateway-service', 'user-service', 'admin-service', 'auth-service','fluentd']
                         services.each { service ->
                             sh "docker push dyw1014/adore-be-${service}"
