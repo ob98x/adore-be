@@ -30,7 +30,10 @@ public enum CustomResponseCode {
     INVALID_FILE_TYPE("잘못된 파일 형식입니다."),
     NOTE_CREATE_SUCCESS("노트 생성에 성공하였습니다."),
     NOTE_DELETE_SUCCESS("노트 삭제에 성공하였습니다."),
-    NOTE_UPDATE_SUCCESS("노트 수정에 성공하였습니다."),;
+    NOTE_UPDATE_SUCCESS("노트 수정에 성공하였습니다."),
+    SURVEY_CREATE_SUCCESS("설문 생성에 성공하였습니다."),
+    SURVEY_UPDATE_SUCCESS("설문 수정에 성공하였습니다."),
+    SURVEY_DELETE_SUCCESS("설문 삭제에 성공하였습니다.");
     private final String message;
 
 }

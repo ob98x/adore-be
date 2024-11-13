@@ -8,4 +8,5 @@ public interface StaticsService {
     GetStaticsResponseDto getNewUserStatics(LocalDate startDate, LocalDate endDate);
     GetStaticsResponseDto getInactiveMembers();
     GetStaticsResponseDto getActiveMembers(LocalDate startDate, LocalDate endDate);
+    GetStaticsResponseDto getRecommendUser(LocalDate startDate, LocalDate endDate);
 }
