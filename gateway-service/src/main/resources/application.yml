@@ -62,10 +62,7 @@ spring:
               - "http://localhost"
             allow-credentials: true
             allowedHeaders:
-              - "Content-Type"
-              - "Authorization"
-              - "X-Requested-With"
-              - "Accept"
+              - "*"
             allowedMethods:
               - GET
               - POST
