@@ -16,6 +16,7 @@ public enum CustomResponseCode {
     SIGNUP_SUCCESS("회원가입에 성공하였습니다."),
     SIGNUP_FAIL("회원가입에 실패하였습니다."),
     EMAIL_SEND_FAIL("이메일 전송에 실패하였습니다."),
-    EMAIL_AUTHORIZATION_FAIL("이메일 인증에 실패하였습니다.");
+    EMAIL_AUTHORIZATION_FAIL("이메일 인증에 실패하였습니다."),
+    PASSWORD_RESET_SUCCESS("비밀번호 재설정에 성공하였습니다."),;
     private final String message;
 }

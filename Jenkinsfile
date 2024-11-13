@@ -86,11 +86,18 @@ pipeline {
             }
         }
 
+        stage('Login') {
+            steps {
+                sh 'echo $DOCKER_PASSWORD | docker login -u $DOCKER_USER --password-stdin' // docker hub 로그인
+            }
+        }
+
         stage('Push Docker Images') {
             steps {
                 script {
                     try {
                         // Docker 이미지 푸시
+                        sh "docker login -u dyw1014 -p $DOCKER_PASSWORD"
                         def services = ['discovery-service', 'gateway-service', 'user-service', 'admin-service', 'auth-service','fluentd']
                         services.each { service ->
                             sh "docker push dyw1014/adore-be-${service}"
@@ -122,7 +129,7 @@ pipeline {
                                 sshTransfer(
                                     execCommand: '''
                                         # 프로젝트 디렉토리로 이동
-                                        cd adore/adore-be
+                                        cd ~/adore/adore-be
 
                                         # Git 저장소에서 최신 코드 가져오기
                                         git pull origin main
@@ -131,11 +138,10 @@ pipeline {
                                         docker-compose pull
 
                                         # 새로운 서비스 배포
-                                        docker-compose up -d \
+                                        docker compose up -d \
                                             admin-service \
                                             auth-service \
                                             user-service \
-                                            gateway-service \
                                     '''
                                 )
                             ])

@@ -50,3 +50,4 @@ out/
 /prometheus/data/
 /auth-service/logs/auth-service.log
 /prometheus/data/data/
+/cert/

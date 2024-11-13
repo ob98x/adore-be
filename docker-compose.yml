@@ -1,4 +1,6 @@
 services:
+
+  # Grafana System Metrics
   node-exporter:
     image: prom/node-exporter:latest
     container_name: node-exporter
@@ -9,6 +11,8 @@ services:
       - "9100:9100"
     networks:
       - msa-network
+
+  # K6 Test Metric
   influxdb:
     image: bitnami/influxdb:1.8.5
     container_name: influxdb
@@ -22,6 +26,7 @@ services:
       - INFLUXDB_DB=adore
     networks:
       - msa-network
+  # K6 Test
   k6:
     image: grafana/k6
     container_name: k6
@@ -37,6 +42,7 @@ services:
     networks:
       - msa-network
 
+  # Grafana
   grafana:
     image: grafana/grafana
     container_name: grafana
@@ -54,6 +60,7 @@ services:
     networks:
       - msa-network
 
+  # Prometheus
   prometheus:
     image: prom/prometheus
     container_name: prometheus
@@ -69,6 +76,7 @@ services:
     restart: always
     networks:
       - msa-network
+
   # Eureka
   discovery-service:
     build:
@@ -102,6 +110,20 @@ services:
     networks:
       - msa-network
 
+  # Nginx
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+      - /etc/letsencrypt:/etc/letsencrypt
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - msa-network
+
+  # User Service
   user-service:
     build:
       context: ./user-service
@@ -121,6 +143,7 @@ services:
     ports:
       - "8081:8081"
 
+  # ElasticSearch
   es-service:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.15.3
     container_name: es-service
@@ -136,6 +159,7 @@ services:
     networks:
       - msa-network
 
+  # Kibana
   kibana-service:
     build:
       context: ./kibana
@@ -149,6 +173,7 @@ services:
     networks:
       - msa-network
 
+  # Logstash
   fluentd-service:
     build:
       context: ./fluentd
@@ -168,6 +193,7 @@ services:
       - "8999:8999"
       - "8999:8999/udp"
 
+  # Auth Service
   auth-service:
     build:
       context: ./auth-service
@@ -192,6 +218,7 @@ services:
     ports:
       - "8084:8084"
 
+  # Admin Service
   admin-service:
     build:
       context: ./admin-service

@@ -10,8 +10,11 @@ import com.authservice.global.CustomException;
 import com.authservice.config.JwtUtil;
 import com.authservice.global.RedisUtil;
 import com.authservice.global.ResponseCode;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.mail.SimpleMailMessage;
@@ -37,6 +40,28 @@ public class AuthServiceImpl implements AuthService {
     private final PasswordEncoder passwordEncoder;
     private final RedisUtil redisUtil;
     private final Duration expireTime = Duration.ofSeconds(864000); // 2 weeks
+
+    @Override
+    @Transactional
+    public CustomResponseCode resetPassword(ResetPasswordDto resetPasswordDto) {
+        Member member = memberRepository.findMemberByEmailAndState(resetPasswordDto.getEmail(), MemberState.ACTIVE)
+                .orElseThrow(() -> new CustomException(ResponseCode.MEMBER_NOT_FOUND));
+        if ( resetPasswordDto.getNewPassword() == null || resetPasswordDto.getNewPasswordConfirm() == null || resetPasswordDto.getEmailVerify() == null) {
+            throw new CustomException(ResponseCode.BAD_REQUEST);
+        }
+
+        if (!resetPasswordDto.getNewPassword().equals(resetPasswordDto.getNewPasswordConfirm())) {
+            throw new CustomException(ResponseCode.PASSWORD_NOT_MATCH);
+        }
+
+        if ( passwordEncoder.encode(resetPasswordDto.getNewPassword()).equals(member.getPassword())) {
+            throw new CustomException(ResponseCode.PASSWORD_SAME);
+        }
+
+        member.setPassword(passwordEncoder.encode(resetPasswordDto.getNewPassword()));
+        memberRepository.save(member);
+        return CustomResponseCode.PASSWORD_RESET_SUCCESS;
+    }
 
     @Override
     public LoginResponseDto login(LoginRequestDto loginRequestDto) {
@@ -97,7 +122,7 @@ public class AuthServiceImpl implements AuthService {
         jwtUtil.validateToken(accessToken);
 
         log.info("logout end, redis token delete: {}", jwtUtil.getMemberId(accessToken));
-        if (redisUtil.getValue(jwtUtil.getMemberId(accessToken).toString()) != null) {
+        if (redisUtil.getValue(jwtUtil.getMemberId(accessToken).toString()) == null) {
             throw new CustomException(ResponseCode.ALREADY_LOGOUT);
         }
         redisUtil.deleteValue(jwtUtil.getMemberId(accessToken).toString());
@@ -132,7 +157,10 @@ public class AuthServiceImpl implements AuthService {
         if (!signUpRequestDto.isAgreeTerms()) {
             throw new CustomException(ResponseCode.TERMS_NOT_AGREED);
         }
-        log.info("signUp processing, agreeTerms: {}", signUpRequestDto.isAgreeTerms());
+
+        if (!signUpRequestDto.isEmailVerify()) {
+            throw new CustomException(ResponseCode.EMAIL_AUTHORIZATION_FAIL);
+        }
 
         Member member = Member.of(
                 signUpRequestDto.getName(),
@@ -211,6 +239,29 @@ public class AuthServiceImpl implements AuthService {
         }
     }
 
+    @Override
+    public String returnRefreshToken(HttpServletRequest request) {
+        if (request.getCookies() != null) {
+            for (Cookie cookie : request.getCookies()) {
+                if ("refreshToken".equals(cookie.getName())) {
+                    return cookie.getValue();
+                }
+            }
+        }
+        throw new CustomException(ResponseCode.NOT_FOUND_REFRESH_TOKEN);
+    }
+
+
+    @Override
+    public ResponseCookie createTokenCookie(String cookieName, String token, boolean isHttpOnly, int maxAge) {
+        return ResponseCookie.from(cookieName, token)
+                .httpOnly(isHttpOnly)
+                .path("/")
+                .maxAge(maxAge)
+                .sameSite("None")
+                .secure(true)
+                .build();
+    }
 
     public long getEmailRequestCount(String email) {
         String key = "email_request_count:" + email;

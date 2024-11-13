@@ -1,10 +1,10 @@
 package com.authservice.auth.service;
 
-import com.authservice.auth.dto.LoginRequestDto;
-import com.authservice.auth.dto.LoginResponseDto;
-import com.authservice.auth.dto.ReissueResponseDto;
-import com.authservice.auth.dto.SignUpRequestDto;
+import com.authservice.auth.dto.*;
 import com.authservice.global.CustomResponseCode;
+import jakarta.servlet.http.HttpServletRequest;
+import org.apache.coyote.Response;
+import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 
 public interface AuthService {
@@ -20,4 +20,7 @@ public interface AuthService {
     void increaseEmailRequestCount(String email);
     long getEmailRequestCount(String email);
     ResponseEntity<CustomResponseCode> verificationEmail(String code, String savedCode);
+    CustomResponseCode resetPassword(ResetPasswordDto resetPasswordDto);
+    ResponseCookie createTokenCookie(String cookieName, String token, boolean isHttpOnly, int maxAge);
+    public String returnRefreshToken(HttpServletRequest request);
 }

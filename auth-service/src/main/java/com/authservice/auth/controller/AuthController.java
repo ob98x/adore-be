@@ -6,8 +6,12 @@ import com.authservice.global.CustomResponseCode;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,11 +20,17 @@ import java.util.Random;
 @Tag(name = "[사용자] 인증 및 인가 관련 API", description = "Auth")
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/auth")
+@RequestMapping("/api/auth")
 @Slf4j
 public class AuthController {
     private final Random random = new Random();
     private final AuthService authService;
+
+    @Value("${jwt.access_exp}")
+    private int accessExp;
+
+    @Value("${jwt.refresh_exp}")
+    private int refreshExp;
 
     @Operation(summary = "이메일 전송 API", description = "이메일을 전송합니다.")
     @PostMapping("/email-send")
@@ -45,7 +55,13 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<LoginResponseDto> login(@RequestBody LoginRequestDto loginRequestDto) {
         LoginResponseDto response = authService.login(loginRequestDto);
-        return ResponseEntity.ok(response);
+        ResponseCookie accessCookie = authService.createTokenCookie("accessToken", response.getAccessToken(), false, accessExp);
+        ResponseCookie refreshCookie = authService.createTokenCookie("refreshToken", response.getRefreshToken(), true, refreshExp);
+
+        return ResponseEntity.ok().headers(headers -> {
+            headers.add("Set-Cookie", accessCookie.toString());
+            headers.add("Set-Cookie", refreshCookie.toString());
+        }).body(response);
     }
 
     @Operation(summary = "닉네임 중복 체크 API", description = "닉네임 중복을 체크합니다.")
@@ -64,16 +80,23 @@ public class AuthController {
 
     @Operation(summary = "토큰 재발급 API", description = "토큰을 재발급합니다.")
     @GetMapping("/reissue")
-    public ResponseEntity<ReissueResponseDto> reissue(@RequestHeader("Authorization") String refreshToken) {
-        ReissueResponseDto response = authService.reissue(refreshToken.substring(7));
-        return ResponseEntity.ok(response);
+    public ResponseEntity<ReissueResponseDto> reissue(HttpServletRequest request) {
+        String refreshToken = authService.returnRefreshToken(request);
+
+        ReissueResponseDto response = authService.reissue(refreshToken);
+        ResponseCookie accessCookie = authService.createTokenCookie("accessToken", response.getAccessToken(), false, accessExp);
+        ResponseCookie refreshCookie = authService.createTokenCookie("refreshToken", response.getRefreshToken(), true, refreshExp);
+        return ResponseEntity.ok().headers(headers -> {
+            headers.add("Set-Cookie", accessCookie.toString());
+            headers.add("Set-Cookie", refreshCookie.toString());
+        }).body(response);
     }
 
     @Operation(summary = "로그아웃 API", description = "로그아웃을 수행합니다.")
     @GetMapping("/logout")
     public ResponseEntity<CustomResponseCode> logout(@RequestHeader("Authorization") String accessToken) {
-        CustomResponseCode response = authService.logout(accessToken.substring(7)).getBody();
-        return ResponseEntity.ok(response);
+        String token = accessToken.substring(7);
+        return authService.logout(token);
     }
 
     @Operation(summary = "회원 가입 API", description = "회원 가입을 수행합니다.")
@@ -82,5 +105,14 @@ public class AuthController {
         String response = authService.signUp(signUpRequestDto);
         return ResponseEntity.ok(response);
     }
+
+    @Operation(summary = "비밀 번호 재설정 API", description = "비밀 번호를 재설정합니다.")
+    @PostMapping("/reset-password")
+    public ResponseEntity<CustomResponseCode> resetPassword(@RequestBody ResetPasswordDto resetPasswordDto) {
+        CustomResponseCode response = authService.resetPassword(resetPasswordDto);
+        return ResponseEntity.ok(response);
+    }
+
+
 
 }

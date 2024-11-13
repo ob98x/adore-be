@@ -48,10 +48,18 @@ public class SignUpRequestDto {
     @NotBlank
     private final boolean nicknameDuplicate;
 
+    @Schema
+    @NotBlank
+    private final boolean emailDuplicate;
+
+    @Schema
+    @NotBlank
+    private final boolean emailVerify;
+
 
     @Builder
     public SignUpRequestDto(
-            String name, String email, String password, LocalDate birthDate, String nickname, boolean agreeTerms, String inflow, String gender, boolean nicknameDuplicate
+            String name, String email, String password, LocalDate birthDate, String nickname, boolean agreeTerms, String inflow, String gender, boolean nicknameDuplicate, boolean emailDuplicate, boolean emailVerify
     ) {
         this.name = name;
         this.email = email;
@@ -62,9 +70,11 @@ public class SignUpRequestDto {
         this.inflow = inflow;
         this.gender = gender;
         this.nicknameDuplicate = nicknameDuplicate;
+        this.emailDuplicate = emailDuplicate;
+        this.emailVerify = emailVerify;
     }
 
-    public static SignUpRequestDto of(String name, String email, String password, LocalDate birthDate, String nickname, boolean agreeTerms, String inflow, String gender, boolean nicknameDuplicate) {
+    public static SignUpRequestDto of(String name, String email, String password, LocalDate birthDate, String nickname, boolean agreeTerms, String inflow, String gender, boolean nicknameDuplicate, boolean emailDuplicate, boolean emailVerify) {
         return SignUpRequestDto.builder()
                 .name(name)
                 .email(email)
@@ -75,6 +85,8 @@ public class SignUpRequestDto {
                 .inflow(inflow)
                 .gender(gender)
                 .nicknameDuplicate(nicknameDuplicate)
+                .emailDuplicate(emailDuplicate)
+                .emailVerify(emailVerify)
                 .build();
     }
 }
