@@ -43,4 +43,12 @@ public class StaticsController {
             @Parameter(description = "종료일") @RequestParam LocalDate endDate) {
         return ResponseEntity.ok(staticsService.getActiveMembers(startDate, endDate));
     }
+
+    @Operation(summary = "추천 기능 이용자 통계 조회 API", description = "추천 기능 이용자 통계를 조회합니다.")
+    @GetMapping("/recommendUser")
+    public ResponseEntity<GetStaticsResponseDto> getRecommendUserStatics(
+            @Parameter(description = "시작일") @RequestParam LocalDate startDate,
+            @Parameter(description = "종료일") @RequestParam LocalDate endDate) {
+        return ResponseEntity.ok(staticsService.getRecommendUser(startDate, endDate));
+    }
 }

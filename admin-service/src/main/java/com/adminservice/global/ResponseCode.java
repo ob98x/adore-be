@@ -48,6 +48,15 @@ public enum ResponseCode {
     INVALID_QUESTION_SEARCH_CATEGORY("QST-ERR-005", HttpStatus.BAD_REQUEST, "잘못된 카테고리입니다."),
     INVALID_QUESTION_SEARCH_STATE("QST-ERR-006", HttpStatus.BAD_REQUEST, "잘못된 상태입니다."),
 
+    // SURVEY
+    SURVEY_NOT_FOUND("SRV-ERR-001", HttpStatus.NOT_FOUND, "설문지를 찾을 수 없습니다."),
+    SURVEY_QST_NOT_FOUND("SRV-ERR-002", HttpStatus.NOT_FOUND, "설문에 맞는 질문을 찾을 수 없습니다."),
+    SURVEY_ANS_NOT_FOUND("SRV-ERR-003", HttpStatus.NOT_FOUND, "질문에 맞는 답변을 찾을 수 없습니다."),
+    SURVEY_USER_ANS_NOT_FOUND("SRV-ERR-004", HttpStatus.NOT_FOUND, "사용자가 작성한 질문을 찾을 수 없습니다."),
+    FRIEND_NOT_FOUND("SRV-ERR-005", HttpStatus.NOT_FOUND, "친구를 찾을 수 없습니다."),
+    RECOMMEND_NOT_FOUND("SRV-ERR-006", HttpStatus.NOT_FOUND, "추천을 받지 못했습니다."),
+    SURVEY_DELETED("SRV-ERR-007", HttpStatus.BAD_REQUEST, "삭제된 설문입니다."),
+
     // Email
     FAILED_MAIL_CREATE("MAIL-ERR-001", HttpStatus.INTERNAL_SERVER_ERROR, "메일 생성에 실패했습니다."),
     FAILED_MAIL_TEMPLATE("MAIL-ERR-002", HttpStatus.INTERNAL_SERVER_ERROR, "메일 템플릿 불러오기에 실패했습니다."),

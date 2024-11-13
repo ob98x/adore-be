@@ -27,6 +27,6 @@ public interface MemberRepository extends JpaRepository<Member, Long>, JpaSpecif
 
     // 특정 기간 내 회원 가입자 수 조회
     @Query("SELECT COUNT(m) FROM Member m WHERE m.createdAt BETWEEN :startDate AND :endDate")
-    Long countNewMembersBetweenDates(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
+    Long countNewMembersBetweenDates(@Param("startDate") LocalDateTime startDate, @Param("endDate") LocalDateTime endDate);
 }
 

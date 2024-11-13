@@ -22,7 +22,7 @@ public class StaticsServiceImpl implements StaticsService {
     @Transactional(readOnly = true)
     public GetStaticsResponseDto getNewUserStatics(LocalDate startDate, LocalDate endDate) {
 
-        Long count = memberRepository.countNewMembersBetweenDates(startDate, endDate);
+        Long count = memberRepository.countNewMembersBetweenDates(startDate.atStartOfDay(), endDate.atStartOfDay());
         return GetStaticsResponseDto.getStaticsInfo(StaticsClass.NEW_USER, count);
     }
 
@@ -38,5 +38,12 @@ public class StaticsServiceImpl implements StaticsService {
     public GetStaticsResponseDto getActiveMembers(LocalDate startDate, LocalDate endDate) {
         Long count = memberRepository.countMembersByLastLoginDates(startDate, endDate);
         return GetStaticsResponseDto.getStaticsInfo(StaticsClass.ACTIVE_USER, count);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public GetStaticsResponseDto getRecommendUser(LocalDate startDate, LocalDate endDate) {
+        Long count = userAnsRepository.countRecommendUsersBetweenDates(startDate.atStartOfDay(), endDate.atStartOfDay());
+        return GetStaticsResponseDto.getStaticsInfo(StaticsClass.RECOMMEND_USER, count);
     }
 }
