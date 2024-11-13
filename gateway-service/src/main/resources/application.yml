@@ -1,3 +1,5 @@
+server:
+  port: 8111
 logging:
   level:
     root: INFO
@@ -73,25 +75,17 @@ spring:
         - id: admin-service
           uri: lb://admin-service
           predicates:
-            - Path=/admin/**
+            - Path=/api/admin/**
           filters:
-            - RewritePath=/admin/(?<segment>.*), /admin/${segment}
+            - RewritePath=/api/admin/(?<segment>.*), /api/admin/${segment}
             - name: JwtFilter
         - id: auth-service
           uri: lb://auth-service
           predicates:
-            - Path=/auth/**
+            - Path=/api/auth/**
           filters:
-            - RewritePath=/auth/(?<segment>.*), /auth/${segment}
+            - RewritePath=/api/auth/(?<segment>.*), /api/auth/${segment}
             - AddResponseHeader=Access-Control-Expose-Headers, Set-Cookie
-
---- # local
-server:
-  port: 8111
-spring:
-  config:
-    activate:
-      on-profile: local
 
 --- # prod
 server:
@@ -100,7 +94,6 @@ server:
     key-store: /ssl/keystore.p12
     key-store-password: ${SSL_PASSWORD}
     key-store-type: PKCS12
-  port: 443
 spring:
   config:
     activate:

@@ -20,7 +20,7 @@ import java.util.Random;
 @Tag(name = "[사용자] 인증 및 인가 관련 API", description = "Auth")
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/auth")
+@RequestMapping("/api/auth")
 @Slf4j
 public class AuthController {
     private final Random random = new Random();
