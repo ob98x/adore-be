@@ -57,20 +57,22 @@ spring:
         add-to-simple-url-handler-mapping: true
         cors-configurations:
           '[/**]':
-            allowed-origin-patterns:
-              - "http://gachon-adore.duckdns.org"
-              - "http://localhost:5173"
+            allowed-origins:
               - "https://gachon-adore.duckdns.org"
-              - "https://localhost:5173"
               - "http://localhost"
             allow-credentials: true
-            allowedHeaders: '*'
+            allowedHeaders:
+              - "Content-Type"
+              - "Authorization"
+              - "X-Requested-With"
+              - "Accept"
             allowedMethods:
-              - PUT
               - GET
               - POST
+              - PUT
               - DELETE
               - OPTIONS
+              - PATCH
       routes:
         - id: admin-service
           uri: lb://admin-service
@@ -78,7 +80,6 @@ spring:
             - Path=/api/admin/**
           filters:
             - RewritePath=/api/admin/(?<segment>.*), /api/admin/${segment}
-            - name: JwtFilter
         - id: auth-service
           uri: lb://auth-service
           predicates:
