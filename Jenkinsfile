@@ -88,7 +88,7 @@ pipeline {
 
         stage('Login') {
             steps {
-                sh 'echo $DOCKER_USER | docker login -u $DOCKER_PASSWORD --password-stdin' // docker hub 로그인
+                sh 'echo $DOCKER_PASSWORD | docker login -u $DOCKER_USER --password-stdin' // docker hub 로그인
             }
         }
 
