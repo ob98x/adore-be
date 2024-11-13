@@ -28,6 +28,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     protected ResponseEntity<ErrorResponse> handleException() {
         final ErrorResponse errorResponse = ErrorResponse.of(ResponseCode.INTERNAL_SERVER_ERROR);
+        log.info("Exception errorResponse : {}", errorResponse);
         return ResponseEntity
                 .status(ResponseCode.INTERNAL_SERVER_ERROR.getStatus())
                 .body(errorResponse);
@@ -70,6 +71,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponse> httpMediaTypeNotSupportedExceptionError(
             HttpClientErrorException e) {
         final ErrorResponse errorResponse = ErrorResponse.of(ResponseCode.INTERNAL_SERVER_ERROR, e);
+        log.info("HttpClientErrorException errorResponse : {}", errorResponse);
         return ResponseEntity
                 .status(e.getStatusCode())
                 .body(errorResponse);
@@ -79,6 +81,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(HttpServerErrorException.class)
     public ResponseEntity<ErrorResponse> httpServerErrorExceptionError(HttpServerErrorException e) {
         final ErrorResponse errorResponse = ErrorResponse.of(ResponseCode.INTERNAL_SERVER_ERROR, e);
+        log.info("HttpServerErrorException errorResponse : {}", errorResponse);
         return ResponseEntity
                 .status(e.getStatusCode())
                 .body(errorResponse);

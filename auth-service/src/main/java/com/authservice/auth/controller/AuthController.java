@@ -55,8 +55,10 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<LoginResponseDto> login(@RequestBody LoginRequestDto loginRequestDto) {
         LoginResponseDto response = authService.login(loginRequestDto);
+        log.info("로그인 성공");
         ResponseCookie accessCookie = authService.createTokenCookie("accessToken", response.getAccessToken(), false, accessExp);
         ResponseCookie refreshCookie = authService.createTokenCookie("refreshToken", response.getRefreshToken(), true, refreshExp);
+        log.info("토큰 발급 완료");
 
         return ResponseEntity.ok().headers(headers -> {
             headers.add("Set-Cookie", accessCookie.toString());
