@@ -56,7 +56,11 @@ public enum ResponseCode {
     FILE_NOT_FOUND("HOL-ERR-002", HttpStatus.BAD_REQUEST, "파일이 없습니다."),
     NOT_IMAGE_FILE("GLB-ERR-004", HttpStatus.BAD_REQUEST, "이미지 파일이 아닙니다."),
     LOGOUT_FAIL("AUT-ERR-020", HttpStatus.BAD_REQUEST, "로그아웃에 실패했습니다."),
-    ALREADY_LOGOUT("AUT-ERR-021", HttpStatus.BAD_REQUEST, "이미 로그아웃 되어있습니다."),;
+    ALREADY_LOGOUT("AUT-ERR-021", HttpStatus.BAD_REQUEST, "이미 로그아웃 되어있습니다."),
+    PASSWORD_NOT_MATCH("AUT-ERR-022", HttpStatus.BAD_REQUEST, "비밀번호가 일치하지 않습니다."),
+    PASSWORD_SAME("AUT-ERR-023", HttpStatus.BAD_REQUEST, "기존 비밀번호와 동일합니다."),
+    REFRESH_TOKEN_NOT_FOUND("AUT-ERR-024", HttpStatus.BAD_REQUEST, "리프레시 토큰을 찾을 수 없습니다."),
+    ACCESS_TOKEN_NOT_FOUND("AUT-ERR-025", HttpStatus.BAD_REQUEST, "액세스 토큰을 찾을 수 없습니다."),;
     private final String code;
     private final HttpStatus status;
     private final String message;

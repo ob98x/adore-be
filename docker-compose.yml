@@ -86,19 +86,41 @@ services:
       - msa-network
 
   # Gateway
-  gateway-service:
+  gateway-service-local:
     build:
       context: ./gateway-service
       dockerfile: Dockerfile
     container_name: gateway-service
     volumes:
       - ./logs:/logs
+      - /cert:/ssl
     environment:
       - TZ=Asia/Seoul
       - JWT_SECRET=${JWT_SECRET}
+      - SPRING_PROFILES_ACTIVE=local
+      - SSL_PASSWORD=${SSL_PASSWORD}
     image: dyw1014/adore-be-gateway-service:latest
     ports:
       - "8111:8111"
+    networks:
+      - msa-network
+
+  gateway-service-prod:
+    build:
+      context: ./gateway-service
+      dockerfile: Dockerfile
+    container_name: gateway-service
+    volumes:
+      - ./logs:/logs
+      - /cert:/ssl
+    environment:
+      - TZ=Asia/Seoul
+      - JWT_SECRET=${JWT_SECRET}
+      - SPRING_PROFILES_ACTIVE=prod
+      - SSL_PASSWORD=${SSL_PASSWORD}
+    image: dyw1014/adore-be-gateway-service:latest
+    ports:
+      - "443:443"
     networks:
       - msa-network
 

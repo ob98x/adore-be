@@ -16,8 +16,6 @@ management:
 jwt:
   secret: ${JWT_SECRET}
 
-server:
-  port: 8111
 eureka:
   instance:
     lease-renewal-interval-in-seconds: 5
@@ -28,7 +26,6 @@ eureka:
     fetch-registry: true
     service-url:
       defaultZone: http://discovery-service:8761/eureka/
-
 
 springdoc:
   api-docs:
@@ -58,7 +55,12 @@ spring:
         add-to-simple-url-handler-mapping: true
         cors-configurations:
           '[/**]':
-            allowedOrigins: '*'
+            allowed-origin-patterns:
+              - "http://gachon-adore.duckdns.org"
+              - "http://localhost:5173"
+              - "https://gachon-adore.duckdns.org"
+              - "https://localhost:5173"
+              - "http://localhost"
             allow-credentials: true
             allowedHeaders: '*'
             allowedMethods:
@@ -81,10 +83,25 @@ spring:
             - Path=/auth/**
           filters:
             - RewritePath=/auth/(?<segment>.*), /auth/${segment}
-        - id: auth-service-security
-          uri: lb://auth-service
-          predicates:
-            - Path=/auth/logout
-          filters:
-            - RewritePath=/auth/logout/(?<segment>.*), /auth/logout/${segment}
-            - name: JwtFilter
+            - AddResponseHeader=Access-Control-Expose-Headers, Set-Cookie
+
+--- # local
+server:
+  port: 8111
+spring:
+  config:
+    activate:
+      on-profile: local
+
+--- # prod
+server:
+  ssl:
+    enabled: true
+    key-store: /ssl/keystore.p12
+    key-store-password: ${SSL_PASSWORD}
+    key-store-type: PKCS12
+  port: 443
+spring:
+  config:
+    activate:
+      on-profile: prod

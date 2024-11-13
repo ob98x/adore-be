@@ -54,6 +54,6 @@ eureka:
   instance:
     instance-id: ${spring.application.name}:${server.port}
 jwt:
-  access_exp: 360000
-  refresh_exp: 8400000
+  access_exp: 86400
+  refresh_exp: 1209600
   secret: ${JWT_SECRET}
