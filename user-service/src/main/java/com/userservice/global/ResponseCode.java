@@ -53,6 +53,14 @@ public enum ResponseCode {
     FAILED_MAIL_TEMPLATE("MAIL-ERR-002", HttpStatus.INTERNAL_SERVER_ERROR, "메일 템플릿 불러오기에 실패했습니다."),
     FAILED_MAIL_SEND("MAIL-ERR-003", HttpStatus.INTERNAL_SERVER_ERROR, "메일 전송에 실패했습니다."),
 
+    // SURVEY
+    SURVEY_NOT_FOUND("SRV-ERR-001", HttpStatus.NOT_FOUND, "설문지를 찾을 수 없습니다."),
+    SURVEY_QST_NOT_FOUND("SRV-ERR-002", HttpStatus.NOT_FOUND, "설문에 맞는 질문을 찾을 수 없습니다."),
+    SURVEY_ANS_NOT_FOUND("SRV-ERR-003", HttpStatus.NOT_FOUND, "질문에 맞는 답변을 찾을 수 없습니다."),
+    SURVEY_USER_ANS_NOT_FOUND("SRV-ERR-004", HttpStatus.NOT_FOUND, "사용자가 작성한 질문을 찾을 수 없습니다."),
+    FRIEND_NOT_FOUND("SRV-ERR-005", HttpStatus.NOT_FOUND, "친구를 찾을 수 없습니다."),
+    RECOMMEND_NOT_FOUND("SRV-ERR-006", HttpStatus.NOT_FOUND, "추천을 받지 못했습니다."),
+
     FILE_NOT_FOUND("HOL-ERR-002", HttpStatus.BAD_REQUEST, "파일이 없습니다."),
     NOT_IMAGE_FILE("GLB-ERR-004", HttpStatus.BAD_REQUEST, "이미지 파일이 아닙니다."),
     QUESTION_NOT_FOUND("QST-ERR-001", HttpStatus.NOT_FOUND, "문의사항을 찾을 수 없습니다."),
