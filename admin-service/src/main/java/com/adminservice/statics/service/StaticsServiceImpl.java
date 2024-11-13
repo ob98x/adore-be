@@ -2,6 +2,7 @@ package com.adminservice.statics.service;
 
 import com.adminservice.statics.dto.GetStaticsResponseDto;
 import com.adminservice.statics.entity.StaticsClass;
+import com.adminservice.survey.repository.UserAnsRepository;
 import com.adminservice.user.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,6 +18,7 @@ import java.time.LocalDate;
 public class StaticsServiceImpl implements StaticsService {
 
     private final MemberRepository memberRepository;
+    private final UserAnsRepository userAnsRepository;
 
     @Override
     @Transactional(readOnly = true)
