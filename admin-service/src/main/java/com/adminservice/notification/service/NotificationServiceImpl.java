@@ -10,6 +10,8 @@ import com.adminservice.notification.dto.NotificationCreateRequestDto;
 import com.adminservice.notification.entity.Notification;
 import com.adminservice.notification.entity.NotificationState;
 import com.adminservice.notification.repository.NotificationRepository;
+import com.adminservice.user.entity.Member;
+import com.adminservice.user.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -25,14 +27,35 @@ import java.util.List;
 public class NotificationServiceImpl implements NotificationService {
 
     private final NotificationRepository notificationRepository;
+    private final MemberRepository memberRepository;
 
     public ResponseEntity<CustomResponseCode> createNotification(NotificationCreateRequestDto notificationCreateRequestDto) {
-        notificationRepository.save(NotificationCreateRequestDto.createNotification(notificationCreateRequestDto));
+        Notification notification = NotificationCreateRequestDto.createNotification(notificationCreateRequestDto);
+        Member member = memberRepository.findById(notificationCreateRequestDto.getMemberId()).orElseThrow(
+                () -> new CustomException(ResponseCode.MEMBER_NOT_FOUND)
+        );
+        Notification notifications = Notification.builder()
+                .title(notificationCreateRequestDto.getTitle())
+                .content(notificationCreateRequestDto.getContent())
+                .member(member)
+                .state(NotificationState.ACTIVE)
+                .build();
+        notificationRepository.save(notifications);
         return ResponseEntity.ok(CustomResponseCode.NOTIFICATION_CREATE_SUCCESS);
     }
 
     public ResponseEntity<CustomResponseCode> updateNotification(Long id, NotificationCreateRequestDto notificationCreateRequestDto) {
-        notificationRepository.save(NotificationCreateRequestDto.updateNotification(checkConflictNotification(id), notificationCreateRequestDto));
+        Notification notification = checkConflictNotification(id);
+        Member member = memberRepository.findById(notificationCreateRequestDto.getMemberId()).orElseThrow(
+                () -> new CustomException(ResponseCode.MEMBER_NOT_FOUND)
+        );
+
+        notification.setContent(notificationCreateRequestDto.getContent());
+        notification.setTitle(notificationCreateRequestDto.getTitle());
+        notification.setMember(member);
+
+        notificationRepository.save(notification);
+
         return ResponseEntity.ok(CustomResponseCode.NOTIFICATION_UPDATE_SUCCESS);
     }
 

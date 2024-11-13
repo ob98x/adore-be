@@ -15,6 +15,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.apache.tomcat.util.http.parser.Authorization;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,6 +32,7 @@ public class NotificationController {
     @Operation(summary = "공지 사항 생성 API", description = "공지 사항을 생성합니다.")
     @PostMapping("/create")
     public ResponseEntity<CustomResponseCode> createNotification(
+            Authorization authorization,
             @Valid @RequestBody NotificationCreateRequestDto notificationCreateRequestDto) {
         return notificationService.createNotification(notificationCreateRequestDto);
     }
@@ -38,6 +40,7 @@ public class NotificationController {
     @Operation(summary = "공지 사항 수정 API", description = "공지 사항을 수정합니다.")
     @PatchMapping("/update")
     public ResponseEntity<CustomResponseCode> updateNotification(
+            Authorization authorization,
             @Valid @RequestBody NotificationCreateRequestDto notificationCreateRequestDto,@Parameter(description = "수정할 공지사항 id")  @RequestParam Long id) {
         return notificationService.updateNotification(id, notificationCreateRequestDto);
     }

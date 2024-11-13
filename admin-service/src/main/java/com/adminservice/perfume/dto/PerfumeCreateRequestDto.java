@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.beans.BeanUtils;
+import org.springframework.web.multipart.MultipartFile;
 
 @Getter
 @Setter
@@ -21,6 +22,7 @@ public class PerfumeCreateRequestDto {
     private String base;
     private String country;
     private int price;
+    private MultipartFile file;
 
     public static Perfume createPerfume(PerfumeCreateRequestDto perfumeCreateRequestDto) {
         return Perfume.builder()

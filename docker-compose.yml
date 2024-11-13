@@ -233,6 +233,9 @@ services:
       - MY_SQL_HOST=${MY_SQL_HOST}
       - MY_SQL_USER=${MY_SQL_USER}
       - MY_SQL_PASSWORD=${MY_SQL_PASSWORD}
+      - GCP_BUCKET_NAME=${GCP_BUCKET_NAME}
+      - GCP_PROJECT_ID=${GCP_PROJECT_ID}
+      - GOOGLE_APPLICATION_CREDENTIALS=./cert/credential.json
     depends_on:
       - discovery-service
     networks:
