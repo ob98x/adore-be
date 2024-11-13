@@ -86,15 +86,3 @@ spring:
           filters:
             - RewritePath=/api/auth/(?<segment>.*), /api/auth/${segment}
             - AddResponseHeader=Access-Control-Expose-Headers, Set-Cookie
-
---- # prod
-server:
-  ssl:
-    enabled: true
-    key-store: /ssl/keystore.p12
-    key-store-password: ${SSL_PASSWORD}
-    key-store-type: PKCS12
-spring:
-  config:
-    activate:
-      on-profile: prod

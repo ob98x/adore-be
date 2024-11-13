@@ -50,6 +50,4 @@ out/
 /prometheus/data/
 /auth-service/logs/auth-service.log
 /prometheus/data/data/
-/gateway-service/ssl/keystore.p12
-/gateway-service/ssl/localhost-cert.pem
-/gateway-service/ssl/localhost-key.pem
+/cert/
