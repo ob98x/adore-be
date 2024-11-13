@@ -17,11 +17,8 @@ public class NotificationCreateRequestDto {
     private String content;
     private Long memberId;
 
-    public static Notification createNotification(NotificationCreateRequestDto notificationCreateRequestDto) {
-        return Notification.builder()
-                .title(notificationCreateRequestDto.getTitle())
-                .content(notificationCreateRequestDto.getContent())
-                .state(NotificationState.ACTIVE)
-                .build();
+    public static Notification updateNotification(Notification notification, NotificationCreateRequestDto notificationCreateRequestDto) {
+        BeanUtils.copyProperties(notificationCreateRequestDto, notification);
+        return notification;
     }
 }

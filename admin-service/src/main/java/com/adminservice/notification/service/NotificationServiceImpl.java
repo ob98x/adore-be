@@ -12,6 +12,7 @@ import com.adminservice.notification.entity.NotificationState;
 import com.adminservice.notification.repository.NotificationRepository;
 import com.adminservice.user.entity.Member;
 import com.adminservice.user.repository.MemberRepository;
+import com.adminservice.user.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -30,10 +31,10 @@ public class NotificationServiceImpl implements NotificationService {
     private final MemberRepository memberRepository;
 
     public ResponseEntity<CustomResponseCode> createNotification(NotificationCreateRequestDto notificationCreateRequestDto) {
-        Notification notification = NotificationCreateRequestDto.createNotification(notificationCreateRequestDto);
         Member member = memberRepository.findById(notificationCreateRequestDto.getMemberId()).orElseThrow(
                 () -> new CustomException(ResponseCode.MEMBER_NOT_FOUND)
         );
+
         Notification notifications = Notification.builder()
                 .title(notificationCreateRequestDto.getTitle())
                 .content(notificationCreateRequestDto.getContent())

@@ -1,10 +1,7 @@
 package com.userservice.review.service;
 
 
-import com.userservice.global.CustomException;
-import com.userservice.global.CustomResponseCode;
-import com.userservice.global.ResponseCode;
-import com.userservice.global.SearchType;
+import com.userservice.global.*;
 import com.userservice.perfume.entity.PerfumeState;
 import com.userservice.perfume.service.PerfumeService;
 import com.userservice.review.dto.GetReviewListResponseDto;
@@ -27,6 +24,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -34,11 +32,11 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ReviewServiceImpl implements ReviewService {
 
-    private final MemberRepository memberRepository;
     private final CommentRepository commentRepository;
     private final ReviewRepository reviewRepository;
     private final PerfumeService perfumeService;
     private final MemberService memberService;
+    private final FileManager fileManager;
 
 
     @Override
@@ -95,6 +93,17 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     @Transactional
     public ResponseEntity<CustomResponseCode> createReview(ReviewCreateRequestDto reviewCreateRequestDto) {
+        MultipartFile file = reviewCreateRequestDto.getFile();
+        if (file.getContentType() == null || !file.getContentType().startsWith("image")) {
+            throw new CustomException(ResponseCode.INVALID_FILE_TYPE);
+        }
+        String imageUri = "fail";
+        try {
+            imageUri = fileManager.uploadImage(file);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        reviewCreateRequestDto.setPhoto(imageUri);
         Review review = Review.builder()
                 .title(reviewCreateRequestDto.getTitle())
                 .content(reviewCreateRequestDto.getContent())
@@ -110,6 +119,17 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     @Transactional
     public ResponseEntity<CustomResponseCode> updateReview(Long id, ReviewCreateRequestDto reviewCreateRequestDto) {
+        MultipartFile file = reviewCreateRequestDto.getFile();
+        if (file.getContentType() == null || !file.getContentType().startsWith("image")) {
+            throw new CustomException(ResponseCode.INVALID_FILE_TYPE);
+        }
+        String imageUri = "fail";
+        try {
+            imageUri = fileManager.uploadImage(file);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        reviewCreateRequestDto.setPhoto(imageUri);
         reviewRepository.save(ReviewCreateRequestDto.updateReview(checkConflictReview(id), reviewCreateRequestDto));
         return ResponseEntity.ok(CustomResponseCode.REVIEW_UPDATE_SUCCESS);
     }

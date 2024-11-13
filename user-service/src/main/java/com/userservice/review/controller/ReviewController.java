@@ -11,6 +11,8 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.apache.tomcat.util.http.parser.Authorization;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,16 +44,16 @@ public class ReviewController {
     }
     
     @Operation(summary = "리뷰 생성 API", description = "리뷰를 생성합니다.")
-    @PostMapping("/create")
+    @PostMapping(value = "/create", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<CustomResponseCode> createReview(
-            @Valid @RequestBody ReviewCreateRequestDto reviewCreateRequestDto) {
+            ReviewCreateRequestDto reviewCreateRequestDto) {
         return reviewService.createReview(reviewCreateRequestDto);
     }
 
     @Operation(summary = "리뷰 수정 API", description = "리뷰를 수정합니다.")
-    @PatchMapping("/update")
+    @PatchMapping(value = "/update", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<CustomResponseCode> updateReview(
-            @Valid @RequestBody ReviewCreateRequestDto reviewCreateRequestDto,@Parameter(description = "수정할 리뷰 id") @RequestParam Long id) {
+            ReviewCreateRequestDto reviewCreateRequestDto,@Parameter(description = "수정할 리뷰 id") @RequestParam Long id) {
         return reviewService.updateReview(id, reviewCreateRequestDto);
     }
 

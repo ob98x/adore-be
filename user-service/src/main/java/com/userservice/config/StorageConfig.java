@@ -1,4 +1,5 @@
-package com.adminservice.config;
+package com.userservice.config;
+
 
 import com.google.cloud.storage.Storage;
 import com.google.cloud.storage.StorageOptions;
