@@ -20,7 +20,7 @@ import java.util.List;
 @Tag(name = "[관리자] 사용자 관련 API", description = "User API")
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/admin/user")
+@RequestMapping("/api/admin/user")
 public class UserController {
 
     private final MemberService memberService;

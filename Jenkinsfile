@@ -142,6 +142,7 @@ pipeline {
                                             admin-service \
                                             auth-service \
                                             user-service \
+                                            gateway-service \
                                     '''
                                 )
                             ])

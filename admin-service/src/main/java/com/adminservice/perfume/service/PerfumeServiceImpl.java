@@ -133,7 +133,7 @@ public class PerfumeServiceImpl implements PerfumeService {
 
     @Override
     public List<GetPerfumeListResponseDto.PerfumeListInfo> allPerfumes() {
-        List<Perfume> perfumes = perfumeRepository.findAll();
+        List<Perfume> perfumes = perfumeRepository.findTop1000ByState(PerfumeState.ACTIVE);
         return perfumes.stream()
                 .map(GetPerfumeListResponseDto.PerfumeListInfo::fromPerfume)
                 .toList();

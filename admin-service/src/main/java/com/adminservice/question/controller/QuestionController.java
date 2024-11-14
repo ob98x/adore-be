@@ -20,7 +20,7 @@ import java.util.List;
 @Tag(name = "[관리자] 문의 관련 API", description = "Question API")
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/admin/question")
+@RequestMapping("/api/admin/question")
 public class QuestionController {
 
     private final QuestionService questionService;

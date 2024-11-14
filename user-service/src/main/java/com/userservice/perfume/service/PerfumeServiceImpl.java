@@ -53,7 +53,7 @@ public class PerfumeServiceImpl implements PerfumeService {
     @Override
     @Transactional(readOnly = true)
     public List<GetPerfumeListResponseDto.PerfumeListInfo> allPerfumes() {
-        List<Perfume> perfumeList = perfumeRepository.findAllByState(PerfumeState.ACTIVE);
+        List<Perfume> perfumeList = perfumeRepository.findTop1000ByState(PerfumeState.ACTIVE);
         return perfumeList.stream()
                 .map(GetPerfumeListResponseDto.PerfumeListInfo::fromPerfume)
                 .toList();

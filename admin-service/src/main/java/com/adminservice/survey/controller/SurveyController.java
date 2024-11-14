@@ -15,7 +15,7 @@ import java.util.List;
 @Tag(name = "[관리자] 관리자 설문 관련 API", description = "Admin/survey")
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/admin/survey")
+@RequestMapping("/api/admin/survey")
 public class SurveyController {
     private final SurveyService surveyService;
 

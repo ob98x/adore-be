@@ -84,3 +84,10 @@ spring:
           filters:
             - RewritePath=/api/auth/(?<segment>.*), /api/auth/${segment}
             - AddResponseHeader=Access-Control-Expose-Headers, Set-Cookie
+        - id: user-service
+          uri: lb://user-service
+          predicates:
+            - Path=/api/user/**
+          filters:
+            - RewritePath=/api/user/(?<segment>.*), /api/user/${segment}
+            - AddResponseHeader=Access-Control-Expose-Headers, Set-Cookie

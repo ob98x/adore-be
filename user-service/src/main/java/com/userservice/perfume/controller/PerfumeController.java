@@ -19,7 +19,7 @@ import java.util.List;
 @Tag(name = "[사용자] 향수 관련 API", description = "Perfume API")
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/user/perfume")
+@RequestMapping("/api/user/perfume")
 public class PerfumeController {
 
     private final PerfumeService perfumeService;

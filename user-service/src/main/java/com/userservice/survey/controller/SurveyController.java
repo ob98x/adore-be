@@ -13,7 +13,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
-@RequestMapping("/user/recomm")
+@RequestMapping("/api/user/recomm")
 public class SurveyController {
 
     private final SurveyService surveyService;

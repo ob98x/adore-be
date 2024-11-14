@@ -16,7 +16,7 @@ import java.time.LocalDate;
 
 @Tag(name = "[관리자] 통계 관련 API", description = "Statics API")
 @RestController
-@RequestMapping("/admin/statics")
+@RequestMapping("/api/admin/statics")
 @RequiredArgsConstructor
 public class StaticsController {
     private final StaticsService staticsService;
