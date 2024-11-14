@@ -130,6 +130,9 @@ services:
       dockerfile: Dockerfile
     container_name: user-service
     image: dyw1014/adore-be-user-service:latest
+    volumes:
+      - ./logs:/logs
+      - ./cert:/cert
     environment:
       - DISCOVERY_SERVICE=http://discovery-service:8761/eureka
       - SPRING_CLOUD_CONFIG_URI=http://config-service:8888
@@ -230,6 +233,7 @@ services:
     image: dyw1014/adore-be-admin-service:latest
     volumes:
       - ./logs:/logs
+      - ./cert:/cert
     environment:
       - DISCOVERY_SERVICE=http://discovery-service:8761/eureka
       - SPRING_CLOUD_CONFIG_URI=http://config-service:8888
@@ -238,7 +242,7 @@ services:
       - MY_SQL_PASSWORD=${MY_SQL_PASSWORD}
       - GCP_BUCKET_NAME=${GCP_BUCKET_NAME}
       - GCP_PROJECT_ID=${GCP_PROJECT_ID}
-      - GOOGLE_APPLICATION_CREDENTIALS=./cert/credential.json
+      - GOOGLE_APPLICATION_CREDENTIALS=/cert/credential.json
     depends_on:
       - discovery-service
     networks:

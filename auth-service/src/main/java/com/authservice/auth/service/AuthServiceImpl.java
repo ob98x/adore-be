@@ -270,4 +270,9 @@ public class AuthServiceImpl implements AuthService {
         return value != null ? Long.parseLong(value) : 0;
     }
 
+    @Override
+    public GetTokenInfo getTokenInfo(String token) {
+        return jwtUtil.getTokenInfo(token);
+    }
+
 }

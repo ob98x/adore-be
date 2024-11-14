@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -115,6 +116,10 @@ public class AuthController {
         return ResponseEntity.ok(response);
     }
 
-
+    @Operation(summary = "JWT 토큰으로 정보 반환하는 API", description = "JWT 토큰으로 정보를 반환합니다.")
+    @GetMapping("/token")
+    public GetTokenInfo getInfo(@RequestParam String token) {
+        return authService.getTokenInfo(token);
+    }
 
 }

@@ -1,6 +1,7 @@
 package com.userservice.user.dto;
 
 import com.userservice.user.entity.Member;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,9 +12,16 @@ import java.time.LocalDate;
 @Getter
 @Setter
 public class UpdateMyPageRequestDto {
+    @Schema(description = "이름", example = "홍길동")
     private String name;
+
+    @Schema(description = "닉네임", example = "홍길동")
     private String nickname;
+
+    @Schema(description = "이메일", example = "dyw1014@gachon.ac.kr")
     private String email;
+
+    @Schema(description = "생년월일", example = "2000-01-01")
     private LocalDate birthDate;
 
     @Builder

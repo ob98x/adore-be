@@ -16,13 +16,11 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @Slf4j
 public class FileManager {
-
-    @Value("${spring.cloud.gcp.storage.bucket}")
-    private String bucketName;
-
     private final Storage storage;
+    private static final String bucketName = "adore-bucket";
 
     public String uploadImage(MultipartFile file) throws IOException {
+        log.info("파일 업로드 요청");
         String uuid = UUID.randomUUID().toString();
         String ext = file.getContentType();
         log.info("uuid: {}, ext: {}", uuid, ext);
@@ -30,9 +28,7 @@ public class FileManager {
         BlobInfo blobInfo = BlobInfo.newBuilder(bucketName, uuid)
                 .setContentType(ext)
                 .build();
-        log.info("blobInfo: {}", blobInfo);
         Blob blob = storage.create(blobInfo, file.getBytes());
-        log.info("blob: {}", blob);
         return "https://storage.googleapis.com/" + bucketName + "/" + uuid;
     }
 }

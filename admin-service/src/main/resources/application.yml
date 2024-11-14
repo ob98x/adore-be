@@ -29,12 +29,6 @@ spring:
     password: ${MY_SQL_PASSWORD}
   application:
     name: admin-service
-  cloud:
-    gcp:
-      storage:
-        enabled: true
-        project-id: ${GCP_PROJECT_ID}
-        bucket: ${GCP_BUCKET_NAME}
 eureka:
   client:
     fetch-registry: true

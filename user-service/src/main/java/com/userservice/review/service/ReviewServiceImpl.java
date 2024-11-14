@@ -1,7 +1,9 @@
 package com.userservice.review.service;
 
 
+import com.userservice.feign.AuthFeignInterface;
 import com.userservice.global.*;
+import com.userservice.perfume.entity.Perfume;
 import com.userservice.perfume.entity.PerfumeState;
 import com.userservice.perfume.service.PerfumeService;
 import com.userservice.review.dto.GetReviewListResponseDto;
@@ -14,9 +16,9 @@ import com.userservice.review.entity.ReviewState;
 import com.userservice.review.repository.CommentRepository;
 import com.userservice.review.repository.ReviewRepository;
 import com.userservice.user.entity.Member;
-import com.userservice.user.repository.MemberRepository;
 import com.userservice.user.service.MemberService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -30,123 +32,167 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class ReviewServiceImpl implements ReviewService {
 
+    private final AuthFeignInterface authFeignInterface;
     private final CommentRepository commentRepository;
-    private final ReviewRepository reviewRepository;
     private final PerfumeService perfumeService;
+    private final ReviewRepository reviewRepository;
     private final MemberService memberService;
     private final FileManager fileManager;
 
 
     @Override
     @Transactional
-    public ResponseEntity<CustomResponseCode> createComment(Long reviewId, Long memberId, String content) {
+    public ResponseEntity<CustomResponseCode> createComment(String authorization, Long reviewId, String content) {
+        log.info("[Review Service - createComment]: {}번 리뷰에 댓글을 작성합니다.", reviewId);
+
+        Long memberId = getMemberId(authorization);
         Member member = memberService.checkConflictMember(memberId);
         Review review = checkConflictReview(reviewId);
+
+        log.info("[Review Service - createComment]: reviewId: {}, memberId: {}, 댓글을 생성합니다.", reviewId, memberId);
         Comment comment = Comment.builder()
                 .content(content)
                 .review(review)
                 .state(CommentState.ACTIVE)
                 .writer(member)
                 .build();
+
+        log.info("[Review Service - createComment]: 댓글을 저장합니다.");
         commentRepository.save(comment);
         return ResponseEntity.ok(CustomResponseCode.COMMENT_CREATE_SUCCESS);
     }
 
     @Override
     @Transactional
-    public ResponseEntity<CustomResponseCode> deleteComment(Long commentId) {
-        Comment comment = checkConflictComment(commentId);
-        comment.setState(CommentState.INACTIVE);
-        commentRepository.save(comment);
-        return ResponseEntity.ok(CustomResponseCode.COMMENT_DELETE_SUCCESS);
-    }
+    public ResponseEntity<CustomResponseCode> updateComment(String authorization, Long commendId, String content) {
+        log.info("[Review Service - updateComment]: {}번 댓글을 수정합니다.", commendId);
 
-    @Override
-    @Transactional
-    public ResponseEntity<CustomResponseCode> updateComment(Long commendId, String content) {
         Comment comment = checkConflictComment(commendId);
+        Long requestMemberId = getMemberId(authorization);
+        checkAuthorizeMember(comment.getWriter().getId(), requestMemberId);
+
+        log.info("[Review Service - updateComment]: 댓글 내용을 수정합니다. old: {}, new: {}", comment.getContent(), content);
         comment.setContent(content);
+
+        log.info("[Review Service - updateComment]: 댓글을 수정합니다.");
         commentRepository.save(comment);
         return ResponseEntity.ok(CustomResponseCode.COMMENT_UPDATE_SUCCESS);
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public List<GetReviewListResponseDto.ReviewListInfo> allReviews() {
-        List<Review> reviewList = reviewRepository.findAllByState(ReviewState.ACTIVE);
-        return reviewList.stream()
-                .map(GetReviewListResponseDto.ReviewListInfo::fromReview)
-                .toList();
+    @Transactional
+    public ResponseEntity<CustomResponseCode> deleteComment(String authorization, Long commentId) {
+        log.info("[Review Service - deleteComment]: {}번 댓글을 삭제합니다.", commentId);
+
+        Comment comment = checkConflictComment(commentId);
+        Long requestMemberId = getMemberId(authorization);
+        checkAuthorizeMember(comment.getWriter().getId(), requestMemberId);
+
+        log.info("[Review Service - deleteComment]: 댓글을 삭제합니다.");
+        comment.setState(CommentState.INACTIVE);
+
+        log.info("[Review Service - deleteComment]: 댓글을 저장합니다.");
+        commentRepository.save(comment);
+        return ResponseEntity.ok(CustomResponseCode.COMMENT_DELETE_SUCCESS);
     }
+
 
     @Override
     @Transactional
-    public ResponseEntity<CustomResponseCode> deleteReview(Long id) {
+    public ResponseEntity<CustomResponseCode> deleteReview(String authorization, Long id) {
+        log.info("[Review Service - deleteReview]: {}번 리뷰를 삭제합니다.", id);
+
         Review review = checkConflictReview(id);
+        Long requestMemberId = getMemberId(authorization);
+        checkAuthorizeMember(review.getMember().getId(), requestMemberId);
+
+        log.info("[Review Service - deleteReview]: 리뷰를 삭제합니다.");
         review.setState(ReviewState.INACTIVE);
+
+        log.info("[Review Service - deleteReview]: 리뷰를 저장합니다.");
         reviewRepository.save(review);
         return ResponseEntity.ok(CustomResponseCode.REVIEW_DELETE_SUCCESS);
     }
 
     @Override
     @Transactional
-    public ResponseEntity<CustomResponseCode> createReview(ReviewCreateRequestDto reviewCreateRequestDto) {
-        MultipartFile file = reviewCreateRequestDto.getFile();
-        if (file.getContentType() == null || !file.getContentType().startsWith("image")) {
-            throw new CustomException(ResponseCode.INVALID_FILE_TYPE);
-        }
-        String imageUri = "fail";
+    public ResponseEntity<CustomResponseCode> createReview(String authorization, ReviewCreateRequestDto reviewCreateRequestDto) {
+        log.info("[Review Service - createReview]: 리뷰를 생성합니다");
+
+        MultipartFile file = checkValidType(reviewCreateRequestDto.getFile());
+        String imageUri = "init";
+        log.info("[Review Service - createReview]: 이미지를 업로드합니다. imageUri: {}", imageUri);
         try {
             imageUri = fileManager.uploadImage(file);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("File upload failed: {}", e.getMessage(), e);
+            throw new CustomException(ResponseCode.FILE_NOT_FOUND);
         }
         reviewCreateRequestDto.setPhoto(imageUri);
+
+        Perfume perfume = perfumeService.checkConflictPerfume(reviewCreateRequestDto.getPerfumeId());
+        Member member = memberService.checkConflictMember(getMemberId(authorization));
+
+        log.info("[Review Service - createReview]: 리뷰를 생성합니다. perfumeId: {}, memberId: {}", perfume.getId(), member.getId());
         Review review = Review.builder()
                 .title(reviewCreateRequestDto.getTitle())
                 .content(reviewCreateRequestDto.getContent())
                 .photo(reviewCreateRequestDto.getPhoto())
-                .perfume(perfumeService.checkConflictPerfume(reviewCreateRequestDto.getPerfumeId()))
-                .member(memberService.checkConflictMember(reviewCreateRequestDto.getMemberId()))
+                .perfume(perfume)
+                .member(member)
                 .build();
-        reviewRepository.save(review);
-        return ResponseEntity.ok(CustomResponseCode.REVIEW_CREATE_SUCCESS);
 
+        log.info("[Review Service - createReview]: 리뷰를 저장합니다.");
+        reviewRepository.save(review);
+
+        return ResponseEntity.ok(CustomResponseCode.REVIEW_CREATE_SUCCESS);
     }
 
     @Override
     @Transactional
-    public ResponseEntity<CustomResponseCode> updateReview(Long id, ReviewCreateRequestDto reviewCreateRequestDto) {
-        MultipartFile file = reviewCreateRequestDto.getFile();
-        if (file.getContentType() == null || !file.getContentType().startsWith("image")) {
-            throw new CustomException(ResponseCode.INVALID_FILE_TYPE);
-        }
-        String imageUri = "fail";
+    public ResponseEntity<CustomResponseCode> updateReview(String authorization, Long id, ReviewCreateRequestDto reviewCreateRequestDto) {
+        MultipartFile file = checkValidType(reviewCreateRequestDto.getFile());
+
+        String imageUri = "init";
+        log.info("[Review Service - updateReview]: 이미지를 업로드합니다. imageUri: {}", imageUri);
         try {
             imageUri = fileManager.uploadImage(file);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("file upload failed");
         }
         reviewCreateRequestDto.setPhoto(imageUri);
-        reviewRepository.save(ReviewCreateRequestDto.updateReview(checkConflictReview(id), reviewCreateRequestDto));
+
+        Review review = checkConflictReview(id);
+        checkAuthorizeMember(review.getMember().getId(), getMemberId(authorization));
+
+        log.info("[Review Service - updateReview]: 리뷰를 수정합니다. id: {}", id);
+        reviewRepository.save(ReviewCreateRequestDto.updateReview(review, reviewCreateRequestDto));
         return ResponseEntity.ok(CustomResponseCode.REVIEW_UPDATE_SUCCESS);
     }
 
     @Override
     @Transactional(readOnly = true)
     public GetReviewResponseDto getReview(Long id) {
-        return GetReviewResponseDto.getReview(checkConflictReview(id));
+        log.info("[Review Service - getReview]: 리뷰를 조회합니다. id: {}", id);
+
+        Review review = checkConflictReview(id);
+
+        log.info("[Review Service - getReview]: 조회수를 증가시킵니다. id: {}", id);
+        review.setViews(review.getViews() + 1);
+
+        return GetReviewResponseDto.getReview(review);
     }
 
     // 전체 리스트
     public GetReviewListResponseDto searchReview(SearchType searchType, String keyword, int page) {
+        log.info("[Review Service - searchReview]: 리뷰 리스트를 검색합니다. searchType: {}, keyword: {}, page: {}", searchType, keyword, page);
         Pageable pageable = PageRequest.of(page, 10);  // 한 페이지당 10개의 항목을 가져옵니다.
 
+        log.info("[Review Service - searchReview]: 검색 조건을 설정합니다.");
         Specification<Review> spec = Specification.where(null);
-
-        // 검색 타입에 따라 유저 검색
         if (searchType == SearchType.TITLE) {
             spec = spec.and((root, query, cb) ->
                     cb.like(root.get("title"), "%" + keyword + "%"));
@@ -155,7 +201,10 @@ public class ReviewServiceImpl implements ReviewService {
                     cb.equal(root.get("state"), PerfumeState.ACTIVE));
         }
 
+        log.info("[Review Service - searchReview]: 리뷰 리스트를 DB 에서 가져옵니다.");
         Page<Review> resultPage = reviewRepository.findAll(spec, pageable);
+
+        log.info("[Review Service - searchReview]: 리뷰 리스트를 DTO 로 변환합니다.");
         List<GetReviewListResponseDto.ReviewListInfo> reviewList = resultPage.getContent().stream()
                 .map(GetReviewListResponseDto.ReviewListInfo::fromReview)
                 .toList();
@@ -165,14 +214,38 @@ public class ReviewServiceImpl implements ReviewService {
 
 
     public Review checkConflictReview(Long id) {
+        log.info("[Review Service - checkConflictReview]: 리뷰가 존재하는지 확인합니다. id: {}", id);
         if (reviewRepository.findByIdAndState(id, ReviewState.ACTIVE).isEmpty()) {
             throw new CustomException(ResponseCode.REVIEW_NOT_FOUND);
         } else  return reviewRepository.findByIdAndState(id, ReviewState.ACTIVE).get();
     }
 
     public Comment checkConflictComment(Long id) {
+        log.info("[Review Service - checkConflictComment]: 댓글이 존재하는지 확인합니다. id: {}", id);
         if (commentRepository.findByIdAndState(id, CommentState.ACTIVE).isEmpty()) {
             throw new CustomException(ResponseCode.COMMENT_NOT_FOUND);
         } else  return commentRepository.findByIdAndState(id, CommentState.ACTIVE).get();
+    }
+
+    public Long getMemberId(String authorization) {
+
+        log.info("[Review Service - getMemberId]: 헤더의 Authorization 을 Access Token 으로 변환해 Token의 정보를 받아옵니다 .authorization to token, token: {}, authorization: {}", authorization, authorization.substring(7));
+        String accessToken = authorization.substring(7);
+        return authFeignInterface.getInfo(accessToken).getMemberId();
+    }
+
+    public void checkAuthorizeMember(Long writerId, Long requestMemberId) {
+        log.info("[Review Service - checkAuthorizeMember]: 작성자와 요청자가 일치하는 지 확인합니다. writerId: {}, requestMemberId: {}", writerId, requestMemberId);
+        if (!writerId.equals(requestMemberId)) {
+            throw new CustomException(ResponseCode.UNAUTHORIZED_MEMBER);
+        }
+    }
+
+    public MultipartFile checkValidType(MultipartFile file) {
+        log.info("[Review Service - checkValidType]: 파일이 이미지 형식인지 확인합니다. file: {}", file);
+        if (file == null || file.isEmpty() || file.getContentType() == null || !file.getContentType().startsWith("image")) {
+            throw new CustomException(ResponseCode.INVALID_FILE_TYPE);
+        }
+        return file;
     }
 }

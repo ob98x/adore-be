@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/user/my")
+@Slf4j
 public class UserController {
 
     private MemberService memberService;
@@ -22,6 +24,7 @@ public class UserController {
     @Operation(summary = "마이페이지 조회 API", description = "마이페이지를 조회합니다.")
     @GetMapping("/{id}")
     ResponseEntity<GetMyPageResponseDto> getMyPage(@PathVariable Long id) {
+        log.info("[User Controller - getMyPage]: {}번 사용자의 마이페이지 조회 요청이 들어왔습니다.", id);
         return ResponseEntity.ok(memberService.getMyPage(id));
     }
 
@@ -30,6 +33,7 @@ public class UserController {
     ResponseEntity<CustomResponseCode> updateNickname(
             @PathVariable Long id,
             @RequestBody @Valid UpdateMyPageRequestDto updateMyPageRequestDto) {
+        log.info("[User Controller - updateNickname]: {}번 사용자의 마이페이지 수정 요청이 들어왔습니다.", id);
         return memberService.updateMyPage(id, updateMyPageRequestDto);
     }
 

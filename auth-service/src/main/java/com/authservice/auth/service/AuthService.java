@@ -23,4 +23,5 @@ public interface AuthService {
     CustomResponseCode resetPassword(ResetPasswordDto resetPasswordDto);
     ResponseCookie createTokenCookie(String cookieName, String token, boolean isHttpOnly, int maxAge);
     public String returnRefreshToken(HttpServletRequest request);
+    public GetTokenInfo getTokenInfo(String accessToken);
 }

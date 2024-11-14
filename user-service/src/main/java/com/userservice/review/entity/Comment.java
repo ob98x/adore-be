@@ -2,6 +2,7 @@ package com.userservice.review.entity;
 
 import com.userservice.global.BaseEntity;
 import com.userservice.user.entity.Member;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -11,17 +12,22 @@ import lombok.*;
 @Table(name = "comment")
 @Entity
 public class Comment extends BaseEntity {
+
+    @Schema(description = "댓글 내용", example = "댓글 내용 1")
     @Column(name = "content", nullable = false)
     private String content;
 
+    @Schema(description = "댓글 상태", example = "ACTIVE / INACTIVE")
     @Column(name = "state")
     @Enumerated(EnumType.STRING)
     private CommentState state;
 
+    @Schema(description = "댓글 작성자", example = "1")
     @ManyToOne
     @JoinColumn(name="member_id")
     private Member writer;
 
+    @Schema(description = "리뷰 ID", example = "1")
     @ManyToOne
     @JoinColumn(name="review_id")
     private Review review;

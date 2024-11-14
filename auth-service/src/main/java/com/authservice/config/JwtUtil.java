@@ -1,5 +1,6 @@
 package com.authservice.config;
 
+import com.authservice.auth.dto.GetTokenInfo;
 import com.authservice.auth.dto.MemberInfoDto;
 import com.authservice.global.CustomException;
 import com.authservice.global.ResponseCode;
@@ -62,6 +63,14 @@ public class JwtUtil {
         return parseClaims(token).get("memberId", Long.class);
     }
 
+    public GetTokenInfo getTokenInfo(String accessToken) {
+        Claims claims = parseClaims(accessToken);
+        return GetTokenInfo.builder()
+                .memberName(claims.get("memberName", String.class))
+                .memberRole(claims.get("role", String.class))
+                .memberId(claims.get("memberId", Long.class))
+                .build();
+    }
 
     public void validateToken(String token) {
         try {

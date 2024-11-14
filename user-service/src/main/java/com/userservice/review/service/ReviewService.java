@@ -8,16 +8,13 @@ import com.userservice.review.dto.GetReviewResponseDto;
 import com.userservice.review.dto.ReviewCreateRequestDto;
 import org.springframework.http.ResponseEntity;
 
-import java.util.List;
-
 public interface ReviewService {
-    List<GetReviewListResponseDto.ReviewListInfo> allReviews();
     GetReviewListResponseDto searchReview(SearchType searchType, String keyword, int page);
     GetReviewResponseDto getReview(Long id);
-    ResponseEntity<CustomResponseCode> deleteReview(Long id);
-    ResponseEntity<CustomResponseCode> createReview(ReviewCreateRequestDto reviewCreateRequestDto);
-    ResponseEntity<CustomResponseCode> updateReview(Long id, ReviewCreateRequestDto reviewCreateRequestDto);
-    ResponseEntity<CustomResponseCode> createComment(Long reviewId, Long memberId, String content);
-    ResponseEntity<CustomResponseCode> deleteComment(Long commentId);
-    ResponseEntity<CustomResponseCode> updateComment(Long commentId, String content);
+    ResponseEntity<CustomResponseCode> deleteReview(String authorization, Long id);
+    ResponseEntity<CustomResponseCode> createReview(String authorization, ReviewCreateRequestDto reviewCreateRequestDto);
+    ResponseEntity<CustomResponseCode> updateReview(String authorization, Long id, ReviewCreateRequestDto reviewCreateRequestDto);
+    ResponseEntity<CustomResponseCode> createComment(String authorization, Long reviewId, String content);
+    ResponseEntity<CustomResponseCode> deleteComment(String authorization, Long commentId);
+    ResponseEntity<CustomResponseCode> updateComment(String authorization, Long commentId, String content);
 }
