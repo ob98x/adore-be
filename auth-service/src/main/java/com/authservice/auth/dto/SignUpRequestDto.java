@@ -24,35 +24,35 @@ public class SignUpRequestDto {
     @NotBlank
     private final String password;
 
-    @Schema
+    @Schema(description = "생년월일", example = "2000-10-14")
     @NotBlank
     private final LocalDate birthDate;
 
-    @Schema
+    @Schema(description = "닉네임", example = "용우")
     @NotBlank
     private final String nickname;
 
-    @Schema
+    @Schema(description = "약관 동의 여부", example = "true")
     @NotBlank
     private final boolean agreeTerms;
 
-    @Schema
+    @Schema(description = "유입 경로", example = "google")
     @NotBlank
     private final String inflow;
 
-    @Schema
+    @Schema(description="성별", example="남")
     @NotBlank
     private final String gender;
 
-    @Schema
+    @Schema(description = "닉네임 중복 여부", example = "false")
     @NotBlank
     private final boolean nicknameDuplicate;
 
-    @Schema
+    @Schema(description = "이메일 중복 여부", example = "false")
     @NotBlank
     private final boolean emailDuplicate;
 
-    @Schema
+    @Schema(description = "이메일 인증 여부", example = "true")
     @NotBlank
     private final boolean emailVerify;
 

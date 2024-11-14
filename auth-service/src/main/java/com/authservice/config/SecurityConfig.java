@@ -30,8 +30,6 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 @RequiredArgsConstructor
 @Slf4j
 public class SecurityConfig {
-    private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
-    private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
@@ -56,11 +54,6 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(requests -> requests
                         .anyRequest().permitAll()
-                )
-                .exceptionHandling(
-                        exceptionHandling -> exceptionHandling
-                                .accessDeniedHandler(jwtAccessDeniedHandler)
-                                .authenticationEntryPoint(jwtAuthenticationEntryPoint)
                 )
                 .formLogin(FormLoginConfigurer::disable);
         return http.build();
