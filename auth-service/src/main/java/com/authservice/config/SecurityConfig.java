@@ -34,8 +34,11 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
-        config.addAllowedOrigin("http://localhost:8111"); // localhost에 대해서만 허용
-        config.addAllowedOrigin("http://gachon-adore.duckdns.org:8111"); // 도메인에 대해서만 허용
+        config.addAllowedOrigin("http://localhost:8111");
+        config.addAllowedOrigin("http://localhost:5173");
+        config.addAllowedOrigin("http://gachon-adore.duckdns.org:8111");
+        config.addAllowedOrigin("http://gachon-adore.duckdns.org:5173");
+        config.addAllowedOrigin("https://gachon-adore.duckdns.org");
         config.addAllowedMethod("*"); // 모든 HTTP 메서드 허용
         config.addAllowedHeader("*"); // 모든 Header 허용
         config.setAllowCredentials(true); // 인증 정보 허용

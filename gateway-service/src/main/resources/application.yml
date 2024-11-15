@@ -58,7 +58,10 @@ spring:
           '[/**]':
             allowed-origins:
               - "https://gachon-adore.duckdns.org"
-              - "http://localhost"
+              - "http://localhost:5173"
+              - "http://localhost:8111"
+              - "http://gachon-adore.duckdns.org:5173"
+              - "http://gachon-adore.duckdns.org:8111"
             allow-credentials: true
             allowedHeaders:
               - "*"
