@@ -12,5 +12,4 @@ public interface ReportService {
     ResponseEntity<GetReportResponseDto> getReport(Long id);
     GetReportListResponseDto getReportLists(FilterType filterType, int page);
     ResponseEntity<CustomResponseCode> processReport(Long id, String penalty);
-    List<GetReportListResponseDto.ReportListInfo> allReports();
 }

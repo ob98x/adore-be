@@ -14,6 +14,7 @@ import com.adminservice.report.entity.ReportState;
 import com.adminservice.report.repository.ReportRepository;
 import com.adminservice.user.entity.Member;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -25,6 +26,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class ReportServiceImpl implements ReportService {
 
     private final ReportRepository reportRepository;
@@ -32,34 +34,32 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public ResponseEntity<GetReportResponseDto> getReport(Long id) {
+        log.info("[Report Service - getReport]: {}번 신고사항 조회 요청이 들어왔습니다.", id);
         return ResponseEntity.ok(GetReportResponseDto.createResponse(checkConflictReport(id)));
     }
 
 
     @Override
     public ResponseEntity<CustomResponseCode> processReport(Long id, String penaltyLevel) {
+        log.info("[Report Service - processReport]: {}번 신고사항 처리 요청이 들어왔습니다.", id);
         Report report = checkConflictReport(id);
         Member target = report.getTarget();
 
+
         report.setState(ReportState.COMPLETE);
 
+        log.info("[Report Service - processReport]: 신고사항 처리를 완료했습니다. id: {}", id);
         penaltyRepository.save(Penalty.of(PenaltyLevel.valueOf(penaltyLevel), target, report));
         reportRepository.save(report);
         return ResponseEntity.ok(CustomResponseCode.REPORT_PROCESS_SUCCESS);
     }
 
     @Override
-    public List<GetReportListResponseDto.ReportListInfo> allReports() {
-        List<Report> reportList = reportRepository.findAll();
-        return reportList.stream()
-                .map(GetReportListResponseDto.ReportListInfo::fromReport)
-                .toList();
-    }
-
-    @Override
     public GetReportListResponseDto getReportLists(FilterType filterType, int page) {
-        Pageable pageable = PageRequest.of(page, 10);  // 한 페이지당 10개의 항목을 가져옵니다.=
+        log.info("[Report Service - getReportLists]: 신고사항 리스트 조회 요청이 들어왔습니다. page: {}, filter: {}", page, filterType);
+        Pageable pageable = PageRequest.of(page, 10);
 
+        log.info("[Report Service - getReportLists]: 검색 조건을 설정합니다.");
         Specification<Report> spec = Specification.where(null);
 
         if (filterType == FilterType.WAIT) {
@@ -73,7 +73,10 @@ public class ReportServiceImpl implements ReportService {
                     cb.notEqual(root.get("state"), ReportState.INACTIVE));
         }
 
+        log.info("[Report Service - getReportLists]: 신고사항 리스트를 조회합니다.");
         Page<Report> resultPage = reportRepository.findAll(spec, pageable);
+
+        log.info("[Report Service - getReportLists]: 신고사항 리스트를 DTO 로 변환합니다.");
         List<GetReportListResponseDto.ReportListInfo> reportList = resultPage.getContent().stream()
                 .map(GetReportListResponseDto.ReportListInfo::fromReport)
                 .toList();
@@ -83,13 +86,13 @@ public class ReportServiceImpl implements ReportService {
     }
 
     public Report checkConflictReport(Long id) {
-        // Check if the question exists
+        log.info("[Report Service - checkConflictReport]: 신고사항 정보를 조회합니다. id: {}", id);
         if (reportRepository.findReportById(id).isEmpty()) {
+            log.error("[Report Service - checkConflictReport]: 신고사항 정보를 찾을 수 없습니다. id: {}", id);
             throw new CustomException(ResponseCode.REPORT_NOT_FOUND);
         }
-
-        // Check if the question is inactive
         if (reportRepository.findReportById(id).get().getState().equals(ReportState.INACTIVE)) {
+            log.error("[Report Service - checkConflictReport]: 삭제된 신고사항 정보입니다. id: {}", id);
             throw new CustomException(ResponseCode.REPORT_DELETED);
         }
 

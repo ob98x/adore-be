@@ -11,6 +11,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.List;
+
 @OpenAPIDefinition(
         info = @Info(title = "API 명세서",
                 description = "CAPI 명세서",
@@ -21,18 +23,24 @@ public class SwaggerConfig {
 
     @Bean
     public OpenAPI api() {
-        SecurityScheme apiKey = new SecurityScheme()
-                .type(SecurityScheme.Type.APIKEY)
+        // Define Bearer Token security scheme
+        SecurityScheme bearerTokenScheme = new SecurityScheme()
+                .type(SecurityScheme.Type.HTTP) // Change to HTTP type
+                .scheme("bearer") // Specify "bearer" as the scheme
+                .bearerFormat("JWT") // Optionally specify the token format
                 .in(SecurityScheme.In.HEADER)
                 .name("Authorization");
 
+        // Apply the security requirement
         SecurityRequirement securityRequirement = new SecurityRequirement()
                 .addList("Bearer Token");
 
         return new OpenAPI()
-                .addServersItem(new Server().url("/"))
-                .components(new Components().addSecuritySchemes("Bearer Token", apiKey))
-                .addSecurityItem(securityRequirement);
+                .servers(List.of(
+                        new Server().url("http://localhost:8111").description("Local Server"),
+                        new Server().url("http://gachon-adore.duckdns.org:8111").description("Deploy Server")
+                ))
+                .components(new Components().addSecuritySchemes("Bearer Token", bearerTokenScheme))
+                .addSecurityItem(securityRequirement); 
     }
-
 }

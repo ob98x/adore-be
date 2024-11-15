@@ -2,6 +2,7 @@ package com.adminservice.question.dto;
 
 import com.adminservice.question.entity.Question;
 import com.adminservice.question.entity.QuestionState;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,20 +14,49 @@ import java.time.LocalDateTime;
 @Builder
 
 public class GetQuestionResponseDto {
+    @Schema(description = "문의 ID", example = "1")
     private Long id;
+
+    @Schema(description = "문의 제목", example = "문의 제목")
     private String title;
+
+    @Schema(description = "문의 내용", example = "문의 내용")
     private String content;
+
+    @Schema(description = "문의자 이름", example = "문의자 이름")
     private String writerName;
+
+    @Schema(description = "문의자 이메일", example = "문의자 이메일")
     private String writerEmail;
+
+    @Schema(description = "문의자 ID", example = "1")
     private Long writerId;
+
+    @Schema(description = "처리자 이름", example = "처리자 이름")
     private String processorName;
+
+    @Schema(description = "처리자 이메일", example = "처리자 이메일")
     private String processorEmail;
+
+    @Schema(description = "처리자 ID", example = "1")
     private Long processorId;
+
+    @Schema(description = "문의 카테고리", example = "PERFUME")
     private String category;
+
+    @Schema(description = "문의 상태", example = "WAIT")
     private QuestionState state;
+
+    @Schema(description = "생성일", example = "2021-07-01T00:00:00")
     private LocalDateTime createdDate;
+
+    @Schema(description = "수정일", example = "2021-07-01T00:00:00")
     private LocalDateTime updatedDate;
+
+    @Schema(description = "답변 내용", example = "답변 내용")
     private String answerContent;
+
+    @Schema(description = "처리 가능 여부", example = "true")
     private boolean canProcess;
 
     @Builder

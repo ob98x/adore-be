@@ -75,7 +75,8 @@ public enum ResponseCode {
     PERFUME_NOT_FOUND("PER-ERR-001", HttpStatus.NOT_FOUND, "향수를 찾을 수 없습니다."),
     FILE_UPLOAD_FAILED("HOL-ERR-001", HttpStatus.INTERNAL_SERVER_ERROR, "파일 업로드에 실패했습니다."),
     INVALID_FILE_TYPE("HOL-ERR-003", HttpStatus.BAD_REQUEST, "잘못된 파일 형식입니다."),
-    NOTE_NOT_FOUND("NOT-ERR-003", HttpStatus.NOT_FOUND, "노트를 찾을 수 없습니다."),;
+    NOTE_NOT_FOUND("NOT-ERR-003", HttpStatus.NOT_FOUND, "노트를 찾을 수 없습니다."),
+    UNAUTHORIZED_MEMBER("MEM-ERR-03", HttpStatus.UNAUTHORIZED, "권한이 없는 회원입니다."),;
     private final String code;
     private final HttpStatus status;
     private final String message;

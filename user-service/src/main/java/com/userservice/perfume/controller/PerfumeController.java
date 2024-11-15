@@ -25,7 +25,7 @@ public class PerfumeController {
     private final PerfumeService perfumeService;
 
     @Operation(summary = "향수 정보 조회 API", description = "향수 정보를 조회합니다.")
-    @GetMapping("/perfume")
+    @GetMapping("/")
     public ResponseEntity<GetPerfumeResponseDto> viewPerfumeInfo(@Parameter(description = "조회할 향수 id")@RequestParam Long id) {
         log.info("[Perfume Controller - viewPerfumeInfo]: {}번 향수의 조회 요청이 들어왔습니다.", id);
         return ResponseEntity.ok(perfumeService.getPerfume(id));
@@ -38,8 +38,8 @@ public class PerfumeController {
         return ResponseEntity.ok(perfumeService.getNote(id));
     }
 
-    @Operation(summary = "[미사용] 향수 리스트 조회 API", description = "향수 리스트를 조회합니다.")
-    @GetMapping("/perfume/lists/{page}")
+    @Operation(summary = "향수 리스트 조회 API", description = "향수 리스트를 조회합니다.")
+    @GetMapping("/lists/{page}")
     public ResponseEntity<GetPerfumeListResponseDto> searchPerfume(
             @PathVariable("page") int page,
             @RequestParam("type") SearchType searchType,
@@ -49,7 +49,7 @@ public class PerfumeController {
         return ResponseEntity.ok(response);
     }
 
-    @Operation(summary = "[미사용] 향수 노트 리스트 조회 API", description = "향수 노트 리스트를 조회합니다.")
+    @Operation(summary = "향수 노트 리스트 조회 API", description = "향수 노트 리스트를 조회합니다.")
     @GetMapping("/note/lists/{page}")
     public ResponseEntity<GetNoteListResponseDto> searchNotes(
             @PathVariable("page") int page,

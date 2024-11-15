@@ -23,7 +23,7 @@ public class StaticsServiceImpl implements StaticsService {
     @Override
     @Transactional(readOnly = true)
     public GetStaticsResponseDto getNewUserStatics(LocalDate startDate, LocalDate endDate) {
-
+        log.info("[Statics Service - getNewUserStatics]: 신규 사용자 통계 조회 요청이 들어왔습니다. 시작일: {}, 종료일: {}", startDate, endDate);
         Long count = memberRepository.countNewMembersBetweenDates(startDate.atStartOfDay(), endDate.atStartOfDay());
         return GetStaticsResponseDto.getStaticsInfo(StaticsClass.NEW_USER, count);
     }
@@ -31,6 +31,7 @@ public class StaticsServiceImpl implements StaticsService {
     @Override
     @Transactional(readOnly = true)
     public GetStaticsResponseDto getInactiveMembers() {
+        log.info("[Statics Service - getInactiveMembers]: 미접속 사용자 통계 조회 요청이 들어왔습니다.");
         Long count = memberRepository.countInactiveMembersByDate(LocalDate.now());
         return GetStaticsResponseDto.getStaticsInfo(StaticsClass.NOT_ENTER, count);
     }
@@ -38,6 +39,7 @@ public class StaticsServiceImpl implements StaticsService {
     @Override
     @Transactional(readOnly = true)
     public GetStaticsResponseDto getActiveMembers(LocalDate startDate, LocalDate endDate) {
+        log.info("[Statics Service - getActiveMembers]: 접속 사용자 통계 조회 요청이 들어왔습니다. 시작일: {}, 종료일: {}", startDate, endDate);
         Long count = memberRepository.countMembersByLastLoginDates(startDate, endDate);
         return GetStaticsResponseDto.getStaticsInfo(StaticsClass.ACTIVE_USER, count);
     }
@@ -45,6 +47,7 @@ public class StaticsServiceImpl implements StaticsService {
     @Override
     @Transactional(readOnly = true)
     public GetStaticsResponseDto getRecommendUser(LocalDate startDate, LocalDate endDate) {
+        log.info("[Statics Service - getRecommendUser]: 추천 기능 이용자 통계 조회 요청이 들어왔습니다. 시작일: {}, 종료일: {}", startDate, endDate);
         Long count = userAnsRepository.countRecommendUsersBetweenDates(startDate.atStartOfDay(), endDate.atStartOfDay());
         return GetStaticsResponseDto.getStaticsInfo(StaticsClass.RECOMMEND_USER, count);
     }

@@ -228,7 +228,6 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     public Long getMemberId(String authorization) {
-
         log.info("[Review Service - getMemberId]: 헤더의 Authorization 을 Access Token 으로 변환해 Token의 정보를 받아옵니다 .authorization to token, token: {}, authorization: {}", authorization, authorization.substring(7));
         String accessToken = authorization.substring(7);
         return authFeignInterface.getInfo(accessToken).getMemberId();

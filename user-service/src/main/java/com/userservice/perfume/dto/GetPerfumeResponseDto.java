@@ -58,6 +58,7 @@ public class GetPerfumeResponseDto {
         this.id = id;
         this.name = name;
         this.brand = brand;
+        this.country = country;
         this.perfumeDesc = perfumeDesc;
         this.gender = gender;
         this.top = top;

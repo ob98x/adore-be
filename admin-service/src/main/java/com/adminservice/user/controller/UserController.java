@@ -11,6 +11,7 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,25 +22,19 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/admin/user")
+@Slf4j
 public class UserController {
 
     private final MemberService memberService;
 
-
-    @Operation(summary = "[미사용] 사용자 리스트 조회 API", description = "사용자 리스트를 조회합니다.")
+    @Operation(summary = "사용자 리스트 조회 API", description = "사용자 리스트를 조회합니다.")
     @GetMapping("/lists/{page}")
     public ResponseEntity<GetMemberListResponseDto> searchUsers(
             @PathVariable("page") int page,
             @RequestParam("type") SearchType searchType,
             @RequestParam("keyword") String keyword) {
+        log.info("[User Controller - searchUsers]: 사용자 리스트 조회 요청이 들어왔습니다. page: {}, type: {}, keyword: {}", page, searchType, keyword);
         GetMemberListResponseDto response = memberService.searchUsers(searchType, keyword, page-1);
-        return ResponseEntity.ok(response);
-    }
-
-    @Operation
-    @GetMapping("/list/")
-    public ResponseEntity<List<GetMemberListResponseDto.MemberListInfo>> allMembers() {
-        List<GetMemberListResponseDto.MemberListInfo> response = memberService.allMembers();
         return ResponseEntity.ok(response);
     }
 
@@ -47,6 +42,7 @@ public class UserController {
     @PostMapping("/create")
     public ResponseEntity<CustomResponseCode> createMember(
             @Valid @RequestBody MemberCreateRequestDto memberCreateRequestDto) {
+        log.info("[User Controller - createMember]: 사용자 생성 요청이 들어왔습니다. name: {}, email: {}", memberCreateRequestDto.getName(), memberCreateRequestDto.getEmail());
         return memberService.createMember(memberCreateRequestDto);
     }
 
@@ -54,18 +50,21 @@ public class UserController {
     @PatchMapping("/update")
     public ResponseEntity<CustomResponseCode> updateMember(
             @Valid @RequestBody MemberCreateRequestDto memberCreateRequestDto, @Parameter(description = "삭제할 수정할 id") @RequestParam Long id) {
+        log.info("[User Controller - updateMember]: 사용자 수정 요청이 들어왔습니다. id: {}", id);
         return memberService.updateMember(id, memberCreateRequestDto);
     }
 
     @Operation(summary = "사용자 조회 API", description = "사용자를 조회합니다.")
     @GetMapping("/")
     public ResponseEntity<GetMemberResponseDto> viewMemberInfo(@Parameter(description = "삭제할 조회할 id") @RequestParam Long id) {
+        log.info("[User Controller - viewMemberInfo]: 사용자 조회 요청이 들어왔습니다. id: {}", id);
         return ResponseEntity.ok(memberService.getMember(id));
     }
 
     @Operation(summary = "사용자 삭제 API", description = "사용자를 삭제합니다.")
     @DeleteMapping("/delete")
     public ResponseEntity<CustomResponseCode> deleteMember(@Parameter(description = "삭제할 사용자 id") @RequestParam Long id) {
+        log.info("[User Controller - deleteMember]: 사용자 삭제 요청이 들어왔습니다. id: {}", id);
         return memberService.deleteMember(id);
     }
 }

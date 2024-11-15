@@ -30,16 +30,15 @@ eureka:
       defaultZone: http://discovery-service:8761/eureka/
 
 springdoc:
-  api-docs:
-    enabled: true
   swagger-ui:
-    urls[0]:
-      name: Auth Service
-      url: http://localhost:8111/auth/swagger-ui
-    urls[1]:
-      name: Admin Service
-      url: http://localhost:8111/admin/swagger-ui
-    path: /auth/swagger-ui
+    path: /swagger-ui.html
+    urls:
+      - url: /api/user/v3/api-docs
+        name: User Service
+      - url: /api/auth/v3/api-docs
+        name: Auth Service
+      - url: /api/admin/v3/api-docs
+        name: Admin Service
 
 spring:
 
