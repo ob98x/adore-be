@@ -13,7 +13,7 @@ public class CorsConfig {
     public CorsFilter corsFilter() {
         CorsConfiguration config = new CorsConfiguration();
         config.addAllowedOrigin("http://localhost:8111"); // Swagger UI를 제공하는 Gateway Origin
-        config.addAllowedOrigin("http://gachon-adore.duckdns.org");
+        config.addAllowedOrigin("http://gachon-adore.duckdns.org:8111");
         config.addAllowedHeader("*");
         config.addAllowedMethod("*"); // GET, POST 등 모든 HTTP 메소드 허용
         config.setAllowCredentials(true); // 인증 정보를 포함한 요청 허용
