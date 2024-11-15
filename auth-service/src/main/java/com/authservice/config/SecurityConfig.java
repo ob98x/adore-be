@@ -20,9 +20,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 
 @Configuration
@@ -32,28 +29,10 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 public class SecurityConfig {
 
     @Bean
-    public CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration config = new CorsConfiguration();
-        config.addAllowedOrigin("http://localhost:8111");
-        config.addAllowedOrigin("http://localhost:5173");
-        config.addAllowedOrigin("http://gachon-adore.duckdns.org:8111");
-        config.addAllowedOrigin("http://gachon-adore.duckdns.org:5173");
-        config.addAllowedOrigin("https://gachon-adore.duckdns.org");
-        config.addAllowedMethod("*"); // 모든 HTTP 메서드 허용
-        config.addAllowedHeader("*"); // 모든 Header 허용
-        config.setAllowCredentials(true); // 인증 정보 허용
-
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", config); // 모든 경로에 대해 설정 적용
-        return source;
-    }
-
-    @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(CsrfConfigurer::disable)
                 .headers(headersConfigurer -> headersConfigurer.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin))
-                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .httpBasic(HttpBasicConfigurer::disable)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(requests -> requests
