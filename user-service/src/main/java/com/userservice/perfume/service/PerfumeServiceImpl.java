@@ -3,10 +3,7 @@ package com.userservice.perfume.service;
 import com.userservice.global.CustomException;
 import com.userservice.global.ResponseCode;
 import com.userservice.global.SearchType;
-import com.userservice.perfume.dto.GetNoteListResponseDto;
-import com.userservice.perfume.dto.GetNoteResponseDto;
-import com.userservice.perfume.dto.GetPerfumeListResponseDto;
-import com.userservice.perfume.dto.GetPerfumeResponseDto;
+import com.userservice.perfume.dto.*;
 import com.userservice.perfume.entity.Note;
 import com.userservice.perfume.entity.Perfume;
 import com.userservice.perfume.entity.PerfumeState;
@@ -22,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -81,27 +79,25 @@ public class PerfumeServiceImpl implements PerfumeService {
     }
 
 
+    @Override
+    @Transactional(readOnly = true)
+    public List<GetParentNoteResponseDto> getParentNotes() {
+        log.info("[Perfume Service - getParentNotes]: 부모 노트 리스트 조회 요청이 들어왔습니다.");
+        List<Note> parentNote = noteRepository.findNotesByParentNoteId(-1L).get();
+        return GetParentNoteResponseDto.fromNoteList(parentNote);
+    }
 
     @Override
     @Transactional(readOnly = true)
-    public GetNoteListResponseDto searchNotes(SearchType searchType, String keyword, int page) {
-        log.info("[Perfume Service - searchNotes]: 향수 노트 리스트 조회 요청이 들어왔습니다. type: {}, keyword: {}", searchType, keyword);
+    public GetNoteListResponseDto searchNotes(Long parentId, int page) {
+
+        log.info("[Perfume Service - searchNotes]: 향수 노트 리스트 조회 요청이 들어왔습니다. parentId: {}", parentId);
         Pageable pageable = PageRequest.of(page, 10);  // 한 페이지당 10개의 항목을 가져옵니다.
 
         log.info("[Perfume Service - searchNotes]: 검색 조건을 설정합니다.");
         Specification<Note> spec = Specification.where(null);
-        if (keyword.isEmpty()) { // 키워드가 없을 경우
-            spec = spec.and((root, query, cb) ->
-                    cb.equal(root.get("state"), PerfumeState.ACTIVE));
-        } else { // 키워드가 있을 경우
-            if (searchType == SearchType.NAME) {
-                spec = spec.and((root, query, cb) ->
-                        cb.like(root.get("note_nm"), "%" + keyword + "%"));
-            } else {
-                spec = spec.and((root, query, cb) ->
-                        cb.equal(root.get("state"), PerfumeState.ACTIVE));
-            }
-        }
+        spec = spec.and((root, query, cb) ->
+                cb.equal(root.get("parent_note_id"), parentId));
 
         log.info("[Perfume Service - searchNotes]: 향수 노트 리스트를 DB 에서 가져옵니다.");
         Page<Note> resultPage = noteRepository.findAll(spec, pageable);

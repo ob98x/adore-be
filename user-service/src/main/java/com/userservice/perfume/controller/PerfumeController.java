@@ -2,10 +2,7 @@ package com.userservice.perfume.controller;
 
 
 import com.userservice.global.SearchType;
-import com.userservice.perfume.dto.GetNoteListResponseDto;
-import com.userservice.perfume.dto.GetNoteResponseDto;
-import com.userservice.perfume.dto.GetPerfumeListResponseDto;
-import com.userservice.perfume.dto.GetPerfumeResponseDto;
+import com.userservice.perfume.dto.*;
 import com.userservice.perfume.service.PerfumeService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -14,6 +11,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Tag(name = "[사용자] 향수 관련 API", description = "Perfume API")
 @RestController
@@ -55,18 +54,23 @@ public class PerfumeController {
         return ResponseEntity.ok(response);
     }
 
+    @Operation(summary = "대분류 노트 리스트 조회 API", description = "대분류 노트 리스트를 조회합니다.")
+    @GetMapping("/note/parent")
+    public ResponseEntity<List<GetParentNoteResponseDto>> getParentNotes() {
+        log.info("[Perfume Controller - getParentNotes]: 대분류 노트 리스트 조회 요청이 들어왔습니다.");
+        List<GetParentNoteResponseDto> response = perfumeService.getParentNotes();
+        return ResponseEntity.ok(response);
+    }
+
+
+
     @Operation(summary = "향수 노트 리스트 조회 API", description = "향수 노트 리스트를 조회합니다.")
     @GetMapping("/note/lists/{page}")
     public ResponseEntity<GetNoteListResponseDto> searchNotes(
             @PathVariable("page") int page,
-            @RequestParam("type") SearchType searchType,
-            @RequestParam(value = "keyword", required = false) String keyword) {
-        if (keyword == null || keyword.trim().isEmpty()) {
-            log.info("[Perfume Controller - searchNotes]: 검색 키워드가 제공되지 않았습니다. 전체 리스트를 반환합니다.");
-            keyword = ""; // 빈 문자열 또는 서비스 로직에서 null을 처리
-        }
-        log.info("[Perfume Controller - searchNotes]: 향수 노트 리스트 조회 요청이 들어왔습니다. type: {}, keyword: {}", searchType, keyword);
-        GetNoteListResponseDto response = perfumeService.searchNotes(searchType, keyword, page-1);
+            @RequestParam("parent") Long parentId) {
+        log.info("[Perfume Controller - searchNotes]: 향수 노트 리스트 조회 요청이 들어왔습니다. type: {}", parentId);
+        GetNoteListResponseDto response = perfumeService.searchNotes(parentId, page-1);
         return ResponseEntity.ok(response);
     }
 }

@@ -12,4 +12,5 @@ import java.util.Optional;
 @Repository
 public interface NoteRepository extends JpaRepository<Note, Long>, JpaSpecificationExecutor<Note> {
     Optional<Note> findNoteById(Long id);
+    Optional<List<Note>> findNotesByParentNoteId(Long id);
 }
