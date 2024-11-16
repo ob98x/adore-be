@@ -12,11 +12,13 @@ import java.util.List;
 public class GetParentNoteResponseDto {
     private Long id;
     private String noteNm;
+    private String noteImg
 
     @Builder
-    public GetParentNoteResponseDto(Long id, String noteNm) {
+    public GetParentNoteResponseDto(Long id, String noteNm, String noteImg) {
         this.id = id;
         this.noteNm = noteNm;
+        this.noteImg = noteImg;
     }
 
     public static List<GetParentNoteResponseDto> fromNoteList(List<Note> noteList) {
@@ -24,6 +26,7 @@ public class GetParentNoteResponseDto {
                 .map(note -> GetParentNoteResponseDto.builder()
                         .id(note.getId())
                         .noteNm(note.getNoteNm())
+                        .noteImg(note.getNoteImg())
                         .build())
                 .toList();
     }
