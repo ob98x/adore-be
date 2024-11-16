@@ -193,12 +193,17 @@ public class ReviewServiceImpl implements ReviewService {
 
         log.info("[Review Service - searchReview]: 검색 조건을 설정합니다.");
         Specification<Review> spec = Specification.where(null);
-        if (searchType == SearchType.TITLE) {
-            spec = spec.and((root, query, cb) ->
-                    cb.like(root.get("title"), "%" + keyword + "%"));
-        }  else {
+        if (keyword.isEmpty()) {
             spec = spec.and((root, query, cb) ->
                     cb.equal(root.get("state"), PerfumeState.ACTIVE));
+        } else {
+            if (searchType == SearchType.TITLE) {
+                spec = spec.and((root, query, cb) ->
+                        cb.like(root.get("title"), "%" + keyword + "%"));
+            } else {
+                spec = spec.and((root, query, cb) ->
+                        cb.equal(root.get("state"), PerfumeState.ACTIVE));
+            }
         }
 
         log.info("[Review Service - searchReview]: 리뷰 리스트를 DB 에서 가져옵니다.");

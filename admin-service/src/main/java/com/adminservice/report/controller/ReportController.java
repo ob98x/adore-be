@@ -4,6 +4,7 @@ import com.adminservice.global.CustomResponseCode;
 import com.adminservice.global.FilterType;
 import com.adminservice.report.dto.GetReportListResponseDto;
 import com.adminservice.report.dto.GetReportResponseDto;
+import com.adminservice.report.entity.ReportCategory;
 import com.adminservice.report.service.ReportService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -26,10 +27,11 @@ public class ReportController {
     @Operation(summary = "신고 사항 리스트 검색 API", description = "신고 사항 리스트를 조회합니다.")
     @GetMapping("/lists/{page}")
     public ResponseEntity<GetReportListResponseDto> getReportLists(
-            @RequestParam("filter") FilterType filterType,
+            @RequestParam(value = "filter") FilterType filterType,
+            @RequestParam(value = "category") ReportCategory category,
             @PathVariable("page") int page) {
         log.info("[Report Controller - getReportLists]: 신고사항 리스트 조회 요청이 들어왔습니다. page: {}, filter: {}", page, filterType);
-        GetReportListResponseDto response = reportService.getReportLists(filterType,page-1);
+        GetReportListResponseDto response = reportService.getReportLists(filterType, category, page-1);
         return ResponseEntity.ok(response);
     }
 

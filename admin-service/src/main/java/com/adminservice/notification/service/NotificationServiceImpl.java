@@ -7,6 +7,7 @@ import com.adminservice.notification.dto.NotificationCreateRequestDto;
 import com.adminservice.notification.entity.Notification;
 import com.adminservice.notification.entity.NotificationState;
 import com.adminservice.notification.repository.NotificationRepository;
+import com.adminservice.perfume.entity.PerfumeState;
 import com.adminservice.user.entity.Member;
 import com.adminservice.user.service.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -104,10 +105,19 @@ public class NotificationServiceImpl implements NotificationService {
         log.info("[ Notification Service - getNotificationLists ] - 검색 조건을 설정합니다.");
 
         Specification<Notification> spec = Specification.where(null);
-        if (searchType != null) {
-            if (searchType == SearchType.TITLE) {
-                spec = spec.and((root, query, cb) ->
-                        cb.like(root.get("title"), "%" + keyword + "%"));
+        if ((keyword.isEmpty())) {
+            spec = spec.and((root, query, cb) ->
+                    cb.notEqual(root.get("state"), NotificationState.ACTIVE));
+        } else {
+            if (searchType != null) {
+                if (searchType == SearchType.TITLE) {
+                    spec = spec.and((root, query, cb) ->
+                            cb.like(root.get("title"), "%" + keyword + "%"));
+                }
+                else {
+                    spec = spec.and((root, query, cb) ->
+                            cb.equal(root.get("state"), PerfumeState.ACTIVE));
+                }
             }
         }
 

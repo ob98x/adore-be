@@ -28,12 +28,15 @@ public class QuestionController {
     @GetMapping("/lists/{page}")
     public ResponseEntity<GetQuestionListResponseDto> searchQuestions(
             @PathVariable("page") int page,
-            @RequestParam("type") SearchType searchType,
+            @RequestParam("type")  SearchType searchType,
             @RequestParam("filter") FilterType filterType,
             @RequestParam("category") QuestionCategory category,
-            @RequestParam("keyword") String searchKeyword) {
+            @RequestParam(value = "keyword", required = false) String searchKeyword) {
         log.info("[Question Controller - searchQuestions]: 문의사항 리스트 조회 요청이 들어왔습니다. page: {}, type: {}, filter: {}, category: {}, keyword: {}",
                 page, searchType, filterType, category, searchKeyword);
+        if (searchKeyword == null || searchKeyword.trim().isEmpty()) {
+            searchKeyword = ""; // 빈 문자열 또는 서비스 로직에서 null을 처리
+        }
         GetQuestionListResponseDto response = questionService.getQuestionList(searchType, filterType, category, searchKeyword, page-1);
         return ResponseEntity.ok(response);
     }

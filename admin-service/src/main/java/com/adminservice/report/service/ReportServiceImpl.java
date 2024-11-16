@@ -10,6 +10,7 @@ import com.adminservice.penalty.repository.PenaltyRepository;
 import com.adminservice.report.dto.GetReportListResponseDto;
 import com.adminservice.report.dto.GetReportResponseDto;
 import com.adminservice.report.entity.Report;
+import com.adminservice.report.entity.ReportCategory;
 import com.adminservice.report.entity.ReportState;
 import com.adminservice.report.repository.ReportRepository;
 import com.adminservice.user.entity.Member;
@@ -55,7 +56,7 @@ public class ReportServiceImpl implements ReportService {
     }
 
     @Override
-    public GetReportListResponseDto getReportLists(FilterType filterType, int page) {
+    public GetReportListResponseDto getReportLists(FilterType filterType, ReportCategory category, int page) {
         log.info("[Report Service - getReportLists]: 신고사항 리스트 조회 요청이 들어왔습니다. page: {}, filter: {}", page, filterType);
         Pageable pageable = PageRequest.of(page, 10);
 
@@ -65,12 +66,17 @@ public class ReportServiceImpl implements ReportService {
         if (filterType == FilterType.WAIT) {
             spec = spec.and( (root, query, cb) ->
                     cb.equal(root.get("state"), ReportState.WAIT));
-        } else if (filterType == FilterType.COMPLETE) {
-            spec = spec.and( (root, query, cb) ->
-                    cb.equal(root.get("state"), ReportState.COMPLETE));
         } else {
             spec = spec.and( (root, query, cb) ->
-                    cb.notEqual(root.get("state"), ReportState.INACTIVE));
+                    cb.equal(root.get("state"), ReportState.COMPLETE));
+        }
+
+        if (category == ReportCategory.REVIEW) {
+            spec = spec.and( (root, query, cb) ->
+                    cb.equal(root.get("category"), ReportCategory.REVIEW));
+        } else if (category == ReportCategory.COMMENT) {
+            spec = spec.and( (root, query, cb) ->
+                    cb.equal(root.get("category"), ReportCategory.COMMENT));
         }
 
         log.info("[Report Service - getReportLists]: 신고사항 리스트를 조회합니다.");

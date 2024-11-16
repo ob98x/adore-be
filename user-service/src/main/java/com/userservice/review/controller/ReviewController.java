@@ -24,12 +24,16 @@ public class ReviewController {
 
     private final ReviewService reviewService;
 
-    @Operation(summary = "[미사용] 리뷰 리스트 검색 API", description = "리뷰 리스트를 조회합니다.")
+    @Operation(summary = "리뷰 리스트 검색 API", description = "리뷰 리스트를 조회합니다.")
     @GetMapping("/lists/{page}")
     public ResponseEntity<GetReviewListResponseDto> searchReviews(
             @PathVariable("page") int page,
             @RequestParam("type") SearchType searchType,
-            @RequestParam("keyword") String keyword) {
+            @RequestParam(value = "keyword", required = false) String keyword) {
+        if (keyword == null || keyword.trim().isEmpty()) {
+            log.info("[Review Controller - searchReviews]: 검색 키워드가 제공되지 않았습니다. 전체 리스트를 반환합니다.");
+            keyword = ""; // 빈 문자열 또는 서비스 로직에서 null을 처리
+        }
         log.info("[Review Controller - searchReviews]: 리뷰 리스트 조회 요청이 들어왔습니다. type: {}, keyword: {}", searchType, keyword);
         GetReviewListResponseDto response = reviewService.searchReview(searchType, keyword, page-1);
         return ResponseEntity.ok(response);

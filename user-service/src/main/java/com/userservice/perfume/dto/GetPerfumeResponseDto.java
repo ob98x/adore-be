@@ -53,8 +53,11 @@ public class GetPerfumeResponseDto {
     @Schema(description = "수정일", example = "2021-07-01T00:00:00")
     private LocalDateTime updatedAt;
 
+    @Schema(description = "생산 년도", example = "2021")
+    private Integer year;
+
     @Builder
-    public GetPerfumeResponseDto(Long id, String name, String brand, String country, String perfumeDesc, String gender, String top, String middle, String base, int price, String perfumePhoto, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public GetPerfumeResponseDto(Long id, String name, String brand, String country, String perfumeDesc, String gender, String top, String middle, String base, int price, String perfumePhoto, LocalDateTime createdAt, LocalDateTime updatedAt, Integer year) {
         this.id = id;
         this.name = name;
         this.brand = brand;
@@ -68,6 +71,7 @@ public class GetPerfumeResponseDto {
         this.perfumePhoto = perfumePhoto;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.year = year;
     }
 
     public static GetPerfumeResponseDto getPerfume(Perfume perfume) {
@@ -84,6 +88,7 @@ public class GetPerfumeResponseDto {
                 .perfumePhoto(perfume.getPerfumeImg())
                 .createdAt(perfume.getCreatedAt())
                 .updatedAt(perfume.getUpdatedAt())
+                .year(perfume.getYear())
                 .build();
     }
 }

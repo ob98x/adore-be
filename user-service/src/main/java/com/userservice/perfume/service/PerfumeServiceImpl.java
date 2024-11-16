@@ -53,15 +53,20 @@ public class PerfumeServiceImpl implements PerfumeService {
 
         log.info("[Perfume Service - searchPerfume]: 검색 조건을 설정합니다.");
         Specification<Perfume> spec = Specification.where(null);
-        if (searchType == SearchType.NAME) {
-            spec = spec.and((root, query, cb) ->
-                    cb.like(root.get("name"), "%" + keyword + "%"));
-        } else if (searchType == SearchType.BRAND) {
-            spec = spec.and((root, query, cb) ->
-                    cb.like(root.get("brand"), "%" + keyword + "%"));
-        } else {
+        if (keyword.isEmpty()) { // 키워드가 없을 경우
             spec = spec.and((root, query, cb) ->
                     cb.equal(root.get("state"), PerfumeState.ACTIVE));
+        } else { // 키워드가 있을 경우
+            if (searchType == SearchType.NAME) {
+                spec = spec.and((root, query, cb) ->
+                        cb.like(root.get("name"), "%" + keyword + "%"));
+            } else if (searchType == SearchType.BRAND) {
+                spec = spec.and((root, query, cb) ->
+                        cb.like(root.get("brand"), "%" + keyword + "%"));
+            } else {
+                spec = spec.and((root, query, cb) ->
+                        cb.equal(root.get("state"), PerfumeState.ACTIVE));
+            }
         }
 
         log.info("[Perfume Service - searchPerfume]: 향수 리스트를 DB 에서 가져옵니다.");
@@ -85,9 +90,17 @@ public class PerfumeServiceImpl implements PerfumeService {
 
         log.info("[Perfume Service - searchNotes]: 검색 조건을 설정합니다.");
         Specification<Note> spec = Specification.where(null);
-        if (searchType == SearchType.NAME) {
+        if (keyword.isEmpty()) { // 키워드가 없을 경우
             spec = spec.and((root, query, cb) ->
-                    cb.like(root.get("note_nm"), "%" + keyword + "%"));
+                    cb.equal(root.get("state"), PerfumeState.ACTIVE));
+        } else { // 키워드가 있을 경우
+            if (searchType == SearchType.NAME) {
+                spec = spec.and((root, query, cb) ->
+                        cb.like(root.get("note_nm"), "%" + keyword + "%"));
+            } else {
+                spec = spec.and((root, query, cb) ->
+                        cb.equal(root.get("state"), PerfumeState.ACTIVE));
+            }
         }
 
         log.info("[Perfume Service - searchNotes]: 향수 노트 리스트를 DB 에서 가져옵니다.");

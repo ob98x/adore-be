@@ -51,6 +51,9 @@ public class QuestionServiceImpl implements QuestionService {
                 spec = spec.and((root, query, cb) ->
                         cb.like(root.get("applicant").get("email"), "%" + searchKeyword + "%"));
             }
+        } else {
+            spec = spec.and((root, query, cb) ->
+                    cb.notEqual(root.get("state"), QuestionState.INACTIVE));
         }
 
         // 필터 조건 추가
@@ -66,6 +69,9 @@ public class QuestionServiceImpl implements QuestionService {
                 spec = spec.and( (root, query, cb) ->
                         cb.notEqual(root.get("state"), QuestionState.INACTIVE));
             }
+        } else {
+            spec = spec.and( (root, query, cb) ->
+                    cb.notEqual(root.get("state"), QuestionState.INACTIVE));
         }
 
         if (category != null ) {
@@ -89,6 +95,9 @@ public class QuestionServiceImpl implements QuestionService {
                 spec = spec.and( (root, query, cb) ->
                         cb.equal(root.get("category"), QuestionCategory.ETC));
             }
+        } else {
+            spec = spec.and( (root, query, cb) ->
+                    cb.notEqual(root.get("state"), QuestionState.INACTIVE));
         }
 
         log.info("[Question Service - getQuestionList]: 문의사항 리스트를 DB 에서 가져옵니다.");
