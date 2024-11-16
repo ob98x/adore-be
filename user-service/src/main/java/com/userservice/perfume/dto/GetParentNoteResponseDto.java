@@ -12,7 +12,7 @@ import java.util.List;
 public class GetParentNoteResponseDto {
     private Long id;
     private String noteNm;
-    private String noteImg
+    private String noteImg;
 
     @Builder
     public GetParentNoteResponseDto(Long id, String noteNm, String noteImg) {
