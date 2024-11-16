@@ -12,7 +12,5 @@ import java.util.Optional;
 
 @Repository
 public interface PerfumeRepository extends JpaRepository<Perfume, Long>, JpaSpecificationExecutor<Perfume> {
-    List<Perfume> findAllByState(PerfumeState state);
     Optional<Perfume> findByIdAndState(Long id, PerfumeState state);
-    List<Perfume> findTop1000ByState(PerfumeState state);
 }

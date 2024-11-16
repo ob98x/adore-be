@@ -97,7 +97,7 @@ public class PerfumeServiceImpl implements PerfumeService {
         log.info("[Perfume Service - searchNotes]: 검색 조건을 설정합니다.");
         Specification<Note> spec = Specification.where(null);
         spec = spec.and((root, query, cb) ->
-                cb.equal(root.get("parent_note_id"), parentId));
+                cb.equal(root.get("parentNoteId"), parentId));
 
         log.info("[Perfume Service - searchNotes]: 향수 노트 리스트를 DB 에서 가져옵니다.");
         Page<Note> resultPage = noteRepository.findAll(spec, pageable);
@@ -106,6 +106,10 @@ public class PerfumeServiceImpl implements PerfumeService {
         List<GetNoteListResponseDto.NoteListInfo> noteList = resultPage.getContent().stream()
                 .map(GetNoteListResponseDto.NoteListInfo::fromNote)
                 .toList();
+        log.info("[Perfume Service - searchNotes]: 향수 노트 리스트를 반환합니다.");
+        log.info("{}개의 노트를 반환합니다.", noteList.size());
+        log.info("페이지 정보: totalPages: {}, hasNext: {}", resultPage.getTotalPages(), resultPage.hasNext());
+        log.info("note 0 name: {}", noteList.get(0).getNoteNm());
 
         return GetNoteListResponseDto.createResponse(noteList, resultPage.getTotalPages(), resultPage.hasNext());
     }
