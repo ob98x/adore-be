@@ -26,16 +26,16 @@ public class MemberCreateRequestDto {
     @Schema(description = "회원 비밀번호", example = "비밀번호")
     private String password;
 
-    @Schema(description = "회원 닉네임", example = "닉네임")
+    @Schema(description = "회원 생년월일", example = "1990-01-01")
     private LocalDate birthDate;
 
-    @Schema(description = "회원 성별", example = "남성")
+    @Schema(description = "회원 유입경로", example = "유입경로")
     private String inflow;
 
-    @Schema(description = "회원 생년월일", example = "1990-01-01")
+    @Schema(description = "회원 성별", example = "남성")
     private String gender;
 
-    @Schema(description = "회원 권한", example = "USER")
+    @Schema(description = "회원 닉네임", example = "닉네임 1")
     private String nickname;
 
     @Schema(description = "회원 상태", example = "ACTIVE")
