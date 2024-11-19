@@ -14,11 +14,11 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class UserAns extends BaseEntity {
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "survey_id")
     private Survey survey;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member; // 성별은 Member 테이블에서 추출
 
