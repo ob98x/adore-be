@@ -9,7 +9,6 @@ import java.util.List;
 @Getter
 @Setter
 public class RequestFriendSurveyResultDto {
-    private Long memberId;
     private String name;
     private String gender;
     private Integer age;
@@ -18,8 +17,7 @@ public class RequestFriendSurveyResultDto {
     private Integer price;
 
     @Builder
-    public RequestFriendSurveyResultDto(Long memberId, String name, String gender, Integer age, List<SelectNote> notes, String character, Integer price) {
-        this.memberId = memberId;
+    public RequestFriendSurveyResultDto(String name, String gender, Integer age, List<SelectNote> notes, String character, Integer price) {
         this.name = name;
         this.gender = gender;
         this.age = age;
@@ -28,9 +26,8 @@ public class RequestFriendSurveyResultDto {
         this.price = price;
     }
 
-    public static RequestFriendSurveyResultDto of(Long memberId, String name, String gender, Integer age, List<SelectNote> notes, String character, Integer price) {
+    public static RequestFriendSurveyResultDto of(String name, String gender, Integer age, List<SelectNote> notes, String character, Integer price) {
         return RequestFriendSurveyResultDto.builder()
-                .memberId(memberId)
                 .name(name)
                 .gender(gender)
                 .age(age)

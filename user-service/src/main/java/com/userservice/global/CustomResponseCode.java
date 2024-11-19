@@ -34,6 +34,8 @@ public enum CustomResponseCode {
     COMMENT_CREATE_SUCCESS("댓글 작성에 성공하였습니다."),
     COMMENT_DELETE_SUCCESS("댓글 삭제에 성공하였습니다."),
     COMMENT_UPDATE_SUCCESS("댓글 수정에 성공하였습니다."),
-    SATISFACTION_CREATE_SUCCESS("만족도조사 생성에 성공하였습니다.");
+    SATISFACTION_CREATE_SUCCESS("만족도조사 생성에 성공하였습니다."),
+    USER_ANS_DELETE_SUCCESS("설문 삭제에 성공하였습니다."),
+    FRIEND_DELETE_SUCCESS("친구 삭제에 성공하였습니다.");
     private final String message;
 }

@@ -11,7 +11,7 @@ import lombok.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class RecommRes extends BaseEntity {
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY) // 변경
     @JoinColumn(name = "user_ans_id")
     private UserAns userAns;
 

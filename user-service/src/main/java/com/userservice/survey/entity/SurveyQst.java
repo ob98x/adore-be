@@ -13,7 +13,7 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class SurveyQst extends BaseEntity {
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY) // 변경
     @JoinColumn(name = "survey_id")
     private Survey survey;
 

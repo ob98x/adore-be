@@ -10,4 +10,5 @@ import java.util.List;
 @Repository
 public interface RecommResRepository extends JpaRepository<RecommRes, Long>, JpaSpecificationExecutor<RecommRes> {
     List<RecommRes> findAllByUserAnsId(Long userAnsId);
+    void deleteAllByUserAnsId(Long userAnsId);
 }

@@ -10,4 +10,5 @@ import java.util.List;
 @Repository
 public interface FrRecommResRepository extends JpaRepository<FrRecommRes, Long>, JpaSpecificationExecutor<FrRecommRes> {
     List<FrRecommRes> findAllByFriendId(Long friendId);
+    void deleteAllByFriendId(Long friendId);
 }

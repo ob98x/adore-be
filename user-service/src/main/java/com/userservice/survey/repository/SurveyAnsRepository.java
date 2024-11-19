@@ -11,4 +11,6 @@ import java.util.Optional;
 @Repository
 public interface SurveyAnsRepository extends JpaRepository<SurveyAns, Long>, JpaSpecificationExecutor<SurveyAns> {
     List<SurveyAns> findAllBySurveyQstId(Long surveyQstId);
+
+    Optional<SurveyAns> findBySurveyQstId(Long surveyQstId);
 }

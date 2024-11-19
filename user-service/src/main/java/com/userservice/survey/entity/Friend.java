@@ -36,8 +36,12 @@ public class Friend extends BaseEntity {
     @Column(name = "price")
     private int price;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "state")
+    private FriendState state;
+
     @Builder
-    public Friend(Member member, String name, String gender, int age, List<String> preferNotes, String character, int price) {
+    public Friend(Member member, String name, String gender, int age, List<String> preferNotes, String character, int price, FriendState state) {
         this.member = member;
         this.name = name;
         this.gender = gender;
@@ -45,9 +49,10 @@ public class Friend extends BaseEntity {
         this.preferNotes = preferNotes;
         this.character = character;
         this.price = price;
+        this.state = state;
     }
 
-    public static Friend of(Member member, String name, String gender, int age, List<String> preferNotes, String character, int price) {
+    public static Friend of(Member member, String name, String gender, int age, List<String> preferNotes, String character, int price, FriendState state) {
         return Friend.builder()
                 .member(member)
                 .name(name)
@@ -56,6 +61,7 @@ public class Friend extends BaseEntity {
                 .preferNotes(preferNotes)
                 .character(character)
                 .price(price)
+                .state(state)
                 .build();
     }
 }
