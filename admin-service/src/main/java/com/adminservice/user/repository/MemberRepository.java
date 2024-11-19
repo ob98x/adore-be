@@ -19,17 +19,17 @@ public interface MemberRepository extends JpaRepository<Member, Long>, JpaSpecif
     boolean existsMemberByEmail(String email);
     boolean existsMemberByNickname(String nickname);
 
-    @Query(value = "SELECT DATE(m.created_at) as date, COUNT(*) as count " +
-            "FROM member m " +
-            "WHERE m.created_at BETWEEN :startDate AND :endDate " +
-            "GROUP BY DATE(m.created_at) " +
-            "ORDER BY DATE(m.created_at)",
-            nativeQuery = true)
-    List<CountList> findCreatedUserCountByDateRange(
-            @Param("startDate") LocalDateTime startDate,
-            @Param("endDate") LocalDateTime endDate);
+    @Query("SELECT new com.adminservice.statics.dto.CountList(DATE(m.createdAt), COUNT(m)) " +
+            "FROM Member m " +
+            "WHERE m.createdAt BETWEEN :startDate AND :endDate " +
+            "GROUP BY DATE(m.createdAt) " +
+            "ORDER BY DATE(m.createdAt)")
+    List<CountList> findNewUserCountByDateRange(@Param("startDate") LocalDateTime startDate,
+                                                         @Param("endDate") LocalDateTime endDate);
 
-    @Query("SELECT new com.adminservice.statics.dto.CountList(u.lastLoginAt, COUNT(u)) " +
+
+
+    @Query("SELECT new com.adminservice.statics.dto.CountList(DATE(u.lastLoginAt), COUNT(u)) " +
             "FROM Member u " +
             "WHERE u.lastLoginAt BETWEEN :startDate AND :endDate " +
             "GROUP BY u.lastLoginAt " +
@@ -37,7 +37,7 @@ public interface MemberRepository extends JpaRepository<Member, Long>, JpaSpecif
     List<CountList> findActiveCountByDateRange(@Param("startDate") LocalDate startDate,
                                          @Param("endDate") LocalDate endDate);
 
-    @Query("SELECT new com.adminservice.statics.dto.CountList(u.lastLoginAt, COUNT(u)) " +
+    @Query("SELECT new com.adminservice.statics.dto.CountList(DATE(u.lastLoginAt), COUNT(u)) " +
             "FROM Member u " +
             "WHERE u.lastLoginAt < :startDate " +
             "GROUP BY u.lastLoginAt " +
