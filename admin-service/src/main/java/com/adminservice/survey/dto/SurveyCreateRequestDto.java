@@ -13,11 +13,9 @@ public class SurveyCreateRequestDto {
     /**
      * - 작성한 memberId Long
      * - 질문 text, orderState, type, Domain 설정해야함 -> 관리자 페이지에도 이게 필요한데
-     * 관리자 페이지에 노트 검색 같은 것들도 필요한데 시발!
+     * 관리자 페이지에 노트 검색 같은 것들도 필요함
      * - 이 질문에 딸린 답변 리스트 (SurveyAns 참고)
-     * 만약 업데이트를 고려한다면 surveyId까지 추가하면 그만이다.
      */
-    private Long writerMemberId;
     private List<SurveyQuestion> questionList;
 
     @Getter
@@ -82,9 +80,8 @@ public class SurveyCreateRequestDto {
 
     }
 
-    public static SurveyCreateRequestDto of(Long writerMemberId, List<SurveyQuestion> questionList) {
+    public static SurveyCreateRequestDto of(List<SurveyQuestion> questionList) {
         SurveyCreateRequestDto requestDto = new SurveyCreateRequestDto();
-        requestDto.setWriterMemberId(writerMemberId);
         requestDto.setQuestionList(questionList);
         return requestDto;
     }
