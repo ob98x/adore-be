@@ -1,6 +1,8 @@
 package com.adminservice.survey.controller;
 
 import com.adminservice.global.CustomResponseCode;
+import com.adminservice.global.FilterType;
+import com.adminservice.global.SearchType;
 import com.adminservice.survey.dto.GetSurveyListResponseDto;
 import com.adminservice.survey.dto.GetSurveyResponseDto;
 import com.adminservice.survey.dto.SurveyCreateRequestDto;
@@ -22,9 +24,10 @@ public class SurveyController {
     // 1. 설문 생성 API
     @PostMapping("/create")
     public ResponseEntity<CustomResponseCode> createSurvey(
-            @RequestBody SurveyCreateRequestDto dto
+            @RequestBody SurveyCreateRequestDto dto,
+            @RequestHeader("authorization") String authorization
             ){
-        return surveyService.createSurvey(dto);
+        return surveyService.createSurvey(dto, authorization);
     }
 
     // 2. 설문 수정 API -> 사실상 질문 테이블이랑 답변 테이블은 생성에 가까운데 survey 테이블은 안바뀜
@@ -45,9 +48,12 @@ public class SurveyController {
     }
 
     // 4. 설문 목록 조회 API
-    @GetMapping("/list")
-    public ResponseEntity<List<GetSurveyListResponseDto.SurveyListInfo>> getSurveyList() {
-        return ResponseEntity.ok(surveyService.getSurveyList());
+    @GetMapping("/list/{page}")
+    public ResponseEntity<GetSurveyListResponseDto> getSurveyList(
+            @PathVariable("page") int page,
+            @RequestParam("filter") FilterType filterType
+    ) {
+        return ResponseEntity.ok(surveyService.getSurveyList(filterType, page-1));
     }
 
     // 5. 설문 세부 조회 API

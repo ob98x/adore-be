@@ -1,7 +1,9 @@
 package com.adminservice.survey.service;
 
+import com.adminservice.feign.AuthFeignInterface;
 import com.adminservice.global.CustomException;
 import com.adminservice.global.CustomResponseCode;
+import com.adminservice.global.FilterType;
 import com.adminservice.global.ResponseCode;
 import com.adminservice.survey.dto.GetSurveyListResponseDto;
 import com.adminservice.survey.dto.GetSurveyResponseDto;
@@ -18,6 +20,10 @@ import com.adminservice.user.entity.MemberState;
 import com.adminservice.user.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,12 +41,14 @@ public class SurveyServiceImpl implements SurveyService{
     private final SurveyQstRepository surveyQstRepository;
     private final MemberRepository memberRepository;
 
+    private final AuthFeignInterface authFeignInterface;
 
     @Override
     @Transactional
-    public ResponseEntity<CustomResponseCode> createSurvey(SurveyCreateRequestDto dto) {
+    public ResponseEntity<CustomResponseCode> createSurvey(SurveyCreateRequestDto dto, String authorization) {
         // survey 저장
-        Member member = checkConflictMember(dto.getWriterMemberId());
+        Long memberId = getMemberId(authorization);
+        Member member = checkConflictMember(memberId);
         Survey survey = surveyRepository.save(SurveyCreateRequestDto.createSurvey(member));
         // surveyQst, surveyAns 저장
         for(SurveyCreateRequestDto.SurveyQuestion surveyQuestion : dto.getQuestionList()){
@@ -127,11 +135,25 @@ public class SurveyServiceImpl implements SurveyService{
 
     @Override
     @Transactional(readOnly = true)
-    public List<GetSurveyListResponseDto.SurveyListInfo> getSurveyList() {
-        List<Survey> surveys = surveyRepository.findAll();
-        return surveys.stream()
+    public GetSurveyListResponseDto getSurveyList(FilterType filterType, int page) {
+        Pageable pageable = PageRequest.of(page, 10);
+
+        Specification<Survey> spec = Specification.where(null);
+        // 필터 조건 추가
+        if (filterType != null ) {
+            if (filterType == FilterType.ACTIVE) {
+                spec = spec.and((root, query, cb) ->
+                        cb.equal(root.get("state"), SurveyState.ACTIVE));
+            } else if (filterType == FilterType.INACTIVE) {
+                spec = spec.and((root, query, cb) ->
+                        cb.equal(root.get("state"), SurveyState.INACTIVE));
+            }
+        } // 조건이 없으면 전체 조회
+        Page<Survey> surveys = surveyRepository.findAll(spec, pageable);
+        List<GetSurveyListResponseDto.SurveyListInfo> surveyList = surveys.getContent().stream()
                 .map(GetSurveyListResponseDto.SurveyListInfo::fromSurvey)
                 .toList();
+        return GetSurveyListResponseDto.createResponse(surveyList, surveys.getTotalPages(), surveys.hasNext());
     }
 
     private Survey checkConflictSurvey(Long id) {
@@ -153,4 +175,11 @@ public class SurveyServiceImpl implements SurveyService{
         }
         return memberRepository.findById(id).get();
     }
+
+    private Long getMemberId(String authorization) {
+        log.info("[Review Service - getMemberId]: 헤더의 Authorization 을 Access Token 으로 변환해 Token의 정보를 받아옵니다 .authorization to token, token: {}, authorization: {}", authorization, authorization.substring(7));
+        String accessToken = authorization.substring(7);
+        return authFeignInterface.getInfo(accessToken).getMemberId();
+    }
 }
+

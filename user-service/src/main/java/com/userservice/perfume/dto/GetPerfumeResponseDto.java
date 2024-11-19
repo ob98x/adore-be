@@ -79,6 +79,7 @@ public class GetPerfumeResponseDto {
                 .id(perfume.getId())
                 .name(perfume.getName())
                 .brand(perfume.getBrand())
+                .country(perfume.getCountry())
                 .perfumeDesc(perfume.getPerfumeDesc())
                 .gender(perfume.getGender())
                 .top(perfume.getTop())
