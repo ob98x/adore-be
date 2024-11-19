@@ -1,12 +1,12 @@
 package com.adminservice.statics.service;
 
-import com.adminservice.statics.dto.GetStaticsResponseDto;
+import com.adminservice.statics.dto.DateCountDto;
 
 import java.time.LocalDate;
 
 public interface StaticsService {
-    GetStaticsResponseDto getNewUserStatics(LocalDate startDate, LocalDate endDate);
-    GetStaticsResponseDto getInactiveMembers();
-    GetStaticsResponseDto getActiveMembers(LocalDate startDate, LocalDate endDate);
-    GetStaticsResponseDto getRecommendUser(LocalDate startDate, LocalDate endDate);
+    DateCountDto getNewUserStatics(LocalDate startDate, LocalDate endDate);
+    DateCountDto getInactiveMembers(LocalDate startDate);
+    DateCountDto getActiveMembers(LocalDate startDate, LocalDate endDate);
+    DateCountDto getRecommendUser(LocalDate startDate, LocalDate endDate);
 }
