@@ -21,6 +21,7 @@ eureka:
 
 logging:
   level:
+    com.netflix.eureka.registry.AbstractInstanceRegistry: WARN
     root: INFO
   file:
     path: ./logs/discovery-service.log
