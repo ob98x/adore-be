@@ -8,6 +8,7 @@ management:
       application: ${spring.application.name}
 logging:
   level:
+    com.netflix.discovery.shared.resolver.aws.ConfigClusterResolver: WARN
     root: INFO
   file:
     path: ./logs/user-service.log

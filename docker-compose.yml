@@ -1,5 +1,21 @@
 services:
-
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor
+    container_name: cadvisor
+    privileged: true
+    ports:
+      - "8080:8080"
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+      - /dev/disk/:/dev/disk:ro
+    devices:
+      - /dev/kmsg
+    restart: always
+    networks:
+      - msa-network
   # Grafana System Metrics
   node-exporter:
     image: prom/node-exporter:latest
@@ -56,6 +72,7 @@ services:
       - GF_SERVER_ROOT_URL=${GF_SERVER_ROOT_URL}
       - ./grafana/provisioning:/etc/grafana/provisioning
       - ./grafana/dashboard:/dashboard
+      - GF_SERVER_SERVE_FROM_SUB_PATH=true
     restart: always
     networks:
       - msa-network

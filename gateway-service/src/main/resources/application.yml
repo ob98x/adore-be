@@ -2,6 +2,8 @@ server:
   port: 8111
 logging:
   level:
+    org.springframework.cloud.gateway: INFO
+    reactor.netty: INFO
     root: INFO
   file:
     path: ./logs/gateway-service.log
