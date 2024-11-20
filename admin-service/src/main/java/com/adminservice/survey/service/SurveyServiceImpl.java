@@ -59,7 +59,7 @@ public class SurveyServiceImpl implements SurveyService{
                 log.info("답변 List 생성 시작 : {}", surveyAnswer.getValue());
                 Long nxtQstId = -1L;
                 if(surveyAnswer.getNxtQstId() != -1L) {
-                    nxtQstId = qst.getId()+surveyAnswer.getNxtQstId()-1L;
+                    nxtQstId = qst.getId()+surveyAnswer.getNxtQstId()-1L; // 해당 질문을 기준으로 설정해야 함
                 }
                 log.info("다음 질문 정해짐 : {}", nxtQstId);
                 surveyAns.add(SurveyCreateRequestDto.SurveyAnswer.createSurveyAns(qst, nxtQstId, surveyAnswer));
@@ -106,13 +106,13 @@ public class SurveyServiceImpl implements SurveyService{
         Survey survey = checkConflictSurvey(surveyId);
         survey.setState(SurveyState.INACTIVE);
         surveyRepository.save(survey);
-        // 질문 가져오기
-        List<SurveyQst> qst = surveyQstRepository.findAllBySurveyId(surveyId);
-        // 각 질문의 답변 삭제 후 질문 삭제
-        for(SurveyQst q : qst) {
-            surveyAnsRepository.deleteAllBySurveyQstId(q.getId());
-            surveyQstRepository.deleteById(q.getId());
-        }
+//        // 질문 가져오기
+//        List<SurveyQst> qst = surveyQstRepository.findAllBySurveyId(surveyId);
+//        // 각 질문의 답변 삭제 후 질문 삭제
+//        for(SurveyQst q : qst) {
+//            surveyAnsRepository.deleteAllBySurveyQstId(q.getId());
+//            surveyQstRepository.deleteById(q.getId());
+//        }
         return ResponseEntity.ok(CustomResponseCode.SURVEY_DELETE_SUCCESS);
     }
 

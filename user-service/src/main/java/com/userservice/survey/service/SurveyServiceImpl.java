@@ -66,7 +66,7 @@ public class SurveyServiceImpl implements SurveyService{
     @Transactional(readOnly = true)
     public GetQuestionsDto getFirstQuestions() {
         // 설문 불러오기
-        Survey survey = findByState(SurveyState.ACTIVE);
+        Survey survey = findTopByState(SurveyState.ACTIVE); // 가장 상위의 active 설문 가져오기
         // 질문 불러오기
         SurveyQst question = findStartAndEndQst(survey.getId(), SurveyQstOrderState.START);
         // 답변 불러오기
@@ -83,18 +83,24 @@ public class SurveyServiceImpl implements SurveyService{
     public GetQuestionsDto getAdditionalQuestions(Long surveyId, List<Long> nxtQstIds) {
         Survey survey = findSurveyByIdAndState(surveyId, SurveyState.ACTIVE);
         // 질문 세팅 (링크된 질문들 모두 가져오기)
+        log.info("나머지 질문 가져오기 - 설문 가져오기");
         List<SurveyQst> questions = new ArrayList<SurveyQst>();
         for(Long nxtQstId : nxtQstIds){
             Long linkedQstId = nxtQstId;
-            questions.add(findMiddleQst(nxtQstId, SurveyQstOrderState.MIDDLE));
+//            questions.add(findMiddleQst(nxtQstId, SurveyQstOrderState.MIDDLE));
+            log.info("나머지 질문 가져오기 - 질문가져오기 : {}", nxtQstId);
             while(linkedQstId != -1L){
-                SurveyAns ans = findSingleSurveyAns(linkedQstId);
-                questions.add(findMiddleQst(ans.getSurveyQst().getId(), SurveyQstOrderState.MIDDLE));
+                questions.add(findMiddleQst(linkedQstId, SurveyQstOrderState.MIDDLE));
+                List<SurveyAns> answers = surveyAnsRepository.findAllBySurveyQstId(linkedQstId);
+                SurveyAns ans = answers.get(1);
+                log.info("나머지 질문 가져오기 - 다음 질문가져오기 : {}", ans.getNxtQstId());
+//                questions.add(findMiddleQst(ans.getNxtQstId(), SurveyQstOrderState.MIDDLE));
                 linkedQstId = ans.getNxtQstId();
             }
         }
         // 마지막 질문 포함하기
         questions.add(findStartAndEndQst(surveyId, SurveyQstOrderState.END));
+        log.info("질문 세팅 완료");
 
         // 각 질문에 대한 답변 세팅
         List<GetQuestionsDto.QstAnsSet> qstAnsSets = new ArrayList<>();
@@ -105,6 +111,7 @@ public class SurveyServiceImpl implements SurveyService{
                     .toList();
             qstAnsSets.add(GetQuestionsDto.QstAnsSet.fromQst(surveyQst, answers));
         }
+        log.info("답변 세팅 완료");
         return GetQuestionsDto.createResponses(qstAnsSets, surveyId);
     }
 
@@ -355,8 +362,8 @@ public class SurveyServiceImpl implements SurveyService{
         }
     }
 
-    private Survey findByState(SurveyState state) {
-        return surveyRepository.findByState(state)
+    private Survey findTopByState(SurveyState state) {
+        return surveyRepository.findTopByStateOrderByCreatedAt(state)
                 .orElseThrow(()-> new CustomException(ResponseCode.SURVEY_NOT_FOUND));
     }
     private Survey findSurveyByIdAndState(Long surveyId, SurveyState state) {

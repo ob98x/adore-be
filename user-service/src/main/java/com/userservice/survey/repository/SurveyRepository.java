@@ -12,4 +12,5 @@ import java.util.Optional;
 public interface SurveyRepository extends JpaRepository<Survey, Long>, JpaSpecificationExecutor<Survey> {
     Optional<Survey> findByIdAndState(Long id, SurveyState state);
     Optional<Survey> findByState(SurveyState state);
+    Optional<Survey> findTopByStateOrderByCreatedAt(SurveyState state);
 }

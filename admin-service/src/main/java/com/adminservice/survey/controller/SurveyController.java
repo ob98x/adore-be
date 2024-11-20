@@ -51,7 +51,7 @@ public class SurveyController {
     @GetMapping("/list/{page}")
     public ResponseEntity<GetSurveyListResponseDto> getSurveyList(
             @PathVariable("page") int page,
-            @RequestParam("filter") FilterType filterType
+            @RequestParam(value = "filter", required = false) FilterType filterType
     ) {
         return ResponseEntity.ok(surveyService.getSurveyList(filterType, page-1));
     }
