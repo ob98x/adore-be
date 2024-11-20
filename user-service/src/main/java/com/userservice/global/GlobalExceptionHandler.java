@@ -18,26 +18,20 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 @Slf4j
 public class GlobalExceptionHandler {
 
+
     // 직접 정의한 에러
     @ExceptionHandler(CustomException.class)
     protected ResponseEntity<ErrorResponse> handleCustomException(final CustomException e) {
+        log.error("[ Auth Service - GlobalExceptionHandler ] CustomException errorResponse : {}", e.getResponseCode().getMessage());
         final ErrorResponse errorResponse = ErrorResponse.of(e.getResponseCode());
         return ResponseEntity
                 .status(e.getResponseCode().getStatus())
                 .body(errorResponse);
     }
 
-    // 지원하지 않는 HttpRequestMethod
-    @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
-    protected ResponseEntity<ErrorResponse> handleHttpRequestMethodNotSupportedException() {
-        final ErrorResponse errorResponse = ErrorResponse.of(ResponseCode.METHOD_NOT_ALLOWED);
-        return ResponseEntity
-                .status(ResponseCode.METHOD_NOT_ALLOWED.getStatus())
-                .body(errorResponse);
-    }
-
     @ExceptionHandler(Exception.class)
     protected ResponseEntity<ErrorResponse> handleException() {
+        log.error("[ Auth Service - GlobalExceptionHandler ] Exception errorResponse : {}", ResponseCode.INTERNAL_SERVER_ERROR.getMessage());
         final ErrorResponse errorResponse = ErrorResponse.of(ResponseCode.INTERNAL_SERVER_ERROR);
         return ResponseEntity
                 .status(ResponseCode.INTERNAL_SERVER_ERROR.getStatus())
@@ -47,6 +41,7 @@ public class GlobalExceptionHandler {
     //validation exception 처리
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResponse> processValidationError(MethodArgumentNotValidException e) {
+        log.error("[ Auth Service - GlobalExceptionHandler ] MethodArgumentNotValidException errorResponse : {}", e.getBindingResult().getAllErrors().get(0).getDefaultMessage());
         final ErrorResponse errorResponse = ErrorResponse.of(ResponseCode.BAD_REQUEST,
                 e.getBindingResult().getAllErrors().get(0).getDefaultMessage());
         return ResponseEntity
@@ -58,6 +53,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     public ResponseEntity<ErrorResponse> methodArgumentTypeMismatchExceptionError(
             MethodArgumentTypeMismatchException e) {
+        log.error("[ Auth Service - GlobalExceptionHandler ] MethodArgumentTypeMismatchException errorResponse : {}", e.getMessage());
         final ErrorResponse errorResponse = ErrorResponse.of(ResponseCode.BAD_REQUEST, e);
         return ResponseEntity
                 .status(ResponseCode.BAD_REQUEST.getStatus())
@@ -68,6 +64,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<ErrorResponse> handleHttpMessageNotReadable(
             HttpMessageNotReadableException e) {
+        log.error("[ Auth Service - GlobalExceptionHandler ] HttpMessageNotReadableException errorResponse : {}", e.getMessage());
         final ErrorResponse errorResponse = ErrorResponse.of(ResponseCode.BAD_REQUEST, e);
         return ResponseEntity
                 .status(ResponseCode.BAD_REQUEST.getStatus())
@@ -75,20 +72,12 @@ public class GlobalExceptionHandler {
 
     }
 
-    //지원하지 않는 media type 에러
-    @ExceptionHandler(HttpMediaTypeNotSupportedException.class)
-    public ResponseEntity<ErrorResponse> httpMediaTypeNotSupportedExceptionError(
-            HttpMediaTypeNotSupportedException e) {
-        final ErrorResponse errorResponse = ErrorResponse.of(ResponseCode.BAD_REQUEST, e);
-        return ResponseEntity
-                .status(e.getStatusCode())
-                .body(errorResponse);
-    }
 
     //외부 api client 에러
     @ExceptionHandler(HttpClientErrorException.class)
     public ResponseEntity<ErrorResponse> httpMediaTypeNotSupportedExceptionError(
             HttpClientErrorException e) {
+        log.error("[ Auth Service - GlobalExceptionHandler ] HttpClientErrorException errorResponse : {}", e.getMessage());
         final ErrorResponse errorResponse = ErrorResponse.of(ResponseCode.INTERNAL_SERVER_ERROR, e);
         return ResponseEntity
                 .status(e.getStatusCode())
@@ -98,7 +87,9 @@ public class GlobalExceptionHandler {
     //외부 api server 에러
     @ExceptionHandler(HttpServerErrorException.class)
     public ResponseEntity<ErrorResponse> httpServerErrorExceptionError(HttpServerErrorException e) {
+        log.error("[ Auth Service - GlobalExceptionHandler ] HttpServerErrorException errorResponse : {}", e.getMessage());
         final ErrorResponse errorResponse = ErrorResponse.of(ResponseCode.INTERNAL_SERVER_ERROR, e);
+        log.info("HttpServerErrorException errorResponse : {}", errorResponse.getMessage());
         return ResponseEntity
                 .status(e.getStatusCode())
                 .body(errorResponse);

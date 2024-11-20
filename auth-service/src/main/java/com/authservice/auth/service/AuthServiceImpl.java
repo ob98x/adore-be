@@ -42,6 +42,7 @@ public class AuthServiceImpl implements AuthService {
     private final Duration expireTime = Duration.ofSeconds(864000); // 2 weeks
 
     @Override
+    @Transactional
     public LoginResponseDto login(LoginRequestDto loginRequestDto) {
         Member member = checkConflictMember(loginRequestDto.getEmail());
 

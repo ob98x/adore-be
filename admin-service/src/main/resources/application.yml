@@ -10,6 +10,7 @@ management:
 logging:
   level:
     root: INFO
+    com.netflix.discovery.shared.resolver.aws.ConfigClusterResolver: WARN
   file:
     path: ./logs/admin-service.log
 server:
@@ -21,9 +22,11 @@ springdoc:
     path: /api/admin/v3/api-docs
 spring:
   jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
     database: mysql
+
   datasource:
-    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://${MY_SQL_HOST}:3306/adore
     username: ${MY_SQL_USER}
     password: ${MY_SQL_PASSWORD}
