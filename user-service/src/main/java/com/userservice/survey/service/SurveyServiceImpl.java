@@ -65,14 +65,18 @@ public class SurveyServiceImpl implements SurveyService{
     @Override
     @Transactional(readOnly = true)
     public GetQuestionsDto getFirstQuestions() {
+        log.info("[Survey Service - getFirstQuestions]: 첫번째 질문을 조회합니다.");
         // 설문 불러오기
         Survey survey = findTopByState(SurveyState.ACTIVE); // 가장 상위의 active 설문 가져오기
+        log.info("[Survey Service - getFirstQuestions]: 가장 최근의 설문을 조회합니다. surveyId : {}", survey.getId());
         // 질문 불러오기
         SurveyQst question = findStartAndEndQst(survey.getId(), SurveyQstOrderState.START);
+        log.info("[Survey Service - getFirstQuestions]: {}번 설문의 질문을 조회합니다. qstId : {}", survey.getId(), question.getId());
         // 답변 불러오기
         List<GetQuestionsDto.AnsSet> answers = findAnswers(question.getId()).stream()
                 .map(GetQuestionsDto.AnsSet::fromAns)
                 .toList();
+        log.info("[Survey Service - getFirstQuestions]: {}번 질문의 답변 셋을 조회합니다.", survey.getId());
         // dto 생성
         GetQuestionsDto.QstAnsSet qstAnsSet = GetQuestionsDto.QstAnsSet.fromQst(question, answers);
         return GetQuestionsDto.createSingleResponse(qstAnsSet, survey.getId());
@@ -81,16 +85,14 @@ public class SurveyServiceImpl implements SurveyService{
     @Override
     @Transactional(readOnly = true)
     public GetQuestionsDto getAdditionalQuestions(Long surveyId, List<Long> nxtQstIds) {
-        Survey survey = findSurveyByIdAndState(surveyId, SurveyState.ACTIVE);
+//        Survey survey = findSurveyByIdAndState(surveyId, SurveyState.ACTIVE);
         // 질문 세팅 (링크된 질문들 모두 가져오기)
-        log.info("나머지 질문 가져오기 - 설문 가져오기");
         List<SurveyQst> questions = new ArrayList<SurveyQst>();
         for(Long nxtQstId : nxtQstIds){
             Long linkedQstId = nxtQstId;
-//            questions.add(findMiddleQst(nxtQstId, SurveyQstOrderState.MIDDLE));
-            log.info("나머지 질문 가져오기 - 질문가져오기 : {}", nxtQstId);
+            log.info("[Survey Service - getAdditionalQuestions]: 첫번째 질문에서 선택한 답변과 연계된 질문을 조회합니다. surveyId : {}, nxtQstId : {}",surveyId, nxtQstId);
             while(linkedQstId != -1L){
-                log.info("while start");
+                log.info("[Survey Service - getAdditionalQuestions]: while start, 다음 질문 아이디가 -1이 나올때까지 반복하며 질문을 조회하고 응답에 추가합니다.");
 
                 log.info("linkedQstId : {}", linkedQstId);
                 SurveyQst surveyQst = findMiddleQst(linkedQstId, SurveyQstOrderState.MIDDLE);
@@ -102,46 +104,51 @@ public class SurveyServiceImpl implements SurveyService{
                 List<SurveyAns> answers = surveyAnsRepository.findAllBySurveyQstId(linkedQstId);
                 log.info("answer find end, {}", answers.stream().toList());
 
-                SurveyAns ans = answers.get(1);
+                SurveyAns ans = answers.get(0);
                 log.info("answer : {}", ans.getId());
-                log.info("나머지 질문 가져오기 - 다음 질문가져오기 : {}", ans.getNxtQstId());
-//                questions.add(findMiddleQst(ans.getNxtQstId(), SurveyQstOrderState.MIDDLE));
+                log.info("답변에 연결된 nxtQstId : {}", ans.getNxtQstId());
                 linkedQstId = ans.getNxtQstId();
             }
         }
         // 마지막 질문 포함하기
         questions.add(findStartAndEndQst(surveyId, SurveyQstOrderState.END));
-        log.info("질문 세팅 완료");
+        log.info("[Survey Service - getAdditionalQuestions]: 연계된 질문을 모두 조회했습니다.");
 
         // 각 질문에 대한 답변 세팅
-        List<GetQuestionsDto.QstAnsSet> qstAnsSets = new ArrayList<>();
+        List<GetQuestionsDto.QstAnsSet> qstAnsSets = new ArrayList<GetQuestionsDto.QstAnsSet>();
         for(SurveyQst surveyQst : questions) {
+            log.info("[Survey Service - getAdditionalQuestions]: 조회한 각 질문들의 답변을 조회합니다. qstId : {}", surveyQst.getId());
             // 답변 불러오기
             List<GetQuestionsDto.AnsSet> answers = findAnswers(surveyQst.getId()).stream()
                     .map(GetQuestionsDto.AnsSet::fromAns)
                     .toList();
-            qstAnsSets.add(GetQuestionsDto.QstAnsSet.fromQst(surveyQst, answers));
+            log.info("[Survey Service - getAdditionalQuestions]: {}번 질문의 답변을 조회했습니다. answers : {}", surveyQst.getId(), answers.stream().toList());
+            GetQuestionsDto.QstAnsSet ansSet = GetQuestionsDto.QstAnsSet.fromQst(surveyQst, answers);
+            qstAnsSets.add(ansSet);
         }
-        log.info("답변 세팅 완료");
+        log.info("[Survey Service - getAdditionalQuestions]: 연계된 질문과 답변을 모두 조회했습니다.");
         return GetQuestionsDto.createResponses(qstAnsSets, surveyId);
     }
 
     @Override
     @Transactional
     public GetRecommendPerfumes saveSurveyResultAndGetRecommendPerfume(RequestSurveyResultDto dto, String authorization) {
+        log.info("[Survey Service - saveSurveyResultAndGetRecommendPerfume]: 설문 결과를 저장하고 추천을 요청합니다. surveyId : {}", dto.getSurveyId());
         // 설문과 멤버 테이블 불러오기
         Long memberId = getMemberId(authorization);
         Member member = findMember(memberId, MemberState.ACTIVE);
         Survey survey = findSurveyByIdAndState(dto.getSurveyId(), SurveyState.ACTIVE);
         // 데이터 변환
-        List<String> notes = new ArrayList<>();
+        List<String> notes = new ArrayList<String>();
         for(SelectNote note : dto.getNotes()){
+            log.info("[Survey Service - saveSurveyResultAndGetRecommendPerfume]: 사용자가 선택한 노트입니다. note : {}", note);
             notes.add(note.getNoteName());
         }
         // 사용자 답변 테이블에 저장
         UserAns userAns = userAnsRepository.save(UserAns.of(survey, member, notes, dto.getPrice(), UserAnsState.ACTIVE));
         // 설문 사용횟수 증가 후 저장
         survey.setSurveyCnt(survey.getSurveyCnt()+1);
+        log.info("[Survey Service - saveSurveyResultAndGetRecommendPerfume]: 작성한 설문을 저장하고 설문 사용횟수를 증가시킵니다. surveyId : {}, surveyCnt: {}", survey.getId(), survey.getSurveyCnt());
         surveyRepository.save(survey);
 
         // fastapi에 향수 추천을 요청
@@ -154,41 +161,47 @@ public class SurveyServiceImpl implements SurveyService{
     @Override
     @Transactional
     public void saveSatisfactionResult(SatisfactionResultDto dto) {
+        log.info("[Survey Service - saveSatisfactionResult]: 설문 결과에 대한 만족도 조사 결과를 저장합니다. userAnsId : {}",dto.getUserAnsId());
         satisSurveyRepository.save(SatisSurvey.of(findUserAnswer(dto.getUserAnsId(), UserAnsState.ACTIVE), dto.getRating(), dto.getReason()));
     }
 
     @Override
     @Transactional(readOnly = true)
     public GetRecommendPerfumes getRecommendPerfumeResult(Long userAnsId) {
+        log.info("[Survey Service - getRecommendPerfumeResult]: 추천 결과를 세부조회합니다. userAnsId : {}", userAnsId);
         UserAns userAns = findUserAnswer(userAnsId, UserAnsState.ACTIVE);
         // userAns로 이용해서 만족도 조사 여부 조회
         Boolean hasSatisSurvey = satisSurveyRepository.findByUserAnsId(userAns.getId()).isPresent();
+        log.info("[Survey Service - getRecommendPerfumeResult]: 만족도 조사 여부를 확인합니다. : {}", hasSatisSurvey);
         // userAnsId로 추천 결과 테이블 조회
         List<RecommRes> recommResList = recommResRepository.findAllByUserAnsId(userAns.getId());
         // dto 생성
-        List<GetRecommendPerfume> perfumes = new ArrayList<>();
+        List<GetRecommendPerfume> perfumes = new ArrayList<GetRecommendPerfume>();
 
         for(RecommRes res : recommResList) {
+            log.info("[Survey Service - getRecommendPerfumeResult]: 추천한 향수들을 조회합니다. : {}", res.getRecommPerfumeNm());
             perfumes.add(GetRecommendPerfume.fromPerfume(findPerfume(res.getRecommPerfumeId(), PerfumeState.ACTIVE)));
         }
 
-        return GetRecommendPerfumes.toMe(perfumes, hasSatisSurvey);
+        return GetRecommendPerfumes.toMe(userAnsId, perfumes, hasSatisSurvey);
     }
 
     @Override
     @Transactional
     public GetRecommendPerfumes saveFriendSurveyResultAndGetRecommendPerfume(RequestFriendSurveyResultDto dto, String authorization) {
+        log.info("[Survey Service - saveFriendSurveyResultAndGetRecommendPerfume]: 친구 설문 결과를 저장하고 추천을 요청합니다. 친구이름 : {}", dto.getName());
 
         Long memberId = getMemberId(authorization);
         Member member = findMember(memberId, MemberState.ACTIVE);
         // 데이터 변환
-        List<String> notes = new ArrayList<>();
+        List<String> notes = new ArrayList<String>();
         for(SelectNote note : dto.getNotes()){
+            log.info("[Survey Service - saveFriendSurveyResultAndGetRecommendPerfume]: 친구 선호 노트입니다. note : {}", note);
             notes.add(note.getNoteName());
         }
         // Friend 테이블 저장
         Friend friend = friendRepository.save(Friend.of(member, dto.getName(), dto.getGender(), dto.getAge(), notes, dto.getCharacter(), dto.getPrice(), FriendState.ACTIVE));
-
+        log.info("[Survey Service - saveFriendSurveyResultAndGetRecommendPerfume]: 친구 정보와 설문 내용을 저장합니다. friendId : {}", friend.getId());
         // fastapi에 향수 추천을 요청
         // 전달할 dto 생성
         RequestRecommedDto reqDto = RequestRecommedDto.toFastApiServer(dto.getNotes(), dto.getPrice(), friend.getGender());
@@ -199,6 +212,7 @@ public class SurveyServiceImpl implements SurveyService{
     @Override
     @Transactional(readOnly = true)
     public GetRecommendPerfumes getFriendRecommendPerfumeResult(Long friendId) {
+        log.info("[Survey Service - getFriendRecommendPerfumeResult]: 친구에게 추천한 결과를 세부조회합니다. friendId : {}", friendId);
         Friend friend = findFriend(friendId, FriendState.ACTIVE);
         // 친구 추천 결과 테이블 조회
         List<FrRecommRes> recommResList = frRecommResRepository.findAllByFriendId(friend.getId());
@@ -207,10 +221,11 @@ public class SurveyServiceImpl implements SurveyService{
         List<GetRecommendPerfume> perfumes = new ArrayList<>();
 
         for(FrRecommRes res : recommResList) {
+            log.info("[Survey Service - getFriendRecommendPerfumeResult]: 추천한 향수들을 조회합니다. : {}", res.getRecommPerfumeNm());
             perfumes.add(GetRecommendPerfume.fromPerfume(findPerfume(res.getRecommPerfumeId(), PerfumeState.ACTIVE)));
         }
 
-        return GetRecommendPerfumes.toFriend(perfumes);
+        return GetRecommendPerfumes.toFriend(friendId, perfumes);
     }
 
     @Override
@@ -218,11 +233,12 @@ public class SurveyServiceImpl implements SurveyService{
     public GetSurveyResultListResponseDto getSurveyResultList(SearchType searchType, String keyword, int page, String authorization) {
         Pageable pageable = PageRequest.of(page, 10);
         Long memberId = getMemberId(authorization);
+        log.info("[Survey Service - getSurveyResultList]: 사용자 ID : {} 의 추천 결과 목록을 조회합니다. searchType : {}, keyword : {}, page : {}", memberId, searchType, keyword, page);
 
         Specification<UserAns> spec = Specification.where(null);
+        spec = spec.and((root, query, cb) ->
+                cb.equal(root.get("member").get("id"), memberId));
         if (keyword.isEmpty()) { // 키워드가 없을 경우
-            spec = spec.and((root, query, cb) ->
-                    cb.equal(root.get("member_id"), memberId));
             spec = spec.and((root, query, cb) ->
                     cb.equal(root.get("state"), UserAnsState.ACTIVE));
         } else { // 키워드가 있을 경우
@@ -231,15 +247,15 @@ public class SurveyServiceImpl implements SurveyService{
                         cb.like(root.get("select_notes"), "%" + keyword + "%"));
             } else {
                 spec = spec.and((root, query, cb) ->
-                        cb.equal(root.get("member_id"), memberId));
-                spec = spec.and((root, query, cb) ->
                         cb.equal(root.get("state"), PerfumeState.ACTIVE));
             }
         }
+        log.info("[Survey Service - getSurveyResultList]: 추천 결과 목록을 DB에서 조회합니다.");
         Page<UserAns> listPage = userAnsRepository.findAll(spec, pageable);
 
-        List<GetSurveyResultListResponseDto.SurveyListInfo> surveyList = new ArrayList<>();
+        List<GetSurveyResultListResponseDto.SurveyListInfo> surveyList = new ArrayList<GetSurveyResultListResponseDto.SurveyListInfo>();
         for(UserAns userAns : listPage.getContent()) {
+            log.info("[Survey Service - getSurveyResultList]: 각 추천 목록에서 보여줄 항목들을 불러옵니다. userAnsId : {}", userAns.getId());
             // 향수 이름들 가져오기
             List<RecommRes> recommRes = recommResRepository.findAllByUserAnsId(userAns.getId());
             List<RecommendPerfumeNameList> list = recommRes.stream()
@@ -255,31 +271,31 @@ public class SurveyServiceImpl implements SurveyService{
     public GetFriendResultListResponseDto getFriendResultList(SearchType searchType, String keyword, int page, String authorization) {
         Pageable pageable = PageRequest.of(page, 10);
         Long memberId = getMemberId(authorization);
+        log.info("[Survey Service - getFriendResultList]:  사용자 ID : {}의 친구 추천 결과 목록을 조회합니다.", memberId);
 
         Specification<Friend> spec = Specification.where(null);
+        spec = spec.and((root, query, cb) ->
+                cb.equal(root.get("member").get("id"), memberId));
         if (keyword.isEmpty()) { // 키워드가 없을 경우
             spec = spec.and((root, query, cb) ->
-                    cb.equal(root.get("member_id"), memberId));
-            spec = spec.and((root, query, cb) ->
-                    cb.equal(root.get("state"), FriendState.ACTIVE)); // Friend
+                    cb.equal(root.get("state"), FriendState.ACTIVE));
         } else { // 키워드가 있을 경우
             if (searchType == SearchType.NAME) {
                 spec = spec.and((root, query, cb) ->
                         cb.like(root.get("name"), "%" + keyword + "%"));
             } else if (searchType == SearchType.GENDER) {
                 spec = spec.and((root, query, cb) ->
-                        cb.like(root.get("name"), "%" + keyword + "%"));
+                        cb.like(root.get("gender"), "%" + keyword + "%"));
             }
             else {
-                spec = spec.and((root, query, cb) ->
-                        cb.equal(root.get("member_id"), memberId));
                 spec = spec.and((root, query, cb) ->
                         cb.equal(root.get("state"), FriendState.ACTIVE));
             }
         }
-
+        log.info("[Survey Service - getFriendResultList]: 친구 추천 결과 목록을 DB에서 조회합니다.");
         Page<Friend> listPage = friendRepository.findAll(spec, pageable);
 
+        log.info("[Survey Service - getFriendResultList]: 친구 추천 결과 목록 DTO를 생성합니다.");
         List<GetFriendResultListResponseDto.FriendListInfo> friendList = listPage.getContent().stream()
                 .map(GetFriendResultListResponseDto.FriendListInfo::fromFriend)
                 .toList();
@@ -289,14 +305,17 @@ public class SurveyServiceImpl implements SurveyService{
     @Override
     @Transactional
     public ResponseEntity<CustomResponseCode> deleteUserAns(Long userAnsId, String authorization) {
+        log.info("[Survey Service - deleteUserAns]: {}번 설문 결과를 삭제합니다.", userAnsId);
         UserAns userAns = findUserAnswer(userAnsId,UserAnsState.ACTIVE);
         Long requestMemberId = getMemberId(authorization);
         checkAuthorizeMember(userAns.getMember().getId(), requestMemberId);
 
         userAns.setState(UserAnsState.INACTIVE);
         // 추천 결과 삭제 필요
+        log.info("[Survey Service - deleteUserAns]: 설문 결과에 포함된 추천 결과를 삭제합니다.(hard delete)");
         recommResRepository.deleteAllByUserAnsId(userAns.getId());
         // 이후 저장
+        log.info("[Survey Service - deleteUserAns]: 설문 결과를 삭제합니다.(soft delete)");
         userAnsRepository.save(userAns);
         return ResponseEntity.ok(CustomResponseCode.USER_ANS_DELETE_SUCCESS);
     }
@@ -304,34 +323,40 @@ public class SurveyServiceImpl implements SurveyService{
     @Override
     @Transactional
     public ResponseEntity<CustomResponseCode> deleteFriend(Long friendId, String authorization) {
+        log.info("[Survey Service - deleteFriend]: {}번 친구 설문 결과를 삭제합니다.", friendId);
         Friend friend = findFriend(friendId, FriendState.ACTIVE);
         Long requestMemberId = getMemberId(authorization);
         checkAuthorizeMember(friend.getMember().getId(), requestMemberId);
 
         friend.setState(FriendState.INACTIVE);
         // 추천 결과 삭제 필요
+        log.info("[Survey Service - deleteFriend]: 친구 설문 결과에 포함된 추천 결과를 삭제합니다.(hard delete)");
         frRecommResRepository.deleteAllByFriendId(friend.getId());
         // 이후 저장
+        log.info("[Survey Service - deleteFriend]: 친구 설문 결과를 삭제합니다.(soft delete)");
         friendRepository.save(friend);
         return ResponseEntity.ok(CustomResponseCode.FRIEND_DELETE_SUCCESS);
     }
 
     private GetRecommendResultDto getRecommendResult(RequestRecommedDto dto, Long id) {
+        log.info("[Survey Service - getRecommendResult]: 요청한 설문 결과의 아이디 : {}", id);
         String apiUrl = "/recomm/perfumes/" + id;
-        log.info("requestURi : {}",apiUrl);
 
         // HTTP POST 요청 보내기
         ResponseEntity<GetRecommendResultDto> responseEntity = restTemplate.postForEntity(apiUrl, dto, GetRecommendResultDto.class);
-        log.info("ResponseEntity : {}", responseEntity);
+        log.info("[Survey Service - getRecommendResult]: 추천 서버로부터 응답을 받았습니다.");
+
         // 응답 값
         return responseEntity.getBody();
     }
     private GetRecommendPerfumes requestRecommendPerfume(RequestRecommedDto dto, UserAns userAns) {
+        Long userAnsId = userAns.getId();
+        log.info("[Survey Service - requestRecommendPerfume]: userAnsId {}번 설문 결과로 추천 서버에 향수 추천을 요청합니다.", userAnsId);
 
-        GetRecommendResultDto responseBody = getRecommendResult(dto, userAns.getId());
+        GetRecommendResultDto responseBody = getRecommendResult(dto, userAnsId);
 
-        List<RecommRes> recommRes = new ArrayList<>();
-        List<GetRecommendPerfume> perfumes = new ArrayList<>();
+        List<RecommRes> recommRes = new ArrayList<RecommRes>();
+        List<GetRecommendPerfume> perfumes = new ArrayList<GetRecommendPerfume>();
         try {
             log.info("recommend perfume response : {}", responseBody.toString());
 
@@ -343,19 +368,20 @@ public class SurveyServiceImpl implements SurveyService{
             recommResRepository.saveAll(recommRes);
 
 
-            return GetRecommendPerfumes.toMe(perfumes, false);
+            return GetRecommendPerfumes.toMe(userAnsId, perfumes, false);
         } catch (Exception e){
-            log.error("no response", e);
+            log.error("no recommend response", e);
             throw new CustomException(ResponseCode.RECOMMEND_NOT_FOUND);
         }
 
     }
     private GetRecommendPerfumes requestFriendRecommendPerfume(RequestRecommedDto dto, Friend friend) {
+        Long friendId = friend.getId();
+        log.info("[Survey Service - requestFriendRecommendPerfume]: friendId {}번 설문 결과로 추천 서버에 향수 추천을 요청합니다.", friendId);
+        GetRecommendResultDto responseBody = getRecommendResult(dto, friendId);
 
-        GetRecommendResultDto responseBody = getRecommendResult(dto, friend.getId());
-
-        List<FrRecommRes> recommRes = new ArrayList<>();
-        List<GetRecommendPerfume> perfumes = new ArrayList<>();
+        List<FrRecommRes> recommRes = new ArrayList<FrRecommRes>();
+        List<GetRecommendPerfume> perfumes = new ArrayList<GetRecommendPerfume>();
         try {
             log.info("recommend perfume response : {}", responseBody.toString());
 
@@ -365,10 +391,10 @@ public class SurveyServiceImpl implements SurveyService{
             }
             frRecommResRepository.saveAll(recommRes);
 
-            return GetRecommendPerfumes.toFriend(perfumes);
+            return GetRecommendPerfumes.toFriend(friendId, perfumes);
 
         } catch (Exception e){
-            log.error("no response", e);
+            log.error("no recommend response", e);
             throw new CustomException(ResponseCode.RECOMMEND_NOT_FOUND);
         }
     }
