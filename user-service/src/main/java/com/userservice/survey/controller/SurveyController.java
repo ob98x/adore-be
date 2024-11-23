@@ -37,9 +37,12 @@ public class SurveyController {
             @RequestParam("nxt1") Long nxtQstId1,
             @RequestParam("nxt2") Long nxtQstId2,
             @RequestParam("nxt3") Long nxtQstId3 ) {
+        log.info("[ User Service - SurveyController ] getAdditionalQuestions - surveyId: {}, nxtQstId1: {}, nxtQstId2: {}, nxtQstId3: {}", surveyId, nxtQstId1, nxtQstId2, nxtQstId3);
         List<Long> nxtQstIds = List.of(nxtQstId1,nxtQstId2,nxtQstId3);
-
-        return ResponseEntity.ok(surveyService.getAdditionalQuestions(surveyId, nxtQstIds)); // 서비스가 들어와야 함
+        log.info("[ User Service - SurveyController ] getAdditionalQuestions - nxtQstIds: {}", nxtQstIds);
+        GetQuestionsDto response = surveyService.getAdditionalQuestions(surveyId, nxtQstIds);
+        log.info("[ User Service - SurveyController ] getAdditionalQuestions - response: {}", response);
+        return ResponseEntity.ok(response);
     }
 
     // 3. 설문 결과 저장 및 fastapi로 추천 요청

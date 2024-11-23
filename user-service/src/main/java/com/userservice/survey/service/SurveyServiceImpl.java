@@ -90,9 +90,20 @@ public class SurveyServiceImpl implements SurveyService{
 //            questions.add(findMiddleQst(nxtQstId, SurveyQstOrderState.MIDDLE));
             log.info("나머지 질문 가져오기 - 질문가져오기 : {}", nxtQstId);
             while(linkedQstId != -1L){
-                questions.add(findMiddleQst(linkedQstId, SurveyQstOrderState.MIDDLE));
+                log.info("while start");
+
+                log.info("linkedQstId : {}", linkedQstId);
+                SurveyQst surveyQst = findMiddleQst(linkedQstId, SurveyQstOrderState.MIDDLE);
+                log.info("find middle qst : {}", surveyQst.getId());
+                questions.add(surveyQst);
+                log.info("add middle qst : {}", surveyQst.getId());
+
+                log.info("answer find start");
                 List<SurveyAns> answers = surveyAnsRepository.findAllBySurveyQstId(linkedQstId);
+                log.info("answer find end, {}", answers.stream().toList());
+
                 SurveyAns ans = answers.get(1);
+                log.info("answer : {}", ans.getId());
                 log.info("나머지 질문 가져오기 - 다음 질문가져오기 : {}", ans.getNxtQstId());
 //                questions.add(findMiddleQst(ans.getNxtQstId(), SurveyQstOrderState.MIDDLE));
                 linkedQstId = ans.getNxtQstId();
