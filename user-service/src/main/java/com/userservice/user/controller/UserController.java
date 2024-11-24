@@ -19,13 +19,17 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 public class UserController {
 
-    private MemberService memberService;
+    private final MemberService memberService;
 
     @Operation(summary = "마이페이지 조회 API", description = "마이페이지를 조회합니다.")
     @GetMapping("/{id}")
     ResponseEntity<GetMyPageResponseDto> getMyPage(@PathVariable Long id) {
         log.info("[User Controller - getMyPage]: {}번 사용자의 마이페이지 조회 요청이 들어왔습니다.", id);
-        return ResponseEntity.ok(memberService.getMyPage(id));
+
+        log.info("[User Controller - getMyPage]: 사용자 정보 조회를 시작합니다. id: {}", id);
+        GetMyPageResponseDto response = memberService.getMyPage(id);
+        log.info("[User Controller - getMyPage]: 사용자 정보 조회가 완료되었습니다. id: {}", response.getName());
+        return ResponseEntity.ok(response);
     }
 
     @Operation(summary = "마이페이지 수정 API", description = "마이페이지를 수정합니다.")

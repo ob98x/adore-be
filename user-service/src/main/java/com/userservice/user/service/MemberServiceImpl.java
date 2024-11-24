@@ -23,9 +23,15 @@ public class MemberServiceImpl implements MemberService {
     private final MemberRepository memberRepository;
 
     @Override
+    @Transactional(readOnly = true)
     public GetMyPageResponseDto getMyPage(Long memberId) {
         log.info("[Member Service - getMyPage]: 사용자 정보 조회 요청이 들어왔습니다. id: {}", memberId);
-        return GetMyPageResponseDto.fromMember(checkConflictMember(memberId));
+        Member member = checkConflictMember(memberId);
+        log.info("[Member Service - getMyPage]: 사용자 정보를 조회합니다. id: {}", memberId);
+        GetMyPageResponseDto response = GetMyPageResponseDto.fromMember(member);
+        log.info("[Member Service - getMyPage]: 사용자 정보 조회가 완료되었습니다. id: {}", response.getName());
+
+        return response;
     }
 
     @Override
