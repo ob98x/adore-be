@@ -3,6 +3,7 @@ package com.userservice.review.dto;
 
 import com.userservice.review.entity.Review;
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.annotation.Nullable;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

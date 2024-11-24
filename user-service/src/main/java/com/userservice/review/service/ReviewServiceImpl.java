@@ -121,18 +121,24 @@ public class ReviewServiceImpl implements ReviewService {
     @Transactional
     public ResponseEntity<CustomResponseCode> createReview(String authorization, ReviewCreateRequestDto reviewCreateRequestDto) {
         log.info("[Review Service - createReview]: 리뷰를 생성합니다");
-
-        MultipartFile file = checkValidType(reviewCreateRequestDto.getFile());
-        String imageUri = "init";
-        log.info("[Review Service - createReview]: 이미지를 업로드합니다. imageUri: {}", imageUri);
-        try {
-            imageUri = fileManager.uploadImage(file);
-        } catch (Exception e) {
-            log.error("File upload failed: {}", e.getMessage(), e);
-            throw new CustomException(ResponseCode.FILE_NOT_FOUND);
+        log.info("[Review Service - createReview]: 파일이 있는지 확인합니다. file: {}", reviewCreateRequestDto.getFile());
+        MultipartFile file = reviewCreateRequestDto.getFile();
+        if (file == null) {
+            log.info("[Review Service - createReview]: 파일이 없습니다.");
+            reviewCreateRequestDto.setPhoto("");
+            log.info("[Review Service - createReview]: 이미지를 업로드하지 않습니다.");
+        } else {
+            checkValidType(file);
+            String imageUri = "init";
+            log.info("[Review Service - createReview]: 이미지를 업로드합니다. imageUri: {}", imageUri);
+            try {
+                imageUri = fileManager.uploadImage(file);
+            } catch (Exception e) {
+                log.error("File upload failed: {}", e.getMessage(), e);
+                throw new CustomException(ResponseCode.FILE_NOT_FOUND);
+            }
+            reviewCreateRequestDto.setPhoto(imageUri);
         }
-        reviewCreateRequestDto.setPhoto(imageUri);
-
         Perfume perfume = perfumeService.checkConflictPerfume(reviewCreateRequestDto.getPerfumeId());
         Member member = memberService.checkConflictMember(getMemberId(authorization));
 
@@ -143,6 +149,7 @@ public class ReviewServiceImpl implements ReviewService {
                 .photo(reviewCreateRequestDto.getPhoto())
                 .perfume(perfume)
                 .member(member)
+                .state(ReviewState.ACTIVE)
                 .build();
 
         log.info("[Review Service - createReview]: 리뷰를 저장합니다.");
@@ -154,22 +161,28 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     @Transactional
     public ResponseEntity<CustomResponseCode> updateReview(String authorization, Long id, ReviewCreateRequestDto reviewCreateRequestDto) {
-        MultipartFile file = checkValidType(reviewCreateRequestDto.getFile());
-
-        String imageUri = "init";
-        log.info("[Review Service - updateReview]: 이미지를 업로드합니다. imageUri: {}", imageUri);
-        try {
-            imageUri = fileManager.uploadImage(file);
-        } catch (Exception e) {
-            log.error("file upload failed");
+        if (reviewCreateRequestDto.getFile().isEmpty()) {
+            reviewCreateRequestDto.setPhoto("");
+        } else {
+            MultipartFile file = checkValidType(reviewCreateRequestDto.getFile());
+            String imageUri = "init";
+            log.info("[Review Service - createReview]: 이미지를 업로드합니다. imageUri: {}", imageUri);
+            try {
+                imageUri = fileManager.uploadImage(file);
+            } catch (Exception e) {
+                log.error("File upload failed: {}", e.getMessage(), e);
+                throw new CustomException(ResponseCode.FILE_NOT_FOUND);
+            }
+            reviewCreateRequestDto.setPhoto(imageUri);
         }
-        reviewCreateRequestDto.setPhoto(imageUri);
 
         Review review = checkConflictReview(id);
         checkAuthorizeMember(review.getMember().getId(), getMemberId(authorization));
 
         log.info("[Review Service - updateReview]: 리뷰를 수정합니다. id: {}", id);
-        reviewRepository.save(ReviewCreateRequestDto.updateReview(review, reviewCreateRequestDto));
+        Review updatedReview = ReviewCreateRequestDto.updateReview(review, reviewCreateRequestDto);
+        updatedReview.setState(ReviewState.ACTIVE);
+        reviewRepository.save(updatedReview);
         return ResponseEntity.ok(CustomResponseCode.REVIEW_UPDATE_SUCCESS);
     }
 
