@@ -15,6 +15,7 @@ public class GetRecommendPerfume {
     private String top;
     private String middle;
     private String base;
+    private String imageUrl;
 
     public static GetRecommendPerfume fromPerfume(Perfume perfume) {
         GetRecommendPerfume info = new GetRecommendPerfume();
@@ -24,6 +25,7 @@ public class GetRecommendPerfume {
         info.setTop(perfume.getTop());
         info.setMiddle(perfume.getMiddle());
         info.setBase(perfume.getBase());
+        info.setImageUrl(perfume.getPerfumeImg());
         return info;
     }
 }
