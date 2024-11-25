@@ -1,14 +1,22 @@
 package com.userservice.perfume.service;
 
+import com.userservice.feign.AuthFeignInterface;
 import com.userservice.global.CustomException;
+import com.userservice.global.CustomResponseCode;
 import com.userservice.global.ResponseCode;
 import com.userservice.global.SearchType;
 import com.userservice.perfume.dto.*;
 import com.userservice.perfume.entity.Note;
 import com.userservice.perfume.entity.Perfume;
 import com.userservice.perfume.entity.PerfumeState;
+
+import com.userservice.perfume.entity.Rating;
 import com.userservice.perfume.repository.NoteRepository;
 import com.userservice.perfume.repository.PerfumeRepository;
+
+import com.userservice.perfume.repository.RatingRepository;
+import com.userservice.user.entity.Member;
+import com.userservice.user.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -28,6 +36,10 @@ public class PerfumeServiceImpl implements PerfumeService {
 
     private final PerfumeRepository perfumeRepository;
     private final NoteRepository noteRepository;
+    private final AuthFeignInterface authFeignInterface;
+    private final MemberService memberService;
+    private final RatingRepository ratingRepository;
+
 
     @Override
     @Transactional(readOnly = true)
@@ -88,6 +100,35 @@ public class PerfumeServiceImpl implements PerfumeService {
     }
 
     @Override
+    @Transactional
+    public CustomResponseCode ratingPerfume(Long perfumeId, String authorization, int rating) {
+        log.info("[Perfume Service - ratingPerfume]: 향수 평가 요청이 들어왔습니다. perfumeId: {}, token: {}, rating: {}", perfumeId, authorization, rating);
+
+        Perfume perfume = checkConflictPerfume(perfumeId);
+
+        log.info("[Perfume Service - ratingPerfume]: 멤버를 찾습니다.");
+        Long memberId = getMemberId(authorization);
+        Member member = memberService.checkConflictMember(memberId);
+
+        if (ratingRepository.findByMemberIdAndPerfumeId(memberId, perfumeId).isPresent()) {
+            log.error("[Perfume Service - ratingPerfume]: 이미 평가한 향수입니다.");
+            throw new CustomException(ResponseCode.ALREADY_RATED);
+        }
+
+        log.info("[Perfume Service - ratingPerfume]: 평가를 저장합니다.");
+        perfume.setRateCnt(perfume.getRateCnt() + 1);
+        perfume.setRateValue(perfume.getRateValue() + rating);
+
+        ratingRepository.save(Rating.builder()
+                .member(member)
+                .perfume(perfume)
+                .rating(rating)
+                .build());
+
+        return CustomResponseCode.RATING_SUCCESS;
+    }
+
+    @Override
     @Transactional(readOnly = true)
     public GetNoteListResponseDto searchNotes(Long parentId, int page) {
 
@@ -136,6 +177,19 @@ public class PerfumeServiceImpl implements PerfumeService {
             throw new CustomException(ResponseCode.NOTE_NOT_FOUND);
         } else {
             return noteRepository.findNoteById(id).get();
+        }
+    }
+
+    public Long getMemberId(String authorization) {
+        log.info("[Review Service - getMemberId]: 헤더의 Authorization 을 Access Token 으로 변환해 Token의 정보를 받아옵니다 .authorization to token, token: {}, authorization: {}", authorization, authorization.substring(7));
+        String accessToken = authorization.substring(7);
+        return authFeignInterface.getInfo(accessToken).getMemberId();
+    }
+
+    public void checkAuthorizeMember(Long writerId, Long requestMemberId) {
+        log.info("[Review Service - checkAuthorizeMember]: 작성자와 요청자가 일치하는 지 확인합니다. writerId: {}, requestMemberId: {}", writerId, requestMemberId);
+        if (!writerId.equals(requestMemberId)) {
+            throw new CustomException(ResponseCode.UNAUTHORIZED_MEMBER);
         }
     }
 }

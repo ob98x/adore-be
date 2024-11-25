@@ -9,11 +9,9 @@ import com.userservice.perfume.service.PerfumeService;
 import com.userservice.review.dto.GetReviewListResponseDto;
 import com.userservice.review.dto.GetReviewResponseDto;
 import com.userservice.review.dto.ReviewCreateRequestDto;
-import com.userservice.review.entity.Comment;
-import com.userservice.review.entity.CommentState;
-import com.userservice.review.entity.Review;
-import com.userservice.review.entity.ReviewState;
+import com.userservice.review.entity.*;
 import com.userservice.review.repository.CommentRepository;
+import com.userservice.review.repository.LikeRepository;
 import com.userservice.review.repository.ReviewRepository;
 import com.userservice.user.entity.Member;
 import com.userservice.user.service.MemberService;
@@ -41,6 +39,7 @@ public class ReviewServiceImpl implements ReviewService {
     private final ReviewRepository reviewRepository;
     private final MemberService memberService;
     private final FileManager fileManager;
+    private final LikeRepository likeRepository;
 
 
     @Override
@@ -156,6 +155,37 @@ public class ReviewServiceImpl implements ReviewService {
         reviewRepository.save(review);
 
         return ResponseEntity.ok(CustomResponseCode.REVIEW_CREATE_SUCCESS);
+    }
+
+    @Override
+    @Transactional
+    public ResponseEntity<CustomResponseCode> likeReview(String authorization, Long id) {
+        log.info("[Review Service - likeReview]: 리뷰에 좋아요를 합니다");
+
+        log.info("[Review Service - likeReview]: 좋아요를 누른 멤버가 존재하는지 확인합니다");
+        Long memberId = getMemberId(authorization);
+        Member member = memberService.checkConflictMember(memberId);
+        log.info("[Review Service - likeReview]: 좋아요를 누른 멤버가 존재하는지 확인합니다 id: {}", member.getId());
+
+        log.info("[Review Service - likeReview]: 리뷰가 존재하는지 확인합니다");
+        Review review = checkConflictReview(id);
+        log.info("[Review Service - likeReview]: 리뷰가 존재하는지 확인합니다 id: {}", review.getId());
+
+        if (likeRepository.findByMemberIdAndReviewId(memberId, id).isPresent()) {
+            log.info("[Review Service - likeReview]: 이미 좋아요를 누른 리뷰입니다.");
+            return ResponseEntity.ok(CustomResponseCode.REVIEW_LIKE_SUCCESS);
+        }
+
+        likeRepository.save(Like.builder()
+                .member(member)
+                .review(review)
+                .build());
+
+        review.setLikeCnt(likeRepository.countByReviewId(review.getId()));
+        reviewRepository.save(review);
+
+        return ResponseEntity.ok(CustomResponseCode.REVIEW_LIKE_SUCCESS);
+
     }
 
     @Override

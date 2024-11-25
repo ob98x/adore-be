@@ -1,6 +1,7 @@
 package com.userservice.perfume.service;
 
 
+import com.userservice.global.CustomResponseCode;
 import com.userservice.global.SearchType;
 import com.userservice.perfume.dto.*;
 import com.userservice.perfume.entity.Note;
@@ -16,4 +17,5 @@ public interface PerfumeService {
     Perfume checkConflictPerfume(Long id);
     Note checkConflictNote(Long id);
     List<GetParentNoteResponseDto> getParentNotes();
+    CustomResponseCode ratingPerfume(Long perfumeId, String authorization, int rating);
 }

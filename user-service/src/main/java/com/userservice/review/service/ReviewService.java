@@ -17,4 +17,5 @@ public interface ReviewService {
     ResponseEntity<CustomResponseCode> createComment(String authorization, Long reviewId, String content);
     ResponseEntity<CustomResponseCode> deleteComment(String authorization, Long commentId);
     ResponseEntity<CustomResponseCode> updateComment(String authorization, Long commentId, String content);
+    ResponseEntity<CustomResponseCode> likeReview(String authorization, Long id);
 }

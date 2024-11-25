@@ -17,6 +17,12 @@ public class GetReviewResponseDto {
     @Schema(description = "리뷰 ID", example = "1")
     private Long id;
 
+    @Schema(description = "리뷰 제목", example = "리뷰 제목")
+    private String title;
+
+    @Schema(description = "리뷰 내용", example = "리뷰 내용")
+    private String content;
+
     @Schema(description = "회원 ID", example = "1")
     private Long memberId;
 
@@ -54,8 +60,10 @@ public class GetReviewResponseDto {
     private List<Comment> commentList;
 
     @Builder
-    public GetReviewResponseDto(Long id, Long memberId, String perfumeName, String perfumeBrand, String perfumeTop, String perfumeMiddle, String perfumeBase, String perfumeDesc, String img, int likeCnt, LocalDateTime createdAt, LocalDateTime updatedAt, List<Comment> commentList) {
+    public GetReviewResponseDto(Long id, String title, String content, Long memberId, String perfumeName, String perfumeBrand, String perfumeTop, String perfumeMiddle, String perfumeBase, String perfumeDesc, String img, int likeCnt, LocalDateTime createdAt, LocalDateTime updatedAt, List<Comment> commentList) {
         this.id = id;
+        this.title = title;
+        this.content = content;
         this.memberId = memberId;
         this.perfumeName = perfumeName;
         this.perfumeBrand = perfumeBrand;
@@ -73,6 +81,8 @@ public class GetReviewResponseDto {
     public static GetReviewResponseDto getReview(Review review) {
         return GetReviewResponseDto.builder()
                 .id(review.getId())
+                .title(review.getTitle())
+                .content(review.getContent())
                 .perfumeName(review.getPerfume().getName())
                 .perfumeBrand(review.getPerfume().getBrand())
                 .perfumeTop(review.getPerfume().getTop())

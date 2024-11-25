@@ -49,6 +49,15 @@ public class ReviewController {
         return reviewService.createReview(authorization, reviewCreateRequestDto);
     }
 
+    @Operation(summary = "리뷰 좋아요 API", description = "리뷰에 좋아요를 진행합니다.")
+    @PatchMapping("/like")
+    public ResponseEntity<CustomResponseCode> likeReview(
+            @Parameter(description = "리뷰 작성자의 access token") @RequestHeader("Authorization") String authorization,
+            @Parameter(description = "좋아요를 진행할 리뷰 id") @RequestParam Long id) {
+        log.info("[Review Controller - likeReview]: {}번 리뷰에 좋아요 요청이 들어왔습니다.", id);
+        return reviewService.likeReview(authorization, id);
+    }
+
     @Operation(summary = "리뷰 조회 API", description = "리뷰를 조회합니다.")
     @GetMapping("/")
     public ResponseEntity<GetReviewResponseDto> viewReviewInfo(@Parameter(description = "조회할 리뷰 id") @RequestParam Long id) {

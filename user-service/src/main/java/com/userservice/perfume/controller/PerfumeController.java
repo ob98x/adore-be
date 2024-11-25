@@ -1,6 +1,7 @@
 package com.userservice.perfume.controller;
 
 
+import com.userservice.global.CustomResponseCode;
 import com.userservice.global.SearchType;
 import com.userservice.perfume.dto.*;
 import com.userservice.perfume.service.PerfumeService;
@@ -62,7 +63,15 @@ public class PerfumeController {
         return ResponseEntity.ok(response);
     }
 
-
+    @Operation(summary = "향수 평가 API", description = "향수에 대한 평가를 진행합니다.")
+    @PostMapping("/rating")
+    public ResponseEntity<CustomResponseCode> ratingPerfume(
+            @PathVariable("perfumeId") Long perfumeId,
+            @RequestHeader("Authorization") String authorization,
+            @RequestParam("rating") int rating) {
+        log.info("[Perfume Controller - ratingPerfume]: 향수 평가 요청이 들어왔습니다. perfumeId: {}, rating: {}", perfumeId, rating);
+        return ResponseEntity.ok(perfumeService.ratingPerfume(perfumeId, authorization, rating));
+    }
 
     @Operation(summary = "향수 노트 리스트 조회 API", description = "향수 노트 리스트를 조회합니다.")
     @GetMapping("/note/lists/{page}")
