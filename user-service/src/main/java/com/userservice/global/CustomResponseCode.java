@@ -37,6 +37,7 @@ public enum CustomResponseCode {
     SATISFACTION_CREATE_SUCCESS("만족도조사 생성에 성공하였습니다."),
     USER_ANS_DELETE_SUCCESS("설문 삭제에 성공하였습니다."),
     FRIEND_DELETE_SUCCESS("친구 삭제에 성공하였습니다."), REVIEW_LIKE_SUCCESS("리뷰 좋아요에 성공하였습니다."),
-    RATING_SUCCESS("평가에 성공하였습니다."),;
+    RATING_SUCCESS("평가에 성공하였습니다."),
+    REVIEW_LIKE_DELETE_SUCCESS("리뷰 좋아요 취소에 성공하였습니다."),;
     private final String message;
 }

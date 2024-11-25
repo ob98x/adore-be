@@ -172,8 +172,10 @@ public class ReviewServiceImpl implements ReviewService {
         log.info("[Review Service - likeReview]: 리뷰가 존재하는지 확인합니다 id: {}", review.getId());
 
         if (likeRepository.findByMemberIdAndReviewId(memberId, id).isPresent()) {
-            log.info("[Review Service - likeReview]: 이미 좋아요를 누른 리뷰입니다.");
-            return ResponseEntity.ok(CustomResponseCode.REVIEW_LIKE_SUCCESS);
+            log.info("[Review Service - likeReview]: 이미 좋아요를 누른 리뷰입니다. 좋아요를 취소합니다.");
+            Like like = likeRepository.findByMemberIdAndReviewId(memberId, id).get();
+            likeRepository.delete(like);
+            return ResponseEntity.ok(CustomResponseCode.REVIEW_LIKE_DELETE_SUCCESS);
         }
 
         likeRepository.save(Like.builder()
