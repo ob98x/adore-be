@@ -2,6 +2,7 @@ package com.userservice.review.controller;
 
 import com.userservice.global.CustomResponseCode;
 import com.userservice.global.SearchType;
+import com.userservice.review.dto.CommentCreateRequestDto;
 import com.userservice.review.dto.GetReviewListResponseDto;
 import com.userservice.review.dto.GetReviewResponseDto;
 import com.userservice.review.dto.ReviewCreateRequestDto;
@@ -89,9 +90,9 @@ public class ReviewController {
     public ResponseEntity<CustomResponseCode> createComment(
             @Parameter(description = "리뷰 작성자의 access token") @RequestHeader("Authorization") String authorization,
             @Parameter(description = "댓글을 작성할 리뷰 id") @RequestParam Long reviewId,
-            @RequestBody String content) {
+            @RequestBody CommentCreateRequestDto content) {
         log.info("[Review Controller - createComment]: 댓글 작성 요청이 들어왔습니다.");
-        return reviewService.createComment(authorization, reviewId, content);
+        return reviewService.createComment(authorization, reviewId, content.getContent());
     }
 
     @Operation(summary = "댓글 수정 API", description = "리뷰의 댓글을 수정합니다.")
@@ -99,9 +100,9 @@ public class ReviewController {
     public ResponseEntity<CustomResponseCode> updateComment(
             @Parameter(description = "리뷰 작성자의 access token") @RequestHeader("Authorization") String authorization,
             @Parameter(description = "수정할 댓글 id") @RequestParam Long commentId,
-            @RequestBody String content) {
+            @RequestBody CommentCreateRequestDto content) {
         log.info("[Review Controller - updateComment]: {}번 댓글의 수정 요청이 들어왔습니다.", commentId);
-        return reviewService.updateComment(authorization, commentId, content);
+        return reviewService.updateComment(authorization, commentId, content.getContent());
     }
 
     @Operation(summary = "댓글 삭제 API", description = "리뷰의 댓글을 삭제합니다.")

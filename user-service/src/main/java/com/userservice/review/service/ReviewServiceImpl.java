@@ -193,10 +193,13 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     @Transactional
     public ResponseEntity<CustomResponseCode> updateReview(String authorization, Long id, ReviewCreateRequestDto reviewCreateRequestDto) {
-        if (reviewCreateRequestDto.getFile().isEmpty()) {
+        MultipartFile file = reviewCreateRequestDto.getFile();
+        if (file == null) {
+            log.info("[Review Service - createReview]: 파일이 없습니다.");
             reviewCreateRequestDto.setPhoto("");
+            log.info("[Review Service - createReview]: 이미지를 업로드하지 않습니다.");
         } else {
-            MultipartFile file = checkValidType(reviewCreateRequestDto.getFile());
+            checkValidType(file);
             String imageUri = "init";
             log.info("[Review Service - createReview]: 이미지를 업로드합니다. imageUri: {}", imageUri);
             try {

@@ -1,6 +1,5 @@
 package com.userservice.review.dto;
 
-import com.userservice.review.entity.Comment;
 import com.userservice.review.entity.Review;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
@@ -56,11 +55,11 @@ public class GetReviewResponseDto {
     @Schema(description = "수정일", example = "2021-07-01T00:00:00")
     private LocalDateTime updatedAt;
 
-    @Schema(description = "댓글 목록", example = "[{\"id\": 1, \"content\": \"댓글 내용 1\", \"createdAt\": \"2021-07-01T00:00:00\", \"updatedAt\": \"2021-07-01T00:00:00\"}, {\"id\": 2, \"content\": \"댓글 내용 2\", \"createdAt\": \"2021-07-01T00:00:00\", \"updatedAt\": \"2021-07-01T00:00:00\"}]")
-    private List<Comment> commentList;
+    @Schema(description = "댓글 목록", example = "[{\"id\": 1, \"content\": \"댓글 내용\"}]")
+    private List<CommentDto> commentList;
 
     @Builder
-    public GetReviewResponseDto(Long id, String title, String content, Long memberId, String perfumeName, String perfumeBrand, String perfumeTop, String perfumeMiddle, String perfumeBase, String perfumeDesc, String img, int likeCnt, LocalDateTime createdAt, LocalDateTime updatedAt, List<Comment> commentList) {
+    public GetReviewResponseDto(Long id, String title, String content, Long memberId, String perfumeName, String perfumeBrand, String perfumeTop, String perfumeMiddle, String perfumeBase, String perfumeDesc, String img, int likeCnt, LocalDateTime createdAt, LocalDateTime updatedAt, List<CommentDto> commentList) {
         this.id = id;
         this.title = title;
         this.content = content;
@@ -93,7 +92,7 @@ public class GetReviewResponseDto {
                 .likeCnt(review.getLikeCnt())
                 .createdAt(review.getCreatedAt())
                 .updatedAt(review.getUpdatedAt())
-                .commentList(review.getCommentList())
+                .commentList(review.getCommentList().stream().map(CommentDto::fromEntity).toList())
                 .memberId(review.getMember().getId())
                 .build();
     }
