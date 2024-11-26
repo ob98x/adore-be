@@ -2,6 +2,11 @@ pipeline {
     agent any
 
     stages {
+        stage('clean up workspace') {
+            steps {
+                sh "docker system prune"
+            }
+        }
         stage('Clone Repository') {
             steps {
                 script {
