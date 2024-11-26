@@ -64,7 +64,7 @@ public class PerfumeController {
     }
 
     @Operation(summary = "향수 평가 API", description = "향수에 대한 평가를 진행합니다.")
-    @PostMapping("/rating")
+    @PostMapping("/rating/{perfumeId}")
     public ResponseEntity<CustomResponseCode> ratingPerfume(
             @PathVariable("perfumeId") Long perfumeId,
             @RequestHeader("Authorization") String authorization,
