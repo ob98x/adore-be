@@ -67,4 +67,5 @@ public class UserController {
         log.info("[User Controller - deleteMember]: 사용자 삭제 요청이 들어왔습니다. id: {}", id);
         return memberService.deleteMember(id);
     }
+
 }

@@ -14,4 +14,5 @@ public interface QuestionService {
     ResponseEntity<GetQuestionResponseDto> getQuestions(Long id);
     ResponseEntity<CustomResponseCode> processQuestions(Long id, String answerContent);
     GetQuestionListResponseDto getQuestionList(SearchType searchType, FilterType filterType, QuestionCategory category, String searchKeyword, int page);
+    Long createQuestion(String content, String title, String category, Long memberId);
 }

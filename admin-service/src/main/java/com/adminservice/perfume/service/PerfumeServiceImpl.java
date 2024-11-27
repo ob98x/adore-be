@@ -50,16 +50,22 @@ public class PerfumeServiceImpl implements PerfumeService {
         log.info("[Perfume Service - updateNote]: 노트를 수정합니다. id: {}, noteCreateRequestDto: {}", id, noteCreateRequestDto);
 
         MultipartFile file = noteCreateRequestDto.getFile();
-        String imageUri = "init";
-        log.info("Perfume Service - updateNote]: 이미지를 업로드합니다. imageUri: {}", imageUri);
-        try {
-            imageUri = fileManager.uploadImage(file);
-        } catch (Exception e) {
-            log.error("[Perfume Service - updateNote]: 이미지 업로드에 실패했습니다. e: {}", e.getMessage());
+        if (file == null) {
+            log.info("[Perfume Service - updateNote]: 파일이 없습니다.");
+            noteCreateRequestDto.setNoteImg("");
+            log.info("[Perfume Service - updateNote]: 이미지를 업로드하지 않습니다.");
+        } else {
+            checkValidType(file);
+            String imageUri = "init";
+            log.info("[Perfume Service - updateNote]: 이미지를 업로드합니다. imageUri: {}", imageUri);
+            try {
+                imageUri = fileManager.uploadImage(file);
+            } catch (Exception e) {
+                log.error("File upload failed: {}", e.getMessage(), e);
+                throw new CustomException(ResponseCode.FILE_NOT_FOUND);
+            }
+            noteCreateRequestDto.setNoteImg(imageUri);
         }
-
-        log.info("[Perfume Service - updateNote]: 노트를 저장합니다. noteCreateRequestDto: {}", noteCreateRequestDto);
-        noteCreateRequestDto.setNoteImg(imageUri);
         noteRepository.save(NoteCreateRequestDto.updateNote(checkConflictNote(id), noteCreateRequestDto));
         return ResponseEntity.ok(CustomResponseCode.NOTE_UPDATE_SUCCESS);
     }
@@ -85,14 +91,22 @@ public class PerfumeServiceImpl implements PerfumeService {
         log.info("[Perfume Service - createPerfume]: 향수를 생성합니다. perfumeCreateRequestDto: {}", perfumeCreateRequestDto);
 
         MultipartFile file = perfumeCreateRequestDto.getFile();
-        String imageUri = "init";
-        log.info("Perfume Service - createPerfume]: 이미지를 업로드합니다. imageUri: {}", imageUri);
-        try {
-            imageUri = fileManager.uploadImage(file);
-        } catch (Exception e) {
-            log.error("[Perfume Service - createPerfume]: 이미지 업로드에 실패했습니다. e: {}", e.getMessage());
+        if (file == null) {
+            log.info("[Perfume Service - createPerfume]: 파일이 없습니다.");
+            perfumeCreateRequestDto.setPerfumePhoto("");
+            log.info("[Perfume Service - createPerfume]: 이미지를 업로드하지 않습니다.");
+        } else {
+            checkValidType(file);
+            String imageUri = "init";
+            log.info("[Perfume Service - createPerfume]: 이미지를 업로드합니다. imageUri: {}", imageUri);
+            try {
+                imageUri = fileManager.uploadImage(file);
+            } catch (Exception e) {
+                log.error("File upload failed: {}", e.getMessage(), e);
+                throw new CustomException(ResponseCode.FILE_NOT_FOUND);
+            }
+            perfumeCreateRequestDto.setPerfumePhoto(imageUri);
         }
-        perfumeCreateRequestDto.setPerfumePhoto(imageUri);
 
         log.info("[Perfume Service - createPerfume]: 향수를 저장합니다. perfumeCreateRequestDto: {}", perfumeCreateRequestDto);
         perfumeRepository.save(PerfumeCreateRequestDto.createPerfume(perfumeCreateRequestDto));
@@ -105,16 +119,22 @@ public class PerfumeServiceImpl implements PerfumeService {
         log.info("[Perfume Service - updatePerfume]: 향수를 수정합니다. id: {}", id);
 
         MultipartFile file = perfumeCreateRequestDto.getFile();
-        String imageUri = "init";
-        log.info("Perfume Service - updatePerfume]: 이미지를 업로드합니다. imageUri: {}", imageUri);
-        try {
-            imageUri = fileManager.uploadImage(file);
-        } catch (Exception e) {
-            log.error("[Perfume Service - updatePerfume]: 이미지 업로드에 실패했습니다. e: {}", e.getMessage());
+        if (file == null) {
+            log.info("[Perfume Service - updatePerfume]: 파일이 없습니다.");
+            perfumeCreateRequestDto.setPerfumePhoto("");
+            log.info("[Perfume Service - updatePerfume]: 이미지를 업로드하지 않습니다.");
+        } else {
+            checkValidType(file);
+            String imageUri = "init";
+            log.info("[Perfume Service - updatePerfume]: 이미지를 업로드합니다. imageUri: {}", imageUri);
+            try {
+                imageUri = fileManager.uploadImage(file);
+            } catch (Exception e) {
+                log.error("File upload failed: {}", e.getMessage(), e);
+                throw new CustomException(ResponseCode.FILE_NOT_FOUND);
+            }
+            perfumeCreateRequestDto.setPerfumePhoto(imageUri);
         }
-
-        log.info("[Perfume Service - updatePerfume]: 향수를 저장합니다. perfumeCreateRequestDto: {}", perfumeCreateRequestDto);
-        perfumeCreateRequestDto.setPerfumePhoto(imageUri);
         perfumeRepository.save(PerfumeCreateRequestDto.updatePerfume(checkConflictPerfume(id), perfumeCreateRequestDto));
         return ResponseEntity.ok(CustomResponseCode.PERFUME_UPDATE_SUCCESS);
     }

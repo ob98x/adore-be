@@ -78,7 +78,8 @@ public enum ResponseCode {
     COMMENT_NOT_FOUND("COM-ERR-001", HttpStatus.NOT_FOUND, "댓글을 찾을 수 없습니다."),
     INVALID_FILE_TYPE("GLB-ERR-005", HttpStatus.BAD_REQUEST, "잘못된 파일 형식입니다."),
     UNAUTHORIZED_MEMBER("MEM-ERR-003", HttpStatus.UNAUTHORIZED, "권한이 없는 회원입니다."),
-    ALREADY_RATED("PER-ERR-003", HttpStatus.BAD_REQUEST, "이미 평가한 향수입니다."),;
+    ALREADY_RATED("PER-ERR-003", HttpStatus.BAD_REQUEST, "이미 평가한 향수입니다."),
+    PENALTY_MEMBER("MEM-ERR-004", HttpStatus.BAD_REQUEST, "제재된 회원입니다."),;
     
     private final String code;
     private final HttpStatus status;

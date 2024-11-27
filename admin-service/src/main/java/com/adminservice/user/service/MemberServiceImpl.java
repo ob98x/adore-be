@@ -1,5 +1,6 @@
 package com.adminservice.user.service;
 
+import com.adminservice.feign.AuthFeignInterface;
 import com.adminservice.global.CustomException;
 import com.adminservice.global.CustomResponseCode;
 import com.adminservice.global.ResponseCode;
@@ -112,6 +113,7 @@ public class MemberServiceImpl implements MemberService {
             throw new CustomException(ResponseCode.EMAIL_DUPLICATE);
         }
     }
+
 
     @Override
     public Member checkConflictMember(Long id) {

@@ -40,6 +40,12 @@ public class PerfumeServiceImpl implements PerfumeService {
     private final MemberService memberService;
     private final RatingRepository ratingRepository;
 
+    @Override
+    @Transactional(readOnly = true)
+    public List<Perfume> getPerfumeMain() {
+        log.info("[Perfume Service - getPerfumeMain]: 메인 향수 리스트 조회 요청이 들어왔습니다.");
+        return perfumeRepository.findTop5ByStateOrderByCreatedAtDesc(PerfumeState.ACTIVE);
+    }
 
     @Override
     @Transactional(readOnly = true)

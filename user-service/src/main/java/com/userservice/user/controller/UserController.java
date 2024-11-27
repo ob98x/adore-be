@@ -2,9 +2,11 @@ package com.userservice.user.controller;
 
 import com.userservice.global.CustomResponseCode;
 import com.userservice.user.dto.GetMyPageResponseDto;
+import com.userservice.user.dto.QuestionCreateRequestDto;
 import com.userservice.user.dto.UpdateMyPageRequestDto;
 import com.userservice.user.service.MemberService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -39,6 +41,18 @@ public class UserController {
             @RequestBody @Valid UpdateMyPageRequestDto updateMyPageRequestDto) {
         log.info("[User Controller - updateNickname]: {}번 사용자의 마이페이지 수정 요청이 들어왔습니다.", id);
         return memberService.updateMyPage(id, updateMyPageRequestDto);
+    }
+
+    @Operation(summary = "사용자 문의 사항 작성 API", description = "사용자의 문의 사항을 작성합니다.")
+    @PostMapping("/question/create")
+    public ResponseEntity<CustomResponseCode> createQuestion(
+            @RequestBody QuestionCreateRequestDto questionCreateRequestDto,
+            @RequestHeader("Authorization") @Parameter(description = "문의자 id") String authorization) {
+        log.info("[User Controller - createQuestion]: 문의 사항 생성 요청이 들어왔습니다.");
+        String content = questionCreateRequestDto.getContent();
+        String title = questionCreateRequestDto.getTitle();
+        String category = questionCreateRequestDto.getCategory();
+        return memberService.createQuestion(content, title, category, authorization);
     }
 
 

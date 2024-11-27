@@ -18,4 +18,5 @@ public interface PerfumeService {
     Note checkConflictNote(Long id);
     List<GetParentNoteResponseDto> getParentNotes();
     CustomResponseCode ratingPerfume(Long perfumeId, String authorization, int rating);
+    List<Perfume> getPerfumeMain();
 }

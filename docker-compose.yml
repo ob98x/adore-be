@@ -46,11 +46,13 @@ services:
   k6:
     image: grafana/k6
     container_name: k6
-    volumes:
-      - ./k6:/scripts
     environment:
       - K6_PROMETHEUS_RW_SERVER_URL=http://prometheus:9090/api/v1/write
       - K6_PROMETHEUS_RW_TREND_AS_NATIVE_HISTOGRAM=true
+    command: >
+      run --out influxdb=http://influxdb:8086/adore /k6/stress.js
+    volumes:
+      - ./k6:/k6
     extra_hosts:
       - "host.docker.internal:host-gateway"
     depends_on:
@@ -70,13 +72,11 @@ services:
       - ./grafana/data:/var/lib/grafana
     environment:
       - GF_SERVER_ROOT_URL=${GF_SERVER_ROOT_URL}
-      - ./grafana/provisioning:/etc/grafana/provisioning
-      - ./grafana/dashboard:/dashboard
       - GF_SERVER_SERVE_FROM_SUB_PATH=true
     restart: always
     networks:
       - msa-network
-
+    user: root
   # Prometheus
   prometheus:
     image: prom/prometheus

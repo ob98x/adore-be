@@ -7,6 +7,9 @@ import com.adminservice.question.entity.Question;
 import com.adminservice.question.entity.QuestionCategory;
 import com.adminservice.question.entity.QuestionState;
 import com.adminservice.question.repository.QuestionRepository;
+import com.adminservice.user.entity.Member;
+import com.adminservice.user.repository.MemberRepository;
+import com.adminservice.user.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -15,6 +18,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -24,6 +28,29 @@ import java.util.List;
 public class QuestionServiceImpl implements QuestionService {
 
     private final QuestionRepository questionRepository;
+    private final MemberService memberService;
+
+    @Override
+    @Transactional
+    public Long createQuestion(String content, String title, String category, Long memberId) {
+        log.info("[Question Service - createQuestion]: 문의사항 생성 요청이 들어왔습니다. memberId: {}", memberId);
+        Member member = memberService.checkConflictMember(memberId);
+        log.info("[Question Service - createQuestion]: 사용자 정보를 조회합니다. memberId: {}", memberId);
+        log.info("[Question Service - createQuestion]: 문의사항을 생성합니다.");
+        Question question = Question.builder()
+                .applicant(member)
+                .content(content)
+                .title(title)
+                .category(QuestionCategory.valueOf(category))
+                .state(QuestionState.WAIT)
+                .processor(null)
+                .answerContent(null)
+                .build();
+        log.info("[Question Service - createQuestion]: 문의사항을 저장합니다.");
+        questionRepository.save(question);
+        log.info("[Question Service - createQuestion]: 문의사항 생성이 완료되었습니다.");
+        return question.getId();
+    }
 
     @Override
     public ResponseEntity<GetQuestionResponseDto> getQuestions(Long id) {

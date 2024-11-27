@@ -33,7 +33,8 @@ public enum CustomResponseCode {
     NOTE_UPDATE_SUCCESS("노트 수정에 성공하였습니다."),
     SURVEY_CREATE_SUCCESS("설문 생성에 성공하였습니다."),
     SURVEY_UPDATE_SUCCESS("설문 수정에 성공하였습니다."),
-    SURVEY_DELETE_SUCCESS("설문 삭제에 성공하였습니다.");
+    SURVEY_DELETE_SUCCESS("설문 삭제에 성공하였습니다."),
+    QUESTION_CREATE_SUCCESS("문의사항 생성에 성공하였습니다."),;
     private final String message;
 
 }

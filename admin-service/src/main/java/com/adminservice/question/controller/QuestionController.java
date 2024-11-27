@@ -54,4 +54,15 @@ public class QuestionController {
         log.info("[Question Controller - deleteMember]: {}번 문의사항 삭제 요청이 들어왔습니다.", id);
         return questionService.processQuestions(id, answerContent);
     }
+
+    @Operation(summary = "문의 사항 생성 API", description = "문의 사항을 생성합니다.")
+    @PostMapping("/create")
+    public Long createQuestion(
+            @RequestParam @Parameter(description = "문의 제목") String title,
+            @RequestParam @Parameter(description = "문의 내용") String content,
+            @RequestParam @Parameter(description = "문의 카테고리") String category,
+            @RequestParam @Parameter(description = "문의자 id") Long memberId) {
+        log.info("[User Controller - createQuestion]: 문의 사항 생성 요청이 들어왔습니다. memberId: {}", memberId);
+        return questionService.createQuestion(content, title, category, memberId);
+    }
 }

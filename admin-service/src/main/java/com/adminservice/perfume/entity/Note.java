@@ -16,7 +16,7 @@ import lombok.*;
 public class Note extends BaseEntity {
 
     @Schema(description = "노트 이름", example = "우디")
-    @Column(name = "notm_nm", nullable = false)
+    @Column(name = "note_nm", nullable = false)
     private String noteNm;
 
     @Schema(description = "노트 내용", example = "노트 설명")

@@ -3,11 +3,10 @@ package com.adminservice.question.entity;
 import com.adminservice.global.BaseEntity;
 import com.adminservice.user.entity.Member;
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.validation.constraints.Null;
+import lombok.*;
 
 @Entity
 @Getter
@@ -48,5 +47,28 @@ public class Question extends BaseEntity {
     @Column(name = "answer_content")
     @Schema(description = "답변 내용", example = "답변 내용")
     private String answerContent;
+
+    @Builder
+    public Question(Member applicant, Member processor, String title, String content, QuestionCategory category, QuestionState state, String answerContent) {
+        this.applicant = applicant;
+        this.processor = processor;
+        this.title = title;
+        this.content = content;
+        this.category = category;
+        this.state = state;
+        this.answerContent = answerContent;
+    }
+
+    public static Question of(Member applicant, Member processor, String title, String content, QuestionCategory category, QuestionState state, String answerContent) {
+        return Question.builder()
+                .applicant(applicant)
+                .processor(processor)
+                .title(title)
+                .content(content)
+                .category(category)
+                .state(state)
+                .answerContent(answerContent)
+                .build();
+    }
 
 }

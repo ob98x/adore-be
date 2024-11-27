@@ -4,6 +4,7 @@ package com.userservice.perfume.controller;
 import com.userservice.global.CustomResponseCode;
 import com.userservice.global.SearchType;
 import com.userservice.perfume.dto.*;
+import com.userservice.perfume.entity.Perfume;
 import com.userservice.perfume.service.PerfumeService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -80,6 +81,14 @@ public class PerfumeController {
             @RequestParam("parent") Long parentId) {
         log.info("[Perfume Controller - searchNotes]: 향수 노트 리스트 조회 요청이 들어왔습니다. type: {}", parentId);
         GetNoteListResponseDto response = perfumeService.searchNotes(parentId, page-1);
+        return ResponseEntity.ok(response);
+    }
+
+    @Operation(summary = "향수 메인 화면", description = "향수 메인 화면을 조회합니다.")
+    @GetMapping("/main")
+    public ResponseEntity<List<Perfume>> getPerfumeMain() {
+        log.info("[Perfume Controller - getPerfumeMain]: 향수 메인 화면 조회 요청이 들어왔습니다.");
+        List<Perfume> response = perfumeService.getPerfumeMain();
         return ResponseEntity.ok(response);
     }
 }

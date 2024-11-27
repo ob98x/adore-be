@@ -1,6 +1,7 @@
 package com.userservice.review.service;
 
 
+import com.userservice.feign.AdminFeignInterface;
 import com.userservice.feign.AuthFeignInterface;
 import com.userservice.global.*;
 import com.userservice.perfume.entity.Perfume;
@@ -40,6 +41,7 @@ public class ReviewServiceImpl implements ReviewService {
     private final MemberService memberService;
     private final FileManager fileManager;
     private final LikeRepository likeRepository;
+    private final AdminFeignInterface adminFeignInterface;
 
 
     @Override
@@ -50,7 +52,7 @@ public class ReviewServiceImpl implements ReviewService {
         Long memberId = getMemberId(authorization);
         Member member = memberService.checkConflictMember(memberId);
         Review review = checkConflictReview(reviewId);
-
+        checkPenalty(memberId);
         log.info("[Review Service - createComment]: reviewId: {}, memberId: {}, 댓글을 생성합니다.", reviewId, memberId);
         Comment comment = Comment.builder()
                 .content(content)
@@ -72,6 +74,7 @@ public class ReviewServiceImpl implements ReviewService {
         Comment comment = checkConflictComment(commendId);
         Long requestMemberId = getMemberId(authorization);
         checkAuthorizeMember(comment.getWriter().getId(), requestMemberId);
+        checkPenalty(requestMemberId);
 
         log.info("[Review Service - updateComment]: 댓글 내용을 수정합니다. old: {}, new: {}", comment.getContent(), content);
         comment.setContent(content);
@@ -119,6 +122,8 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     @Transactional
     public ResponseEntity<CustomResponseCode> createReview(String authorization, ReviewCreateRequestDto reviewCreateRequestDto) {
+        Long memberId = getMemberId(authorization);
+        checkPenalty(memberId);
         log.info("[Review Service - createReview]: 리뷰를 생성합니다");
         log.info("[Review Service - createReview]: 파일이 있는지 확인합니다. file: {}", reviewCreateRequestDto.getFile());
         MultipartFile file = reviewCreateRequestDto.getFile();
@@ -139,7 +144,7 @@ public class ReviewServiceImpl implements ReviewService {
             reviewCreateRequestDto.setPhoto(imageUri);
         }
         Perfume perfume = perfumeService.checkConflictPerfume(reviewCreateRequestDto.getPerfumeId());
-        Member member = memberService.checkConflictMember(getMemberId(authorization));
+        Member member = memberService.checkConflictMember(memberId);
 
         log.info("[Review Service - createReview]: 리뷰를 생성합니다. perfumeId: {}, memberId: {}", perfume.getId(), member.getId());
         Review review = Review.builder()
@@ -193,15 +198,16 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     @Transactional
     public ResponseEntity<CustomResponseCode> updateReview(String authorization, Long id, ReviewCreateRequestDto reviewCreateRequestDto) {
+        Long memberId = getMemberId(authorization);
         MultipartFile file = reviewCreateRequestDto.getFile();
         if (file == null) {
-            log.info("[Review Service - createReview]: 파일이 없습니다.");
+            log.info("[Review Service - updateReview]: 파일이 없습니다.");
             reviewCreateRequestDto.setPhoto("");
-            log.info("[Review Service - createReview]: 이미지를 업로드하지 않습니다.");
+            log.info("[Review Service - updateReview]: 이미지를 업로드하지 않습니다.");
         } else {
             checkValidType(file);
             String imageUri = "init";
-            log.info("[Review Service - createReview]: 이미지를 업로드합니다. imageUri: {}", imageUri);
+            log.info("[Review Service - updateReview]: 이미지를 업로드합니다. imageUri: {}", imageUri);
             try {
                 imageUri = fileManager.uploadImage(file);
             } catch (Exception e) {
@@ -211,8 +217,9 @@ public class ReviewServiceImpl implements ReviewService {
             reviewCreateRequestDto.setPhoto(imageUri);
         }
 
+        checkPenalty(memberId);
         Review review = checkConflictReview(id);
-        checkAuthorizeMember(review.getMember().getId(), getMemberId(authorization));
+        checkAuthorizeMember(review.getMember().getId(), memberId);
 
         log.info("[Review Service - updateReview]: 리뷰를 수정합니다. id: {}", id);
         Review updatedReview = ReviewCreateRequestDto.updateReview(review, reviewCreateRequestDto);
@@ -293,11 +300,19 @@ public class ReviewServiceImpl implements ReviewService {
         }
     }
 
-    public MultipartFile checkValidType(MultipartFile file) {
+    public void checkValidType(MultipartFile file) {
         log.info("[Review Service - checkValidType]: 파일이 이미지 형식인지 확인합니다. file: {}", file);
         if (file == null || file.isEmpty() || file.getContentType() == null || !file.getContentType().startsWith("image")) {
             throw new CustomException(ResponseCode.INVALID_FILE_TYPE);
         }
-        return file;
+    }
+
+    public void checkPenalty(Long memberId) {
+        log.info("[Review Service - checkPenalty]: 회원의 패널티 여부를 확인합니다. memberId: {}", memberId);
+        // 제제 대상일 경우 false 아닐 경우 true
+        if (!adminFeignInterface.checkPenalty(memberId)) {
+            throw new CustomException(ResponseCode.PENALTY_MEMBER);
+        }
+        log.info("[Review Service - checkPenalty]: 패널티 여부 확인 완료 memberId: {}", memberId);
     }
 }

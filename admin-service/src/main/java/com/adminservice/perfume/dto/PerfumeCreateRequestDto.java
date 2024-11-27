@@ -1,6 +1,7 @@
 package com.adminservice.perfume.dto;
 
 import com.adminservice.perfume.entity.Perfume;
+import com.adminservice.perfume.entity.PerfumeState;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -44,7 +45,7 @@ public class PerfumeCreateRequestDto {
     private String country;
 
     @Schema(description = "향수 가격", example = "100000")
-    private int price;
+    private Long price;
 
     @Schema(description = "사진 업로드", example = "사진 확장자를 가지는 파일")
     private MultipartFile file;
@@ -61,7 +62,8 @@ public class PerfumeCreateRequestDto {
                 .middle(perfumeCreateRequestDto.getMiddle())
                 .base(perfumeCreateRequestDto.getBase())
                 .country(perfumeCreateRequestDto.getCountry())
-                .price(perfumeCreateRequestDto.getPrice())
+                .price(Math.toIntExact(perfumeCreateRequestDto.getPrice()))
+                .state(PerfumeState.ACTIVE)
                 .build();
     }
 
