@@ -2,6 +2,8 @@ package com.adminservice.report.controller;
 
 import com.adminservice.global.CustomResponseCode;
 import com.adminservice.global.FilterType;
+import com.adminservice.penalty.entity.Penalty;
+import com.adminservice.penalty.entity.PenaltyLevel;
 import com.adminservice.report.dto.GetReportListResponseDto;
 import com.adminservice.report.dto.GetReportResponseDto;
 import com.adminservice.report.entity.ReportCategory;
@@ -42,11 +44,11 @@ public class ReportController {
         return reportService.getReport(id);
     }
 
-    @Operation(summary = "신고 사항 삭제 API", description = "신고 사항을 삭제합니다.")
+    @Operation(summary = "신고 사항 처리 API", description = "신고 사항을 처리합니다.")
     @PostMapping("/process")
-    public ResponseEntity<CustomResponseCode> processReport(@Parameter(description = "처리할 신고 사항 id") @RequestParam Long id, @RequestBody String answerContent) {
-        log.info("[Report Controller - processReport]: {}번 신고사항 삭제 요청이 들어왔습니다.", id);
-        return reportService.processReport(id, answerContent);
+    public ResponseEntity<CustomResponseCode> processReport(@Parameter(description = "처리할 신고 사항 id") @RequestParam Long id, @RequestParam PenaltyLevel penaltyLevel) {
+        log.info("[Report Controller - processReport]: {}번 처리사항 삭제 요청이 들어왔습니다.", id);
+        return reportService.processReport(id, penaltyLevel);
     }
 
     @Operation(summary = "신고 사항 생성 API", description = "신고 사항을 생성합니다.")

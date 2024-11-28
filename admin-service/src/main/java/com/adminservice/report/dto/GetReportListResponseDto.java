@@ -27,6 +27,9 @@ public class GetReportListResponseDto {
     @Setter
     public static class ReportListInfo {
 
+        @Schema(description = "id", example = "1")
+        private Long id;
+
         @Schema(description = "신고 제목", example = "신고 제목")
         private String title;
 
@@ -48,6 +51,7 @@ public class GetReportListResponseDto {
         // 정적 팩토리 메서드를 추가하여 변환 간소화
         public static ReportListInfo fromReport(Report report) {
             ReportListInfo info = new ReportListInfo();
+            info.setId(report.getId());
             info.setTitle(report.getTitle());
             info.setNickname(report.getReportedBy().getNickname());
             info.setEmail(report.getReportedBy().getEmail());

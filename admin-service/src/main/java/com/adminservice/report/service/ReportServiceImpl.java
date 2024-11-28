@@ -44,7 +44,7 @@ public class ReportServiceImpl implements ReportService {
 
 
     @Override
-    public ResponseEntity<CustomResponseCode> processReport(Long id, String penaltyLevel) {
+    public ResponseEntity<CustomResponseCode> processReport(Long id, PenaltyLevel penaltyLevel) {
         log.info("[Report Service - processReport]: {}번 신고사항 처리 요청이 들어왔습니다.", id);
         Report report = checkConflictReport(id);
         Member target = report.getTarget();
@@ -52,8 +52,15 @@ public class ReportServiceImpl implements ReportService {
 
         report.setState(ReportState.COMPLETE);
 
+        if (penaltyLevel.toString().equals("NONE")) {
+            log.info("[Report Service - processReport]: 신고사항 처리를 완료했습니다. id: {}", id);
+            report.setState(ReportState.INACTIVE);
+            reportRepository.save(report);
+            return ResponseEntity.ok(CustomResponseCode.REPORT_PROCESS_SUCCESS);
+        }
+
         log.info("[Report Service - processReport]: 신고사항 처리를 완료했습니다. id: {}", id);
-        penaltyRepository.save(Penalty.of(PenaltyLevel.valueOf(penaltyLevel), target, report));
+        penaltyRepository.save(Penalty.of(penaltyLevel, target, report));
         reportRepository.save(report);
         return ResponseEntity.ok(CustomResponseCode.REPORT_PROCESS_SUCCESS);
     }
