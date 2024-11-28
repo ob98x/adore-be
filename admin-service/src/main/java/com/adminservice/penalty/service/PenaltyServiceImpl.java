@@ -1,16 +1,27 @@
 package com.adminservice.penalty.service;
 
 import com.adminservice.global.CustomException;
+import com.adminservice.global.FilterType;
 import com.adminservice.global.ResponseCode;
 import com.adminservice.penalty.entity.Penalty;
+import com.adminservice.penalty.entity.PenaltyLevel;
 import com.adminservice.penalty.repository.PenaltyRepository;
+import com.adminservice.report.dto.GetPenaltyListResponseDto;
+import com.adminservice.report.dto.GetReportListResponseDto;
+import com.adminservice.report.entity.Report;
+import com.adminservice.report.entity.ReportState;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
 
 @Service
 @Slf4j
@@ -74,6 +85,37 @@ public class PenaltyServiceImpl implements PenaltyService {
                 throw new CustomException(ResponseCode.INVALID_PENALTY_LEVEL);
         }
         return isExpired;
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public GetPenaltyListResponseDto getPenaltyMembers(PenaltyLevel level, int page) {
+        log.info("[Penalty Service - getPenaltyMembers]: 페널티 회원 조회를 시작합니다. page: {}", page);
+
+        Pageable pageable = PageRequest.of(page, 10);
+
+        log.info("[Penalty Service - getPenaltyMembers]: 검색 조건을 설정합니다.");
+        Specification<Penalty> spec = Specification.where(null);
+        if (level == PenaltyLevel.HIGH) {
+            spec = spec.and( (root, query, cb) ->
+                    cb.equal(root.get("level"), PenaltyLevel.HIGH));
+        } else if (level == PenaltyLevel.MIDDLE) {
+            spec = spec.and( (root, query, cb) ->
+                    cb.equal(root.get("level"), PenaltyLevel.MIDDLE));
+        } else {
+            spec = spec.and( (root, query, cb) ->
+                    cb.equal(root.get("level"), PenaltyLevel.LOW));
+        }
+
+        log.info("[Penalty Service - getPenaltyMembers]: 신고사항 리스트를 조회합니다.");
+        Page<Penalty> resultPage = penaltyRepository.findAll(spec, pageable);
+
+        log.info("[Penalty Service - getPenaltyMembers]: 신고사항 리스트를 DTO 로 변환합니다.");
+        List<GetPenaltyListResponseDto.PenaltyListInfo> penaltyList = resultPage.getContent().stream()
+                .map(GetPenaltyListResponseDto.PenaltyListInfo::fromPenalty)
+                .toList();
+
+        return GetPenaltyListResponseDto.createResponse(penaltyList, resultPage.getTotalPages(), resultPage.hasNext());
     }
 
     @Transactional

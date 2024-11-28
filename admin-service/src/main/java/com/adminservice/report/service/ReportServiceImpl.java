@@ -98,7 +98,6 @@ public class ReportServiceImpl implements ReportService {
                 .toList();
 
         return GetReportListResponseDto.createResponse(reportList, resultPage.getTotalPages(), resultPage.hasNext());
-
     }
 
     @Override
