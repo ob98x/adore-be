@@ -57,8 +57,11 @@ public class GetReportResponseDto {
     @Schema(description = "처리 가능 여부", example = "true")
     private boolean canProcess;
 
+    @Schema(description = "content id", example = "1")
+    private Long contentId;
+
     @Builder
-    private GetReportResponseDto(Long id, String title, String content, Long reporterId, String reporterName, String reporterEmail, Long targetId, String targetName, String targetEmail, String category, ReportState state, LocalDateTime createdDate, LocalDateTime updatedDate, boolean canProcess) {
+    private GetReportResponseDto(Long id, String title, String content, Long reporterId, String reporterName, String reporterEmail, Long targetId, String targetName, String targetEmail, String category, ReportState state, LocalDateTime createdDate, LocalDateTime updatedDate, boolean canProcess,  Long contentId) {
         this.id = id;
         this.title = title;
         this.content = content;
@@ -73,6 +76,7 @@ public class GetReportResponseDto {
         this.createdDate = createdDate;
         this.updatedDate = updatedDate;
         this.canProcess = canProcess;
+        this.contentId = contentId;
     }
 
     public static GetReportResponseDto createResponse(Report report) {
@@ -91,6 +95,7 @@ public class GetReportResponseDto {
                 .createdDate(report.getCreatedAt())
                 .updatedDate(report.getUpdatedAt())
                 .canProcess(report.getState() == ReportState.WAIT)
+                .contentId(report.getContentId())
                 .build();
     }
 }
