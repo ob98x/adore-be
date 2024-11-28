@@ -7,6 +7,7 @@ import com.userservice.global.*;
 import com.userservice.perfume.entity.Perfume;
 import com.userservice.perfume.entity.PerfumeState;
 import com.userservice.perfume.service.PerfumeService;
+import com.userservice.review.dto.CreateReportDto;
 import com.userservice.review.dto.GetReviewListResponseDto;
 import com.userservice.review.dto.GetReviewResponseDto;
 import com.userservice.review.dto.ReviewCreateRequestDto;
@@ -43,6 +44,38 @@ public class ReviewServiceImpl implements ReviewService {
     private final LikeRepository likeRepository;
     private final AdminFeignInterface adminFeignInterface;
 
+
+    @Override
+    @Transactional
+    public ResponseEntity<CustomResponseCode> reportContent(String authorization, CreateReportDto createReportDto) {
+        Long contentId = createReportDto.getContentId();
+        String category = createReportDto.getCategory();
+        String content = createReportDto.getContent();
+        String title = createReportDto.getTitle();
+
+        log.info("[Review Service - reportContent]: {}번 {}를 신고합니다.", contentId, category);
+
+        Long reporterId = getMemberId(authorization);
+        Long targetId = 0L;
+        if (category.equals("REVIEW")) {
+            Review review = checkConflictReview(contentId);
+            targetId = review.getMember().getId();
+            log.info("[Review Service - reportContent]: 리뷰를 신고합니다. reviewId: {}, reporterMemberId: {}, targetMemberId: {}", contentId, reporterId, targetId);
+
+        } else {
+            Comment comment = checkConflictComment(contentId);
+            targetId = comment.getWriter().getId();
+            log.info("[Review Service - reportContent]: 댓글을 신고합니다. commentId: {}, reporterMemberId: {}, targetMemberId: {}", contentId, reporterId, targetId);
+        }
+
+        checkPenalty(reporterId);
+
+        log.info("[Review Service - reportContent]: 신고 내용을 생성합니다.");
+        Long reportId = adminFeignInterface.createReport(category, targetId, content, contentId, reporterId, title);
+        log.info("[Review Service - reportContent]: 신고를 생성했습니다. reportId: {}", reportId);
+
+        return ResponseEntity.ok(CustomResponseCode.REPORT_CREATE_SUCCESS);
+    }
 
     @Override
     @Transactional

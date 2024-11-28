@@ -4,10 +4,7 @@ import com.adminservice.global.BaseEntity;
 import com.adminservice.user.entity.Member;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Getter
@@ -36,8 +33,8 @@ public class Report extends BaseEntity {
     private ReportState state;
 
     @Schema(description = "신고 받은 리뷰 ID", example = "1")
-    @Column(name = "review_id", nullable = false)
-    private Long reviewId;
+    @Column(name = "content_id", nullable = false)
+    private Long contentId;
 
     @Schema(description = "신고자 ID", example = "1")
     @ManyToOne
@@ -48,5 +45,28 @@ public class Report extends BaseEntity {
     @OneToOne
     @JoinColumn(name = "target_id", nullable = false)
     private Member target;
+
+    @Builder
+    public Report(String title, String content, ReportCategory category, ReportState state, Long contentId, Member reportedBy, Member target) {
+        this.title = title;
+        this.content = content;
+        this.category = category;
+        this.state = state;
+        this.contentId = contentId;
+        this.reportedBy = reportedBy;
+        this.target = target;
+    }
+
+    public static Report of(String title, String content, ReportCategory category, ReportState state, Long contentId, Member reportedBy, Member target) {
+        return Report.builder()
+                .title(title)
+                .content(content)
+                .category(category)
+                .state(state)
+                .contentId(contentId)
+                .reportedBy(reportedBy)
+                .target(target)
+                .build();
+    }
 
 }

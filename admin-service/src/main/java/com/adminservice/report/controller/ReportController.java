@@ -48,4 +48,17 @@ public class ReportController {
         log.info("[Report Controller - processReport]: {}번 신고사항 삭제 요청이 들어왔습니다.", id);
         return reportService.processReport(id, answerContent);
     }
+
+    @Operation(summary = "신고 사항 생성 API", description = "신고 사항을 생성합니다.")
+    @PostMapping("/create")
+    public Long createReport(
+            @RequestParam("category") String category,
+            @RequestParam("targetId") Long targetId,
+            @RequestParam("content") String content,
+            @RequestParam("contentId") Long contentId,
+            @RequestParam("reporterId") Long reporterId,
+            @RequestParam("title") String title) {
+        log.info("[Report Controller - createReport]: 신고사항 생성 요청이 들어왔습니다.");
+        return reportService.createReport(contentId, title, category, targetId, content, reporterId);
+    }
 }

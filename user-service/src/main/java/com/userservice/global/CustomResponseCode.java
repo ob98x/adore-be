@@ -39,6 +39,7 @@ public enum CustomResponseCode {
     FRIEND_DELETE_SUCCESS("친구 삭제에 성공하였습니다."), REVIEW_LIKE_SUCCESS("리뷰 좋아요에 성공하였습니다."),
     RATING_SUCCESS("평가에 성공하였습니다."),
     REVIEW_LIKE_DELETE_SUCCESS("리뷰 좋아요 취소에 성공하였습니다."),
-    QUESTION_CREATE_SUCCESS("문의 사항 생성에 성공하였습니다."),;
+    QUESTION_CREATE_SUCCESS("문의 사항 생성에 성공하였습니다."),
+    REPORT_CREATE_SUCCESS("신고 사항 생성에 성공하였습니다."),;
     private final String message;
 }

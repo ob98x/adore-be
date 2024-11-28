@@ -2,10 +2,7 @@ package com.userservice.review.controller;
 
 import com.userservice.global.CustomResponseCode;
 import com.userservice.global.SearchType;
-import com.userservice.review.dto.CommentCreateRequestDto;
-import com.userservice.review.dto.GetReviewListResponseDto;
-import com.userservice.review.dto.GetReviewResponseDto;
-import com.userservice.review.dto.ReviewCreateRequestDto;
+import com.userservice.review.dto.*;
 import com.userservice.review.service.ReviewService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -112,5 +109,14 @@ public class ReviewController {
             @Parameter(description = "삭제할 댓글 id") @RequestParam Long commentId) {
         log.info("[Review Controller - deleteComment]: {}번 댓글의 삭제 요청이 들어왔습니다.", commentId);
         return reviewService.deleteComment(authorization, commentId);
+    }
+
+    @Operation(summary = "신고 API", description = "리뷰 또는 댓글을 신고합니다.")
+    @PostMapping("/report")
+    public ResponseEntity<CustomResponseCode> reportReview(
+            @Parameter(description = "리뷰 작성자의 access token") @RequestHeader("Authorization") String authorization,
+            @RequestBody CreateReportDto createReportDto) {
+        log.info("[Review Controller - reportReview]: {}번 리뷰의 신고 요청이 들어왔습니다.", createReportDto.getContentId());
+        return reviewService.reportContent(authorization, createReportDto);
     }
 }

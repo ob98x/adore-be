@@ -14,6 +14,7 @@ import com.adminservice.report.entity.ReportCategory;
 import com.adminservice.report.entity.ReportState;
 import com.adminservice.report.repository.ReportRepository;
 import com.adminservice.user.entity.Member;
+import com.adminservice.user.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -22,6 +23,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -32,6 +34,7 @@ public class ReportServiceImpl implements ReportService {
 
     private final ReportRepository reportRepository;
     private final PenaltyRepository penaltyRepository;
+    private final MemberService memberService;
 
     @Override
     public ResponseEntity<GetReportResponseDto> getReport(Long id) {
@@ -91,6 +94,30 @@ public class ReportServiceImpl implements ReportService {
 
     }
 
+    @Override
+    @Transactional
+    public Long createReport(Long contentId, String title, String category, Long targetId, String content, Long reporterId) {
+        log.info("[Report Service - createReport]: 신고사항 생성 요청이 들어왔습니다. contentId: {}, title: {}, category: {}, targetId: {}, content: {}, reporterId: {}",contentId, title, category, targetId, content, reporterId);
+
+        log.info("[Report Service - createReport]: 신고 대상과 신고자 정보를 조회합니다.");
+        Member target = memberService.checkConflictMember(targetId);
+        Member reporter = memberService.checkConflictMember(reporterId);
+
+        log.info("[Report Service - createReport]: 신고사항을 생성합니다.");
+        Report report = Report.builder()
+                .title(title)
+                .content(content)
+                .category(ReportCategory.valueOf(category))
+                .state(ReportState.WAIT)
+                .contentId(contentId)
+                .reportedBy(reporter)
+                .target(target)
+                .build();
+
+        reportRepository.save(report);
+        return report.getId();
+    }
+
     public Report checkConflictReport(Long id) {
         log.info("[Report Service - checkConflictReport]: 신고사항 정보를 조회합니다. id: {}", id);
         if (reportRepository.findReportById(id).isEmpty()) {
@@ -103,4 +130,6 @@ public class ReportServiceImpl implements ReportService {
         }
 
         return reportRepository.findReportById(id).get();
-}}
+}
+
+}

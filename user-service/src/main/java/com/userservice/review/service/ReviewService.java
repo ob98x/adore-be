@@ -3,6 +3,7 @@ package com.userservice.review.service;
 
 import com.userservice.global.CustomResponseCode;
 import com.userservice.global.SearchType;
+import com.userservice.review.dto.CreateReportDto;
 import com.userservice.review.dto.GetReviewListResponseDto;
 import com.userservice.review.dto.GetReviewResponseDto;
 import com.userservice.review.dto.ReviewCreateRequestDto;
@@ -18,4 +19,5 @@ public interface ReviewService {
     ResponseEntity<CustomResponseCode> deleteComment(String authorization, Long commentId);
     ResponseEntity<CustomResponseCode> updateComment(String authorization, Long commentId, String content);
     ResponseEntity<CustomResponseCode> likeReview(String authorization, Long id);
+    ResponseEntity<CustomResponseCode> reportContent(String authorization, CreateReportDto createReportDto);
 }

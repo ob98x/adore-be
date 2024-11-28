@@ -13,4 +13,5 @@ public interface ReportService {
     ResponseEntity<GetReportResponseDto> getReport(Long id);
     GetReportListResponseDto getReportLists(FilterType filterType, ReportCategory category, int page);
     ResponseEntity<CustomResponseCode> processReport(Long id, String penalty);
+    Long createReport(Long contentId, String title, String category, Long targetId, String content, Long reporterId);
 }

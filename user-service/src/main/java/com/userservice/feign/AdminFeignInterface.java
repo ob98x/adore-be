@@ -22,4 +22,14 @@ public interface AdminFeignInterface {
             @RequestParam @Parameter(description = "문의 내용") String content,
             @RequestParam @Parameter(description = "문의 카테고리") String category,
             @RequestParam @Parameter(description = "문의자 id") Long memberId);
+
+    @Operation(summary = "신고 사항 생성 API", description = "신고 사항을 생성합니다.")
+    @PostMapping("/report/create")
+    Long createReport(
+            @RequestParam("category") String category,
+            @RequestParam("targetId") Long targetId,
+            @RequestParam("content") String content,
+            @RequestParam("contentId") Long contentId,
+            @RequestParam("reporterId") Long reporterId,
+            @RequestParam("title") String title);
 }
